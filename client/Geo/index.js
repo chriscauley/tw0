@@ -37,24 +37,34 @@ const Look = (geo) => {
   }
 
   const shapes = {
-    box: (dist) => {
+    box: (dist, dindex) => {
       const out = []
-      geo.dindexes.forEach((dindex, i) => {
-        const o_dindex = geo.dindexes[(i + 1) % geo.dindexes.length] // orthogonal direction
-        range(dist * 2 + 1).forEach((o_dist) => {
-          out.push(dist * dindex + o_dist * o_dindex)
-        })
-        out.pop() // last corner is repeated
+      const o_dindex = geo.rot_dindexes[dindex][1]
+
+      // top row
+      range(-dist, dist+1).forEach(i => out.push(dist * dindex - i * o_dindex))
+
+      // left and right sides in middle
+      range(1, 2*dist).forEach(i => {
+        out.push((dist-i) * dindex + o_dindex * dist)
+        out.push((dist-i) * dindex - o_dindex * dist)
       })
+
+      // bottom row
+      range(-dist, dist+1).forEach(i => out.push(-dist * dindex - i * o_dindex))
       return out
     },
     circle: (dist, dindex) => {
       const out = []
       const o_dindex = geo.rot_dindexes[dindex][1]
       out.push(dindex * dist)
-      range(1, 2*dist).forEach(i => {
+      range(1, dist+1).forEach(i => {
         out.push(dindex*(dist-i) - o_dindex * i)
         out.push(dindex*(dist-i) + o_dindex * i)
+      })
+      range(1, dist).forEach(i => {
+        out.push(-dindex*(dist-i) - o_dindex * i)
+        out.push(-dindex*(dist-i) + o_dindex * i)
       })
       out.push(dindex * -dist)
       return out

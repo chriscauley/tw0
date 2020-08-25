@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 1`] = `"17,25,23,31"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 2`] = `"23,17,31,25"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 3`] = `"25,31,17,23"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 4`] = `"31,23,25,17"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 5`] = `"17,25,23,31,10,18,16,26,22,32,30,38"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 6`] = `"23,17,31,25,22,16,30,10,38,18,32,26"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 7`] = `"25,31,17,23,26,32,18,38,10,30,16,22"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 8`] = `"31,23,25,17,38,30,32,22,26,16,18,10"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 9`] = `"17,25,23,31,10,18,16,26,22,32,30,38,3,11,9,19,15,27,21,39,37,33,29,45"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 10`] = `"23,17,31,25,22,16,30,10,38,18,32,26,21,15,29,9,37,3,45,19,33,11,39,27"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 11`] = `"25,31,17,23,26,32,18,38,10,30,16,22,27,33,19,39,11,45,3,29,15,37,9,21"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 12`] = `"31,23,25,17,38,30,32,22,26,16,18,10,45,37,39,29,33,21,27,9,11,15,19,3"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 13`] = `"16,17,18,23,25,30,31,32"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 14`] = `"30,23,16,31,17,32,25,18"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 15`] = `"18,25,32,17,31,16,23,30"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 16`] = `"32,31,30,25,23,18,17,16"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 17`] = `"16,17,18,23,25,30,31,32,8,9,10,11,12,15,19,22,26,29,33,36,37,38,39,40"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 18`] = `"30,23,16,31,17,32,25,18,36,29,22,15,8,37,9,38,10,39,11,40,33,26,19,12"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 19`] = `"18,25,32,17,31,16,23,30,12,19,26,33,40,11,39,10,38,9,37,8,15,22,29,36"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 20`] = `"32,31,30,25,23,18,17,16,40,39,38,37,36,33,29,26,22,19,15,12,11,10,9,8"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 21`] = `"16,17,18,23,25,30,31,32,8,9,10,11,12,15,19,22,26,29,33,36,37,38,39,40,0,1,2,3,4,5,6,7,13,14,20,21,27,28,34,35,41,42,43,44,45,46,47,48"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 22`] = `"30,23,16,31,17,32,25,18,36,29,22,15,8,37,9,38,10,39,11,40,33,26,19,12,42,35,28,21,14,7,0,43,1,44,2,45,3,46,4,47,5,48,41,34,27,20,13,6"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 23`] = `"18,25,32,17,31,16,23,30,12,19,26,33,40,11,39,10,38,9,37,8,15,22,29,36,6,13,20,27,34,41,48,5,47,4,46,3,45,2,44,1,43,0,7,14,21,28,35,42"`;
+
+exports[`\`geo.look(shape, index, dist, dindex)\` changes direction with dindex 24`] = `"32,31,30,25,23,18,17,16,40,39,38,37,36,33,29,26,22,19,15,12,11,10,9,8,48,47,46,45,44,43,42,41,35,34,28,27,21,20,14,13,7,6,5,4,3,2,1,0"`;

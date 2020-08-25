@@ -11,15 +11,18 @@ const snapIndexes = (geo, indexes, title) => {
   expect(indexes.join(',')).toMatchSnapshot()
 }
 
-test('`geo.look("circle", index, dist, dindex)` changes direction with dindex', () => {
+test('`geo.look(shape, index, dist, dindex)` changes direction with dindex', () => {
+  const shapes = ['circle', 'box']
   const geo = Geo(7,7)
   const board = {}
   const index = geo.CENTER
-  range(1,2).forEach(dist => {
-    geo.dindexes.forEach(dindex=> {
-      const indexes = geo.look('circle', index, dist, dindex)
-      const dir = geo._dindex2name[dindex]
-      snapIndexes(geo, indexes, `"circle" facing ${dir} at dist ${dist}`)
-    })
-  })
+  shapes.forEach(shape => (
+    range(1,4).forEach(dist => (
+      geo.dindexes.forEach(dindex=> {
+        const indexes = geo.look(shape, index, dist, dindex)
+        const dir = geo._dindex2name[dindex]
+        snapIndexes(geo, indexes, `"${shape}" facing ${dir} at dist ${dist}`)
+      })
+    ))
+  ))
 })
