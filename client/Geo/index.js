@@ -1,34 +1,42 @@
 const { range } = require('lodash')
-const alphanum = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split(
-  '',
-)
-const numalpha = '0123456789abcdefghijklmnopqrstuvqxwyz'.split('')
+const alpha = 'abcdefghijklmnopqrstuvwxyz'
+const ALPHA = alpha.toUpperCase()
+const numbers = '0123456789'
+export const alphabet = alpha.split('')
+export const alphanum = (alpha+ALPHA+numbers).split('')
+export const numalpha = (numbers+alpha+ALPHA).split('')
 
 const mod = (n, d) => ((n % d) + d) % d
 
 const Look = (geo) => {
   const make = (shape, dist) => {
-    if (dist > 0 && !look[shape][dist - 1]) {
+    const R = 1
+    if (look[shape][R][dist]) {
+      return
+    }
+    if (dist > 0 && !look[shape][R][dist - 1]) {
       make(shape, dist - 1)
     }
     if (shape.startsWith('__')) {
       // dunder means "outer shell of look"
-      look[shape][dist] = shapes[shape.slice(2)](dist)
+      geo.dindexes.forEach(dindex => {
+        look[shape][dindex][dist] = shapes[shape.slice(2)](dist)
+      })
     } else {
-      if (!look['__' + shape][dist]) {
+      if (!look['__' + shape][R][dist]) {
         // need outer shells to make filled looks
         make('__' + shape, dist)
       }
-      look[shape][dist] = []
-      range(dist + 1).forEach((_dist) => {
-        look[shape][dist] = look[shape][dist].concat(look['__' + shape][_dist])
+      geo.dindexes.forEach(dindex => {
+        look[shape][dindex][dist] = []
+        range(dist + 1).forEach((_dist) => {
+          look[shape][dindex][dist] = look[shape][dindex][dist].concat(look['__' + shape][dindex][_dist])
+        })
       })
     }
   }
 
   const shapes = {
-    f: (dist) => {
-    },
     box: (dist) => {
       const out = []
       geo.dindexes.forEach((dindex, i) => {
@@ -40,8 +48,6 @@ const Look = (geo) => {
       })
       return out
     },
-    // "up right down left"
-    urdl: (dist) => geo.dindexes.map((di) => di * dist),
     circle: (dist) => {
       const out = []
       geo.dindexes.forEach((dindex, i) => {
@@ -55,16 +61,20 @@ const Look = (geo) => {
     },
   }
 
-  const look = (shape, index, dist) => {
-    if (!look[shape][dist]) {
+  const look = (shape, index, dist, dindex) => {
+    if (!look[shape][dindex][dist]) {
       make(shape, dist)
     }
-    return look[shape][dist].map((dindex) => index + dindex)
+    return look[shape][dindex][dist].map((dindex) => index + dindex)
   }
 
   Object.keys(shapes).forEach((shape) => {
-    look[shape] = [[]] // all geometries only see nothing at range 0
-    look['__' + shape] = [[]]
+    look[shape] = {}
+    look['__' + shape] = {}
+    geo.dindexes.forEach(dindex => {
+      look[shape][dindex] = [[]] // all geometries only see nothing at range 0
+      look['__' + shape][dindex] = [[]]
+    })
     make(shape, 1)
   })
 
@@ -105,10 +115,16 @@ const Geo = (x0, x_max, y0, y_max) => {
     xys: [],
     indexes: [],
     AREA: W * H,
-    dindexes: [-W, 1, W, -1],
+    dindexes: [-W, -1, 1, W ], // u, l, r, d
+    rot_dindexes: {
+      [-W]: [-W, -1, 1, W ], // u, l, r, d
+      [W]: [W, 1, -1, -W ], // d, l, r, u
+      [1]: [1, -W, W, -1], // r, u, d, l
+      [-1]: [-1, W, -W, 1], // l, d, u, r
+    },
     i2xy: (i) => [mod(i, W), Math.floor(i / W)],
     xy2i: (xy) => xy[0] + xy[1] * W,
-    print(board, {from_xy=[x0,y0], to_xy=[x_max, y_max], delimiter='',empty=' ', extras}={}) {
+    print(board, {from_xy=[x0,y0], to_xy=[x_max, y_max], delimiter='',empty=' ', extras, title}={}) {
       const xs = range(from_xy[0], to_xy[0]+1)
       const ys = range(from_xy[1], to_xy[1]+1)
       const lines = ys.map((y) => (
@@ -119,6 +135,7 @@ const Geo = (x0, x_max, y0, y_max) => {
       if (extras) {
         extras.forEach((e, i) => lines[i].push('  ' + e))
       }
+      title && lines.unshift(title)
       return lines.join('\n')
     },
     log: (board, options) => console.log(geo.print(board, options)),
@@ -153,15 +170,13 @@ const Geo = (x0, x_max, y0, y_max) => {
       )
       return out
     },
-    getDindexes: (dindex) => geo.rot_dindexes[dindex],
-    rot_dindexes: {},
   }
 
   geo.CENTER = geo.xy2i([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])
 
-  const _double_dindexes = geo.dindexes.concat(geo.dindexes)
+  geo._wrapped_dindexes = geo.dindexes.concat(geo.dindexes)
   geo.dindexes.forEach((dindex, i) => {
-    geo.rot_dindexes[dindex] = _double_dindexes.slice(i, i+geo.dindexes.length)
+    geo.rot_dindexes[dindex] = geo._wrapped_dindexes.slice(i, i+geo.dindexes.length)
   })
 
   range(x0, x_max+1).forEach(

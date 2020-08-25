@@ -1,9 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 1`] = `"7,13,17,11"`;
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 1`] = `"17,23,25,31"`;
 
-exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 2`] = `"7,13,17,11"`;
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 2`] = `"17,23,25,31"`;
 
-exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 3`] = `"7,13,17,11"`;
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 3`] = `"17,23,25,31"`;
 
-exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 4`] = `"7,13,17,11"`;
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 4`] = `"17,23,25,31"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 5`] = `"17,23,25,31,10,16,22,24,26,32,38,24"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 6`] = `"17,23,25,31,10,16,22,24,26,32,38,24"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 7`] = `"17,23,25,31,10,16,22,24,26,32,38,24"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 8`] = `"17,23,25,31,10,16,22,24,26,32,38,24"`;

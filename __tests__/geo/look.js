@@ -1,27 +1,24 @@
-import Geo from '../../client/Geo'
+import { range } from 'lodash'
+import Geo, { numalpha } from '../../client/Geo'
 
-const snapIndexes = (geo, indexes) => {
-  let error
-  try {
-    expect(indexes.join(',')).toMatchSnapshot()
-  } catch (e) {
-    error = e
-  }
+const snapIndexes = (geo, indexes, title) => {
   if (process.argv.includes('-V')) {
     const board = {}
     board[geo.CENTER] = 'X'
-    indexes.forEach((index, i) => board[index] = i)
-    geo.log(board, {delimiter:'.'})
+    indexes.forEach((index, i) => board[index] = numalpha[i])
+    geo.log(board, {empty:'.', title})
   }
-  if (error) { throw error }
+  expect(indexes.join(',')).toMatchSnapshot()
 }
 
 test('`geo.look("circle", index, dist, dindex)` changes direction with dindex', () => {
-  const geo = Geo(5,5)
+  const geo = Geo(7,7)
   const board = {}
   const index = geo.CENTER
-  geo.dindexes.forEach(dindex=> {
-    const indexes = geo.look('circle', index, 1, dindex)
-    snapIndexes(geo, indexes)
+  range(1,3).forEach(dist => {
+    geo.dindexes.forEach(dindex=> {
+      const indexes = geo.look('circle', index, dist, dindex)
+      snapIndexes(geo, indexes, `"circle" facing ${dindex} at dist ${dist}`)
+    })
   })
 })
