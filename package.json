@@ -1,0 +1,14 @@
+{
+  "name": "tw0",
+  "version": "0.0.0",
+  "description": "Timewalker, day zero",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "jest": "^26.4.2"
+  }
+}
