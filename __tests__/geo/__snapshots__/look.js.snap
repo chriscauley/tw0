@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 1`] = `"7,13,17,11"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 2`] = `"7,13,17,11"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 3`] = `"7,13,17,11"`;
+
+exports[`\`geo.look("circle", index, dist, dindex)\` changes direction with dindex 4`] = `"7,13,17,11"`;
