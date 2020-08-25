@@ -15,10 +15,11 @@ test('`geo.look("circle", index, dist, dindex)` changes direction with dindex', 
   const geo = Geo(7,7)
   const board = {}
   const index = geo.CENTER
-  range(1,3).forEach(dist => {
+  range(1,2).forEach(dist => {
     geo.dindexes.forEach(dindex=> {
       const indexes = geo.look('circle', index, dist, dindex)
-      snapIndexes(geo, indexes, `"circle" facing ${dindex} at dist ${dist}`)
+      const dir = geo._dindex2name[dindex]
+      snapIndexes(geo, indexes, `"circle" facing ${dir} at dist ${dist}`)
     })
   })
 })

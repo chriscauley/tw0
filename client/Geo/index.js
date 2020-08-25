@@ -20,7 +20,7 @@ const Look = (geo) => {
     if (shape.startsWith('__')) {
       // dunder means "outer shell of look"
       geo.dindexes.forEach(dindex => {
-        look[shape][dindex][dist] = shapes[shape.slice(2)](dist)
+        look[shape][dindex][dist] = shapes[shape.slice(2)](dist, dindex)
       })
     } else {
       if (!look['__' + shape][R][dist]) {
@@ -48,15 +48,15 @@ const Look = (geo) => {
       })
       return out
     },
-    circle: (dist) => {
+    circle: (dist, dindex) => {
       const out = []
-      geo.dindexes.forEach((dindex, i) => {
-        out.push(dindex * dist)
-        const o_dindex = geo.dindexes[(i + 1) % geo.dindexes.length] // orthogonal direction
-        range(1, dist).forEach((o_dist) =>
-          out.push((dist - o_dist) * dindex + o_dist * o_dindex),
-        )
+      const o_dindex = geo.rot_dindexes[dindex][1]
+      out.push(dindex * dist)
+      range(1, 2*dist).forEach(i => {
+        out.push(dindex*(dist-i) - o_dindex * i)
+        out.push(dindex*(dist-i) + o_dindex * i)
       })
+      out.push(dindex * -dist)
       return out
     },
   }
@@ -115,6 +115,9 @@ const Geo = (x0, x_max, y0, y_max) => {
     xys: [],
     indexes: [],
     AREA: W * H,
+    _dindex_names: ['u', 'l', 'r', 'd',],
+    _name2dindex: {},
+    _dindex2name: {},
     dindexes: [-W, -1, 1, W ], // u, l, r, d
     rot_dindexes: {
       [-W]: [-W, -1, 1, W ], // u, l, r, d
@@ -172,12 +175,13 @@ const Geo = (x0, x_max, y0, y_max) => {
     },
   }
 
-  geo.CENTER = geo.xy2i([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])
-
-  geo._wrapped_dindexes = geo.dindexes.concat(geo.dindexes)
   geo.dindexes.forEach((dindex, i) => {
-    geo.rot_dindexes[dindex] = geo._wrapped_dindexes.slice(i, i+geo.dindexes.length)
+    const name = geo._dindex_names[i]
+    geo._dindex2name[dindex] = name
+    geo._name2dindex[name] = dindex
   })
+
+  geo.CENTER = geo.xy2i([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])
 
   range(x0, x_max+1).forEach(
     x => range(y0, y_max+1).forEach(
