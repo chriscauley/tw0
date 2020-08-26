@@ -90,9 +90,9 @@ const Look = (geo) => {
 
   look.inBounds = (shape, index, dist) => {
     // like look, but won't cross out of bounds
-    const x0 = geo.i2xy(index)[0]
+    const x0 = geo.index2xy(index)[0]
     const xys = look(shape, index, dist)
-      .map((i) => geo.i2xy(i))
+      .map((i) => geo.index2xy(i))
       .filter(
         (xy) =>
           Math.abs(xy[0] - x0) <= dist &&
@@ -100,7 +100,7 @@ const Look = (geo) => {
           xy[1] >= geo.y0 &&
           xy[1] < geo.y0 + geo.H,
       )
-    return xys.map((xy) => geo.xy2i(xy))
+    return xys.map((xy) => geo.xy2index(xy))
   }
 
   return look
@@ -135,13 +135,13 @@ const Geo = (x0, x_max, y0, y_max) => {
       [1]: [1, -W, W, -1], // r, u, d, l
       [-1]: [-1, W, -W, 1], // l, d, u, r
     },
-    i2xy: (i) => [mod(i, W), Math.floor(i / W)],
-    xy2i: (xy) => xy[0] + xy[1] * W,
+    index2xy: (i) => [mod(i, W), Math.floor(i / W)],
+    xy2index: (xy) => xy[0] + xy[1] * W,
     print(board, {from_xy=[x0,y0], to_xy=[x_max, y_max], delimiter='',empty=' ', extras, title}={}) {
       const xs = range(from_xy[0], to_xy[0]+1)
       const ys = range(from_xy[1], to_xy[1]+1)
       const lines = ys.map((y) => (
-        xs.map((x) => board[this.xy2i([x, y])])
+        xs.map((x) => board[this.xy2index([x, y])])
           .map(s => s=== undefined ? empty : s)
           .join(delimiter)
       ))
@@ -152,33 +152,15 @@ const Geo = (x0, x_max, y0, y_max) => {
       return lines.join('\n')
     },
     log: (board, options) => console.log(geo.print(board, options)),
-    makeBoard(xys, values = []) {
-      const board = {}
-      xys.forEach((xy, i) => {
-        board[this.xy2i(xy)] = values[i] || i
-      })
-      return board
-    },
     inBounds(xy) {
       return xy[0] >= x0 && xy[0] < x0 + W && xy[1] >= y0 && xy[1] < y0 + H
     },
-    eachXY(f) {
-      console.warn('eachXY is depracated, use geo.xys.forEach instead')
-      range(x0, x_max+1).forEach(
-        x => range(y0, y_max+1).forEach(
-          y => f([x,y])
-        )
-      )
-    },
-    slice(board, xy, W, H, _default) {
+    slice(xy, W, H) {
       const out = []
       const ys = range(xy[1], xy[1] + H)
       range(xy[0], xy[0]+W).forEach(
         x => ys.forEach(
-          y => {
-            const v = board[geo.xy2i([x,y])]
-            out.push(v === undefined ? _default : v)
-          }
+          y => out.push(geo.xy2index([x,y]))
         )
       )
       return out
@@ -191,14 +173,14 @@ const Geo = (x0, x_max, y0, y_max) => {
     geo._name2dindex[name] = dindex
   })
 
-  geo.CENTER = geo.xy2i([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])
+  geo.CENTER = geo.xy2index([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])
 
-  range(x0, x_max+1).forEach(
-    x => range(y0, y_max+1).forEach(
-      y => {
+  range(y0, y_max+1).forEach(
+    y => range(x0, x_max+1).forEach(
+      x => {
         const xy = [x,y]
         geo.xys.push()
-        geo.indexes.push(geo.xy2i(xy))
+        geo.indexes.push(geo.xy2index(xy))
       }
     )
   )
