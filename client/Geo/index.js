@@ -136,7 +136,7 @@ const Geo = (x0, x_max, y0, y_max) => {
       [-1]: [-1, W, -W, 1], // l, d, u, r
     },
     index2xy: (i) => [mod(i, W), Math.floor(i / W)],
-    xy2index: (xy) => xy[0] + xy[1] * W,
+    xy2index: (xy) => mod(xy[0] + xy[1] * W, geo.AREA),
     print(board, {from_xy=[x0,y0], to_xy=[x_max, y_max], delimiter='',empty=' ', extras, title}={}) {
       const xs = range(from_xy[0], to_xy[0]+1)
       const ys = range(from_xy[1], to_xy[1]+1)
