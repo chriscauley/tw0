@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`xy2index 1`] = `
+".....
+.6...
+..1..
+.4.3.
+5...2"
+`;
