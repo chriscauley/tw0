@@ -1,6 +1,6 @@
-import Board from '../client/Board'
-import Game from '../client/Game'
-import render from '../client/render/text'
+import Board from '../tw/Board'
+import Game from '../tw/Game'
+import render from '../tw/render/text'
 
 
 const Snap = layers => board => {

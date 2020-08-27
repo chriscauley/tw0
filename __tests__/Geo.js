@@ -1,4 +1,4 @@
-import Geo, {numalpha} from '../client/Geo'
+import Geo, {numalpha} from '../tw/Geo'
 
 test('xy2index', () => {
   const geo = Geo(5, 5)

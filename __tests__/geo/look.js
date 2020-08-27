@@ -1,5 +1,5 @@
 import { range } from 'lodash'
-import Geo, { numalpha } from '../../client/Geo'
+import Geo, { numalpha } from '../../tw/Geo'
 
 const snapIndexes = (geo, indexes, title) => {
   if (process.argv.includes('-V')) {

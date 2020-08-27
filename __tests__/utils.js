@@ -1,5 +1,5 @@
-import Board from '../client/Board'
-import { floodFill, floodFillPath } from '../client/utils'
+import Board from '../tw/Board'
+import { floodFill, floodFillPath } from '../tw/utils'
 
 const snapBoard = (geo, board, title) => {
   const result = geo.print(board, {empty:'.', delimiter: '\t', title})
