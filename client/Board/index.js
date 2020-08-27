@@ -29,6 +29,7 @@ export default class Board {
     Object.assign(this, { W, H })
     this.turn = turn
     this.geo = Geo(W, H)
+    this.dindex = this.geo.dindexes[0]
     this.connectPath()
     this.recache()
   }
@@ -77,6 +78,10 @@ export default class Board {
 
     this.start1 = path[0]
     this.start2 = path[path.length -1]
+    if (this.start1 === this.start2 && path.length <3) {
+      // path is a single point
+      return
+    }
     const b = {}
     b[this.start1] = 1
     b[this.start2] = 2
@@ -110,6 +115,17 @@ export default class Board {
     piece._turn = this.game ? this.game.turn : 0
     this.setPiece(piece.index, piece)
     return piece
+  }
+
+  quickAddPieces(pieces) {
+    pieces.forEach(([team, type, dxy=[0,0]]) => {
+      const xy = vector.add(
+        this.geo.index2xy(this['start'+team]),
+        dxy
+      )
+      const index = this.geo.xy2index(xy)
+      this.newPiece({ team, type, index })
+    })
   }
 
   recache() {

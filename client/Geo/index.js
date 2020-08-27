@@ -126,6 +126,8 @@ const Geo = (x0, x_max, y0, y_max) => {
     indexes: [],
     AREA: W * H,
     _dindex_names: ['u', 'l', 'r', 'd',],
+    _dindex_chars: ['^', '<', '>', 'v',],
+    _dindex2char: {},
     _name2dindex: {},
     _dindex2name: {},
     dindexes: [-W, -1, 1, W ], // u, l, r, d
@@ -158,9 +160,10 @@ const Geo = (x0, x_max, y0, y_max) => {
     slice(xy, W, H) {
       const out = []
       const ys = range(xy[1], xy[1] + H)
-      range(xy[0], xy[0]+W).forEach(
-        x => ys.forEach(
-          y => out.push(geo.xy2index([x,y]))
+      const xs = range(xy[0], xy[0]+W)
+      ys.forEach(
+        y => xs.forEach(
+          x=> out.push(geo.xy2index([x,y]))
         )
       )
       return out
@@ -171,6 +174,7 @@ const Geo = (x0, x_max, y0, y_max) => {
     const name = geo._dindex_names[i]
     geo._dindex2name[dindex] = name
     geo._name2dindex[name] = dindex
+    geo._dindex2char[dindex] = geo._dindex_chars[i]
   })
 
   geo.CENTER = geo.xy2index([Math.floor((geo.x0+geo.W)/2), Math.floor((geo.y0+geo.H)/2)])

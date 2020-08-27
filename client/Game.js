@@ -1,5 +1,4 @@
 import { applyMove, applyDamage } from './piece/lib'
-
 // import respawn from './player/respawn'
 import { assert } from './utils'
 
@@ -28,12 +27,14 @@ export default class Game {
     this.turn = 0
     this.board = board
     board.game = this
-    this.spawnPieces()
+    // this.spawnPieces()
   }
 
   doAttacks(pieces) {
+    this.board.recache()
     const piece_moves = pieces.map(p => [p, getMove(p)])
     const attack_moves = piece_moves.filter(t => t[1].damages)
+    const failed_pieces = []
     attack_moves.forEach(([piece, move]) => {
       let piece_moved
       move.damages.forEach((damage) => {
@@ -49,11 +50,16 @@ export default class Game {
           throw "Not implemented: attack+move"
         }
         applyMove(piece, move)
+      } else {
+        failed_pieces.push(piece)
       }
     })
-    // if (attack_moves.length) {
-    //   // TODO no damage was done, maybe just apply move here?
-    // }
+    if (failed_pieces.length) {
+      if (failed_pieces.length === pieces.length) {
+        throw "Unable to resolve attack (infinite loop)"
+      }
+      this.doAttacks(failed_pieces)
+    }
   }
 
   doMoves(pieces) {
@@ -92,12 +98,6 @@ export default class Game {
     const pieces = this.board.getPieces()
     pieces.forEach(p => (this.piece_turns[p.id] = p.turns))
 
-    // TODO
-    // pieces should eventually handle which team is moving
-    // follow(pieces) // #! TODO this takes upto 15ms!
-    // this.board.applyFire()
-    // this.board.moveFire()
-    // this.board.applyFire()
     this.doAttacks(pieces)
     this.doMoves(pieces)
     this.finishTurn()
@@ -115,9 +115,10 @@ export default class Game {
     // TODO
     // this.trigger('nextturn')
     this.turn++
-    this.spawnPieces()
+    // this.spawnPieces()
   }
 
+  // TODO turned off until I figure out logic for game mode
   spawnPieces() {
     if (this.turn % 20 !== 0) {
       return

@@ -2,15 +2,48 @@ import Board from '../client/Board'
 import Game from '../client/Game'
 import render from '../client/render/text'
 
+
+const Snap = layers => board => {
+  const result = render(board, layers)
+  if (process.argv.includes('-V')) {
+    console.log(result)
+  }
+}
+
 // TODO snapshots
-test('Two skulls kill each other', () => {
+test('2-skull', () => {
+  const snap = Snap(['piece_type', 'piece_dindex'])
   const board = new Board({W: 8, H: 3, path: [9, 14]})
   const game = new Game({ board })
-  console.log(render(board))
+  board.quickAddPieces([
+    [1, 'skull'],
+    [2, 'skull']
+  ])
+  snap(board)
   game.nextTurn()
-  console.log(render(board))
+  snap(board)
   game.nextTurn()
-  console.log(render(board))
+  snap(board)
   game.nextTurn()
-  console.log(render(board))
+  snap(board)
+})
+
+test('9-skull', () => {
+  const snap = Snap(['piece_type', 'piece_dindex'])
+  const board = new Board({W: 5, H: 5, path: [12]})
+  const game = new Game({ board })
+  board.quickAddPieces([
+    [1, 'skull', [-1, -1]],
+    [2, 'skull', [0, -1]],
+    [1, 'skull', [1, -1]],
+    [2, 'skull', [-1, 0]],
+    [1, 'skull', [0, 0]],
+    [2, 'skull', [1, 0]],
+    [1, 'skull', [-1, 1]],
+    [2, 'skull', [0, 1]],
+    [1, 'skull', [1, 1]],
+  ])
+  snap(board)
+  game.nextTurn()
+  snap(board)
 })
