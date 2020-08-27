@@ -1,4 +1,4 @@
-import { applyMove } from './piece/lib'
+import { applyMove, applyDamage } from './piece/lib'
 
 // import respawn from './player/respawn'
 import { assert } from './utils'
@@ -31,54 +31,65 @@ export default class Game {
     this.spawnPieces()
   }
 
-  _doTurn(piece) {
-    if (piece.dead) {
-      return // piece was killed during turn
-    }
-    const move = getMove(piece)
-    if (!move || move.defer) {
-      return
-    }
-    applyMove(piece, move, this.turn)
-    this.piece_turns[piece.id]--
-    if (move.turns) {
-      this.piece_turns[piece.id] += move.turns
-      if (this.piece_turns[piece.id] > 100) {
-        // This is an easy place to accidentally make an inifinte loop
-        throw 'Piece was given too many turns'
+  doAttacks(pieces) {
+    const piece_moves = pieces.map(p => [p, getMove(p)])
+    const attack_moves = piece_moves.filter(t => t[1].damages)
+    attack_moves.forEach(([piece, move]) => {
+      let piece_moved
+      move.damages.forEach((damage) => {
+        const result = applyDamage(piece.board, damage)
+        if (result) {
+          piece_moved = true
+        }
+      })
+      if (piece_moved) {
+        this.piece_turns[piece.id] --
+        if (move.index || move.dindex) {
+          // there needs to be some kind of conflict resolution here
+          throw "Not implemented: attack+move"
+        }
+        applyMove(piece, move)
       }
-    }
-    if (move.end) {
-      this.piece_turns[piece.id] = 0
-    }
+    })
+    // if (attack_moves.length) {
+    //   // TODO no damage was done, maybe just apply move here?
+    // }
   }
 
-  doTurns(pieces, defer) {
-    let last_count
-    let current_count = 0
-    pieces.forEach(p => (p.can_defer = defer))
-    while (current_count !== last_count) {
-      // first move with deferral until no pieces make a move
-      last_count = current_count
-      current_count = 0
-      pieces.forEach(piece => {
-        // everyone takes one turn
-        this._doTurn(piece)
-        current_count += this.piece_turns[piece.id]
-      })
-      pieces = pieces.filter(p => this.piece_turns[p.id] > 0)
-    }
-    if (defer) {
-      // Repeat with deferral off
-      this.doTurns(pieces, false)
-    }
+  doMoves(pieces) {
+    this.board.recache()
+    const piece_moves = pieces.filter(p => this.piece_turns[p.id]).map(p => [p, getMove(p)])
+    const hard_block = {}
+    const soft_block = {}
+    pieces.filter(p => this.piece_turns[p.id] <= 0).forEach(p => {
+      hard_block[p.index] = true
+    })
+    piece_moves.forEach(([piece, move]) => {
+      if (move.index === undefined) {
+        applyMove(piece, move)
+        this.piece_turns[piece.id]--
+        hard_block[piece.index] = true
+      } else {
+        soft_block[piece.index] = soft_block[piece.index] || []
+        soft_block[piece.index].push([piece, move])
+      }
+    })
+    Object.entries(soft_block).forEach(([index, piece_moves]) => {
+      if (piece_moves.length > 1) {
+        throw "NotImplemented: conflicting moves"
+      } else {
+        const [piece, move] = piece_moves[0]
+        applyMove(piece, move)
+        this.piece_turns[piece.id]--
+      }
+    })
   }
 
   nextTurn = () => {
     this.busy = true
     // figure out how many turns each piece can take
     this.piece_turns = {}
-    const pieces = this.board.getPieces().filter(p => p.type !== 'player')
+    const pieces = this.board.getPieces()
     pieces.forEach(p => (this.piece_turns[p.id] = p.turns))
 
     // TODO
@@ -87,7 +98,8 @@ export default class Game {
     // this.board.applyFire()
     // this.board.moveFire()
     // this.board.applyFire()
-    this.doTurns(pieces, true)
+    this.doAttacks(pieces)
+    this.doMoves(pieces)
     this.finishTurn()
     this.busy = false
   }
@@ -114,8 +126,8 @@ export default class Game {
     teams.forEach(team => {
       const index = this.board['start' + team]
       const dindex = getPathDindex(this.board, index, team)
-      const type = 'skeleton'
-      this.board.newPiece({ type, index, dindex })
+      const type = 'skull'
+      this.board.newPiece({ type, index, dindex, team })
     })
   }
 }

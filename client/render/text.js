@@ -2,6 +2,7 @@
 
 const LEGEND = {
   skeleton: 's',
+  skull: 'k',
 }
 
 
@@ -20,7 +21,7 @@ export default (board, options={}) => {
     const piece = entities.piece[index]
     if (piece) {
       const { type, team } = piece
-      const s = LEGEND[type]
+      const s = LEGEND[type] || '?'
       out[index] = team === 2 ? s.toUpperCase() : s
     } else if (wall) {
       out[index] = 'X'

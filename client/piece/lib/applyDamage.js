@@ -1,5 +1,10 @@
-export default (piece, damage) => {
+export default (board, damage) => {
   const { count, index, dindex, sprite, source } = damage
+  const piece = board.getPiece(index)
+  if (!piece) {
+    // piece died since start of turn
+    return false
+  }
   piece.health -= count
   // piece.board.renderer.animations.push({
   //   index,
@@ -12,7 +17,7 @@ export default (piece, damage) => {
     damage.kill = piece
     // #! TODO should also do death animation
     piece.dead = true
-    piece.board._addGold(piece.board.xy2i(xy), 1)
     piece.board.removePiece(piece)
   }
+  return true // TODO return animation here?
 }

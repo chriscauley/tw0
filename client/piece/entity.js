@@ -16,6 +16,8 @@ const PIECE_DEFAULTS = {
   turns: 1,
   dindex: 1,
   hits: 0,
+  geometry: 'circle',
+  dist: 1,
 }
 
 const newPiece = opts => {
@@ -41,6 +43,8 @@ const newPiece = opts => {
       '_turn',
       'equipment',
       'lives',
+      'geometry',
+      'dist',
     ]),
     name: 'piece',
   }
@@ -58,6 +62,7 @@ const newPlayer = opts => {
   })
   piece.equitpment = opts.equipment || { ...item.default_equipment }
   piece.lives = opts.lives || 2
+  piece.turns = 0 // player is stationary while others move
   return piece
 }
 

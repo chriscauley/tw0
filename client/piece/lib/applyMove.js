@@ -1,18 +1,8 @@
-import applyDamage from './applyDamage'
-
 export default (piece, move, turn) => {
   if (piece.preMove) {
     piece.preMove()
   }
   const { index, dindex = piece.dindex, damages, after = [], preMove } = move
-  if (damages && damages.length) {
-    damages.forEach(damage => {
-      damage.turn = turn
-      const target = piece.board.getOne('piece', damage.index)
-      applyDamage(target, damage)
-      target._last_damage = damage
-    })
-  }
   move._from = piece.index
   if (index !== undefined && index !== piece.index) {
     piece.board.setPiece(index, piece)

@@ -33,13 +33,16 @@ export default class Board {
     this.recache()
   }
 
+  getOne = (type, index) => this.entities[type][index]
+
+  getMany = (type, indexes) => indexes.map(i => this.getOne(type, i)).filter(i => i !== undefined)
+
   setOne(type, index, value) {
     assert(type !== piece, 'cannot set piece with setOne')
     this.entities[type] = value
   }
 
-  getOne = (type, index) => this.entities[type][index]
-  getMany = (type, indexes) => indexes.map(i => this.getOne(type, i)).filter(i => i !== undefined)
+  getPiece = (index) => this.entities.piece[index]
 
   setPiece(index, piece) {
     this.dirty.team = true
@@ -59,7 +62,6 @@ export default class Board {
   removePiece(piece) {
     this.dirty.team = true
     delete this.entities.piece[piece.index]
-    delete piece.board
   }
 
   getPieces() {
@@ -103,6 +105,7 @@ export default class Board {
   newPiece(opts) {
     this.dirty.team = true
     const piece = newPiece(opts)
+    piece.board = this
     piece.id = ++this._piece_id
     piece._turn = this.game ? this.game.turn : 0
     this.setPiece(piece.index, piece)

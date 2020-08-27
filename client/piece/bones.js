@@ -2,8 +2,6 @@ import move from '../move'
 
 export default {
   skeleton: {
-    range: 1,
-    geometry: 'f',
     opts: { health: 2 },
     tasks: [
       // move.energy('health').equals(1).then(
@@ -13,9 +11,16 @@ export default {
       //   ])
       // ),
       move.wait(1),
-      // move.attack,
-      // move.findNearby,
+      move.attackNearby,
+      move.turn.towardPathOrFoe,
       move.forward
     ]
   },
+  skull: {
+    tasks: [
+      move.attackNearby,
+      move.turn.towardPathOrFoe,
+      move.forward
+    ]
+  }
 }
