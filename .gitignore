@@ -1,3 +1,12 @@
 node_modules
 .cache
 coverage
+dist
+
+__pycache__
+.venv
+.backups
+server/settings/.secret_key
+server/settings/local.py
+unrest
+ur
