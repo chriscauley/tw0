@@ -904,6 +904,14 @@
     "@babel/plugin-transform-react-jsx-source" "^7.10.4"
     "@babel/plugin-transform-react-pure-annotations" "^7.10.4"
 
+"@babel/runtime-corejs2@^7.4.5":
+  version "7.11.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.11.2.tgz#700a03945ebad0d31ba6690fc8a6bcc9040faa47"
+  integrity sha512-AC/ciV28adSSpEkBglONBWq4/Lvm6GAZuxIoyVtsnUpZMl0bxLtoChEnYAkP+47KyOCayZanojtflUEUJtR/6Q==
+  dependencies:
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
   version "7.11.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
@@ -1318,6 +1326,38 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@unrest/css@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@unrest/css/-/css-0.0.6.tgz#7736b05a7ad36fc30bfe49eeebbf73344922046c"
+  integrity sha512-0RMTFBTLN1IGzPpCSoAXtjM/coa4ghBrr5VjD41F9PxaXchyNcT6wONe8gqkzsl9+k7glZWCR0HsET9Sz0Jtxg==
+
+"@unrest/react-auth@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@unrest/react-auth/-/react-auth-0.1.0.tgz#91e7c249745185c327f602b7a7ed4ef2772e3ba8"
+  integrity sha512-sJjZHX0B9KF7DcviyEs4U5KmKRCEIykaPkF40/aAPsByHSX4snqRu5km7HxBeUsuBJk7/QsoiufzmldO5o7BFQ==
+
+"@unrest/react-config-hook@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@unrest/react-config-hook/-/react-config-hook-0.0.5.tgz#d56e15653baa682e03c8dd42aa960db9bac99c22"
+  integrity sha512-kWCCePmy9tQEZ/a8/rxJg+q4P6/Ck47nANel79TizuMUHENZPabUxGOG4CtmOCFHSffeaX4+F1vTP6ua9/gqvQ==
+
+"@unrest/react-jsonschema-form@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@unrest/react-jsonschema-form/-/react-jsonschema-form-0.0.1.tgz#d8cbabb02e06781d23fd9ec0b1a986db865b6d47"
+  integrity sha512-Y8OKRcPW+2/IxMkZkAhUoJl5MyhzTX1twwI1566HmwvUr6Oa+oFr/uyKEnmI0LyQ8LS+eZJ+/sMZYtcs8SRuvw==
+
+"@unrest/react-rest-hook@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@unrest/react-rest-hook/-/react-rest-hook-0.0.5.tgz#1de56a8222943a1aae487560a37595c5cc66013f"
+  integrity sha512-0ZLdgP+A9hIzJcoRNEna47h/Il666+G8U5S19sUD7aIN4hiSDUa/8BhZLAteYkHEwwyAbNljNUkCesia+oa0BQ==
+  dependencies:
+    lodash "^4.17.15"
+
+"@unrest/storage@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@unrest/storage/-/storage-0.1.1.tgz#27f23a5b0da4642cfac646c843be4a450b068e45"
+  integrity sha512-XUN0uM5vURkkfEOLNMFvbExWcNv6KIhEdwkr/YCtv5gkv7SdBIxsCRWJYh2E7MSbSkIa4cPgAJIh33kFU+o+6Q==
+
 "@unrest/tailwind@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.0.7.tgz#49e4454e1c27813e435487379244b82cec545b70"
@@ -1364,7 +1404,7 @@ acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.0.tgz#e1ad486e6c54501634c6c397c5c121daa383607c"
   integrity sha512-+G7P8jJmCHr+S+cLfQxygbWhXy+8YTVGzAkpEbcLo2mLoL7tij/VG41QSHACSf5QgYRhMZYHuNc6drJaO0Da+w==
 
-ajv@^6.12.3:
+ajv@^6.12.3, ajv@^6.7.0:
   version "6.12.4"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.4.tgz#0614facc4522127fa713445c6bfd3ebd376e2234"
   integrity sha512-eienB2c9qVQs2KWexhkrdMLVDoIQCz5KSeLxwg9Lzk4DOfBtIK9PQwwufcsn1jjGuf9WZmqPMbGxOzfcuphJCQ==
@@ -2031,6 +2071,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
 cli-cursor@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
@@ -2201,7 +2246,7 @@ core-js-compat@^3.6.2:
     browserslist "^4.8.5"
     semver "7.0.0"
 
-core-js@^2.4.0, core-js@^2.6.5:
+core-js@^2.4.0, core-js@^2.5.7, core-js@^2.6.5:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
@@ -4677,6 +4722,11 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
   integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
 
+nanoid@^2.1.0:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.11.tgz#ec24b8a758d591561531b4176a01e3ab4f0f0280"
+  integrity sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -4846,6 +4896,11 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
+
+object-hash@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.0.3.tgz#d12db044e03cd2ca3d77c0570d87225b02e1e6ea"
+  integrity sha512-JPKn0GMu+Fa3zt3Bmr66JhokJU5BaNBIh4ZeTlaCBzrBsOeXzwcKKAK1tbLiPKgvwmPXsDvvLHoWh5Bm7ofIYg==
 
 object-inspect@^1.7.0:
   version "1.8.0"
@@ -5614,7 +5669,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.6.2:
+prop-types@^15.5.8, prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5732,10 +5787,29 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
+react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-jsonschema-form@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/react-jsonschema-form/-/react-jsonschema-form-1.8.1.tgz#9c962f29a55b3fe071d8edf2fc3430f05f1b7ed9"
+  integrity sha512-aaDloxNAcGXOOOcdKOxxqEEn5oDlPUZgWcs8unXXB9vjBRgCF8rCm/wVSv1u2G5ih0j/BX6Ewd/WjI2g00lPdg==
+  dependencies:
+    "@babel/runtime-corejs2" "^7.4.5"
+    ajv "^6.7.0"
+    core-js "^2.5.7"
+    lodash "^4.17.15"
+    prop-types "^15.5.8"
+    react-is "^16.8.4"
+    react-lifecycles-compat "^3.0.4"
+    shortid "^2.2.14"
+
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
 react-router-dom@^5.2.0:
   version "5.2.0"
@@ -5766,7 +5840,7 @@ react-router@5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@>=15:
+react@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
@@ -6235,6 +6309,13 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+shortid@^2.2.14:
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.15.tgz#2b902eaa93a69b11120373cd42a1f1fe4437c122"
+  integrity sha512-5EaCy2mx2Jgc/Fdn9uuDuNIIfWBpzY4XIlhoqtXF6qsf+/+SGZ+FxDdX/ZsMZiWupIWNqAEmiNY4RC+LSmCeOw==
+  dependencies:
+    nanoid "^2.1.0"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
@@ -6935,6 +7016,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-global-hook@^0.1.12:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/use-global-hook/-/use-global-hook-0.1.13.tgz#15bad925552b1506317f0c028e7742b94692aa24"
+  integrity sha512-2ioap8vC/FM+2p/VUrCOyZg2/iTGpxMOQN6CzOoxULa9+nK0DjAOb/WiMrr8qQIfJC9KbC4srT0j0q2kC2J4SA==
 
 use@^3.1.0:
   version "3.1.1"
