@@ -31,6 +31,7 @@ export default class Board {
     this.geo = Geo(W, H)
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
+    this.quickAddPieces(options.pieces)
     this.recache()
   }
 
@@ -117,7 +118,26 @@ export default class Board {
     return piece
   }
 
-  quickAddPieces(pieces) {
+  quickAddPieces(pieces=[]) {
+    if (typeof pieces === 'string') {
+      if (!pieces.includes('|')) {
+        pieces += '|' + pieces
+      }
+      const out = []
+      pieces.split('|').forEach((s, i_team) => {
+        s.split(',').forEach(s2 => {
+          if (!s2.match(/^\d+x/)) {
+            s2 = '1x'+s2
+          }
+          const [_, count, type] = s2.match(/^(\d+)x(.+)/)
+          let i = parseInt(count)
+          while (i--) {
+            out.push([i_team + 1, type])
+          }
+        })
+      })
+      pieces = out
+    }
     pieces.forEach(([team, type, dxy=[0,0]]) => {
       const xy = vector.add(
         this.geo.index2xy(this['start'+team]),
@@ -143,9 +163,11 @@ export default class Board {
   }
 }
 
-const getCorners = (board, d) => {
+export const getCorners = (board, d) => {
   const geo = board.geo
-  return [geo.xy2index([d, d]), geo.xy2index([-d-1, -d])]
+  const x = geo.W < d * 2 ? Math.floor(geo.W / 2) : d
+  const y = geo.H < d * 2 ? Math.floor(geo.H / 2) : d
+  return [geo.xy2index([x, y]), geo.xy2index([-x-1, -y])]
 }
 
 const getDefaultPath = (board) => {
@@ -155,7 +177,7 @@ const getDefaultPath = (board) => {
   const start_xy = geo.index2xy(start)
   const end_xy = geo.index2xy(end)
   const out = [start]
-  if (start_xy[1] !== end_xy[1]) {
+  if (start_xy[0] !== end_xy[0] && start_xy[1] !== end_xy[1] ) {
     const mid_x = start_xy[0] + Math.floor((end_xy[0] - start_xy[0])/2)
     out.push(geo.xy2index([mid_x, start_xy[1]]))
     out.push(geo.xy2index([mid_x, end_xy[1]]))

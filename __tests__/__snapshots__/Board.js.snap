@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`2-skull 1`] = `
+"type    
+XXXXXXXX	
+X.k--K.X	
+XXXXXXXX	"
+`;
+
+exports[`2-skull 2`] = `
+"type    
+XXXXXXXX	
+X.-kK-.X	
+XXXXXXXX	"
+`;
+
+exports[`2-skull 3`] = `
+"type    
+XXXXXXXX	
+X.----.X	
+XXXXXXXX	"
+`;
+
+exports[`2-skull 4`] = `
+"type    
+XXXXXXXX	
+X.----.X	
+XXXXXXXX	"
+`;
+
+exports[`9-skull 1`] = `
+"type 
+XXXXX	
+XkKkX	
+XKkKX	
+XkKkX	
+XXXXX	"
+`;
+
+exports[`9-skull 2`] = `
+"type 
+XXXXX	
+X...X	
+X...X	
+Xk..X	
+XXXXX	"
+`;
+
+exports[`getDefaultPath 1`] = `
+"type 
+XXXXX	
+X...X	
+X...X	
+X...X	
+XXXXX	"
+`;
+
+exports[`getDefaultPath 2`] = `
+"type 
+XXXXX	
+X...X	
+X.|.X	
+X.|.X	
+X.|.X	
+X.|.X	
+X.|.X	
+X.|.X	
+X...X	
+XXXXX	"
+`;
+
+exports[`getDefaultPath 3`] = `
+"type      
+XXXXXXXXXX	
+X........X	
+X.------.X	
+X........X	
+XXXXXXXXXX	"
+`;
+
+exports[`getDefaultPath 4`] = `
+"type      
+XXXXXXXXXX	
+X........X	
+X.--|....X	
+X...|....X	
+X...|....X	
+X...|....X	
+X...|....X	
+X...----.X	
+X........X	
+XXXXXXXXXX	"
+`;

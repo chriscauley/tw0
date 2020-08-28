@@ -23,10 +23,11 @@ export const getMove = piece => {
 }
 
 export default class Game {
-  constructor({board}) {
+  constructor({board, id}) {
     this.turn = 0
     this.board = board
     board.game = this
+    this.id = id
     // this.spawnPieces()
   }
 

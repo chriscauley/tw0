@@ -3,22 +3,17 @@ import Game from '../tw/Game'
 import render from '../tw/render/text'
 
 
-const Snap = layers => board => {
-  const result = render(board, layers)
+const snap = board => {
+  const result = render(board, 'piece_type', {extra_layers:['piece_dindex']})
   if (process.argv.includes('-V')) {
     console.log(result)
   }
+  expect(result).toMatchSnapshot()
 }
 
-// TODO snapshots
 test('2-skull', () => {
-  const snap = Snap(['piece_type', 'piece_dindex'])
-  const board = new Board({W: 8, H: 3, path: [9, 14]})
+  const board = new Board({W: 8, H: 3, pieces: 'skull'})
   const game = new Game({ board })
-  board.quickAddPieces([
-    [1, 'skull'],
-    [2, 'skull']
-  ])
   snap(board)
   game.nextTurn()
   snap(board)
@@ -29,10 +24,7 @@ test('2-skull', () => {
 })
 
 test('9-skull', () => {
-  const snap = Snap(['piece_type', 'piece_dindex'])
-  const board = new Board({W: 5, H: 5, path: [12]})
-  const game = new Game({ board })
-  board.quickAddPieces([
+  const pieces = [
     [1, 'skull', [-1, -1]],
     [2, 'skull', [0, -1]],
     [1, 'skull', [1, -1]],
@@ -42,8 +34,20 @@ test('9-skull', () => {
     [1, 'skull', [-1, 1]],
     [2, 'skull', [0, 1]],
     [1, 'skull', [1, 1]],
-  ])
+  ]
+  const board = new Board({W: 5, H: 5, path: [12], pieces})
+  const game = new Game({ board })
   snap(board)
   game.nextTurn()
   snap(board)
+})
+
+test('getDefaultPath', () => {
+  const tests = [
+    {W: 5, H: 5},
+    {W: 5, H: 10},
+    {W: 10, H: 5},
+    {W: 10, H: 10},
+  ]
+  tests.forEach((options) => snap(new Board(options)))
 })

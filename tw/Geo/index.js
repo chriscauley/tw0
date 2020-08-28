@@ -72,6 +72,9 @@ const Look = (geo) => {
   }
 
   const look = (shape, index, dist, dindex) => {
+    if (!look[shape][dindex]) {
+      throw Error(`Invalid dindex: ${dindex}`)
+    }
     if (!look[shape][dindex][dist]) {
       make(shape, dist)
     }
@@ -148,7 +151,7 @@ const Geo = (x0, x_max, y0, y_max) => {
           .join(delimiter)
       ))
       if (extras) {
-        extras.forEach((e, i) => lines[i].push('  ' + e))
+        extras.forEach((e, i) => lines[i] += '\t' + e)
       }
       title && lines.unshift(title)
       return lines.join('\n')

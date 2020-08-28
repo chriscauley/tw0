@@ -1,3 +1,5 @@
+import { assert } from '../utils'
+
 const LEGEND = {
   skeleton: 's',
   skull: 'k',
@@ -13,15 +15,35 @@ const _join = (strings) => {
   return result.join('\n')
 }
 
-export default (board, layers, options={}) => {
+export default (board, options={}) => {
   const { geo, entities } = board
   const {
     xy=[0,0],
     W=geo.W,
     H=geo.H,
+    extra_layers=[],
+    layer='piece_type'
   } = options
   const indexes = geo.slice(xy, W, H)
-  return _join(layers.map(layer => renderLayer(board, layer, indexes)))
+  const main = renderLayer(board, layer, indexes)
+  const title = layer.replace(/^piece_/,'').slice(0, board.geo.W).padEnd(board.geo.W)
+  const extras = []
+  indexes.forEach((index) => {
+    const [x,y] = geo.index2xy(index)
+    const values = []
+    extras[y] = extras[y] || ''
+    extra_layers.forEach(layer => {
+      const value = LAYERS[layer](board, index)
+      if (value!==undefined) {
+        values.push(value)
+      }
+    })
+    if (values.length) {
+      const joiner = extras[y] ? '\t' : ''
+      extras[y] += `${index}:${values.join(',')}\t`
+    }
+  })
+  return geo.print(main, { title, extras})
 }
 
 const getPieceId = (b, i) => b.entities.piece[i] && b.entities.piece[i].id
@@ -29,7 +51,7 @@ const getPieceIndex = (b, i) => b.entities.piece[i] && b.entities.piece[i].index
 const getPieceDindex = (board, index) => {
   const piece = board.entities.piece[index]
   if (piece) {
-    return board.geo._dindex2char[piece.dindex] || 'o'
+    return board.geo._dindex2name[piece.dindex] || 'o'
   }
 }
 
@@ -44,6 +66,7 @@ const getPieceType = (board, index) => {
 
 const renderLayer = (board, layer, indexes) => {
   const getter = LAYERS[layer]
+  assert(getter, 'You must specify a layer')
   const out = {}
   indexes.forEach((index) => {
     const wall = board.entities.wall[index]
@@ -59,8 +82,7 @@ const renderLayer = (board, layer, indexes) => {
       out[index] = '.'
     }
   })
-  const title = layer.replace(/^piece_/,'').slice(0, board.geo.W).padEnd(board.geo.W)
-  return board.geo.print(out, {title})
+  return out
 }
 
 const LAYERS = {
