@@ -3,28 +3,28 @@
 exports[`2-skull 1`] = `
 "type    
 XXXXXXXX	
-X.k--K.X	
+X k--K X	
 XXXXXXXX	"
 `;
 
 exports[`2-skull 2`] = `
 "type    
 XXXXXXXX	
-X.-kK-.X	
+X -kK- X	
 XXXXXXXX	"
 `;
 
 exports[`2-skull 3`] = `
 "type    
 XXXXXXXX	
-X.----.X	
+X ---- X	
 XXXXXXXX	"
 `;
 
 exports[`2-skull 4`] = `
 "type    
 XXXXXXXX	
-X.----.X	
+X ---- X	
 XXXXXXXX	"
 `;
 
@@ -40,54 +40,54 @@ XXXXX	"
 exports[`9-skull 2`] = `
 "type 
 XXXXX	
-X...X	
-X...X	
-Xk..X	
+X   X	
+X   X	
+Xk  X	
 XXXXX	"
 `;
 
 exports[`getDefaultPath 1`] = `
 "type 
 XXXXX	
-X...X	
-X...X	
-X...X	
+X   X	
+X   X	
+X   X	
 XXXXX	"
 `;
 
 exports[`getDefaultPath 2`] = `
 "type 
 XXXXX	
-X...X	
-X.|.X	
-X.|.X	
-X.|.X	
-X.|.X	
-X.|.X	
-X.|.X	
-X...X	
+X   X	
+X | X	
+X | X	
+X | X	
+X | X	
+X | X	
+X | X	
+X   X	
 XXXXX	"
 `;
 
 exports[`getDefaultPath 3`] = `
 "type      
 XXXXXXXXXX	
-X........X	
-X.------.X	
-X........X	
+X        X	
+X ------ X	
+X        X	
 XXXXXXXXXX	"
 `;
 
 exports[`getDefaultPath 4`] = `
 "type      
 XXXXXXXXXX	
-X........X	
-X.--|....X	
-X...|....X	
-X...|....X	
-X...|....X	
-X...|....X	
-X...----.X	
-X........X	
+X        X	
+X --|    X	
+X   |    X	
+X   |    X	
+X   |    X	
+X   |    X	
+X   ---- X	
+X        X	
 XXXXXXXXXX	"
 `;

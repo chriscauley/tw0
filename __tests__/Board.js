@@ -5,7 +5,7 @@ import render from '../tw/render/text'
 
 const snap = board => {
   const result = render(board, 'piece_type', {extra_layers:['piece_dindex']})
-  if (process.argv.includes('-V')) {
+  if (process.__UR && process.__UR.V) {
     console.log(result)
   }
   expect(result).toMatchSnapshot()

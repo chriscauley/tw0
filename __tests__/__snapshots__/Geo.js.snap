@@ -8,33 +8,43 @@ exports[`look.__box 1`] = `
 `;
 
 exports[`look.__box 2`] = `
-"__box 1 l
-247
-1 6
-035"
-`;
-
-exports[`look.__box 3`] = `
-"__box 1 r
-530
-6 1
-742"
-`;
-
-exports[`look.__box 4`] = `
-"__box 1 d
-765
-4 3
-210"
-`;
-
-exports[`look.__box 5`] = `
 "__box 2 u
 01234
 5   6
 7   8
 9   a
 bcdef"
+`;
+
+exports[`look.__box 3`] = `
+"__box 3 u
+0123456
+7     8
+9     a
+b     c
+d     e
+f     g
+hijklmn"
+`;
+
+exports[`look.__box 4`] = `
+"__box 4 u
+012345678
+9       a
+b       c
+d       e
+f       g
+h       i
+j       k
+l       m
+nopqrstuv"
+`;
+
+exports[`look.__box 5`] = `
+"__box 1 l
+247
+1 6
+035"
 `;
 
 exports[`look.__box 6`] = `
@@ -47,35 +57,6 @@ exports[`look.__box 6`] = `
 `;
 
 exports[`look.__box 7`] = `
-"__box 2 r
-b9750
-c   1
-d   2
-e   3
-fa864"
-`;
-
-exports[`look.__box 8`] = `
-"__box 2 d
-fedcb
-a   9
-8   7
-6   5
-43210"
-`;
-
-exports[`look.__box 9`] = `
-"__box 3 u
-0123456
-7     8
-9     a
-b     c
-d     e
-f     g
-hijklmn"
-`;
-
-exports[`look.__box 10`] = `
 "__box 3 l
 68acegn
 5     m
@@ -84,6 +65,35 @@ exports[`look.__box 10`] = `
 2     j
 1     i
 079bdfh"
+`;
+
+exports[`look.__box 8`] = `
+"__box 4 l
+8acegikmv
+7       u
+6       t
+5       s
+4       r
+3       q
+2       p
+1       o
+09bdfhjln"
+`;
+
+exports[`look.__box 9`] = `
+"__box 1 r
+530
+6 1
+742"
+`;
+
+exports[`look.__box 10`] = `
+"__box 2 r
+b9750
+c   1
+d   2
+e   3
+fa864"
 `;
 
 exports[`look.__box 11`] = `
@@ -98,43 +108,6 @@ ngeca86"
 `;
 
 exports[`look.__box 12`] = `
-"__box 3 d
-nmlkjih
-g     f
-e     d
-c     b
-a     9
-8     7
-6543210"
-`;
-
-exports[`look.__box 13`] = `
-"__box 4 u
-012345678
-9       a
-b       c
-d       e
-f       g
-h       i
-j       k
-l       m
-nopqrstuv"
-`;
-
-exports[`look.__box 14`] = `
-"__box 4 l
-8acegikmv
-7       u
-6       t
-5       s
-4       r
-3       q
-2       p
-1       o
-09bdfhjln"
-`;
-
-exports[`look.__box 15`] = `
 "__box 4 r
 nljhfdb90
 o       1
@@ -145,6 +118,33 @@ s       5
 t       6
 u       7
 vmkigeca8"
+`;
+
+exports[`look.__box 13`] = `
+"__box 1 d
+765
+4 3
+210"
+`;
+
+exports[`look.__box 14`] = `
+"__box 2 d
+fedcb
+a   9
+8   7
+6   5
+43210"
+`;
+
+exports[`look.__box 15`] = `
+"__box 3 d
+nmlkjih
+g     f
+e     d
+c     b
+a     9
+8     7
+6543210"
 `;
 
 exports[`look.__box 16`] = `
@@ -168,33 +168,43 @@ exports[`look.__circle 1`] = `
 `;
 
 exports[`look.__circle 2`] = `
-"__circle 1 l
- 1 
-0 3
- 2 "
-`;
-
-exports[`look.__circle 3`] = `
-"__circle 1 r
- 2 
-3 0
- 1 "
-`;
-
-exports[`look.__circle 4`] = `
-"__circle 1 d
- 3 
-1 2
- 0 "
-`;
-
-exports[`look.__circle 5`] = `
 "__circle 2 u
   0  
  2 1 
 4   3
  6 5 
   7  "
+`;
+
+exports[`look.__circle 3`] = `
+"__circle 3 u
+   0   
+  2 1  
+ 4   3 
+6     5
+ a   9 
+  8 7  
+   b   "
+`;
+
+exports[`look.__circle 4`] = `
+"__circle 4 u
+    0    
+   2 1   
+  4   3  
+ 6     5 
+8       7
+ e     d 
+  c   b  
+   a 9   
+    f    "
+`;
+
+exports[`look.__circle 5`] = `
+"__circle 1 l
+ 1 
+0 3
+ 2 "
 `;
 
 exports[`look.__circle 6`] = `
@@ -207,35 +217,6 @@ exports[`look.__circle 6`] = `
 `;
 
 exports[`look.__circle 7`] = `
-"__circle 2 r
-  4  
- 6 2 
-7   0
- 5 1 
-  3  "
-`;
-
-exports[`look.__circle 8`] = `
-"__circle 2 d
-  7  
- 5 6 
-3   4
- 1 2 
-  0  "
-`;
-
-exports[`look.__circle 9`] = `
-"__circle 3 u
-   0   
-  2 1  
- 4   3 
-6     5
- a   9 
-  8 7  
-   b   "
-`;
-
-exports[`look.__circle 10`] = `
 "__circle 3 l
    5   
   3 9  
@@ -244,6 +225,35 @@ exports[`look.__circle 10`] = `
  2   8 
   4 a  
    6   "
+`;
+
+exports[`look.__circle 8`] = `
+"__circle 4 l
+    7    
+   5 d   
+  3   b  
+ 1     9 
+0       f
+ 2     a 
+  4   c  
+   6 e   
+    8    "
+`;
+
+exports[`look.__circle 9`] = `
+"__circle 1 r
+ 2 
+3 0
+ 1 "
+`;
+
+exports[`look.__circle 10`] = `
+"__circle 2 r
+  4  
+ 6 2 
+7   0
+ 5 1 
+  3  "
 `;
 
 exports[`look.__circle 11`] = `
@@ -258,43 +268,6 @@ b     0
 `;
 
 exports[`look.__circle 12`] = `
-"__circle 3 d
-   b   
-  7 8  
- 9   a 
-5     6
- 3   4 
-  1 2  
-   0   "
-`;
-
-exports[`look.__circle 13`] = `
-"__circle 4 u
-    0    
-   2 1   
-  4   3  
- 6     5 
-8       7
- e     d 
-  c   b  
-   a 9   
-    f    "
-`;
-
-exports[`look.__circle 14`] = `
-"__circle 4 l
-    7    
-   5 d   
-  3   b  
- 1     9 
-0       f
- 2     a 
-  4   c  
-   6 e   
-    8    "
-`;
-
-exports[`look.__circle 15`] = `
 "__circle 4 r
     8    
    e 6   
@@ -305,6 +278,33 @@ f       0
   b   3  
    d 5   
     7    "
+`;
+
+exports[`look.__circle 13`] = `
+"__circle 1 d
+ 3 
+1 2
+ 0 "
+`;
+
+exports[`look.__circle 14`] = `
+"__circle 2 d
+  7  
+ 5 6 
+3   4
+ 1 2 
+  0  "
+`;
+
+exports[`look.__circle 15`] = `
+"__circle 3 d
+   b   
+  7 8  
+ 9   a 
+5     6
+ 3   4 
+  1 2  
+   0   "
 `;
 
 exports[`look.__circle 16`] = `
@@ -320,6 +320,326 @@ exports[`look.__circle 16`] = `
     0    "
 `;
 
+exports[`look.__cone 1`] = `
+"__cone 1 u
+ 0 
+   
+   "
+`;
+
+exports[`look.__cone 2`] = `
+"__cone 2 u
+ 102 
+     
+     
+     
+     "
+`;
+
+exports[`look.__cone 3`] = `
+"__cone 3 u
+ 31024 
+       
+       
+       
+       
+       
+       "
+`;
+
+exports[`look.__cone 4`] = `
+"__cone 4 u
+ 5310246 
+         
+         
+         
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.__cone 5`] = `
+"__cone 1 l
+   
+0  
+   "
+`;
+
+exports[`look.__cone 6`] = `
+"__cone 2 l
+     
+2    
+0    
+1    
+     "
+`;
+
+exports[`look.__cone 7`] = `
+"__cone 3 l
+       
+4      
+2      
+0      
+1      
+3      
+       "
+`;
+
+exports[`look.__cone 8`] = `
+"__cone 4 l
+         
+6        
+4        
+2        
+0        
+1        
+3        
+5        
+         "
+`;
+
+exports[`look.__cone 9`] = `
+"__cone 1 r
+   
+  0
+   "
+`;
+
+exports[`look.__cone 10`] = `
+"__cone 2 r
+     
+    1
+    0
+    2
+     "
+`;
+
+exports[`look.__cone 11`] = `
+"__cone 3 r
+       
+      3
+      1
+      0
+      2
+      4
+       "
+`;
+
+exports[`look.__cone 12`] = `
+"__cone 4 r
+         
+        5
+        3
+        1
+        0
+        2
+        4
+        6
+         "
+`;
+
+exports[`look.__cone 13`] = `
+"__cone 1 d
+   
+   
+ 0 "
+`;
+
+exports[`look.__cone 14`] = `
+"__cone 2 d
+     
+     
+     
+     
+ 201 "
+`;
+
+exports[`look.__cone 15`] = `
+"__cone 3 d
+       
+       
+       
+       
+       
+       
+ 42013 "
+`;
+
+exports[`look.__cone 16`] = `
+"__cone 4 d
+         
+         
+         
+         
+         
+         
+         
+         
+ 6420135 "
+`;
+
+exports[`look.__three 1`] = `
+"__three 1 u
+102
+   
+   "
+`;
+
+exports[`look.__three 2`] = `
+"__three 2 u
+ 102 
+     
+     
+     
+     "
+`;
+
+exports[`look.__three 3`] = `
+"__three 3 u
+  102  
+       
+       
+       
+       
+       
+       "
+`;
+
+exports[`look.__three 4`] = `
+"__three 4 u
+   102   
+         
+         
+         
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.__three 5`] = `
+"__three 1 l
+2  
+0  
+1  "
+`;
+
+exports[`look.__three 6`] = `
+"__three 2 l
+     
+2    
+0    
+1    
+     "
+`;
+
+exports[`look.__three 7`] = `
+"__three 3 l
+       
+       
+2      
+0      
+1      
+       
+       "
+`;
+
+exports[`look.__three 8`] = `
+"__three 4 l
+         
+         
+         
+2        
+0        
+1        
+         
+         
+         "
+`;
+
+exports[`look.__three 9`] = `
+"__three 1 r
+  1
+  0
+  2"
+`;
+
+exports[`look.__three 10`] = `
+"__three 2 r
+     
+    1
+    0
+    2
+     "
+`;
+
+exports[`look.__three 11`] = `
+"__three 3 r
+       
+       
+      1
+      0
+      2
+       
+       "
+`;
+
+exports[`look.__three 12`] = `
+"__three 4 r
+         
+         
+         
+        1
+        0
+        2
+         
+         
+         "
+`;
+
+exports[`look.__three 13`] = `
+"__three 1 d
+   
+   
+201"
+`;
+
+exports[`look.__three 14`] = `
+"__three 2 d
+     
+     
+     
+     
+ 201 "
+`;
+
+exports[`look.__three 15`] = `
+"__three 3 d
+       
+       
+       
+       
+       
+       
+  201  "
+`;
+
+exports[`look.__three 16`] = `
+"__three 4 d
+         
+         
+         
+         
+         
+         
+         
+         
+   201   "
+`;
+
 exports[`look.box 1`] = `
 "box 1 u
 012
@@ -328,33 +648,43 @@ exports[`look.box 1`] = `
 `;
 
 exports[`look.box 2`] = `
-"box 1 l
-247
-1 6
-035"
-`;
-
-exports[`look.box 3`] = `
-"box 1 r
-530
-6 1
-742"
-`;
-
-exports[`look.box 4`] = `
-"box 1 d
-765
-4 3
-210"
-`;
-
-exports[`look.box 5`] = `
 "box 2 u
 89abc
 d012e
 f3 4g
 h567i
 jklmn"
+`;
+
+exports[`look.box 3`] = `
+"box 3 u
+opqrstu
+v89abcw
+xd012ey
+zf3 4gA
+Bh567iC
+DjklmnE
+FGHIJKL"
+`;
+
+exports[`look.box 4`] = `
+"box 4 u
+MNOPQRSTU
+VopqrstuW
+Xv89abcwY
+Zxd012ey!
+!zf3 4gA!
+!Bh567iC!
+!DjklmnE!
+!FGHIJKL!
+!!!!!!!!!"
+`;
+
+exports[`look.box 5`] = `
+"box 1 l
+247
+1 6
+035"
 `;
 
 exports[`look.box 6`] = `
@@ -367,35 +697,6 @@ a1 6l
 `;
 
 exports[`look.box 7`] = `
-"box 2 r
-jhfd8
-k5309
-l6 1a
-m742b
-nigec"
-`;
-
-exports[`look.box 8`] = `
-"box 2 d
-nmlkj
-i765h
-g4 3f
-e210d
-cba98"
-`;
-
-exports[`look.box 9`] = `
-"box 3 u
-opqrstu
-v89abcw
-xd012ey
-zf3 4gA
-Bh567iC
-DjklmnE
-FGHIJKL"
-`;
-
-exports[`look.box 10`] = `
 "box 3 l
 uwyACEL
 tceginK
@@ -404,6 +705,35 @@ ra1 6lI
 q9035kH
 p8dfhjG
 ovxzBDF"
+`;
+
+exports[`look.box 8`] = `
+"box 4 l
+UWY!!!!!!
+TuwyACEL!
+StceginK!
+Rsb247mJ!
+Qra1 6lI!
+Pq9035kH!
+Op8dfhjG!
+NovxzBDF!
+MVXZ!!!!!"
+`;
+
+exports[`look.box 9`] = `
+"box 1 r
+530
+6 1
+742"
+`;
+
+exports[`look.box 10`] = `
+"box 2 r
+jhfd8
+k5309
+l6 1a
+m742b
+nigec"
 `;
 
 exports[`look.box 11`] = `
@@ -418,43 +748,6 @@ LECAywu"
 `;
 
 exports[`look.box 12`] = `
-"box 3 d
-LKJIHGF
-EnmlkjD
-Ci765hB
-Ag4 3fz
-ye210dx
-wcba98v
-utsrqpo"
-`;
-
-exports[`look.box 13`] = `
-"box 4 u
-MNOPQRSTU
-VopqrstuW
-Xv89abcwY
-Zxd012ey!
-!zf3 4gA!
-!Bh567iC!
-!DjklmnE!
-!FGHIJKL!
-!!!!!!!!!"
-`;
-
-exports[`look.box 14`] = `
-"box 4 l
-UWY!!!!!!
-TuwyACEL!
-StceginK!
-Rsb247mJ!
-Qra1 6lI!
-Pq9035kH!
-Op8dfhjG!
-NovxzBDF!
-MVXZ!!!!!"
-`;
-
-exports[`look.box 15`] = `
 "box 4 r
 !!!!!ZXVM
 !FDBzxvoN
@@ -465,6 +758,33 @@ exports[`look.box 15`] = `
 !KnigectS
 !LECAywuT
 !!!!!!YWU"
+`;
+
+exports[`look.box 13`] = `
+"box 1 d
+765
+4 3
+210"
+`;
+
+exports[`look.box 14`] = `
+"box 2 d
+nmlkj
+i765h
+g4 3f
+e210d
+cba98"
+`;
+
+exports[`look.box 15`] = `
+"box 3 d
+LKJIHGF
+EnmlkjD
+Ci765hB
+Ag4 3fz
+ye210dx
+wcba98v
+utsrqpo"
 `;
 
 exports[`look.box 16`] = `
@@ -488,33 +808,43 @@ exports[`look.circle 1`] = `
 `;
 
 exports[`look.circle 2`] = `
-"circle 1 l
- 1 
-0 3
- 2 "
-`;
-
-exports[`look.circle 3`] = `
-"circle 1 r
- 2 
-3 0
- 1 "
-`;
-
-exports[`look.circle 4`] = `
-"circle 1 d
- 3 
-1 2
- 0 "
-`;
-
-exports[`look.circle 5`] = `
 "circle 2 u
   4  
  605 
 82 17
  a39 
   b  "
+`;
+
+exports[`look.circle 3`] = `
+"circle 3 u
+   c   
+  e4d  
+ g605f 
+i82 17h
+ ma39l 
+  kbj  
+   n   "
+`;
+
+exports[`look.circle 4`] = `
+"circle 4 u
+    o    
+   qcp   
+  se4dr  
+ ug605ft 
+wi82 17hv
+ Cma39lB 
+  Akbjz  
+   ynx   
+    D    "
+`;
+
+exports[`look.circle 5`] = `
+"circle 1 l
+ 1 
+0 3
+ 2 "
 `;
 
 exports[`look.circle 6`] = `
@@ -527,35 +857,6 @@ exports[`look.circle 6`] = `
 `;
 
 exports[`look.circle 7`] = `
-"circle 2 r
-  8  
- a26 
-b3 04
- 915 
-  7  "
-`;
-
-exports[`look.circle 8`] = `
-"circle 2 d
-  b  
- 93a 
-71 28
- 506 
-  4  "
-`;
-
-exports[`look.circle 9`] = `
-"circle 3 u
-   c   
-  e4d  
- g605f 
-i82 17h
- ma39l 
-  kbj  
-   n   "
-`;
-
-exports[`look.circle 10`] = `
 "circle 3 l
    h   
   f7l  
@@ -564,6 +865,35 @@ c40 3bn
  e62ak 
   g8m  
    i   "
+`;
+
+exports[`look.circle 8`] = `
+"circle 4 l
+    v    
+   thB   
+  rf7lz  
+ pd519jx 
+oc40 3bnD
+ qe62aky 
+  sg8mA  
+   uiC   
+    w    "
+`;
+
+exports[`look.circle 9`] = `
+"circle 1 r
+ 2 
+3 0
+ 1 "
+`;
+
+exports[`look.circle 10`] = `
+"circle 2 r
+  8  
+ a26 
+b3 04
+ 915 
+  7  "
 `;
 
 exports[`look.circle 11`] = `
@@ -578,43 +908,6 @@ nb3 04c
 `;
 
 exports[`look.circle 12`] = `
-"circle 3 d
-   n   
-  jbk  
- l93am 
-h71 28i
- f506g 
-  d4e  
-   c   "
-`;
-
-exports[`look.circle 13`] = `
-"circle 4 u
-    o    
-   qcp   
-  se4dr  
- ug605ft 
-wi82 17hv
- Cma39lB 
-  Akbjz  
-   ynx   
-    D    "
-`;
-
-exports[`look.circle 14`] = `
-"circle 4 l
-    v    
-   thB   
-  rf7lz  
- pd519jx 
-oc40 3bnD
- qe62aky 
-  sg8mA  
-   uiC   
-    w    "
-`;
-
-exports[`look.circle 15`] = `
 "circle 4 r
     w    
    Ciu   
@@ -625,6 +918,33 @@ Dnb3 04co
   zl7fr  
    Bht   
     v    "
+`;
+
+exports[`look.circle 13`] = `
+"circle 1 d
+ 3 
+1 2
+ 0 "
+`;
+
+exports[`look.circle 14`] = `
+"circle 2 d
+  b  
+ 93a 
+71 28
+ 506 
+  4  "
+`;
+
+exports[`look.circle 15`] = `
+"circle 3 d
+   n   
+  jbk  
+ l93am 
+h71 28i
+ f506g 
+  d4e  
+   c   "
 `;
 
 exports[`look.circle 16`] = `
@@ -638,6 +958,326 @@ vh71 28iw
   rd4es  
    pcq   
     o    "
+`;
+
+exports[`look.cone 1`] = `
+"cone 1 u
+ 0 
+   
+   "
+`;
+
+exports[`look.cone 2`] = `
+"cone 2 u
+ 213 
+  0  
+     
+     
+     "
+`;
+
+exports[`look.cone 3`] = `
+"cone 3 u
+ 75468 
+  213  
+   0   
+       
+       
+       
+       "
+`;
+
+exports[`look.cone 4`] = `
+"cone 4 u
+ eca9bdf 
+  75468  
+   213   
+    0    
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.cone 5`] = `
+"cone 1 l
+   
+0  
+   "
+`;
+
+exports[`look.cone 6`] = `
+"cone 2 l
+     
+3    
+10   
+2    
+     "
+`;
+
+exports[`look.cone 7`] = `
+"cone 3 l
+       
+8      
+63     
+410    
+52     
+7      
+       "
+`;
+
+exports[`look.cone 8`] = `
+"cone 4 l
+         
+f        
+d8       
+b63      
+9410     
+a52      
+c7       
+e        
+         "
+`;
+
+exports[`look.cone 9`] = `
+"cone 1 r
+   
+  0
+   "
+`;
+
+exports[`look.cone 10`] = `
+"cone 2 r
+     
+    2
+   01
+    3
+     "
+`;
+
+exports[`look.cone 11`] = `
+"cone 3 r
+       
+      7
+     25
+    014
+     36
+      8
+       "
+`;
+
+exports[`look.cone 12`] = `
+"cone 4 r
+         
+        e
+       7c
+      25a
+     0149
+      36b
+       8d
+        f
+         "
+`;
+
+exports[`look.cone 13`] = `
+"cone 1 d
+   
+   
+ 0 "
+`;
+
+exports[`look.cone 14`] = `
+"cone 2 d
+     
+     
+     
+  0  
+ 312 "
+`;
+
+exports[`look.cone 15`] = `
+"cone 3 d
+       
+       
+       
+       
+   0   
+  312  
+ 86457 "
+`;
+
+exports[`look.cone 16`] = `
+"cone 4 d
+         
+         
+         
+         
+         
+    0    
+   312   
+  86457  
+ fdb9ace "
+`;
+
+exports[`look.three 1`] = `
+"three 1 u
+102
+   
+   "
+`;
+
+exports[`look.three 2`] = `
+"three 2 u
+ 435 
+ 102 
+     
+     
+     "
+`;
+
+exports[`look.three 3`] = `
+"three 3 u
+  768  
+  435  
+  102  
+       
+       
+       
+       "
+`;
+
+exports[`look.three 4`] = `
+"three 4 u
+   a9b   
+   768   
+   435   
+   102   
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.three 5`] = `
+"three 1 l
+2  
+0  
+1  "
+`;
+
+exports[`look.three 6`] = `
+"three 2 l
+     
+52   
+30   
+41   
+     "
+`;
+
+exports[`look.three 7`] = `
+"three 3 l
+       
+       
+852    
+630    
+741    
+       
+       "
+`;
+
+exports[`look.three 8`] = `
+"three 4 l
+         
+         
+         
+b852     
+9630     
+a741     
+         
+         
+         "
+`;
+
+exports[`look.three 9`] = `
+"three 1 r
+  1
+  0
+  2"
+`;
+
+exports[`look.three 10`] = `
+"three 2 r
+     
+   14
+   03
+   25
+     "
+`;
+
+exports[`look.three 11`] = `
+"three 3 r
+       
+       
+    147
+    036
+    258
+       
+       "
+`;
+
+exports[`look.three 12`] = `
+"three 4 r
+         
+         
+         
+     147a
+     0369
+     258b
+         
+         
+         "
+`;
+
+exports[`look.three 13`] = `
+"three 1 d
+   
+   
+201"
+`;
+
+exports[`look.three 14`] = `
+"three 2 d
+     
+     
+     
+ 201 
+ 534 "
+`;
+
+exports[`look.three 15`] = `
+"three 3 d
+       
+       
+       
+       
+  201  
+  534  
+  867  "
+`;
+
+exports[`look.three 16`] = `
+"three 4 d
+         
+         
+         
+         
+         
+   201   
+   534   
+   867   
+   b9a   "
 `;
 
 exports[`xy2index 1`] = `

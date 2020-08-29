@@ -3,8 +3,8 @@ import Geo, {numalpha, SHAPES} from '../tw/Geo'
 
 const snap = (board, options) => {
   const output = board.geo.print(board, options)
-  if (process.argv.includes('-V')) {
-    console.log(output)
+  if (process.__UR && process.__UR.V) {
+    console.log(output) // eslint-disable-line
   }
   expect(output).toMatchSnapshot()
 }
@@ -22,12 +22,13 @@ test('xy2index', () => {
   snap(b)
 })
 
-const testShape = (shape) => {
+SHAPES.forEach(shape => {
   test('look.'+shape, () => {
-    range(1,5).forEach(dist => {
-      const geo = Geo(dist*2+1)
-      geo.dindexes.forEach(dindex => {
+    range(4).forEach(i_dindex => {
+      range(1,5).forEach(dist => {
+        const geo = Geo(dist*2+1)
         const board = {geo}
+        const dindex = geo.dindexes[i_dindex]
         const indexes = geo.look(shape, geo.CENTER, dist, dindex)
         indexes.forEach((index, i) => board[index] = numalpha[i] || '!')
         const title = `${shape} ${dist} ${geo._dindex2name[dindex]}`
@@ -35,10 +36,5 @@ const testShape = (shape) => {
       })
     })
   })
-}
-
-SHAPES.forEach(shape => {
-  testShape(shape)
-  testShape('__'+shape)
 })
 
