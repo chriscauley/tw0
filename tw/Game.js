@@ -78,17 +78,26 @@ export default class Game {
         this.piece_turns[piece.id]--
         hard_block[piece.index] = true
       } else {
-        soft_block[piece.index] = soft_block[piece.index] || []
-        soft_block[piece.index].push([piece, move])
+        soft_block[move.index] = soft_block[move.index] || []
+        soft_block[move.index].push([piece, move])
       }
     })
     Object.values(soft_block).forEach((piece_moves) => {
+      const [piece1, move1] = piece_moves[0]
       if (piece_moves.length > 1) {
-        throw 'NotImplemented: conflicting moves'
+        const team1 = piece1.team
+        if (piece_moves.find(([piece, _move]) => piece.team !== team1)) {
+          piece_moves.forEach(([piece, _move]) => {
+            const { index } = piece
+            applyDamage(this.board, { index, count: 1 })
+            // TODO bouncing damage animation
+          })
+        } else {
+          throw 'All good, execute!'
+        }
       } else {
-        const [piece, move] = piece_moves[0]
-        applyMove(piece, move)
-        this.piece_turns[piece.id]--
+        applyMove(piece1, move1)
+        this.piece_turns[piece1.id]--
       }
     })
   }
