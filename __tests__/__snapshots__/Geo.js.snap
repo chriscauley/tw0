@@ -1,9 +1,329 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Look 1`] = `
+"circle 1 u
+ 0 
+2 1
+ 3 "
+`;
+
+exports[`Look 2`] = `
+"box 1 u
+012
+3 4
+567"
+`;
+
+exports[`Look 3`] = `
+"circle 1 l
+ 1 
+0 3
+ 2 "
+`;
+
+exports[`Look 4`] = `
+"box 1 l
+247
+1 6
+035"
+`;
+
+exports[`Look 5`] = `
+"circle 1 r
+ 2 
+3 0
+ 1 "
+`;
+
+exports[`Look 6`] = `
+"box 1 r
+530
+6 1
+742"
+`;
+
+exports[`Look 7`] = `
+"circle 1 d
+ 3 
+1 2
+ 0 "
+`;
+
+exports[`Look 8`] = `
+"box 1 d
+765
+4 3
+210"
+`;
+
+exports[`Look 9`] = `
+"circle 2 u
+  4  
+ 605 
+82 17
+ a39 
+  b  "
+`;
+
+exports[`Look 10`] = `
+"box 2 u
+89abc
+d012e
+f3 4g
+h567i
+jklmn"
+`;
+
+exports[`Look 11`] = `
+"circle 2 l
+  7  
+ 519 
+40 3b
+ 62a 
+  8  "
+`;
+
+exports[`Look 12`] = `
+"box 2 l
+cegin
+b247m
+a1 6l
+9035k
+8dfhj"
+`;
+
+exports[`Look 13`] = `
+"circle 2 r
+  8  
+ a26 
+b3 04
+ 915 
+  7  "
+`;
+
+exports[`Look 14`] = `
+"box 2 r
+jhfd8
+k5309
+l6 1a
+m742b
+nigec"
+`;
+
+exports[`Look 15`] = `
+"circle 2 d
+  b  
+ 93a 
+71 28
+ 506 
+  4  "
+`;
+
+exports[`Look 16`] = `
+"box 2 d
+nmlkj
+i765h
+g4 3f
+e210d
+cba98"
+`;
+
+exports[`Look 17`] = `
+"circle 3 u
+   c   
+  e4d  
+ g605f 
+i82 17h
+ ma39l 
+  kbj  
+   n   "
+`;
+
+exports[`Look 18`] = `
+"box 3 u
+opqrstu
+v89abcw
+xd012ey
+zf3 4gA
+Bh567iC
+DjklmnE
+FGHIJKL"
+`;
+
+exports[`Look 19`] = `
+"circle 3 l
+   h   
+  f7l  
+ d519j 
+c40 3bn
+ e62ak 
+  g8m  
+   i   "
+`;
+
+exports[`Look 20`] = `
+"box 3 l
+uwyACEL
+tceginK
+sb247mJ
+ra1 6lI
+q9035kH
+p8dfhjG
+ovxzBDF"
+`;
+
+exports[`Look 21`] = `
+"circle 3 r
+   i   
+  m8g  
+ ka26e 
+nb3 04c
+ j915d 
+  l7f  
+   h   "
+`;
+
+exports[`Look 22`] = `
+"box 3 r
+FDBzxvo
+Gjhfd8p
+Hk5309q
+Il6 1ar
+Jm742bs
+Knigect
+LECAywu"
+`;
+
+exports[`Look 23`] = `
+"circle 3 d
+   n   
+  jbk  
+ l93am 
+h71 28i
+ f506g 
+  d4e  
+   c   "
+`;
+
+exports[`Look 24`] = `
+"box 3 d
+LKJIHGF
+EnmlkjD
+Ci765hB
+Ag4 3fz
+ye210dx
+wcba98v
+utsrqpo"
+`;
+
+exports[`Look 25`] = `
+"circle 4 u
+    o    
+   qcp   
+  se4dr  
+ ug605ft 
+wi82 17hv
+ Cma39lB 
+  Akbjz  
+   ynx   
+    D    "
+`;
+
+exports[`Look 26`] = `
+"box 4 u
+MNOPQRSTU
+VopqrstuW
+Xv89abcwY
+Zxd012ey!
+!zf3 4gA!
+!Bh567iC!
+!DjklmnE!
+!FGHIJKL!
+!!!!!!!!!"
+`;
+
+exports[`Look 27`] = `
+"circle 4 l
+    v    
+   thB   
+  rf7lz  
+ pd519jx 
+oc40 3bnD
+ qe62aky 
+  sg8mA  
+   uiC   
+    w    "
+`;
+
+exports[`Look 28`] = `
+"box 4 l
+UWY!!!!!!
+TuwyACEL!
+StceginK!
+Rsb247mJ!
+Qra1 6lI!
+Pq9035kH!
+Op8dfhjG!
+NovxzBDF!
+MVXZ!!!!!"
+`;
+
+exports[`Look 29`] = `
+"circle 4 r
+    w    
+   Ciu   
+  Am8gs  
+ yka26eq 
+Dnb3 04co
+ xj915dp 
+  zl7fr  
+   Bht   
+    v    "
+`;
+
+exports[`Look 30`] = `
+"box 4 r
+!!!!!ZXVM
+!FDBzxvoN
+!Gjhfd8pO
+!Hk5309qP
+!Il6 1arQ
+!Jm742bsR
+!KnigectS
+!LECAywuT
+!!!!!!YWU"
+`;
+
+exports[`Look 31`] = `
+"circle 4 d
+    D    
+   xny   
+  zjbkA  
+ Bl93amC 
+vh71 28iw
+ tf506gu 
+  rd4es  
+   pcq   
+    o    "
+`;
+
+exports[`Look 32`] = `
+"box 4 d
+!!!!!!!!!
+!LKJIHGF!
+!EnmlkjD!
+!Ci765hB!
+!Ag4 3fz!
+!ye210dxZ
+Ywcba98vX
+WutsrqpoV
+UTSRQPONM"
+`;
+
 exports[`xy2index 1`] = `
-".....
-.6...
-..1..
-.4.3.
-5...2"
+"     
+ 6   
+  1  
+ 4 3 
+5   2"
 `;
