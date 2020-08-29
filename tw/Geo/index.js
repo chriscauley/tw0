@@ -1,7 +1,10 @@
-const { range } = require('lodash')
+import { range } from 'lodash'
+import { assert } from '../utils'
+
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const ALPHA = alpha.toUpperCase()
 const numbers = '0123456789'
+
 export const alphabet = alpha.split('')
 export const alphanum = (alpha+ALPHA+numbers).split('')
 export const numalpha = (numbers+alpha+ALPHA).split('')
@@ -109,21 +112,6 @@ const Look = (geo) => {
     make(shape, 1)
   })
 
-  look.inBounds = (shape, index, dist) => {
-    // like look, but won't cross out of bounds
-    const x0 = geo.index2xy(index)[0]
-    const xys = look(shape, index, dist)
-      .map((i) => geo.index2xy(i))
-      .filter(
-        (xy) =>
-          Math.abs(xy[0] - x0) <= dist &&
-          xy[1] < geo.H &&
-          xy[1] >= geo.y0 &&
-          xy[1] < geo.y0 + geo.H,
-      )
-    return xys.map((xy) => geo.xy2index(xy))
-  }
-
   return look
 }
 
@@ -183,7 +171,6 @@ const Geo = (x0, x_max, y0, y_max) => {
       title && lines.unshift(title)
       return lines.join('\n')
     },
-    log: (board, options) => console.log(geo.print(board, options)),
     inBounds(xy) {
       return xy[0] >= x0 && xy[0] < x0 + W && xy[1] >= y0 && xy[1] < y0 + H
     },
@@ -213,7 +200,7 @@ const Geo = (x0, x_max, y0, y_max) => {
     y => range(x0, x_max+1).forEach(
       x => {
         const xy = [x,y]
-        geo.xys.push()
+        geo.xys.push(xy)
         geo.indexes.push(geo.xy2index(xy))
       }
     )
@@ -222,35 +209,5 @@ const Geo = (x0, x_max, y0, y_max) => {
   geo.look = Look(geo)
   return geo
 }
-const assert = (bool, exception) => {
-  if (!bool) {
-    throw exception
-  }
-}
 
-const log = (...args) => {
-  if (log.isOn()) {
-    console.log(...args)
-  }
-}
-
-log.isOn = () => process.argv.includes('-v')
-
-const answer = (text, value, expected) => {
-  if (expected !== undefined) {
-    assert(value === expected, `Bad answer for ${text}, ${value} !== ${expected}`)
-  }
-  console.log(text, value)
-}
-
-// eslint-disable-next-line
 export default Geo
-//   numalpha,
-//   alphanum,
-//   alphabet: alphanum.slice(0,26),
-//   Geo,
-//   assert,
-//   log,
-//   answer,
-//   mod,
-// }
