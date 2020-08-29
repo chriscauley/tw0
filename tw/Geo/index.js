@@ -9,7 +9,63 @@ export const numalpha = (numbers+alpha+ALPHA).split('')
 const mod = (n, d) => ((n % d) + d) % d
 export const SHAPES = []
 
+const Shapes = (geo) => ({
+  box: (dist, dindex) => {
+    const out = []
+    const o_dindex = geo.rot_dindexes[dindex][1]
+
+    // top row
+    range(-dist, dist+1).forEach(i => out.push(dist * dindex - i * o_dindex))
+
+    // left and right sides in middle
+    range(1, 2*dist).forEach(i => {
+      out.push((dist-i) * dindex + o_dindex * dist)
+      out.push((dist-i) * dindex - o_dindex * dist)
+    })
+
+    // bottom row
+    range(-dist, dist+1).forEach(i => out.push(-dist * dindex - i * o_dindex))
+    return out
+  },
+  circle: (dist, dindex) => {
+    const out = []
+    const o_dindex = geo.rot_dindexes[dindex][1]
+    out.push(dindex * dist)
+    range(1, dist+1).forEach(i => {
+      out.push(dindex*(dist-i) - o_dindex * i)
+      out.push(dindex*(dist-i) + o_dindex * i)
+    })
+    range(1, dist).forEach(i => {
+      out.push(-dindex*(dist-i) - o_dindex * i)
+      out.push(-dindex*(dist-i) + o_dindex * i)
+    })
+    out.push(dindex * -dist)
+    return out
+  },
+  three: (dist, dindex) => {
+    const target = dist*dindex
+    const o_dindex = geo.rot_dindexes[dindex][1]
+    return [target, target + o_dindex, target - o_dindex]
+  },
+  cone: (dist, dindex) => {
+    const target = dist*dindex
+    const out = [target]
+    const o_dindex = geo.rot_dindexes[dindex][1]
+    range(1, dist).forEach(o_dist => {
+      out.push(target + o_dist * o_dindex)
+      out.push(target - o_dist * o_dindex)
+    })
+    return out
+  },
+})
+
+Object.keys(Shapes()).forEach(shape => {
+  SHAPES.push('__'+shape)
+  SHAPES.push(shape)
+})
+
 const Look = (geo) => {
+  const shapes = Shapes(geo)
   const make = (shape, dist) => {
     const R = 1
     if (look[shape][R][dist]) {
@@ -37,56 +93,6 @@ const Look = (geo) => {
     }
   }
 
-  const shapes = {
-    box: (dist, dindex) => {
-      const out = []
-      const o_dindex = geo.rot_dindexes[dindex][1]
-
-      // top row
-      range(-dist, dist+1).forEach(i => out.push(dist * dindex - i * o_dindex))
-
-      // left and right sides in middle
-      range(1, 2*dist).forEach(i => {
-        out.push((dist-i) * dindex + o_dindex * dist)
-        out.push((dist-i) * dindex - o_dindex * dist)
-      })
-
-      // bottom row
-      range(-dist, dist+1).forEach(i => out.push(-dist * dindex - i * o_dindex))
-      return out
-    },
-    circle: (dist, dindex) => {
-      const out = []
-      const o_dindex = geo.rot_dindexes[dindex][1]
-      out.push(dindex * dist)
-      range(1, dist+1).forEach(i => {
-        out.push(dindex*(dist-i) - o_dindex * i)
-        out.push(dindex*(dist-i) + o_dindex * i)
-      })
-      range(1, dist).forEach(i => {
-        out.push(-dindex*(dist-i) - o_dindex * i)
-        out.push(-dindex*(dist-i) + o_dindex * i)
-      })
-      out.push(dindex * -dist)
-      return out
-    },
-    three: (dist, dindex) => {
-      const target = dist*dindex
-      const o_dindex = geo.rot_dindexes[dindex][1]
-      return [target, target + o_dindex, target - o_dindex]
-    },
-    cone: (dist, dindex) => {
-      const target = dist*dindex
-      const out = [target]
-      const o_dindex = geo.rot_dindexes[dindex][1]
-      range(1, dist).forEach(o_dist => {
-        out.push(target + o_dist * o_dindex)
-        out.push(target - o_dist * o_dindex)
-      })
-      return out
-    },
-  }
-
   const look = (shape, index, dist, dindex) => {
     if (!look[shape][dindex]) {
       throw Error(`Invalid dindex: ${dindex}`)
@@ -95,17 +101,11 @@ const Look = (geo) => {
     return look[shape][dindex][dist].map((dindex) => index + dindex)
   }
 
-  const registerShape = (name) => {
-    SHAPES.push(name)
-    look[name] = {}
+  SHAPES.forEach((shape) => {
+    look[shape] = {}
     geo.dindexes.forEach(dindex => {
-      look[name][dindex] = [[]] // all geometries only see nothing at range 0
+      look[shape][dindex] = [[]] // all geometries only see nothing at range 0
     })
-  }
-
-  Object.keys(shapes).forEach((shape) => {
-    registerShape(shape)
-    registerShape('__' + shape)
     make(shape, 1)
   })
 
@@ -127,7 +127,13 @@ const Look = (geo) => {
   return look
 }
 
+const geo_cache = {}
+
 const Geo = (x0, x_max, y0, y_max) => {
+  const key = `${x0},${x_max},${y0},${y_max}`
+  if (geo_cache[key]) {
+    return geo_cache[key]
+  }
   if (x_max === undefined) {
     x_max = x0
   }
@@ -141,7 +147,7 @@ const Geo = (x0, x_max, y0, y_max) => {
   const W = Math.abs(x_max - x0) + 1
   const H = Math.abs(y_max - y0) + 1
 
-  const geo = {
+  const geo = geo_cache[key] = {
     x0,
     y0,
     W,
