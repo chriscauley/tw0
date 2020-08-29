@@ -110,6 +110,9 @@ const Look = (geo) => {
 }
 
 const Geo = (x0, x_max, y0, y_max) => {
+  if (x_max === undefined) {
+    x_max = x0
+  }
   if (y0 === undefined) {
     y_max = x_max - 1
     x_max = x0 - 1

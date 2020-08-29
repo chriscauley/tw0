@@ -22,20 +22,23 @@ test('xy2index', () => {
   snap(b)
 })
 
-test('Look', () => {
-  const _test = (geo, shape, dist, dindex) => {
-    const indexes = geo.look(shape, geo.CENTER, dist, dindex)
-    const board = {geo}
-    indexes.forEach((index, i) => board[index] = numalpha[i] || '!')
-    const title = `${shape} ${dist} ${geo._dindex2name[dindex]}`
-    snap(board, {title})
-  }
-  range(1,5).forEach(dist => {
-    const geo = Geo(dist*2+1)
-    geo.dindexes.forEach(dindex => {
-      SHAPES.forEach(shape => {
-        _test(geo, shape, dist, dindex)
+const testShape = (shape) => {
+  test('look.'+shape, () => {
+    range(1,5).forEach(dist => {
+      const geo = Geo(dist*2+1)
+      geo.dindexes.forEach(dindex => {
+        const board = {geo}
+        const indexes = geo.look(shape, geo.CENTER, dist, dindex)
+        indexes.forEach((index, i) => board[index] = numalpha[i] || '!')
+        const title = `${shape} ${dist} ${geo._dindex2name[dindex]}`
+        snap(board, {title})
       })
     })
   })
+}
+
+SHAPES.forEach(shape => {
+  testShape(shape)
+  testShape('__'+shape)
 })
+

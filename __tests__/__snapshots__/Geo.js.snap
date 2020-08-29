@@ -1,71 +1,354 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Look 1`] = `
-"circle 1 u
+exports[`look.__box 1`] = `
+"__box 1 u
+012
+3 4
+567"
+`;
+
+exports[`look.__box 2`] = `
+"__box 1 l
+247
+1 6
+035"
+`;
+
+exports[`look.__box 3`] = `
+"__box 1 r
+530
+6 1
+742"
+`;
+
+exports[`look.__box 4`] = `
+"__box 1 d
+765
+4 3
+210"
+`;
+
+exports[`look.__box 5`] = `
+"__box 2 u
+01234
+5   6
+7   8
+9   a
+bcdef"
+`;
+
+exports[`look.__box 6`] = `
+"__box 2 l
+468af
+3   e
+2   d
+1   c
+0579b"
+`;
+
+exports[`look.__box 7`] = `
+"__box 2 r
+b9750
+c   1
+d   2
+e   3
+fa864"
+`;
+
+exports[`look.__box 8`] = `
+"__box 2 d
+fedcb
+a   9
+8   7
+6   5
+43210"
+`;
+
+exports[`look.__box 9`] = `
+"__box 3 u
+0123456
+7     8
+9     a
+b     c
+d     e
+f     g
+hijklmn"
+`;
+
+exports[`look.__box 10`] = `
+"__box 3 l
+68acegn
+5     m
+4     l
+3     k
+2     j
+1     i
+079bdfh"
+`;
+
+exports[`look.__box 11`] = `
+"__box 3 r
+hfdb970
+i     1
+j     2
+k     3
+l     4
+m     5
+ngeca86"
+`;
+
+exports[`look.__box 12`] = `
+"__box 3 d
+nmlkjih
+g     f
+e     d
+c     b
+a     9
+8     7
+6543210"
+`;
+
+exports[`look.__box 13`] = `
+"__box 4 u
+012345678
+9       a
+b       c
+d       e
+f       g
+h       i
+j       k
+l       m
+nopqrstuv"
+`;
+
+exports[`look.__box 14`] = `
+"__box 4 l
+8acegikmv
+7       u
+6       t
+5       s
+4       r
+3       q
+2       p
+1       o
+09bdfhjln"
+`;
+
+exports[`look.__box 15`] = `
+"__box 4 r
+nljhfdb90
+o       1
+p       2
+q       3
+r       4
+s       5
+t       6
+u       7
+vmkigeca8"
+`;
+
+exports[`look.__box 16`] = `
+"__box 4 d
+vutsrqpon
+m       l
+k       j
+i       h
+g       f
+e       d
+c       b
+a       9
+876543210"
+`;
+
+exports[`look.__circle 1`] = `
+"__circle 1 u
  0 
 2 1
  3 "
 `;
 
-exports[`Look 2`] = `
+exports[`look.__circle 2`] = `
+"__circle 1 l
+ 1 
+0 3
+ 2 "
+`;
+
+exports[`look.__circle 3`] = `
+"__circle 1 r
+ 2 
+3 0
+ 1 "
+`;
+
+exports[`look.__circle 4`] = `
+"__circle 1 d
+ 3 
+1 2
+ 0 "
+`;
+
+exports[`look.__circle 5`] = `
+"__circle 2 u
+  0  
+ 2 1 
+4   3
+ 6 5 
+  7  "
+`;
+
+exports[`look.__circle 6`] = `
+"__circle 2 l
+  3  
+ 1 5 
+0   7
+ 2 6 
+  4  "
+`;
+
+exports[`look.__circle 7`] = `
+"__circle 2 r
+  4  
+ 6 2 
+7   0
+ 5 1 
+  3  "
+`;
+
+exports[`look.__circle 8`] = `
+"__circle 2 d
+  7  
+ 5 6 
+3   4
+ 1 2 
+  0  "
+`;
+
+exports[`look.__circle 9`] = `
+"__circle 3 u
+   0   
+  2 1  
+ 4   3 
+6     5
+ a   9 
+  8 7  
+   b   "
+`;
+
+exports[`look.__circle 10`] = `
+"__circle 3 l
+   5   
+  3 9  
+ 1   7 
+0     b
+ 2   8 
+  4 a  
+   6   "
+`;
+
+exports[`look.__circle 11`] = `
+"__circle 3 r
+   6   
+  a 4  
+ 8   2 
+b     0
+ 7   1 
+  9 3  
+   5   "
+`;
+
+exports[`look.__circle 12`] = `
+"__circle 3 d
+   b   
+  7 8  
+ 9   a 
+5     6
+ 3   4 
+  1 2  
+   0   "
+`;
+
+exports[`look.__circle 13`] = `
+"__circle 4 u
+    0    
+   2 1   
+  4   3  
+ 6     5 
+8       7
+ e     d 
+  c   b  
+   a 9   
+    f    "
+`;
+
+exports[`look.__circle 14`] = `
+"__circle 4 l
+    7    
+   5 d   
+  3   b  
+ 1     9 
+0       f
+ 2     a 
+  4   c  
+   6 e   
+    8    "
+`;
+
+exports[`look.__circle 15`] = `
+"__circle 4 r
+    8    
+   e 6   
+  c   4  
+ a     2 
+f       0
+ 9     1 
+  b   3  
+   d 5   
+    7    "
+`;
+
+exports[`look.__circle 16`] = `
+"__circle 4 d
+    f    
+   9 a   
+  b   c  
+ d     e 
+7       8
+ 5     6 
+  3   4  
+   1 2   
+    0    "
+`;
+
+exports[`look.box 1`] = `
 "box 1 u
 012
 3 4
 567"
 `;
 
-exports[`Look 3`] = `
-"circle 1 l
- 1 
-0 3
- 2 "
-`;
-
-exports[`Look 4`] = `
+exports[`look.box 2`] = `
 "box 1 l
 247
 1 6
 035"
 `;
 
-exports[`Look 5`] = `
-"circle 1 r
- 2 
-3 0
- 1 "
-`;
-
-exports[`Look 6`] = `
+exports[`look.box 3`] = `
 "box 1 r
 530
 6 1
 742"
 `;
 
-exports[`Look 7`] = `
-"circle 1 d
- 3 
-1 2
- 0 "
-`;
-
-exports[`Look 8`] = `
+exports[`look.box 4`] = `
 "box 1 d
 765
 4 3
 210"
 `;
 
-exports[`Look 9`] = `
-"circle 2 u
-  4  
- 605 
-82 17
- a39 
-  b  "
-`;
-
-exports[`Look 10`] = `
+exports[`look.box 5`] = `
 "box 2 u
 89abc
 d012e
@@ -74,16 +357,7 @@ h567i
 jklmn"
 `;
 
-exports[`Look 11`] = `
-"circle 2 l
-  7  
- 519 
-40 3b
- 62a 
-  8  "
-`;
-
-exports[`Look 12`] = `
+exports[`look.box 6`] = `
 "box 2 l
 cegin
 b247m
@@ -92,16 +366,7 @@ a1 6l
 8dfhj"
 `;
 
-exports[`Look 13`] = `
-"circle 2 r
-  8  
- a26 
-b3 04
- 915 
-  7  "
-`;
-
-exports[`Look 14`] = `
+exports[`look.box 7`] = `
 "box 2 r
 jhfd8
 k5309
@@ -110,16 +375,7 @@ m742b
 nigec"
 `;
 
-exports[`Look 15`] = `
-"circle 2 d
-  b  
- 93a 
-71 28
- 506 
-  4  "
-`;
-
-exports[`Look 16`] = `
+exports[`look.box 8`] = `
 "box 2 d
 nmlkj
 i765h
@@ -128,18 +384,7 @@ e210d
 cba98"
 `;
 
-exports[`Look 17`] = `
-"circle 3 u
-   c   
-  e4d  
- g605f 
-i82 17h
- ma39l 
-  kbj  
-   n   "
-`;
-
-exports[`Look 18`] = `
+exports[`look.box 9`] = `
 "box 3 u
 opqrstu
 v89abcw
@@ -150,18 +395,7 @@ DjklmnE
 FGHIJKL"
 `;
 
-exports[`Look 19`] = `
-"circle 3 l
-   h   
-  f7l  
- d519j 
-c40 3bn
- e62ak 
-  g8m  
-   i   "
-`;
-
-exports[`Look 20`] = `
+exports[`look.box 10`] = `
 "box 3 l
 uwyACEL
 tceginK
@@ -172,18 +406,7 @@ p8dfhjG
 ovxzBDF"
 `;
 
-exports[`Look 21`] = `
-"circle 3 r
-   i   
-  m8g  
- ka26e 
-nb3 04c
- j915d 
-  l7f  
-   h   "
-`;
-
-exports[`Look 22`] = `
+exports[`look.box 11`] = `
 "box 3 r
 FDBzxvo
 Gjhfd8p
@@ -194,18 +417,7 @@ Knigect
 LECAywu"
 `;
 
-exports[`Look 23`] = `
-"circle 3 d
-   n   
-  jbk  
- l93am 
-h71 28i
- f506g 
-  d4e  
-   c   "
-`;
-
-exports[`Look 24`] = `
+exports[`look.box 12`] = `
 "box 3 d
 LKJIHGF
 EnmlkjD
@@ -216,20 +428,7 @@ wcba98v
 utsrqpo"
 `;
 
-exports[`Look 25`] = `
-"circle 4 u
-    o    
-   qcp   
-  se4dr  
- ug605ft 
-wi82 17hv
- Cma39lB 
-  Akbjz  
-   ynx   
-    D    "
-`;
-
-exports[`Look 26`] = `
+exports[`look.box 13`] = `
 "box 4 u
 MNOPQRSTU
 VopqrstuW
@@ -242,20 +441,7 @@ Zxd012ey!
 !!!!!!!!!"
 `;
 
-exports[`Look 27`] = `
-"circle 4 l
-    v    
-   thB   
-  rf7lz  
- pd519jx 
-oc40 3bnD
- qe62aky 
-  sg8mA  
-   uiC   
-    w    "
-`;
-
-exports[`Look 28`] = `
+exports[`look.box 14`] = `
 "box 4 l
 UWY!!!!!!
 TuwyACEL!
@@ -268,20 +454,7 @@ NovxzBDF!
 MVXZ!!!!!"
 `;
 
-exports[`Look 29`] = `
-"circle 4 r
-    w    
-   Ciu   
-  Am8gs  
- yka26eq 
-Dnb3 04co
- xj915dp 
-  zl7fr  
-   Bht   
-    v    "
-`;
-
-exports[`Look 30`] = `
+exports[`look.box 15`] = `
 "box 4 r
 !!!!!ZXVM
 !FDBzxvoN
@@ -294,20 +467,7 @@ exports[`Look 30`] = `
 !!!!!!YWU"
 `;
 
-exports[`Look 31`] = `
-"circle 4 d
-    D    
-   xny   
-  zjbkA  
- Bl93amC 
-vh71 28iw
- tf506gu 
-  rd4es  
-   pcq   
-    o    "
-`;
-
-exports[`Look 32`] = `
+exports[`look.box 16`] = `
 "box 4 d
 !!!!!!!!!
 !LKJIHGF!
@@ -318,6 +478,166 @@ exports[`Look 32`] = `
 Ywcba98vX
 WutsrqpoV
 UTSRQPONM"
+`;
+
+exports[`look.circle 1`] = `
+"circle 1 u
+ 0 
+2 1
+ 3 "
+`;
+
+exports[`look.circle 2`] = `
+"circle 1 l
+ 1 
+0 3
+ 2 "
+`;
+
+exports[`look.circle 3`] = `
+"circle 1 r
+ 2 
+3 0
+ 1 "
+`;
+
+exports[`look.circle 4`] = `
+"circle 1 d
+ 3 
+1 2
+ 0 "
+`;
+
+exports[`look.circle 5`] = `
+"circle 2 u
+  4  
+ 605 
+82 17
+ a39 
+  b  "
+`;
+
+exports[`look.circle 6`] = `
+"circle 2 l
+  7  
+ 519 
+40 3b
+ 62a 
+  8  "
+`;
+
+exports[`look.circle 7`] = `
+"circle 2 r
+  8  
+ a26 
+b3 04
+ 915 
+  7  "
+`;
+
+exports[`look.circle 8`] = `
+"circle 2 d
+  b  
+ 93a 
+71 28
+ 506 
+  4  "
+`;
+
+exports[`look.circle 9`] = `
+"circle 3 u
+   c   
+  e4d  
+ g605f 
+i82 17h
+ ma39l 
+  kbj  
+   n   "
+`;
+
+exports[`look.circle 10`] = `
+"circle 3 l
+   h   
+  f7l  
+ d519j 
+c40 3bn
+ e62ak 
+  g8m  
+   i   "
+`;
+
+exports[`look.circle 11`] = `
+"circle 3 r
+   i   
+  m8g  
+ ka26e 
+nb3 04c
+ j915d 
+  l7f  
+   h   "
+`;
+
+exports[`look.circle 12`] = `
+"circle 3 d
+   n   
+  jbk  
+ l93am 
+h71 28i
+ f506g 
+  d4e  
+   c   "
+`;
+
+exports[`look.circle 13`] = `
+"circle 4 u
+    o    
+   qcp   
+  se4dr  
+ ug605ft 
+wi82 17hv
+ Cma39lB 
+  Akbjz  
+   ynx   
+    D    "
+`;
+
+exports[`look.circle 14`] = `
+"circle 4 l
+    v    
+   thB   
+  rf7lz  
+ pd519jx 
+oc40 3bnD
+ qe62aky 
+  sg8mA  
+   uiC   
+    w    "
+`;
+
+exports[`look.circle 15`] = `
+"circle 4 r
+    w    
+   Ciu   
+  Am8gs  
+ yka26eq 
+Dnb3 04co
+ xj915dp 
+  zl7fr  
+   Bht   
+    v    "
+`;
+
+exports[`look.circle 16`] = `
+"circle 4 d
+    D    
+   xny   
+  zjbkA  
+ Bl93amC 
+vh71 28iw
+ tf506gu 
+  rd4es  
+   pcq   
+    o    "
 `;
 
 exports[`xy2index 1`] = `
