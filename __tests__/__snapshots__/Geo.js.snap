@@ -480,6 +480,166 @@ exports[`look.__cone 16`] = `
  6420135 "
 `;
 
+exports[`look.__f 1`] = `
+"__f 1 u
+ 0 
+   
+   "
+`;
+
+exports[`look.__f 2`] = `
+"__f 2 u
+  0  
+     
+     
+     
+     "
+`;
+
+exports[`look.__f 3`] = `
+"__f 3 u
+   0   
+       
+       
+       
+       
+       
+       "
+`;
+
+exports[`look.__f 4`] = `
+"__f 4 u
+    0    
+         
+         
+         
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.__f 5`] = `
+"__f 1 l
+   
+0  
+   "
+`;
+
+exports[`look.__f 6`] = `
+"__f 2 l
+     
+     
+0    
+     
+     "
+`;
+
+exports[`look.__f 7`] = `
+"__f 3 l
+       
+       
+       
+0      
+       
+       
+       "
+`;
+
+exports[`look.__f 8`] = `
+"__f 4 l
+         
+         
+         
+         
+0        
+         
+         
+         
+         "
+`;
+
+exports[`look.__f 9`] = `
+"__f 1 r
+   
+  0
+   "
+`;
+
+exports[`look.__f 10`] = `
+"__f 2 r
+     
+     
+    0
+     
+     "
+`;
+
+exports[`look.__f 11`] = `
+"__f 3 r
+       
+       
+       
+      0
+       
+       
+       "
+`;
+
+exports[`look.__f 12`] = `
+"__f 4 r
+         
+         
+         
+         
+        0
+         
+         
+         
+         "
+`;
+
+exports[`look.__f 13`] = `
+"__f 1 d
+   
+   
+ 0 "
+`;
+
+exports[`look.__f 14`] = `
+"__f 2 d
+     
+     
+     
+     
+  0  "
+`;
+
+exports[`look.__f 15`] = `
+"__f 3 d
+       
+       
+       
+       
+       
+       
+   0   "
+`;
+
+exports[`look.__f 16`] = `
+"__f 4 d
+         
+         
+         
+         
+         
+         
+         
+         
+    0    "
+`;
+
 exports[`look.__three 1`] = `
 "__three 1 u
 102
@@ -1118,6 +1278,166 @@ exports[`look.cone 16`] = `
    312   
   86457  
  fdb9ace "
+`;
+
+exports[`look.f 1`] = `
+"f 1 u
+ 0 
+   
+   "
+`;
+
+exports[`look.f 2`] = `
+"f 2 u
+  1  
+  0  
+     
+     
+     "
+`;
+
+exports[`look.f 3`] = `
+"f 3 u
+   2   
+   1   
+   0   
+       
+       
+       
+       "
+`;
+
+exports[`look.f 4`] = `
+"f 4 u
+    3    
+    2    
+    1    
+    0    
+         
+         
+         
+         
+         "
+`;
+
+exports[`look.f 5`] = `
+"f 1 l
+   
+0  
+   "
+`;
+
+exports[`look.f 6`] = `
+"f 2 l
+     
+     
+10   
+     
+     "
+`;
+
+exports[`look.f 7`] = `
+"f 3 l
+       
+       
+       
+210    
+       
+       
+       "
+`;
+
+exports[`look.f 8`] = `
+"f 4 l
+         
+         
+         
+         
+3210     
+         
+         
+         
+         "
+`;
+
+exports[`look.f 9`] = `
+"f 1 r
+   
+  0
+   "
+`;
+
+exports[`look.f 10`] = `
+"f 2 r
+     
+     
+   01
+     
+     "
+`;
+
+exports[`look.f 11`] = `
+"f 3 r
+       
+       
+       
+    012
+       
+       
+       "
+`;
+
+exports[`look.f 12`] = `
+"f 4 r
+         
+         
+         
+         
+     0123
+         
+         
+         
+         "
+`;
+
+exports[`look.f 13`] = `
+"f 1 d
+   
+   
+ 0 "
+`;
+
+exports[`look.f 14`] = `
+"f 2 d
+     
+     
+     
+  0  
+  1  "
+`;
+
+exports[`look.f 15`] = `
+"f 3 d
+       
+       
+       
+       
+   0   
+   1   
+   2   "
+`;
+
+exports[`look.f 16`] = `
+"f 4 d
+         
+         
+         
+         
+         
+    0    
+    1    
+    2    
+    3    "
 `;
 
 exports[`look.three 1`] = `
