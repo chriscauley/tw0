@@ -10,6 +10,21 @@ const mod = (n, d) => ((n % d) + d) % d
 export const SHAPES = []
 
 const Shapes = (geo) => ({
+  circle: (dist, dindex) => {
+    const out = []
+    const o_dindex = geo.rot_dindexes[dindex][1]
+    out.push(dindex * dist)
+    range(1, dist+1).forEach(i => {
+      out.push(dindex*(dist-i) - o_dindex * i)
+      out.push(dindex*(dist-i) + o_dindex * i)
+    })
+    range(1, dist).forEach(i => {
+      out.push(-dindex*(dist-i) - o_dindex * i)
+      out.push(-dindex*(dist-i) + o_dindex * i)
+    })
+    out.push(dindex * -dist)
+    return out
+  },
   box: (dist, dindex) => {
     const out = []
     const o_dindex = geo.rot_dindexes[dindex][1]
@@ -25,21 +40,6 @@ const Shapes = (geo) => ({
 
     // bottom row
     range(-dist, dist+1).forEach(i => out.push(-dist * dindex - i * o_dindex))
-    return out
-  },
-  circle: (dist, dindex) => {
-    const out = []
-    const o_dindex = geo.rot_dindexes[dindex][1]
-    out.push(dindex * dist)
-    range(1, dist+1).forEach(i => {
-      out.push(dindex*(dist-i) - o_dindex * i)
-      out.push(dindex*(dist-i) + o_dindex * i)
-    })
-    range(1, dist).forEach(i => {
-      out.push(-dindex*(dist-i) - o_dindex * i)
-      out.push(-dindex*(dist-i) + o_dindex * i)
-    })
-    out.push(dindex * -dist)
     return out
   },
   three: (dist, dindex) => {
@@ -94,9 +94,9 @@ const Look = (geo) => {
   }
 
   const look = (shape, index, dist, dindex) => {
-    if (!look[shape][dindex]) {
-      throw Error(`Invalid dindex: ${dindex}`)
-    }
+    // TODO are these string interpolations a performance issue?
+    assert(look[shape][dindex], `Invalid dindex: ${dindex}`)
+    assert(Number.isInteger(dist), `Distance must be an integer not '${typeof dist}`)
     make(shape, dist) // idempotent
     return look[shape][dindex][dist].map((dindex) => index + dindex)
   }
