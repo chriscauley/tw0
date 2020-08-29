@@ -70,15 +70,18 @@ const Look = (geo) => {
       out.push(dindex * -dist)
       return out
     },
+    three: (dist, dindex) => {
+      const target = dist*dindex
+      const o_dindex = geo.rot_dindexes[dindex][1]
+      return [target, target + o_dindex, target - o_dindex]
+    },
   }
 
   const look = (shape, index, dist, dindex) => {
     if (!look[shape][dindex]) {
       throw Error(`Invalid dindex: ${dindex}`)
     }
-    if (!look[shape][dindex][dist]) {
-      make(shape, dist)
-    }
+    make(shape, dist) // idempotent
     return look[shape][dindex][dist].map((dindex) => index + dindex)
   }
 
