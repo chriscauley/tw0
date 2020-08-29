@@ -1,6 +1,8 @@
 import { range } from 'lodash'
-import Geo, { numalpha } from '../tw/Geo'
+
+import Geo from '../tw/Geo'
 import Shapes from '../tw/Geo/Shapes'
+import { numalpha } from '../tw/render/text'
 
 const snap = (board, options) => {
   const output = board.geo.print(board, options)

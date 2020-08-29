@@ -1,5 +1,6 @@
 import { range } from 'lodash'
-import Geo, { numalpha } from '../../tw/Geo'
+import Geo from '../../tw/Geo'
+import { numalpha } from '../../tw/render/text'
 
 const snapIndexes = (geo, indexes, title) => {
   if (process.__UR && process.__UR.V) {
