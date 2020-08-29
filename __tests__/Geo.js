@@ -1,5 +1,6 @@
 import { range } from 'lodash'
-import Geo, {numalpha, SHAPES} from '../tw/Geo'
+import Geo, { numalpha } from '../tw/Geo'
+import Shapes from '../tw/Geo/Shapes'
 
 const snap = (board, options) => {
   const output = board.geo.print(board, options)
@@ -22,7 +23,7 @@ test('xy2index', () => {
   snap(b)
 })
 
-SHAPES.forEach(shape => {
+Shapes.list.forEach(shape => {
   test('look.'+shape, () => {
     range(4).forEach(i_dindex => {
       range(1,5).forEach(dist => {

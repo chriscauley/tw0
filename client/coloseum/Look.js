@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SearchHook from './SearchHook'
-import { SHAPES } from '../../tw/Geo'
+import Shapes from '../../tw/Geo/Shapes'
 import Board from '../../tw/Board'
 import render from '../../tw/render/text'
 
@@ -13,7 +13,7 @@ const schema = {
   properties: {
     shape: {
       type: 'string',
-      enum: SHAPES,
+      enum: Shapes.list,
     },
     dist: {
       type: 'integer',
@@ -27,7 +27,7 @@ const schema = {
 }
 
 const initial = {
-  shape: SHAPES[0],
+  shape: Shapes.list[0],
   dist: 2,
   dir: 'r',
 }

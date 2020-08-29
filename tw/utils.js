@@ -4,6 +4,8 @@ export const assert = (bool, e) => {
   }
 }
 
+export const mod = (n, d) => ((n % d) + d) % d
+
 export const floodFill = ({board, pieces, criteria, use_piece_dindex, max_level=16}) => {
   // creates two maps
   // fill distance to nearest piece (or piece-like object)
