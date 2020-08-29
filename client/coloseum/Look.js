@@ -1,8 +1,6 @@
 import React from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
-import Form from '@unrest/react-jsonschema-form'
-import qs from 'query-string'
 
+import SearchHook from './SearchHook'
 import { SHAPES } from '../../tw/Geo'
 import Board from '../../tw/Board'
 import render from '../../tw/render/text'
@@ -34,30 +32,7 @@ const initial = {
   dir: 'r',
 }
 
-const useLook = () => {
-  const { search } = useLocation()
-  const data = {
-    ...initial,
-    ...qs.parse(search.replace(/^\?/,''))
-  }
-  data.dist = parseInt(data.dist)
-  return data
-}
-
-function RouterForm({schema}) {
-  const formData = useLook()
-  const history = useHistory()
-  const onChange = (formData) => history.push('?'+qs.stringify(formData))
-  return (
-    <Form
-      formData={formData}
-      onChange={onChange}
-      autoSubmit={true}
-      customButton={true}
-      schema={schema}
-    />
-  )
-}
+const {useSearch, SearchForm } = SearchHook({initial, schema})
 
 const Render = ({board, ...props}) => {
   const text = render(board, props)
@@ -79,12 +54,12 @@ export default function Look({match}) {
   const board = new Board({W: SIZE, H: SIZE})
   window.b = board
   const center = board.geo.center
-  const { shape, dist, dir } = useLook()
-  const highlight = board.geo.look(shape, board.geo.CENTER, dist, board.geo._name2dindex[dir])
+  const { shape, dist, dir } = useSearch().data
+  const highlight = board.geo.look(shape, board.geo.CENTER, parseInt(dist), board.geo._name2dindex[dir])
   return (
     <div className="flex p-4">
       <div className="mr-4" style={{width: '16rem'}}>
-        <RouterForm schema={schema} />
+        <SearchForm schema={schema} />
       </div>
       <Render board={board} empty=" " path={false} highlight={highlight}/>
     </div>
