@@ -4,6 +4,34 @@ import Geo from '../Geo'
 import vector from '../Geo/vector'
 import { assert, floodFillPath, floodFillTeam } from '../utils'
 import { newPiece } from '../piece/entity'
+import types from '../piece/types'
+
+export const parsePieces = (pieces) => {
+  if (typeof pieces === 'string') {
+    if (!pieces.includes('|')) {
+      pieces += '|' + pieces
+    }
+    const out = []
+    pieces.split('|').forEach((s, i_team) => {
+      s.split(',').forEach((s2) => {
+        if (!s2) {
+          return
+        }
+        if (!s2.match(/^\d+x/)) {
+          s2 = '1x' + s2
+        }
+        const [_, count, type] = s2.match(/^(\d+)x(.+)/)
+        let i = parseInt(count)
+        while (i--) {
+          out.push([i_team + 1, type])
+        }
+      })
+    })
+    pieces = out
+  }
+  pieces.forEach(([_count, type]) => assert(types[type], `Unknown piece type ${type}`))
+  return pieces
+}
 
 export default class Board {
   constructor({ W, H, turn = 0, ...options }) {
@@ -120,25 +148,7 @@ export default class Board {
   }
 
   quickAddPieces(pieces = []) {
-    if (typeof pieces === 'string') {
-      if (!pieces.includes('|')) {
-        pieces += '|' + pieces
-      }
-      const out = []
-      pieces.split('|').forEach((s, i_team) => {
-        s.split(',').forEach((s2) => {
-          if (!s2.match(/^\d+x/)) {
-            s2 = '1x' + s2
-          }
-          const [_, count, type] = s2.match(/^(\d+)x(.+)/)
-          let i = parseInt(count)
-          while (i--) {
-            out.push([i_team + 1, type])
-          }
-        })
-      })
-      pieces = out
-    }
+    pieces = parsePieces(pieces)
     pieces.forEach(([team, type, dxy = [0, 0]]) => {
       const xy = vector.add(this.geo.index2xy(this['start' + team]), dxy)
       const index = this.geo.xy2index(xy)
