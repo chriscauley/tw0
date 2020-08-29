@@ -7,7 +7,7 @@ const doMorph = (type, piece) => {
   board.newPiece({ index, type, dindex, team })
 }
 
-export default type => (piece, move) => {
+export default (type) => (piece, move) => {
   return after({ ...move, done: true }, () => doMorph(type, piece))
 }
 

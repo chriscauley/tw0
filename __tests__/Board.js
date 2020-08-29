@@ -2,17 +2,16 @@ import Board from '../tw/Board'
 import Game from '../tw/Game'
 import render from '../tw/render/text'
 
-
-const snap = board => {
-  const result = render(board, 'piece_type', {extra_layers:['piece_dindex']})
+const snap = (board) => {
+  const result = render(board, 'piece_type', { extra_layers: ['piece_dindex'] })
   if (process.__UR && process.__UR.V) {
-    console.log(result)
+    console.log(result) // eslint-disable-line
   }
   expect(result).toMatchSnapshot()
 }
 
 test('2-skull', () => {
-  const board = new Board({W: 8, H: 3, pieces: 'skull'})
+  const board = new Board({ W: 8, H: 3, pieces: 'skull' })
   const game = new Game({ board })
   snap(board)
   game.nextTurn()
@@ -35,7 +34,7 @@ test('9-skull', () => {
     [2, 'skull', [0, 1]],
     [1, 'skull', [1, 1]],
   ]
-  const board = new Board({W: 5, H: 5, path: [12], pieces})
+  const board = new Board({ W: 5, H: 5, path: [12], pieces })
   const game = new Game({ board })
   snap(board)
   game.nextTurn()
@@ -44,10 +43,10 @@ test('9-skull', () => {
 
 test('getDefaultPath', () => {
   const tests = [
-    {W: 5, H: 5},
-    {W: 5, H: 10},
-    {W: 10, H: 5},
-    {W: 10, H: 10},
+    { W: 5, H: 5 },
+    { W: 5, H: 10 },
+    { W: 10, H: 5 },
+    { W: 10, H: 10 },
   ]
   tests.forEach((options) => snap(new Board(options)))
 })

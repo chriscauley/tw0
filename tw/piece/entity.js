@@ -20,7 +20,7 @@ const PIECE_DEFAULTS = {
   dist: 1,
 }
 
-const newPiece = opts => {
+const newPiece = (opts) => {
   const type = types[opts.type]
   if (!type) {
     throw `Unknown type "${opts.type}" for piece`
@@ -55,7 +55,7 @@ const newPiece = opts => {
   return piece
 }
 
-const newPlayer = opts => {
+const newPlayer = (opts) => {
   const piece = newPiece({
     ...opts,
     team: 1,

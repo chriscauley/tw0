@@ -14,7 +14,7 @@ export default (geo) => {
     }
     if (shape.startsWith('__')) {
       // dunder means "outer shell of look"
-      geo.dindexes.forEach(dindex => {
+      geo.dindexes.forEach((dindex) => {
         look[shape][dindex][dist] = shapes[shape.slice(2)](dist, dindex)
       })
     } else {
@@ -22,10 +22,12 @@ export default (geo) => {
         // need outer shells to make filled looks
         make('__' + shape, dist)
       }
-      geo.dindexes.forEach(dindex => {
+      geo.dindexes.forEach((dindex) => {
         look[shape][dindex][dist] = []
         range(dist + 1).forEach((_dist) => {
-          look[shape][dindex][dist] = look[shape][dindex][dist].concat(look['__' + shape][dindex][_dist])
+          look[shape][dindex][dist] = look[shape][dindex][dist].concat(
+            look['__' + shape][dindex][_dist],
+          )
         })
       })
     }
@@ -41,7 +43,7 @@ export default (geo) => {
 
   Shapes.list.forEach((shape) => {
     look[shape] = {}
-    geo.dindexes.forEach(dindex => {
+    geo.dindexes.forEach((dindex) => {
       look[shape][dindex] = [[]] // all geometries only see nothing at range 0
     })
     make(shape, 1)

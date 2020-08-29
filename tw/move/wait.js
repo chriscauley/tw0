@@ -1,19 +1,18 @@
 import after from './after'
 
-export default turns => {
-
+export default (turns) => {
   const action = (piece, move) => {
     if (piece.wait === undefined) {
       piece.wait = 0
     }
     if (piece.wait < turns) {
-      const tick = piece => piece.wait++
+      const tick = (piece) => piece.wait++
       return {
         now: tick,
         done: true,
       }
     }
-    const reset = piece => (piece.wait = 0)
+    const reset = (piece) => (piece.wait = 0)
     return after(move, reset)
   }
 

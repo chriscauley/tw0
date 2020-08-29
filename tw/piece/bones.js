@@ -13,14 +13,10 @@ export default {
       move.wait(1),
       move.attackNearby,
       move.turn.towardPathOrFoe,
-      move.forward
-    ]
+      move.forward,
+    ],
   },
   skull: {
-    tasks: [
-      move.attackNearby,
-      move.turn.towardPathOrFoe,
-      move.forward
-    ]
-  }
+    tasks: [move.attackNearby, move.turn.towardPathOrFoe, move.forward],
+  },
 }

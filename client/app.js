@@ -5,13 +5,12 @@ import sprites from './sprites'
 import Coloseum from './coloseum'
 import Look from './coloseum/Look'
 
-
 const App = () => {
   return (
     <HashRouter>
-      <sprites.routes/>
-      <Route path="/coloseum/" component={Coloseum}/>
-      <Route path="/look/" component={Look}/>
+      <sprites.routes />
+      <Route path="/coloseum/" component={Coloseum} />
+      <Route path="/look/" component={Look} />
     </HashRouter>
   )
 }

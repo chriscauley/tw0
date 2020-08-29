@@ -1,16 +1,15 @@
 import Board from '../tw/Board'
-import { floodFill, floodFillPath } from '../tw/utils'
 
 const snapBoard = (geo, board, title) => {
-  const result = geo.print(board, {empty:'.', delimiter: '\t', title})
+  const result = geo.print(board, { empty: '.', delimiter: '\t', title })
   if (process.__UR && process.__UR.V) {
-    console.log(result)
+    console.log(result) // eslint-disable-line
   }
   expect(result).toMatchSnapshot()
 }
 
 test('floodFillPath', () => {
-  const board = new Board({W: 9, H: 9})
+  const board = new Board({ W: 9, H: 9 })
   const { geo, cache } = board
   snapBoard(geo, cache.path.fill, 'Distance to nearest path')
   snapBoard(geo, cache.path.dfill, 'Direction to follow path')
@@ -18,13 +17,13 @@ test('floodFillPath', () => {
     type: 'skeleton',
     team: 1,
     index: board.start1,
-    dindex: 1
+    dindex: 1,
   })
   board.newPiece({
     type: 'skeleton',
     team: 2,
     index: board.start2,
-    dindex: 1
+    dindex: 1,
   })
   board.recache()
   snapBoard(geo, cache.team[1].fill, 'Distance to nearest team 1')

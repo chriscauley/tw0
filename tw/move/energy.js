@@ -26,16 +26,13 @@ const add = (energy_type, amount) => (piece, move) => {
 const set = (energy_type, amount) => (piece, move) =>
   after(move, () => (piece[energy_type] = amount))
 
-const has = (energy_type, amount) =>
-  ifThen(piece => piece[energy_type] >= amount)
+const has = (energy_type, amount) => ifThen((piece) => piece[energy_type] >= amount)
 
-const hasNot = (energy_type, amount) =>
-  ifThen(piece => piece[energy_type] < amount)
+const hasNot = (energy_type, amount) => ifThen((piece) => piece[energy_type] < amount)
 
-const equals = (energy_type, amount) =>
-  ifThen(piece => piece[energy_type] === amount)
+const equals = (energy_type, amount) => ifThen((piece) => piece[energy_type] === amount)
 
-const energy = energy_type => ({
+const energy = (energy_type) => ({
   use: curry(use)(energy_type),
   has: curry(has)(energy_type),
   hasNot: curry(hasNot)(energy_type),

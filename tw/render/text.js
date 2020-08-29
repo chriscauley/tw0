@@ -5,8 +5,8 @@ const ALPHA = alpha.toUpperCase()
 const numbers = '0123456789'
 
 export const alphabet = alpha.split('')
-export const alphanum = (alpha+ALPHA+numbers).split('')
-export const numalpha = (numbers+alpha+ALPHA).split('')
+export const alphanum = (alpha + ALPHA + numbers).split('')
+export const numalpha = (numbers + alpha + ALPHA).split('')
 
 const LEGEND = {
   skeleton: 's',
@@ -16,44 +16,46 @@ const LEGEND = {
 const _join = (strings) => {
   // combine several multi-line strings into one multiline string (horizontal concatenation)
   const result = []
-  const splitted_strings = strings.map(s => s.split('\n'))
+  const splitted_strings = strings.map((s) => s.split('\n'))
   splitted_strings[0].forEach((_, i) => {
-    result.push(splitted_strings.map(lines => lines[i]).join('\t'))
+    result.push(splitted_strings.map((lines) => lines[i]).join('\t'))
   })
   return result.join('\n')
 }
 
-export default (board, options={}) => {
-  const { geo, entities } = board
+export default (board, options = {}) => {
+  const { geo } = board
   const {
-    xy=[0,0],
-    W=geo.W,
-    H=geo.H,
-    extra_layers=[],
-    layer='piece_type',
+    xy = [0, 0],
+    W = geo.W,
+    H = geo.H,
+    extra_layers = [],
+    layer = 'piece_type',
     empty,
-    path=true,
-    highlight=[],
+    path = true,
+    highlight = [],
   } = options
   const indexes = geo.slice(xy, W, H)
-  const main = renderLayer(board, {layer, indexes, path})
+  const main = renderLayer(board, { layer, indexes, path })
   highlight.forEach((index, i) => {
     main[index] = numalpha[i] || '?'
   })
-  const title = layer.replace(/^piece_/,'').slice(0, board.geo.W).padEnd(board.geo.W)
+  const title = layer
+    .replace(/^piece_/, '')
+    .slice(0, board.geo.W)
+    .padEnd(board.geo.W)
   const extras = []
   indexes.forEach((index) => {
-    const [x,y] = geo.index2xy(index)
+    const [_x, y] = geo.index2xy(index)
     const values = []
     extras[y] = extras[y] || ''
-    extra_layers.forEach(layer => {
+    extra_layers.forEach((layer) => {
       const value = LAYERS[layer](board, index)
-      if (value!==undefined) {
+      if (value !== undefined) {
         values.push(value)
       }
     })
     if (values.length) {
-      const joiner = extras[y] ? '\t' : ''
       extras[y] += `${index}:${values.join(',')}\t`
     }
   })

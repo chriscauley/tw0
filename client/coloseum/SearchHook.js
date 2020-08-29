@@ -3,12 +3,12 @@ import { useLocation, useHistory } from 'react-router-dom'
 import Form from '@unrest/react-jsonschema-form'
 import qs from 'query-string'
 
-export default ({initial, schema}) => {
+export default ({ initial, schema }) => {
   const useSearch = () => {
     const { search } = useLocation()
     const data = {
       ...initial,
-      ...qs.parse(search.replace(/^\?/,''))
+      ...qs.parse(search.replace(/^\?/, '')),
     }
     return {
       data,
@@ -17,9 +17,9 @@ export default ({initial, schema}) => {
   }
 
   function SearchForm() {
-    const {data} = useSearch()
+    const { data } = useSearch()
     const history = useHistory()
-    const onChange = (formData) => history.push('?'+qs.stringify(formData))
+    const onChange = (formData) => history.push('?' + qs.stringify(formData))
     return (
       <Form
         formData={data}

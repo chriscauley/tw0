@@ -2,9 +2,9 @@ import { sortBy } from 'lodash'
 
 export default (piece, move) => {
   const targets = piece.board.geo
-        .look(piece.geometry, piece.index, piece.dist, piece.board.dindex)
-        .map(index => piece.board.getOne('piece', index))
-        .filter(target => target && !target.invulnerable && target.team !== piece.team)
+    .look(piece.geometry, piece.index, piece.dist, piece.board.dindex)
+    .map((index) => piece.board.getOne('piece', index))
+    .filter((target) => target && !target.invulnerable && target.team !== piece.team)
   sortBy(targets, 'health')
   const target = targets[0]
   if (target) {

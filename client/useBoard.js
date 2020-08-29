@@ -1,4 +1,3 @@
-import { isEqual } from 'lodash'
 import React from 'react'
 import objectHash from 'object-hash'
 
@@ -6,8 +5,8 @@ import Board from '../tw/Board'
 import Game from '../tw/Game'
 
 const board_cache = {}
-const getGame = options => {
-  const hash = objectHash(options).slice(0,8)
+const getGame = (options) => {
+  const hash = objectHash(options).slice(0, 8)
   if (!board_cache[hash]) {
     const board = new Board(options)
     board_cache[hash] = new Game({ board, id: hash })
@@ -16,7 +15,7 @@ const getGame = options => {
 }
 
 export default (options) => {
-  const [ _, setState ] = React.useState()
+  const [_, setState] = React.useState()
   const game = getGame(options)
   const update = () => setState(Math.random())
   const reset = () => {

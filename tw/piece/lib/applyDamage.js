@@ -1,5 +1,5 @@
 export default (board, damage) => {
-  const { count, index, dindex, sprite, source } = damage
+  const { count, index /*, dindex, sprite, source*/ } = damage
   const piece = board.getPiece(index)
   if (!piece) {
     // piece died since start of turn

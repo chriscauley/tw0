@@ -14,13 +14,13 @@ const sprite = (name) => {
     const selector = `.sprite.sprite-${name}`
     style_tag.innerHTML += `${selector} { background-image: url("/static/sprites/${name}.png");}\n`
     sprite.list.push(name)
-    registry[name] = 'sprite sprite-'+name
+    registry[name] = 'sprite sprite-' + name
   }
   return registry[name]
 }
 sprite.list = []
 
-Object.keys(types).forEach(type => {
+Object.keys(types).forEach((type) => {
   sprite(type)
 })
 

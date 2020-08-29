@@ -1,7 +1,7 @@
 import React from 'react'
 import css from '@unrest/css'
 
-import types from '../../tw/piece/types'
+// import types from '../../tw/piece/types'
 import render from '../../tw/render/text'
 import useBoard from '../useBoard'
 import SearchHook from './SearchHook'
@@ -12,7 +12,7 @@ const schema = {
     W: { type: 'integer' },
     H: { type: 'integer' },
     pieces: { type: 'string' },
-  }
+  },
 }
 
 const initial = {
@@ -23,9 +23,8 @@ const initial = {
 
 const { useSearch, SearchForm } = SearchHook({ initial, schema })
 
-export default function Coloseum () {
+export default function Coloseum() {
   const { data } = useSearch()
-  console.log(data)
   const { game, next, reset } = useBoard(data)
 
   return (
@@ -34,9 +33,13 @@ export default function Coloseum () {
         <SearchForm />
       </div>
       <div>
-        <pre >{render(game.board)}</pre>
-        <button className={css.button('mr-2')} onClick={next}>next</button>
-        <button className={css.button()} onClick={reset}>reset</button>
+        <pre>{render(game.board)}</pre>
+        <button className={css.button('mr-2')} onClick={next}>
+          next
+        </button>
+        <button className={css.button()} onClick={reset}>
+          reset
+        </button>
       </div>
     </div>
   )
