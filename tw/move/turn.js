@@ -37,7 +37,10 @@ const towardPathOrFoe = (piece, move = {}) => {
   return move
 }
 
+const flip = (piece, move) => ({ ...move, dindex: -piece.dindex })
+
 export default {
   fromHit,
   towardPathOrFoe,
+  flip,
 }

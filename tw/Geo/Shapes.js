@@ -48,6 +48,7 @@ const Shapes = (geo) => ({
     })
     return out
   },
+  f: (dist, dindex) => [dist * dindex],
 })
 
 Shapes.list = []

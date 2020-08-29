@@ -7,8 +7,9 @@ const numbers = '0123456789'
 export const alphabet = alpha.split('')
 export const alphanum = (alpha + ALPHA + numbers).split('')
 export const numalpha = (numbers + alpha + ALPHA).split('')
-
+const toNumAlpha = (v) => (v === undefined ? v : numalpha[v] || '?')
 const LEGEND = {
+  legday: 'l',
   skeleton: 's',
   skull: 'k',
 }
@@ -38,7 +39,7 @@ export default (board, options = {}) => {
   const indexes = geo.slice(xy, W, H)
   const main = renderLayer(board, { layer, indexes, path })
   highlight.forEach((index, i) => {
-    main[index] = numalpha[i] || '?'
+    main[index] = toNumAlpha(i)
   })
   const title = layer
     .replace(/^piece_/, '')
@@ -104,4 +105,6 @@ const LAYERS = {
   piece_id: getPieceId,
   piece_dindex: getPieceDindex,
   piece_type: getPieceType,
+  'cache.dpath': (b, i) => b.geo._dindex2char[b.cache.path.dfill[i]],
+  'cache.path': (b, i) => toNumAlpha(b.cache.path.fill[i]),
 }

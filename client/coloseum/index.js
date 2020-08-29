@@ -26,6 +26,7 @@ const { useSearch, SearchForm } = SearchHook({ initial, schema })
 export default function Coloseum() {
   const { data } = useSearch()
   const { game, next, reset } = useBoard(data)
+  window.b = game.board
 
   return (
     <div className="flex p-4">
@@ -33,7 +34,7 @@ export default function Coloseum() {
         <SearchForm />
       </div>
       <div>
-        <pre>{render(game.board)}</pre>
+        <pre>{render(game.board, { extra_layers: ['piece_dindex'] })}</pre>
         <button className={css.button('mr-2')} onClick={next}>
           next
         </button>
