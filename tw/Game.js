@@ -97,6 +97,7 @@ export default class Game {
     this.busy = true
     // figure out how many turns each piece can take
     this.piece_turns = {}
+    this.afterturn = []
     const pieces = this.board.getPieces()
     pieces.forEach((p) => (this.piece_turns[p.id] = p.turns))
 
@@ -114,6 +115,8 @@ export default class Game {
       }
       // respawn(this.player)
     }
+    this.afterturn.forEach((f) => f())
+    delete this.afterturn
     // TODO
     // this.trigger('nextturn')
     this.turn++
