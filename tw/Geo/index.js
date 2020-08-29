@@ -75,6 +75,16 @@ const Look = (geo) => {
       const o_dindex = geo.rot_dindexes[dindex][1]
       return [target, target + o_dindex, target - o_dindex]
     },
+    cone: (dist, dindex) => {
+      const target = dist*dindex
+      const out = [target]
+      const o_dindex = geo.rot_dindexes[dindex][1]
+      range(1, dist).forEach(o_dist => {
+        out.push(target + o_dist * o_dindex)
+        out.push(target - o_dist * o_dindex)
+      })
+      return out
+    },
   }
 
   const look = (shape, index, dist, dindex) => {
