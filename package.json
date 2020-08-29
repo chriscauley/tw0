@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "parcel client/index.html -p 5445 --public-url /static/ --no-hmr",
-    "lint": "yarn eslint client",
+    "lint": "yarn eslint client tw __tests__",
     "test": "node bin/run-jest.js"
   },
   "dependencies": {
@@ -32,7 +32,14 @@
     "use-global-hook": "^0.1.12"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
     "parcel": "^1.12.4",
+    "prettier": "^2.1.1",
     "sass": "^1.26.10"
   }
 }
