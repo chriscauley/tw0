@@ -59,7 +59,7 @@ export default function Look({match}) {
   return (
     <div className="flex p-4">
       <div className="mr-4" style={{width: '16rem'}}>
-        <SearchForm schema={schema} />
+        <SearchForm />
       </div>
       <Render board={board} empty=" " path={false} highlight={highlight}/>
     </div>

@@ -16,7 +16,7 @@ export default ({initial, schema}) => {
     }
   }
 
-  function SearchForm({schema}) {
+  function SearchForm() {
     const {data} = useSearch()
     const history = useHistory()
     const onChange = (formData) => history.push('?'+qs.stringify(formData))

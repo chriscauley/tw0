@@ -1,21 +1,43 @@
 import React from 'react'
-// import ConfigHook from '@unrest/react-config-hook'
+import css from '@unrest/css'
 
 import types from '../../tw/piece/types'
 import render from '../../tw/render/text'
 import useBoard from '../useBoard'
+import SearchHook from './SearchHook'
 
-// const { useConfig } = ConfigHook('coloseum', schema, uiSchema)
+const schema = {
+  type: 'object',
+  properties: {
+    W: { type: 'integer' },
+    H: { type: 'integer' },
+    pieces: { type: 'string' },
+  }
+}
 
+const initial = {
+  W: 9,
+  H: 9,
+  pieces: 'skull',
+}
+
+const { useSearch, SearchForm } = SearchHook({ initial, schema })
 
 export default function Coloseum () {
-  const { game, next, reset } = useBoard({W: 8, H: 3, pieces: 'skull'})
+  const { data } = useSearch()
+  console.log(data)
+  const { game, next, reset } = useBoard(data)
 
   return (
-    <div>
-      <pre >{render(game.board)}</pre>
-      <button onClick={next}>next</button>
-      <button onClick={reset}>reset</button>
+    <div className="flex p-4">
+      <div className="max-w-sm mr-4">
+        <SearchForm />
+      </div>
+      <div>
+        <pre >{render(game.board)}</pre>
+        <button className={css.button('mr-2')} onClick={next}>next</button>
+        <button className={css.button()} onClick={reset}>reset</button>
+      </div>
     </div>
   )
 }
