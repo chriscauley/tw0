@@ -31,7 +31,7 @@ export default (board, options={}) => {
   const indexes = geo.slice(xy, W, H)
   const main = renderLayer(board, {layer, indexes, path})
   highlight.forEach((index, i) => {
-    main[index] = numalpha[i]
+    main[index] = numalpha[i] || '?'
   })
   const title = layer.replace(/^piece_/,'').slice(0, board.geo.W).padEnd(board.geo.W)
   const extras = []

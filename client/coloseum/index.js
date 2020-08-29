@@ -9,7 +9,7 @@ import useBoard from '../useBoard'
 
 
 export default function Coloseum () {
-  const { game, next, reset } = useBoard({W: 8, H: 3, path: [9, 14], pieces: 'skull'})
+  const { game, next, reset } = useBoard({W: 8, H: 3, pieces: 'skull'})
 
   return (
     <div>

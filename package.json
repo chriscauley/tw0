@@ -23,6 +23,7 @@
     "classnames": "^2.2.6",
     "jest": "^26.4.2",
     "object-hash": "^2.0.3",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-jsonschema-form": "^1.8.1",

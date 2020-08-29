@@ -7,6 +7,7 @@ export const alphanum = (alpha+ALPHA+numbers).split('')
 export const numalpha = (numbers+alpha+ALPHA).split('')
 
 const mod = (n, d) => ((n % d) + d) % d
+export const SHAPES = []
 
 const Look = (geo) => {
   const make = (shape, dist) => {
@@ -81,13 +82,17 @@ const Look = (geo) => {
     return look[shape][dindex][dist].map((dindex) => index + dindex)
   }
 
-  Object.keys(shapes).forEach((shape) => {
-    look[shape] = {}
-    look['__' + shape] = {}
+  const registerShape = (name) => {
+    SHAPES.push(name)
+    look[name] = {}
     geo.dindexes.forEach(dindex => {
-      look[shape][dindex] = [[]] // all geometries only see nothing at range 0
-      look['__' + shape][dindex] = [[]]
+      look[name][dindex] = [[]] // all geometries only see nothing at range 0
     })
+  }
+
+  Object.keys(shapes).forEach((shape) => {
+    registerShape(shape)
+    registerShape('__' + shape)
     make(shape, 1)
   })
 
