@@ -2,7 +2,7 @@ import { range } from 'lodash'
 import Geo, { numalpha } from '../../tw/Geo'
 
 const snapIndexes = (geo, indexes, title) => {
-  if (process.argv.includes('-V')) {
+  if (process.__UR && process.__UR.V) {
     const board = {}
     board[geo.CENTER] = 'X'
     indexes.forEach((index, i) => board[index] = numalpha[i])

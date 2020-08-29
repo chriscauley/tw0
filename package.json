@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "develop": "parcel client/index.html -p 5445 --public-url /static/ --no-hmr",
-    "lint": "yarn eslint client"
+    "lint": "yarn eslint client",
+    "test": "node bin/run-jest.js"
   },
   "dependencies": {
     "@babel/core": "^7.11.4",

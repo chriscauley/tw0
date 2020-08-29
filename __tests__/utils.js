@@ -3,7 +3,7 @@ import { floodFill, floodFillPath } from '../tw/utils'
 
 const snapBoard = (geo, board, title) => {
   const result = geo.print(board, {empty:'.', delimiter: '\t', title})
-  if (process.argv.includes('-V')) {
+  if (process.__UR && process.__UR.V) {
     console.log(result)
   }
   expect(result).toMatchSnapshot()
