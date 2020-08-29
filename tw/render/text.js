@@ -1,4 +1,5 @@
 import { assert } from '../utils'
+import { numalpha } from '../Geo'
 
 const LEGEND = {
   skeleton: 's',
@@ -22,10 +23,16 @@ export default (board, options={}) => {
     W=geo.W,
     H=geo.H,
     extra_layers=[],
-    layer='piece_type'
+    layer='piece_type',
+    empty,
+    path=true,
+    highlight=[],
   } = options
   const indexes = geo.slice(xy, W, H)
-  const main = renderLayer(board, layer, indexes)
+  const main = renderLayer(board, {layer, indexes, path})
+  highlight.forEach((index, i) => {
+    main[index] = numalpha[i]
+  })
   const title = layer.replace(/^piece_/,'').slice(0, board.geo.W).padEnd(board.geo.W)
   const extras = []
   indexes.forEach((index) => {
@@ -43,7 +50,7 @@ export default (board, options={}) => {
       extras[y] += `${index}:${values.join(',')}\t`
     }
   })
-  return geo.print(main, { title, extras})
+  return geo.print(main, { title, extras, empty })
 }
 
 const getPieceId = (b, i) => b.entities.piece[i] && b.entities.piece[i].id
@@ -64,22 +71,20 @@ const getPieceType = (board, index) => {
   }
 }
 
-const renderLayer = (board, layer, indexes) => {
+const renderLayer = (board, { layer, indexes, path }) => {
   const getter = LAYERS[layer]
   assert(getter, 'You must specify a layer')
   const out = {}
   indexes.forEach((index) => {
+    const _path = board.entities.path[index]
     const wall = board.entities.wall[index]
-    const path = board.entities.path[index]
     const value = getter(board, index)
     if (value) {
       out[index] = value
     } else if (wall) {
-      out[index] = 'X'
-    } else if (path) {
-      out[index] = Math.abs(path) === 1 ? '-' : '|'
-    } else {
-      out[index] = '.'
+      out[index] = wall
+    } else if (path && _path) {
+      out[index] = Math.abs(_path) === 1 ? '-' : '|'
     }
   })
   return out
