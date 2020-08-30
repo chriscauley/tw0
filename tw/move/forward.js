@@ -1,18 +1,30 @@
 import { canMoveOn } from '../piece/lib'
 
-const forward = (piece, move) => {
+const forward = (dist) => (piece, move) => {
   const dindex = move.dindex || piece.dindex
-  const target = piece.index + dindex
-  if (canMoveOn(piece.board, target, dindex)) {
-    move.index = target
+  const targets = piece.board.geo.look('f', piece.index, dist, dindex)
+  let valid_index
+  for (let i = 0; i < targets.length; i++) {
+    const target = targets[i]
+    if (canMoveOn(piece.board, target, dindex)) {
+      valid_index = target
+    } else {
+      break
+    }
+  }
+  if (valid_index !== undefined) {
+    move.index = valid_index
     move.done = true
   }
   return move
 }
 
-forward.bounce = (piece, move) => {
-  move.dindex = -piece.dindex
-  return forward(piece, move)
+forward.bounce = (dist) => {
+  const _forward = forward(dist)
+  return (piece, move) => {
+    move.dindex = -piece.dindex
+    return _forward(piece, move)
+  }
 }
 
 export default forward

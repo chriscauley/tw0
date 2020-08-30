@@ -5,9 +5,6 @@ import types from './types'
 import item from '../item'
 
 const PIECE_DEFAULTS = {
-  speed: 1, // moves this many spaces
-  sight: 3, // follow friends/enemies this many squares away
-  loss_sight: 3, // loses sight at sight+loss_sight distance
   wait_time: 1, // wait this many turns inbetween moves
   i_cycle: 0,
   damage: 1,
@@ -16,8 +13,6 @@ const PIECE_DEFAULTS = {
   turns: 1,
   dindex: 1,
   hits: 0,
-  geometry: 'circle',
-  dist: 1,
 }
 
 const newPiece = (opts) => {
@@ -34,7 +29,6 @@ const newPiece = (opts) => {
       'dindex',
       'team',
       'health',
-      'speed',
       '_PRNG',
       'waiting',
       'i_cycle',
@@ -43,8 +37,6 @@ const newPiece = (opts) => {
       '_turn',
       'equipment',
       'lives',
-      'geometry',
-      'dist',
     ]),
     name: 'piece',
   }
