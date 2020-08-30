@@ -6,6 +6,9 @@ const fromHit = (piece, move) => {
 }
 
 const findLowest = (piece, layer) => {
+  // TODO pass in move, return modified move
+  // TODO should set move.priority and move.dindex
+  // TODO if move.priority is set, return unmodified move
   const forward_index = piece.dindex + piece.index
   let forward_value
   const targets = piece.board.geo.dindexes
@@ -38,6 +41,19 @@ const towardPathOrFoe = (piece, move = {}) => {
 }
 
 const flip = (piece, move) => ({ ...move, dindex: -piece.dindex })
+
+const towardSound = (piece, move = {}) => {
+  // TODO use board.cache.sound to find nearest sound. Sounds last 2 turns?
+  move.dindex = findLowest(piece, piece.board.cache.sound)
+  return move
+}
+
+// TODO orRandom needs to use seeded randomness
+// probably use a combination of current turn and spawn turn and id or something
+const orRandom = (piece, move = {}) => {
+  move.dindex = move.dindex || piece.board.geo.dindexes[Math.floor(Math.random() * 4)]
+  return move
+}
 
 export default {
   fromHit,
