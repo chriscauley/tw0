@@ -10,6 +10,22 @@ export default {
       move.forward.bounce(1),
     ],
   },
+  legs4days: {
+    geometry: 'f',
+    tasks: [
+      move.ifDidDamage(move.attackNearby('f', 2), move.forward(1)),
+      move.forward(3),
+      move.forward.bounce(3),
+    ],
+  },
+  sixlegs: {
+    geometry: 'f',
+    tasks: [
+      move.ifDidDamage(move.attackNearby('f', 3), move.forward(3)),
+      move.forward(3),
+      move.forward.bounce(3),
+    ],
+  },
   skeleton: {
     opts: { health: 2 },
     tasks: [
