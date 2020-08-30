@@ -44,7 +44,6 @@ export default class Game {
         }
       })
       if (piece_moved) {
-        this.piece_turns[piece.id]--
         if (move.index || move.dindex) {
           // there needs to be some kind of conflict resolution here
           throw 'Not implemented: attack+move'
@@ -88,25 +87,22 @@ export default class Game {
             const { index } = piece
             applyDamage(this.board, { index, count: 1 })
             move.done = true
+            move.end = true
             move.index = piece.index
             applyMove(piece, move, this.turn)
-            this.piece_turns[piece.id] = 0
             this.board.animate('collide@' + move0.index)
           })
         } else {
           applyMove(piece0, move0, this.turn)
-          this.piece_turns[piece0.id]--
         }
       })
     } else if (forwards.length) {
       forwards.forEach(([piece, move]) => {
         applyMove(piece, move, this.turn)
-        this.piece_turns[piece.id]--
       })
     } else {
       piece_moves.forEach(([piece, move]) => {
         applyMove(piece, move, this.turn)
-        this.piece_turns[piece.id]-- //!
       })
     }
     if (pieces.filter((p) => this.piece_turns[p.id]).length !== piece_moves.length) {
