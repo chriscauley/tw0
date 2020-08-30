@@ -1,10 +1,65 @@
 .SpriteList {
   .sprite {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 6rem;
-    image-rendering: pixelated;
-    width: 6rem;
+    font-size: 6rem;
+  }
+}
+
+.sprite {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 1em;
+  image-rendering: pixelated;
+  width: 1em;
+}
+
+.board {
+  $a: 0.2s;
+  font-size: 3em;
+  position: relative;
+  .sprite {
+    position: absolute;
+    &.piece {
+      transition: left $a,  top $a, opacity $a;
+    }
+  }
+  @for $i from -5 through 30 {
+    .x-#{$i} {
+      left: $i * 1em;
+    }
+    .y-#{$i} {
+      top: $i * 1em;
+    }
+    &:hover {
+      .x0-#{$i} {
+        left: $i * 1em;
+      }
+      .y0-#{$i} {
+        top: $i * 1em;
+      }
+    }
+  }
+  @for $i from 1 through 30 {
+    &.W-#{$i} {
+      width: $i * 1em;
+    }
+    &.H-#{$i} {
+      height: $i * 1em;
+    }
+  }
+  .is_dead {
+    opacity: 0;
+  }
+}
+
+.board {
+  .sprite {
+    z-index: 10;
+    &.sprite-floor0, &.sprite-floor1 {
+      z-index: 0
+    }
+    &.piece {
+      z-index: 20;
+    }
   }
 }

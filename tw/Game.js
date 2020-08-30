@@ -82,6 +82,7 @@ export default class Game {
         const [piece0, move0] = piece_moves[0]
         const team0 = piece0.team
         if (piece_moves.find(([piece, _move]) => piece.team !== team0)) {
+          const collide_index = move0.index
           this.board.animate({ type: 'collide', index: move0.index })
           piece_moves.forEach(([piece, move]) => {
             const { index } = piece
@@ -90,6 +91,7 @@ export default class Game {
             move.end = true
             move.index = piece.index
             applyMove(piece, move, this.turn)
+            piece.index = collide_index
           })
         } else {
           // only move the first piece to avoid friendly collision
@@ -115,7 +117,10 @@ export default class Game {
     this.board.animations = {}
     this.afterturn = []
     const pieces = this.board.getPieces()
-    pieces.forEach((p) => (this.piece_turns[p.id] = p.turns))
+    pieces.forEach((p) => {
+      this.piece_turns[p.id] = p.turns
+      p.last_index = p.index
+    })
 
     this.doMoves(pieces)
     this.finishTurn()
