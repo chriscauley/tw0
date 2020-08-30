@@ -1,5 +1,6 @@
 import { defaults } from 'lodash'
 
+import { canMoveOn } from '../piece/lib'
 import Geo from '../Geo'
 import vector from '../Geo/vector'
 import { assert, floodFillPath, floodFillTeam } from '../utils'
@@ -60,7 +61,6 @@ export default class Board {
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
     this.quickAddPieces(options.pieces)
-    this.recache()
   }
 
   getOne = (type, index) => this.entities[type][index]
@@ -135,6 +135,7 @@ export default class Board {
     })
 
     this.geo.indexes.forEach((i) => (this.entities.square[i] = true))
+    this.recache()
   }
 
   newPiece(opts) {
@@ -149,11 +150,25 @@ export default class Board {
 
   quickAddPieces(pieces = []) {
     pieces = parsePieces(pieces)
-    pieces.forEach(([team, type, dxy = [0, 0]]) => {
-      const xy = vector.add(this.geo.index2xy(this['start' + team]), dxy)
-      const index = this.geo.xy2index(xy)
-      this.newPiece({ team, type, index })
+    pieces.forEach(([team, type, dindex]) => {
+      const start = this['start' + team]
+      let index = dindex + start
+      if (dindex === undefined) {
+        const team_di = team === 1 ? 1 : -1
+        const indexes = [start].concat(this.geo.look('circle', start, 2, team_di))
+        index = indexes.find((i) => canMoveOn(this, i))
+        if (index === undefined) {
+          console.error('cannot place piece', team, type, dindex)
+          return
+        }
+      }
+      dindex = dindex || this.getPathDindex(index, team)
+      this.newPiece({ team, type, index, dindex })
     })
+  }
+
+  getPathDindex(index, team) {
+    return (team === 1 ? 1 : -1) * this.cache.path.dfill[index]
   }
 
   recache() {
@@ -168,6 +183,10 @@ export default class Board {
     }
     this.dirty = {}
   }
+
+  animate(...args) {
+    console.log('animate', ...args) // eslint-disable-line
+  }
 }
 
 export const getCorners = (board, d) => {
@@ -179,7 +198,7 @@ export const getCorners = (board, d) => {
 
 const getDefaultPath = (board) => {
   const { geo } = board
-  const [start, end] = getCorners(board, 2)
+  const [start, end] = getCorners(board, 3)
   const start_xy = geo.index2xy(start)
   const end_xy = geo.index2xy(end)
   const out = [start]

@@ -63,43 +63,55 @@ export default class Game {
   }
 
   doMoves(pieces) {
+    // this function happens in waves, first doing colliding enemies, then anyone stepping forward, then everyone else
+    // TODO move prioritization here is lacking, but I want to move on to other enemies first
     this.board.recache()
     const piece_moves = pieces.filter((p) => this.piece_turns[p.id]).map((p) => [p, getMove(p)])
-    const hard_block = {}
+    if (!piece_moves.length) {
+      return
+    }
     const soft_block = {}
-    pieces
-      .filter((p) => this.piece_turns[p.id] <= 0)
-      .forEach((p) => {
-        hard_block[p.index] = true
-      })
     piece_moves.forEach(([piece, move]) => {
-      if (move.index === undefined) {
-        applyMove(piece, move)
-        this.piece_turns[piece.id]--
-        hard_block[piece.index] = true
-      } else {
+      if (move.index !== undefined) {
         soft_block[move.index] = soft_block[move.index] || []
         soft_block[move.index].push([piece, move])
       }
     })
-    Object.values(soft_block).forEach((piece_moves) => {
-      const [piece1, move1] = piece_moves[0]
-      if (piece_moves.length > 1) {
-        const team1 = piece1.team
-        if (piece_moves.find(([piece, _move]) => piece.team !== team1)) {
-          piece_moves.forEach(([piece, _move]) => {
+    const collisions = Object.values(soft_block).filter((pms) => pms.length > 1)
+    const forwards = piece_moves.filter(([p, m]) => p.dindex === m.dindex)
+    if (collisions.length) {
+      collisions.forEach((piece_moves) => {
+        const [piece0, move0] = piece_moves[0]
+        const team0 = piece0.team
+        if (piece_moves.find(([piece, _move]) => piece.team !== team0)) {
+          piece_moves.forEach(([piece, move]) => {
             const { index } = piece
             applyDamage(this.board, { index, count: 1 })
-            // TODO bouncing damage animation
+            move.done = true
+            move.index = piece.index
+            applyMove(piece, move, this.turn)
+            this.piece_turns[piece.id] = 0
+            this.board.animate('collide@' + move0.index)
           })
         } else {
-          throw 'All good, execute!'
+          applyMove(piece0, move0, this.turn)
+          this.piece_turns[piece0.id]--
         }
-      } else {
-        applyMove(piece1, move1)
-        this.piece_turns[piece1.id]--
-      }
-    })
+      })
+    } else if (forwards.length) {
+      forwards.forEach(([piece, move]) => {
+        applyMove(piece, move, this.turn)
+        this.piece_turns[piece.id]--
+      })
+    } else {
+      piece_moves.forEach(([piece, move]) => {
+        applyMove(piece, move, this.turn)
+        this.piece_turns[piece.id]-- //!
+      })
+    }
+    if (pieces.filter((p) => this.piece_turns[p.id]).length !== piece_moves.length) {
+      this.doMoves(pieces)
+    }
   }
 
   nextTurn = () => {

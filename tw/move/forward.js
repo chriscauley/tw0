@@ -3,7 +3,7 @@ import { canMoveOn } from '../piece/lib'
 const forward = (piece, move) => {
   const dindex = move.dindex || piece.dindex
   const target = piece.index + dindex
-  if (canMoveOn(piece, target, dindex)) {
+  if (canMoveOn(piece.board, target, dindex)) {
     move.index = target
     move.done = true
   }

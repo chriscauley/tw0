@@ -9,8 +9,8 @@ export const canAttack = (piece, index) => {
   return target.team !== piece.team || piece.friendly_fire
 }
 
-export const canMoveOn = (piece, index, _dindex) => {
-  const { getOne } = piece.board
+export const canMoveOn = (board, index, _dindex) => {
+  const { getOne } = board
   return getOne('square', index) && !getOne('piece', index) && !getOne('wall', index)
 }
 
