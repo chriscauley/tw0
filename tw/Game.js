@@ -91,7 +91,9 @@ export default class Game {
             move.end = true
             move.index = piece.index
             applyMove(piece, move, this.turn)
-            piece.index = collide_index
+            if (piece.dead) {
+              piece.index = collide_index
+            }
           })
         } else {
           // only move the first piece to avoid friendly collision

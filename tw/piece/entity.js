@@ -5,7 +5,6 @@ import types from './types'
 import item from '../item'
 
 const PIECE_DEFAULTS = {
-  wait_time: 1, // wait this many turns inbetween moves
   i_cycle: 0,
   damage: 1,
   health: 1,
@@ -30,7 +29,6 @@ const newPiece = (opts) => {
       'team',
       'health',
       '_PRNG',
-      'waiting',
       'i_cycle',
       'max_health',
       'turns',
