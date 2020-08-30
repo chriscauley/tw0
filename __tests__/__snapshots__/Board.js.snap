@@ -50,6 +50,24 @@ X B X
 XXXXX	"
 `;
 
+exports[`colliding skulls 1`] = `
+"type       
+XXXXXXXXXXX	
+X         X	
+X  k---K  X	
+X         X	
+XXXXXXXXXXX	"
+`;
+
+exports[`colliding skulls 2`] = `
+"type       
+XXXXXXXXXXX	
+X         X	
+X  -----  X	
+X         X	
+XXXXXXXXXXX	"
+`;
+
 exports[`getDefaultPath 1`] = `
 "type 
 XXXXX	

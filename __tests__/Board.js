@@ -61,3 +61,12 @@ test('bonetar-conflicting-attack-move', () => {
   game.nextTurn()
   snap(board)
 })
+
+test('colliding skulls', () => {
+  const board = new Board({ W: 11, H: 5, pieces: 'skull' })
+  const game = new Game({ board })
+  snap(board)
+  game.nextTurn()
+  game.nextTurn()
+  snap(board)
+})
