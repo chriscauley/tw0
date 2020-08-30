@@ -1,6 +1,12 @@
 export const assert = (bool, e) => {
   if (!bool) {
-    throw typeof e === 'function' ? e() : e
+    if (typeof e === 'function') {
+      e = e()
+    }
+    if (typeof e === 'string') {
+      e = Error(e)
+    }
+    throw e
   }
 }
 

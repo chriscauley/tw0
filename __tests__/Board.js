@@ -1,5 +1,4 @@
 import Board from '../tw/Board'
-import Game from '../tw/Game'
 import render from '../tw/render/text'
 
 const snap = (board) => {
@@ -12,9 +11,8 @@ const snap = (board) => {
 
 test('2-skull', () => {
   const board = new Board({ W: 8, H: 3, pieces: 'skull' })
-  const game = new Game({ board })
   snap(board)
-  game.nextTurn()
+  board.game.nextTurn()
   snap(board)
 })
 
@@ -31,9 +29,8 @@ test('9-skull', () => {
     [1, 'skull', 6],
   ]
   const board = new Board({ W: 5, H: 5, path: [12], pieces })
-  const game = new Game({ board })
   snap(board)
-  game.nextTurn()
+  board.game.nextTurn()
   snap(board)
 })
 
@@ -55,18 +52,16 @@ test('bonetar-conflicting-attack-move', () => {
     [2, 'bonetar', 5],
   ]
   const board = new Board({ W: 5, H: 5, path: [12], pieces })
-  const game = new Game({ board })
   snap(board)
-  game.nextTurn()
-  game.nextTurn()
+  board.game.nextTurn()
+  board.game.nextTurn()
   snap(board)
 })
 
 test('colliding skulls', () => {
   const board = new Board({ W: 11, H: 5, pieces: 'skull' })
-  const game = new Game({ board })
   snap(board)
-  game.nextTurn()
-  game.nextTurn()
+  board.game.nextTurn()
+  board.game.nextTurn()
   snap(board)
 })

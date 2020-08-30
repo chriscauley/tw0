@@ -12,7 +12,7 @@ const options = {
 export default function Play() {
   return (
     <div className="flex p-4">
-      <RenderGame options={options} css text controls />
+      <RenderGame options={options} css />
     </div>
   )
 }

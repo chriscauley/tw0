@@ -1,6 +1,7 @@
 import { defaults } from 'lodash'
 
 import { canMoveOn } from '../piece/lib'
+import Game from '../Game'
 import Geo from '../Geo'
 import vector from '../Geo/vector'
 import { assert, floodFillPath, floodFillTeam } from '../utils'
@@ -61,6 +62,7 @@ export default class Board {
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
     this.recache()
+    this.game = options.game || new Game({ board: this, id: this.options.id })
     options.player && this.addPlayer(options.player)
     this.quickAddPieces(options.pieces)
     this.animations = {}

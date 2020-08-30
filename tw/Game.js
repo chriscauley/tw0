@@ -1,4 +1,4 @@
-import { applyMove, applyDamage, canMoveOn } from './piece/lib'
+import { applyMove, applyDamage, canMoveOn, canAttack } from './piece/lib'
 // import respawn from './player/respawn'
 
 // moved these imports down because getMove should probably be in it's own file
@@ -119,6 +119,9 @@ export default class Game {
     this.board.animations = {}
     this.afterturn = []
     const pieces = this.board.getPieces().filter((p) => !p.player)
+    if (pieces.length === 0) {
+      this.board.quickAddPieces('|skull,skull,skull')
+    }
     pieces.forEach((p) => {
       this.piece_turns[p.id] = p.turns
       p.last_index = p.index
@@ -157,6 +160,32 @@ export default class Game {
       const type = 'skull'
       this.board.newPiece({ type, index, dindex, team })
     })
+  }
+
+  pressSpace = (e, callback) => {
+    e.preventDefault()
+    this.nextTurn()
+    callback()
+  }
+
+  pressArrow = (e, callback) => {
+    e.preventDefault()
+    const { player, geo } = this.board
+    const key = e.key.replace('Arrow', '')[0].toLowerCase()
+    const dindex = geo._name2dindex[key]
+    const index = dindex + player.index
+    if (canAttack(player, index)) {
+      applyDamage(this.board, {
+        index: index,
+        count: player.damage,
+        source: player.index,
+        dindex,
+      })
+    } else if (canMoveOn(this.board, index)) {
+      applyMove(player, { index, dindex }, this.turn)
+    }
+    this.nextTurn()
+    callback()
   }
 }
 
