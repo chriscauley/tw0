@@ -101,6 +101,7 @@ export default class Board {
   }
 
   connectPath() {
+    this.geo.indexes.forEach((i) => (this.entities.square[i] = true))
     let { path, makeWalls } = this.options
     makeWalls(this)
     if (typeof path === 'function') {
@@ -134,8 +135,6 @@ export default class Board {
       }
       this.entities.path[last_index] = dindex
     })
-
-    this.geo.indexes.forEach((i) => (this.entities.square[i] = true))
   }
 
   newPiece(opts) {

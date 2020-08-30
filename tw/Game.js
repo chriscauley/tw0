@@ -1,4 +1,4 @@
-import { applyMove, applyDamage } from './piece/lib'
+import { applyMove, applyDamage, canMoveOn } from './piece/lib'
 // import respawn from './player/respawn'
 
 // moved these imports down because getMove should probably be in it's own file
@@ -31,26 +31,24 @@ export default class Game {
   }
 
   doAttacks(attack_moves) {
-    const failed_pieces = []
+    let failed
     attack_moves.forEach(([piece, move]) => {
+      if (move.index && !canMoveOn(this.board, move.index)) {
+        // a piece has moved into this spot during this turn. Retry move.
+        failed++
+        return
+      }
       let piece_moved
       move.damages.forEach((damage) => {
-        const result = applyDamage(piece.board, damage)
-        if (result) {
-          piece_moved = true
-        }
+        piece_moved = applyDamage(piece.board, damage) || piece_moved
       })
       if (piece_moved) {
-        if (move.index || move.dindex) {
-          // there needs to be some kind of conflict resolution here
-          throw 'Not implemented: attack+move'
-        }
         applyMove(piece, move)
       } else {
-        failed_pieces.push(piece)
+        failed++
       }
     })
-    if (failed_pieces.length === attack_moves.length) {
+    if (failed === attack_moves.length) {
       throw 'Unable to resolve attack (infinite loop)'
     }
   }

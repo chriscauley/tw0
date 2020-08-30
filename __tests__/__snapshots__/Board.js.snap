@@ -32,6 +32,24 @@ Xk  X
 XXXXX	"
 `;
 
+exports[`bonetar-conflicting-attack-move 1`] = `
+"type 
+XXXXX	
+X s X	
+Xs-BX	
+X B X	
+XXXXX	"
+`;
+
+exports[`bonetar-conflicting-attack-move 2`] = `
+"type 
+XXXXX	
+X s X	
+Xs- X	
+X B X	
+XXXXX	"
+`;
+
 exports[`getDefaultPath 1`] = `
 "type 
 XXXXX	

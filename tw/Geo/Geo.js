@@ -80,6 +80,11 @@ export default (x0, x_max, y0, y_max) => {
       ys.forEach((y) => xs.forEach((x) => out.push(geo.xy2index([x, y]))))
       return out
     },
+    floorDindex(dindex) {
+      // if dindex is a multiple of W it is in thy y direction
+      // otherwise it is in the x direction
+      return (dindex % W === 0 ? W : 1) * Math.sign(dindex)
+    },
   })
 
   geo.dindexes.forEach((dindex, i) => {

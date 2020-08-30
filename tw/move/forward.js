@@ -6,7 +6,7 @@ const forward = (dist) => (piece, move) => {
   let valid_index
   for (let i = 0; i < targets.length; i++) {
     const target = targets[i]
-    if (canMoveOn(piece.board, target, dindex)) {
+    if (canMoveOn(piece.board, target)) {
       valid_index = target
     } else {
       break

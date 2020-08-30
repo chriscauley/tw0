@@ -46,3 +46,18 @@ test('getDefaultPath', () => {
   ]
   tests.forEach((options) => snap(new Board(options)))
 })
+
+test('bonetar-conflicting-attack-move', () => {
+  const pieces = [
+    [1, 'skeleton', -5],
+    [1, 'skeleton', -1],
+    [2, 'bonetar', 1],
+    [2, 'bonetar', 5],
+  ]
+  const board = new Board({ W: 5, H: 5, path: [12], pieces })
+  const game = new Game({ board })
+  snap(board)
+  game.nextTurn()
+  game.nextTurn()
+  snap(board)
+})

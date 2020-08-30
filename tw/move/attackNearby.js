@@ -8,7 +8,16 @@ export default (shape, dist) => (piece, move) => {
   sortBy(targets, 'health')
   const target = targets[0]
   if (target) {
-    move.damages = [{ index: target.index, count: piece.damage, source: piece.index }]
+    const dindex = piece.board.geo.floorDindex(target.index - piece.index)
+    move.damages = [
+      {
+        index: target.index,
+        count: piece.damage,
+        source: piece.index,
+        dindex,
+      },
+    ]
+    move.dindex = dindex
     move.done = true
     move.end = true
   }
