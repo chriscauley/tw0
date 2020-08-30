@@ -82,6 +82,7 @@ export default class Game {
         const [piece0, move0] = piece_moves[0]
         const team0 = piece0.team
         if (piece_moves.find(([piece, _move]) => piece.team !== team0)) {
+          this.board.animate({ type: 'collide', index: move0.index })
           piece_moves.forEach(([piece, move]) => {
             const { index } = piece
             applyDamage(this.board, { index, count: 1 })
@@ -89,7 +90,6 @@ export default class Game {
             move.end = true
             move.index = piece.index
             applyMove(piece, move, this.turn)
-            this.board.animate('collide@' + move0.index)
           })
         } else {
           // only move the first piece to avoid friendly collision
@@ -111,8 +111,8 @@ export default class Game {
 
   nextTurn = () => {
     this.busy = true
-    // figure out how many turns each piece can take
-    this.piece_turns = {}
+    this.piece_turns = {} // how many turns each piece can take
+    this.board.animations = {}
     this.afterturn = []
     const pieces = this.board.getPieces()
     pieces.forEach((p) => (this.piece_turns[p.id] = p.turns))

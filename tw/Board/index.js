@@ -54,7 +54,7 @@ export default class Board {
       team: true,
       path: true,
     }
-    this._piece_id = 0
+    this.pieces = []
     Object.assign(this, { W, H })
     this.turn = turn
     this.geo = Geo(W, H)
@@ -62,6 +62,7 @@ export default class Board {
     this.connectPath()
     this.recache()
     this.quickAddPieces(options.pieces)
+    this.animations = {}
   }
 
   getOne = (type, index) => this.entities[type][index]
@@ -141,7 +142,8 @@ export default class Board {
     this.dirty.team = true
     const piece = newPiece(opts)
     piece.board = this
-    piece.id = ++this._piece_id
+    piece.id = this.pieces.length
+    this.pieces.push(piece)
     piece._turn = this.game ? this.game.turn : 0
     this.setPiece(piece.index, piece)
     return piece
@@ -183,8 +185,10 @@ export default class Board {
     this.dirty = {}
   }
 
-  animate(...args) {
-    console.log('animate', ...args) // eslint-disable-line
+  animate(animation) {
+    const { index } = animation
+    this.animations[index] = this.animations[index] || []
+    this.animations[index].push(animation)
   }
 }
 

@@ -14,6 +14,7 @@ export default (board, damage) => {
   //   damage_source: source && source.type,
   // })
   if (piece.health <= 0) {
+    board.animate({ type: 'death', index, piece })
     damage.kill = piece
     // #! TODO should also do death animation
     piece.dead = true

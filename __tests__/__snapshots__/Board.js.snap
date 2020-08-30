@@ -10,7 +10,7 @@ XXXXXXXX	"
 exports[`2-skull 2`] = `
 "type    
 XXXXXXXX	
-X  --  X	
+X  --  X	%3k	%4k	
 XXXXXXXX	"
 `;
 
@@ -26,9 +26,9 @@ XXXXX	"
 exports[`9-skull 2`] = `
 "type 
 XXXXX	
-X   X	
-X - X	
-Xk  X	
+X   X	%1k	%2k	%3k	
+X - X	%1k	%2k	%3k	
+Xk  X	%2k	%3k	
 XXXXX	"
 `;
 
@@ -45,7 +45,7 @@ exports[`bonetar-conflicting-attack-move 2`] = `
 "type 
 XXXXX	
 X s X	
-Xs- X	
+Xs- X	%2b	
 X B X	
 XXXXX	"
 `;
@@ -63,7 +63,7 @@ exports[`colliding skulls 2`] = `
 "type       
 XXXXXXXXXXX	
 X         X	
-X  -----  X	
+X  -----  X	%4k	#5	%6k	
 X         X	
 XXXXXXXXXXX	"
 `;

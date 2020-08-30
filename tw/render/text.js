@@ -15,14 +15,9 @@ const LEGEND = {
   bonetar: 'b',
 }
 
-const _join = (strings) => {
-  // combine several multi-line strings into one multiline string (horizontal concatenation)
-  const result = []
-  const splitted_strings = strings.map((s) => s.split('\n'))
-  splitted_strings[0].forEach((_, i) => {
-    result.push(splitted_strings.map((lines) => lines[i]).join('\t'))
-  })
-  return result.join('\n')
+const ANIMATION_LEGEND = {
+  collide: '#',
+  death: '%',
 }
 
 export default (board, options = {}) => {
@@ -59,6 +54,15 @@ export default (board, options = {}) => {
     })
     if (values.length) {
       extras[y] += `${index}:${values.join(',')}\t`
+    }
+    if (board.animations[index]) {
+      board.animations[index].forEach((animation) => {
+        let value = ANIMATION_LEGEND[animation.type] + board.geo.index2xy(index)[0]
+        if (animation.piece) {
+          value += LEGEND[animation.piece.type] || '?'
+        }
+        extras[y] += value + '\t'
+      })
     }
   })
   return geo.print(main, { title, extras, empty })
