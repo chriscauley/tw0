@@ -30,10 +30,7 @@ export default class Game {
     // this.spawnPieces()
   }
 
-  doAttacks(pieces) {
-    this.board.recache()
-    const piece_moves = pieces.map((p) => [p, getMove(p)])
-    const attack_moves = piece_moves.filter((t) => t[1].damages)
+  doAttacks(attack_moves) {
     const failed_pieces = []
     attack_moves.forEach(([piece, move]) => {
       let piece_moved
@@ -53,11 +50,8 @@ export default class Game {
         failed_pieces.push(piece)
       }
     })
-    if (failed_pieces.length) {
-      if (failed_pieces.length === pieces.length) {
-        throw 'Unable to resolve attack (infinite loop)'
-      }
-      this.doAttacks(failed_pieces)
+    if (failed_pieces.length === attack_moves.length) {
+      throw 'Unable to resolve attack (infinite loop)'
     }
   }
 
@@ -69,6 +63,13 @@ export default class Game {
     if (!piece_moves.length) {
       return
     }
+    const attack_moves = piece_moves.filter((t) => t[1].damages)
+    if (attack_moves.length) {
+      this.doAttacks(attack_moves)
+      this.doMoves(pieces)
+      return
+    }
+
     const soft_block = {}
     piece_moves.forEach(([piece, move]) => {
       if (move.index !== undefined) {
@@ -93,19 +94,19 @@ export default class Game {
             this.board.animate('collide@' + move0.index)
           })
         } else {
+          // only move the first piece to avoid friendly collision
           applyMove(piece0, move0, this.turn)
         }
       })
     } else if (forwards.length) {
-      forwards.forEach(([piece, move]) => {
-        applyMove(piece, move, this.turn)
-      })
+      forwards.forEach(([piece, move]) => applyMove(piece, move, this.turn))
     } else {
-      piece_moves.forEach(([piece, move]) => {
-        applyMove(piece, move, this.turn)
-      })
+      piece_moves.forEach(([piece, move]) => applyMove(piece, move, this.turn))
     }
-    if (pieces.filter((p) => this.piece_turns[p.id]).length !== piece_moves.length) {
+
+    // if some pieces did move and some pieces still can move, try do moves again
+    const still_moveable = pieces.filter((p) => this.piece_turns[p.id]).length
+    if (still_moveable !== piece_moves.length) {
       this.doMoves(pieces)
     }
   }
@@ -118,7 +119,6 @@ export default class Game {
     const pieces = this.board.getPieces()
     pieces.forEach((p) => (this.piece_turns[p.id] = p.turns))
 
-    this.doAttacks(pieces)
     this.doMoves(pieces)
     this.finishTurn()
     this.busy = false

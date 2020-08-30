@@ -25,7 +25,7 @@ export default (piece, move, turn) => {
   //     target._type.onPush(target, move.push.dxy)
   //   }
   // }
-  piece.board.game.piece_turns[piece.id] --
+  piece.board.game.piece_turns[piece.id]--
   if (move.end) {
     piece.board.game.piece_turns[piece.id] = 0
   }
