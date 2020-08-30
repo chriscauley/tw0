@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "coverage": "jest --coverage --coverageDirectory .coverage",
     "develop": "parcel client/index.html -p 5445 --public-url /static/ --no-hmr",
     "lint": "yarn eslint client tw __tests__",
     "test": "node bin/run-jest.js"
