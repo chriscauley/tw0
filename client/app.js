@@ -4,6 +4,7 @@ import { HashRouter, Route } from 'react-router-dom'
 import sprites from './sprites'
 import Coloseum from './coloseum'
 import Look from './coloseum/Look'
+import Play from './coloseum/Play'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <sprites.routes />
       <Route path="/coloseum/" component={Coloseum} />
       <Route path="/look/" component={Look} />
+      <Route path="/play/" component={Play} />
     </HashRouter>
   )
 }
