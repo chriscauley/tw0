@@ -118,7 +118,7 @@ export default class Game {
     this.piece_turns = {} // how many turns each piece can take
     this.board.animations = {}
     this.afterturn = []
-    const pieces = this.board.getPieces()
+    const pieces = this.board.getPieces().filter((p) => !p.player)
     pieces.forEach((p) => {
       this.piece_turns[p.id] = p.turns
       p.last_index = p.index

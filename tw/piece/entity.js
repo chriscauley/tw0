@@ -35,6 +35,7 @@ const newPiece = (opts) => {
       '_turn',
       'equipment',
       'lives',
+      'player',
     ]),
     name: 'piece',
   }
@@ -42,6 +43,12 @@ const newPiece = (opts) => {
     piece.max_health = piece.health
   }
   piece._type = type
+  if (piece.player) {
+    piece.equipment = opts.equipment || { ...item.default_equipment }
+    piece.lives = opts.lives || 2
+    piece.turns = 0 // player is stationary while others move
+    piece.health = piece.max_health = 3
+  }
   return piece
 }
 
@@ -50,9 +57,6 @@ const newPlayer = (opts) => {
     ...opts,
     team: 1,
   })
-  piece.equitpment = opts.equipment || { ...item.default_equipment }
-  piece.lives = opts.lives || 2
-  piece.turns = 0 // player is stationary while others move
   return piece
 }
 

@@ -1,7 +1,9 @@
 import bones from './bones'
 import { assert } from '../utils'
 
-const types = {}
+const types = {
+  warrior: {},
+}
 
 Object.entries({ bones }).forEach(([_name, lib]) => {
   Object.entries(lib).forEach(([piece_name, piece]) => {

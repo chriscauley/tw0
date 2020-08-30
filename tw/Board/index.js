@@ -61,6 +61,7 @@ export default class Board {
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
     this.recache()
+    options.player && this.addPlayer(options.player)
     this.quickAddPieces(options.pieces)
     this.animations = {}
   }
@@ -149,22 +150,25 @@ export default class Board {
     return piece
   }
 
+  getTeamSpawn({ team, dindex, ...options }) {
+    const start = this['start' + team]
+    let index = dindex + start
+    const team_di = team === 1 ? 1 : -1
+    if (dindex === undefined) {
+      const indexes = [start].concat(this.geo.look('circle', start, 2, team_di))
+      index = indexes.find((i) => canMoveOn(this, i))
+      if (index === undefined) {
+        throw `cannot place piece for team=${team} dindex=${dindex}`
+      }
+    }
+    dindex = dindex || this.getPathDindex(index, team)
+    return { index, dindex, team, ...options }
+  }
+
   quickAddPieces(pieces = []) {
     pieces = parsePieces(pieces)
     pieces.forEach(([team, type, dindex]) => {
-      const start = this['start' + team]
-      let index = dindex + start
-      const team_di = team === 1 ? 1 : -1
-      if (dindex === undefined) {
-        const indexes = [start].concat(this.geo.look('circle', start, 2, team_di))
-        index = indexes.find((i) => canMoveOn(this, i))
-        if (index === undefined) {
-          console.error('cannot place piece', team, type, dindex)
-          return
-        }
-      }
-      dindex = dindex || this.getPathDindex(index, team)
-      this.newPiece({ team, type, index, dindex: team_di })
+      this.newPiece(this.getTeamSpawn({ team, type, dindex }))
     })
   }
 
@@ -189,6 +193,13 @@ export default class Board {
     const { index } = animation
     this.animations[index] = this.animations[index] || []
     this.animations[index].push(animation)
+  }
+
+  // TODO this should be on game if we want to do multi board (not sure if I want to)
+  addPlayer(team) {
+    if (team) {
+      this.player = this.newPiece(this.getTeamSpawn({ team, type: 'warrior', player: true }))
+    }
   }
 }
 

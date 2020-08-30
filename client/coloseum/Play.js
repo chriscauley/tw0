@@ -6,7 +6,7 @@ const options = {
   W: 9,
   H: 9,
   player: 1,
-  pieces: '|5xskull',
+  pieces: '|skull',
 }
 
 export default function Play() {
