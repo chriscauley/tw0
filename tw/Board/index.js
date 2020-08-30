@@ -60,6 +60,7 @@ export default class Board {
     this.geo = Geo(W, H)
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
+    this.recache()
     this.quickAddPieces(options.pieces)
   }
 
@@ -109,7 +110,7 @@ export default class Board {
     this.start1 = path[0]
     this.start2 = path[path.length - 1]
     if (this.start1 === this.start2 && path.length < 3) {
-      // path is a single point
+      this.entities.path[this.start1] = 1
       return
     }
     const b = {}
@@ -135,7 +136,6 @@ export default class Board {
     })
 
     this.geo.indexes.forEach((i) => (this.entities.square[i] = true))
-    this.recache()
   }
 
   newPiece(opts) {
@@ -153,8 +153,8 @@ export default class Board {
     pieces.forEach(([team, type, dindex]) => {
       const start = this['start' + team]
       let index = dindex + start
+      const team_di = team === 1 ? 1 : -1
       if (dindex === undefined) {
-        const team_di = team === 1 ? 1 : -1
         const indexes = [start].concat(this.geo.look('circle', start, 2, team_di))
         index = indexes.find((i) => canMoveOn(this, i))
         if (index === undefined) {
@@ -163,7 +163,7 @@ export default class Board {
         }
       }
       dindex = dindex || this.getPathDindex(index, team)
-      this.newPiece({ team, type, index, dindex })
+      this.newPiece({ team, type, index, dindex: team_di })
     })
   }
 

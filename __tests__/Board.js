@@ -16,23 +16,19 @@ test('2-skull', () => {
   snap(board)
   game.nextTurn()
   snap(board)
-  game.nextTurn()
-  snap(board)
-  game.nextTurn()
-  snap(board)
 })
 
 test('9-skull', () => {
   const pieces = [
-    [1, 'skull', [-1, -1]],
-    [2, 'skull', [0, -1]],
-    [1, 'skull', [1, -1]],
-    [2, 'skull', [-1, 0]],
-    [1, 'skull', [0, 0]],
-    [2, 'skull', [1, 0]],
-    [1, 'skull', [-1, 1]],
-    [2, 'skull', [0, 1]],
-    [1, 'skull', [1, 1]],
+    [1, 'skull', -6],
+    [2, 'skull', -5],
+    [1, 'skull', -4],
+    [2, 'skull', -1],
+    [1, 'skull', 0],
+    [2, 'skull', 1],
+    [1, 'skull', 4],
+    [2, 'skull', 5],
+    [1, 'skull', 6],
   ]
   const board = new Board({ W: 5, H: 5, path: [12], pieces })
   const game = new Game({ board })

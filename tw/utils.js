@@ -50,6 +50,12 @@ export const floodFillPath = (board) => {
     dindex,
     index: parseInt(index),
   }))
+  if (pieces.length === 1) {
+    const dfill = {}
+    const fill = {}
+    board.geo.indexes.forEach(i => dfill[i] = 1)
+    return { dfill, fill }
+  }
   return floodFill({
     board,
     pieces,
