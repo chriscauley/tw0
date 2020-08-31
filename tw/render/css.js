@@ -1,4 +1,16 @@
-import { sortBy } from 'lodash'
+import { sortBy, range } from 'lodash'
+
+const addHealth = (piece, out) => {
+  const HEART = 'fa fa-heart text-red-400'
+  if (piece.max_health > 1) {
+    if (piece.health > 2) {
+      out.children.push(HEART)
+      out.children.push('fa fa-question text-white')
+    } else {
+      range(piece.health).forEach(() => out.children.push('fa fa-heart text-red-400'))
+    }
+  }
+}
 
 export default (board, options = {}) => {
   const { geo } = board
@@ -32,6 +44,8 @@ export default (board, options = {}) => {
       // no index because this will be set several times
       className: `sprite sprite-${p.type} piece`,
       id: `piece-${p.id}`,
+      children: [],
+      steps: [],
     }),
   }
 
@@ -40,24 +54,42 @@ export default (board, options = {}) => {
     out._base = out.className
     out.className += css.index(piece._indexes[0])
     piece._indexes.forEach((i, n) => {
-      const s = n === 0 ? 'className' : `step${n}`
-      out[s] = out._base + css.index(i)
+      let cls = out._base + css.index(i)
+      const attack = animations[i].filter((a) => a.type === 'attack')[0]
+      if (attack) {
+        cls += ' attack-' + geo._dindex2name[attack.dindex]
+      }
+      if (attack || n > 0) {
+        out.steps.push(cls)
+      }
     })
+    const last = out.steps[out.steps.length - 1]
+    if (last && last.includes(' attack-')) {
+      out.steps.push(last.replace(/ attack-./, ''))
+    }
     out.piece = piece
     pieces[piece.id] = piece
     items.push(out)
+    addHealth(piece, out)
     return out
   }
 
+  const animations = {}
+  indexes.forEach((index) => {
+    animations[index] = board.animations[index] || []
+  })
+
   board.getPieces().forEach(spritePiece)
-  indexes.forEach((index) =>
-    (board.animations[index] || []).forEach((a) => {
+  indexes.forEach((index) => {
+    // dead pieces aren't in board.getPieces()
+    animations[index].forEach((a) => {
       if (a.type === 'death') {
         const item = spritePiece(a.piece)
-        item.className += ' is_dead'
+        const last = item.steps[item.steps.length - 1]
+        item.steps.push(last + ' is_dead')
       }
-    }),
-  )
+    })
+  })
   sortBy(items, 'id') // stops react from re-ording the pieces
 
   indexes.forEach((index) => {

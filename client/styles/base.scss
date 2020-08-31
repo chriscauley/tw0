@@ -20,7 +20,13 @@
   .sprite {
     position: absolute;
     &.piece {
+      display: flex;
       transition: left $a,  top $a, opacity $a;
+      background-size: 90%;
+      background-position: bottom center;
+      .fa {
+        font-size: 0.25em;
+      }
     }
   }
   @for $i from -5 through 30 {
@@ -39,6 +45,19 @@
       }
     }
   }
+  .attack-u {
+    animation: $a bounce-up;
+  }
+  .attack-l {
+    animation: $a bounce-left;
+  }
+  .attack-r {
+    animation: $a bounce-right;
+  }
+  .attack-d {
+    animation: $a bounce-down;
+  }
+
   @for $i from 1 through 30 {
     &.W-#{$i} {
       width: $i * 1em;
@@ -62,4 +81,30 @@
       z-index: 20;
     }
   }
+}
+
+$a_dist: 0.5em;
+
+@keyframes bounce-up {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-$a_dist) }
+  100% { transform: translateY(0) }
+}
+
+@keyframes bounce-down {
+  0% { transform: translateY(0) }
+  50% { transform: translateY($a_dist) }
+  100% { transform: translateY(0) }
+}
+
+@keyframes bounce-right {
+  0% { transform: translateX(0) }
+  50% { transform: translateX($a_dist) }
+  100% { transform: translateX(0) }
+}
+
+@keyframes bounce-left {
+  0% { transform: translateX(0) }
+  50% { transform: translateX(-$a_dist) }
+  100% { transform: translateX(0) }
 }

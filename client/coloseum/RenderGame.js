@@ -12,22 +12,27 @@ function TextRenderer({ board, ...options }) {
 }
 
 function CSSRenderer({ board, ...options }) {
+  const DELAY = 200
   const { items, boardClass } = renderCSS(board, options)
   const board_id = 'board-' + board.id
   const click = i => () => console.log(i) // eslint-disable-line
+  const has_steps = items.filter((i) => i.steps)
   const stepTo = (no) => () => {
-    const s = 'step' + no
-    items.filter((i) => i[s]).forEach((i) => (document.getElementById(i.id).className = i[s]))
-    if (no < 3) {
-      setTimeout(stepTo(no + 1), 200)
+    has_steps.forEach((i) => {
+      if (i.steps[no]) {
+        document.getElementById(i.id).className = i.steps[no]
+      }
+    })
+    if (has_steps.filter((i) => i.steps.length > no).length) {
+      setTimeout(stepTo(no + 1), DELAY)
     }
   }
-  setTimeout(stepTo(1), 0)
+  setTimeout(stepTo(0), 0)
   return (
     <div className={boardClass} id={board_id}>
       {items.map((i) => (
         <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
-          {i.children && i.children.map((c) => <div className={c} key={c} />)}
+          {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
         </div>
       ))}
     </div>

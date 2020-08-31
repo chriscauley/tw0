@@ -120,17 +120,18 @@ export default class Game {
     // clear everything
     this.piece_turns = {} // how many turns each piece can take
     this.afterturn = []
-    const pieces = this.board.getPieces()
+    this.board.animations = {}
+    if (this.player_move) {
+      this.board.player._indexes = [this.board.player.index]
+      movePlayer(this.board.player, this.player_move)
+      delete this.player_move
+    }
+    const pieces = this.board.getPieces().filter((p) => !p.player)
     pieces.forEach((p) => {
       this.piece_turns[p.id] = p.turns
       p._indexes = [p.index]
     })
-    this.board.animations = {}
 
-    if (this.player_move) {
-      movePlayer(this.board.player, this.player_move)
-      delete this.player_move
-    }
     this.doMoves(pieces)
     if (pieces.length === 0) {
       this.board.quickAddPieces('|skull,skull,skull')
