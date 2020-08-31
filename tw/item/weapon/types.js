@@ -1,40 +1,40 @@
 const BASE = {
   damage: 1,
-  range: 1,
-  geometry: '_line',
+  dist: 1,
+  shape: '__f',
   slot: 'weapon',
-  splash: false, // does damage to all squares in geometry
+  splash: 1, // does damage to all squares in shape
 }
 
 const types = {
   knife: {},
 
   longsword: {
-    range: 2,
-    splash: true,
-    geometry: 'line',
+    dist: 2,
+    splash: 2,
+    shape: 'f',
   },
 
   katana: {
-    geometry: 'three',
-    splash: true,
+    shape: 'three',
+    splash: 3,
   },
 
   spear: {
-    range: 2,
+    dist: 2,
     step: true,
   },
 
   scythe: {
-    range: 2,
-    geometry: '_three',
-    splash: true,
+    dist: 2,
+    shape: '__three',
+    splash: 3,
     step: true,
   },
 
   jambiya: {
-    geometry: 'lr',
-    splash: true,
+    shape: 'lr',
+    splash: 2,
     step: true,
   },
 }

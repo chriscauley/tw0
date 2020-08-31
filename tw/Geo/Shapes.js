@@ -49,6 +49,10 @@ const Shapes = (geo) => ({
     return out
   },
   f: (dist, dindex) => [dist * dindex],
+  lr: (dist, dindex) => {
+    const o_dindex = geo.rot_dindexes[dindex][1]
+    return [o_dindex * dist, -o_dindex * dist]
+  },
   cross: (dist, dindex) => geo.rot_dindexes[dindex].map((dindex2) => dist * dindex2),
 })
 
