@@ -1,4 +1,5 @@
-import { applyMove, applyDamage, canMoveOn, canAttack } from './piece/lib'
+import { applyMove, applyDamage, canMoveOn } from './piece/lib'
+import { movePlayer } from './piece/lib/player'
 // import respawn from './player/respawn'
 
 // moved these imports down because getMove should probably be in it's own file
@@ -34,7 +35,7 @@ export default class Game {
     let failed
     attack_moves.forEach(([piece, move]) => {
       if (move.index && !canMoveOn(this.board, move.index)) {
-        // a piece has moved into this spot during this turn. Retry move.
+        // damage requires move but another piece has moved into this spot during this turn.
         failed++
         return
       }
@@ -115,30 +116,37 @@ export default class Game {
 
   nextTurn = () => {
     this.busy = true
+
+    // clear everything
     this.piece_turns = {} // how many turns each piece can take
-    this.board.animations = {}
     this.afterturn = []
-    const pieces = this.board.getPieces().filter((p) => !p.player)
+    const pieces = this.board.getPieces()
+    pieces.forEach((p) => {
+      this.piece_turns[p.id] = p.turns
+      p._indexes = [p.index]
+    })
+    this.board.animations = {}
+
+    if (this.player_move) {
+      movePlayer(this.board.player, this.player_move)
+      delete this.player_move
+    }
+    this.doMoves(pieces)
     if (pieces.length === 0) {
       this.board.quickAddPieces('|skull,skull,skull')
     }
-    pieces.forEach((p) => {
-      this.piece_turns[p.id] = p.turns
-      p.last_index = p.index
-    })
 
-    this.doMoves(pieces)
     this.finishTurn()
     this.busy = false
   }
 
   finishTurn = () => {
-    if (this.player && this.player.health <= 0) {
-      if (!this.player.lives > 0) {
+    if (this.board.player && this.board.player.health <= 0) {
+      if (!this.board.player.lives > 0) {
         this.gameover()
         return
       }
-      // respawn(this.player)
+      // respawn(this.board.player)
     }
     this.afterturn.forEach((f) => f())
     delete this.afterturn
@@ -170,20 +178,9 @@ export default class Game {
 
   pressArrow = (e, callback) => {
     e.preventDefault()
-    const { player, geo } = this.board
     const key = e.key.replace('Arrow', '')[0].toLowerCase()
-    const dindex = geo._name2dindex[key]
-    const index = dindex + player.index
-    if (canAttack(player, index)) {
-      applyDamage(this.board, {
-        index: index,
-        count: player.damage,
-        source: player.index,
-        dindex,
-      })
-    } else if (canMoveOn(this.board, index)) {
-      applyMove(player, { index, dindex }, this.turn)
-    }
+    const dindex = this.board.geo._name2dindex[key]
+    this.player_move = { dindex }
     this.nextTurn()
     callback()
   }

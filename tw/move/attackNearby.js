@@ -13,7 +13,7 @@ export default (shape, dist) => (piece, move) => {
       {
         index: target.index,
         count: piece.damage,
-        source: piece.index,
+        source: piece,
         dindex,
       },
     ]

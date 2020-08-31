@@ -13,10 +13,20 @@ function TextRenderer({ board, ...options }) {
 
 function CSSRenderer({ board, ...options }) {
   const { items, boardClass } = renderCSS(board, options)
+  const board_id = 'board-' + board.id
+  const click = i => () => console.log(i) // eslint-disable-line
+  const stepTo = (no) => () => {
+    const s = 'step' + no
+    items.filter((i) => i[s]).forEach((i) => (document.getElementById(i.id).className = i[s]))
+    if (no < 3) {
+      setTimeout(stepTo(no + 1), 200)
+    }
+  }
+  setTimeout(stepTo(1), 0)
   return (
-    <div className={boardClass}>
+    <div className={boardClass} id={board_id}>
       {items.map((i) => (
-        <div className={i.className} key={i.id}>
+        <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
           {i.children && i.children.map((c) => <div className={c} key={c} />)}
         </div>
       ))}

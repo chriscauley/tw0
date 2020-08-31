@@ -92,6 +92,7 @@ export default class Board {
 
     piece.board = this
     piece.index = index
+    piece._indexes.push(index)
     this.entities.piece[index] = piece
   }
 
@@ -148,6 +149,7 @@ export default class Board {
     piece.id = this.pieces.length
     this.pieces.push(piece)
     piece._turn = this.game ? this.game.turn : 0
+    piece._indexes = [] // used in renderer
     this.setPiece(piece.index, piece)
     return piece
   }
