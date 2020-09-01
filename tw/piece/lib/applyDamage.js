@@ -6,6 +6,7 @@ export default (board, damage) => {
     return false
   }
   piece.health -= count
+  piece._last_damage = damage
   source &&
     board.animate({
       dindex,

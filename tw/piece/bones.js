@@ -29,12 +29,10 @@ export default {
   skeleton: {
     opts: { health: 2 },
     tasks: [
-      // move.energy('health').equals(1).then(
-      //   move.chain([
-      //     move.turn.fromHit,
-      //     move.morph('runner')
-      //   ])
-      // ),
+      move
+        .energy('health')
+        .equals(1)
+        .then(move.chain([move.turn.fromHit, move.morph('legday')])),
       move.wait(1),
       move.attackNearby('circle', 1),
       move.turn.towardPathOrFoe,
