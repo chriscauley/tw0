@@ -50,7 +50,7 @@ export default (board, options = {}) => {
     },
     piece: (p) => ({
       // no index because this will be set several times
-      className: `sprite sprite-${p.type} piece`,
+      className: `sprite sprite-${p.type} piece ${p.awake ? 'awake' : ''} wait-${p.wait}`,
       id: `piece-${p.id}`,
       children: [],
       steps: [],

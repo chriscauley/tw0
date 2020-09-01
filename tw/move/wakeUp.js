@@ -1,8 +1,12 @@
 import after from './after'
 
 const wake = (piece, move) => {
+  move.priority = 0 // since piece doesn't move, do this move first
   move.done = true
-  after(move, () => (piece.awake = true))
+  after(move, () => {
+    piece.awake = true
+    piece.wait = 1
+  })
   return move
 }
 

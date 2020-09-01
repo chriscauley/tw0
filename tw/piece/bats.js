@@ -7,7 +7,7 @@ export default {
       move.wait(1),
       move.attackNearby('circle', 1),
       move.turn.towardSound,
-      move.forward,
+      move.forward(1),
     ],
   },
   bigbat: {

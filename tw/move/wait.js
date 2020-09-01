@@ -8,6 +8,7 @@ export default (turns) => {
     if (piece.wait < turns) {
       const tick = (piece) => piece.wait++
       return {
+        priority: 0, // piece man't move, max priority
         now: tick,
         done: true,
       }

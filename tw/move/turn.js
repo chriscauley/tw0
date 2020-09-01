@@ -5,10 +5,11 @@ const fromHit = (piece, move) => {
   return move
 }
 
-const findLowest = (piece, layer) => {
-  // TODO pass in move, return modified move
-  // TODO should set move.priority and move.dindex
-  // TODO if move.priority is set, return unmodified move
+const findLowest = (piece, layer, move) => {
+  if (move.priority !== undefined) {
+    // previously found a lower priority move
+    return move
+  }
   const forward_index = piece.dindex + piece.index
   let forward_value
   const targets = piece.board.geo.dindexes
@@ -23,27 +24,28 @@ const findLowest = (piece, layer) => {
         dindex,
       }
     })
+    .filter((t) => piece.board.canMoveOn(t.index))
     .filter((t) => t.value !== undefined)
   const target = sortBy(targets, 'value')[0]
   if (target) {
-    return target.value === forward_value ? piece.dindex : target.dindex
+    move.priority = target.value
+    move.dindex = target.value === forward_value ? piece.dindex : target.dindex
   }
+  return move
 }
 
 const towardPathOrFoe = (piece, move = {}) => {
   const _team = piece.team === 1 ? 2 : 1
   const cache = piece.board.cache
-  const dindex = findLowest(piece, cache.team[_team].fill) || findLowest(piece, cache.path.fill)
-  if (dindex) {
-    move.dindex = dindex
-  }
+  move = findLowest(piece, cache.team[_team].fill, move)
+  move = findLowest(piece, cache.path.fill, move)
   return move
 }
 
 const flip = (piece, move) => ({ ...move, dindex: -piece.dindex })
 
 const towardSound = (piece, move = {}) => {
-  move.dindex = findLowest(piece, piece.board.cache.sound)
+  move = findLowest(piece, piece.board.cache.sound, move)
   return move
 }
 

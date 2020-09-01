@@ -15,7 +15,7 @@ export const getMove = (piece) => {
   types[piece.type].tasks.find((task) => {
     move = task(piece, move)
     if (move && move.done) {
-      return move
+      return true
     }
   })
 
@@ -69,15 +69,17 @@ export default class Game {
       return
     }
 
+    let lowest_priority = Infinity
     const soft_block = {}
     piece_moves.forEach(([piece, move]) => {
+      move.priority = move.priority || Infinity
       if (move.index !== undefined) {
+        lowest_priority = Math.min(lowest_priority, move.priority)
         soft_block[move.index] = soft_block[move.index] || []
         soft_block[move.index].push([piece, move])
       }
     })
     const collisions = Object.values(soft_block).filter((pms) => pms.length > 1)
-    const forwards = piece_moves.filter(([p, m]) => p.dindex === m.dindex)
     if (collisions.length) {
       collisions.forEach((piece_moves) => {
         const [piece0, move0] = piece_moves[0]
@@ -101,10 +103,10 @@ export default class Game {
           applyMove(piece0, move0, this.turn)
         }
       })
-    } else if (forwards.length) {
-      forwards.forEach(([piece, move]) => applyMove(piece, move, this.turn))
     } else {
-      piece_moves.forEach(([piece, move]) => applyMove(piece, move, this.turn))
+      piece_moves
+        .filter((pm) => pm[1].priority <= lowest_priority)
+        .forEach((pm) => applyMove(pm[0], pm[1], this.turn))
     }
 
     // if some pieces did move and some pieces still can move, try do moves again
@@ -133,7 +135,7 @@ export default class Game {
 
     this.doMoves(pieces)
     if (pieces.length === 0) {
-      this.board.quickAddPieces('|skull,skull,skull')
+      this.board.quickAddPieces('|bat,bat,bat')
     }
 
     this.finishTurn()

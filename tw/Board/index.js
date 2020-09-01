@@ -157,6 +157,11 @@ export default class Board {
     return piece
   }
 
+  canMoveOn(index) {
+    // TODO move canMoveOn into board
+    return canMoveOn(this, index)
+  }
+
   getTeamSpawn({ team, dindex, ...options }) {
     const start = this['start' + team]
     let index = dindex + start

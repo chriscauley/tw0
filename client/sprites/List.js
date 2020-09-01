@@ -10,6 +10,7 @@ sprite('wall1')
 sprite('wall2')
 sprite('wall3')
 sprite('wall4')
+sprite('bat.awake')
 
 export default function List() {
   return (
