@@ -17,6 +17,8 @@
   $a: 0.2s;
   font-size: 3em;
   position: relative;
+  &.layer-sound .sprite.sound { display: block; }
+  &.layer-sound_cache .sprite.sound_cache { display: block; }
   .sprite {
     position: absolute;
     &.piece {
@@ -27,6 +29,23 @@
       .fa {
         font-size: 0.25em;
       }
+    }
+    @for $i from 0 through 16 {
+      &.sound-#{$i}:before {
+        content: "S:#{$i}";
+      }
+    }
+    &.sound, &.sound_cache {
+      display: none;
+    }
+    &.sound:before, &.sound_cache:before {
+      /* needs tailwind */
+      background: rgba(0,0,0,0.5);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: #aaa;
+      font-size: 0.25em;
     }
   }
   @for $i from -5 through 30 {
@@ -79,6 +98,9 @@
     }
     &.piece {
       z-index: 20;
+    }
+    &.sound {
+      z-index: 30;
     }
   }
 }

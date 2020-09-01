@@ -32,6 +32,14 @@ export default (board, options = {}) => {
       className: `sprite ${css.index(i)} wall-${v} sprite-wall${((i + 151) % 127) % 5}`,
       id: `wall-${i}`,
     }),
+    sound: (i, v) => ({
+      id: `sound-${i}`,
+      className: `sound sprite sound-${v} ${css.index(i)}`,
+    }),
+    sound_cache: (i, v) => ({
+      id: `sound_cache-${i}`,
+      className: `sound_cache sprite sound-${v} ${css.index(i)}`,
+    }),
     square: (i) => {
       const xy = geo.index2xy(i)
       const n = ((xy[0] % 2) + (xy[1] % 2)) % 2
@@ -98,6 +106,14 @@ export default (board, options = {}) => {
       items.push(css.wall(index, wall))
     } else if (board.getOne('square', index)) {
       items.push(css.square(index))
+    }
+    const sound = board.getOne('sound', index)
+    if (sound !== undefined) {
+      items.push(css.sound(index, sound))
+    }
+    const sound_cache = board.cache.sound[index]
+    if (sound_cache !== undefined) {
+      items.push(css.sound_cache(index, sound_cache))
     }
   })
   return {

@@ -3,40 +3,13 @@ import { GlobalHotKeys } from 'react-hotkeys'
 import css from '@unrest/css'
 
 import renderText from '../../tw/render/text'
-import renderCSS from '../../tw/render/css'
 import useBoard from '../useBoard'
+import CSSRenderer from './CSSRenderer'
+import config from './config'
 
 function TextRenderer({ board, ...options }) {
   const output = renderText(board, options)
   return <pre>{output}</pre>
-}
-
-function CSSRenderer({ board, ...options }) {
-  const DELAY = 200
-  const { items, boardClass } = renderCSS(board, options)
-  const board_id = 'board-' + board.id
-  const click = i => () => console.log(i) // eslint-disable-line
-  const has_steps = items.filter((i) => i.steps)
-  const stepTo = (no) => () => {
-    has_steps.forEach((i) => {
-      if (i.steps[no]) {
-        document.getElementById(i.id).className = i.steps[no]
-      }
-    })
-    if (has_steps.filter((i) => i.steps.length > no).length) {
-      setTimeout(stepTo(no + 1), DELAY)
-    }
-  }
-  setTimeout(stepTo(0), 0)
-  return (
-    <div className={boardClass} id={board_id}>
-      {items.map((i) => (
-        <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
-          {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
-        </div>
-      ))}
-    </div>
-  )
 }
 
 const renderers = {
@@ -58,8 +31,9 @@ const keyMap = {
   },
 }
 
-export default function RenderGame({ controls = false, css = false, text = false, options }) {
+export default function RenderGame({ controls = false, options }) {
   const { game, next, reset, update } = useBoard(options)
+  const { css, text, extra_layers } = config.use().formData
   const handlers = {
     UNSELECT: () => alert('TODO unselect'),
     ARROW: (e) => game.pressArrow(e, update),
@@ -82,8 +56,9 @@ export default function RenderGame({ controls = false, css = false, text = false
           </button>
         </div>
       )}
-      {css && <renderers.css board={game.board} extra_layers={['piece_dindex']} />}
-      {text && <renderers.text board={game.board} extra_layers={['piece_dindex']} />}
+      {css && <renderers.css board={game.board} extra_layers={extra_layers} />}
+      {text && <renderers.text board={game.board} extra_layers={extra_layers} />}
+      <config.Link />
     </div>
   )
 }

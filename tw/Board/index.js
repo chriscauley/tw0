@@ -7,6 +7,7 @@ import vector from '../Geo/vector'
 import { assert, floodFillPath, floodFillTeam } from '../utils'
 import { newPiece } from '../piece/entity'
 import types from '../piece/types'
+import sound from './sound'
 
 export const parsePieces = (pieces) => {
   if (typeof pieces === 'string') {
@@ -44,6 +45,7 @@ export default class Board {
       path: {},
       wall: {},
       square: {},
+      sound: {},
     }
     this.options = defaults(options, {
       path: getDefaultPath,
@@ -62,6 +64,7 @@ export default class Board {
     this.dindex = this.geo.dindexes[0]
     this.connectPath()
     this.recache()
+    sound.cache(this)
     this.game = options.game || new Game({ board: this, id: this.options.id })
     options.player && this.addPlayer(options.player)
     this.quickAddPieces(options.pieces)
@@ -194,9 +197,12 @@ export default class Board {
   }
 
   animate(animation) {
-    const { index } = animation
+    const { index, type } = animation
     this.animations[index] = this.animations[index] || []
     this.animations[index].push(animation)
+    if (type === 'attack') {
+      this.entities.sound[index] = 0
+    }
   }
 
   // TODO this should be on game if we want to do multi board (not sure if I want to)
@@ -204,6 +210,13 @@ export default class Board {
     if (team) {
       this.player = this.newPiece(this.getTeamSpawn({ team, type: 'warrior', player: true }))
     }
+  }
+
+  startTurn() {
+    sound.age(this)
+    sound.cache(this)
+    this.animations = {}
+    this.getPieces().forEach((p) => (p._indexes = [p.index]))
   }
 }
 

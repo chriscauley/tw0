@@ -2,17 +2,24 @@ import React from 'react'
 
 import RenderGame from './RenderGame'
 
-const options = {
-  W: 9,
-  H: 9,
-  player: 1,
-  pieces: '|skull',
+const getOptions = (pieces) => {
+  const piece_sets = {
+    bones: '|skull',
+    bats: '|bat',
+  }
+  return {
+    W: 9,
+    H: 9,
+    player: 1,
+    pieces: piece_sets[pieces],
+  }
 }
 
-export default function Play() {
+export default function Play({ match }) {
+  const { pieces } = match.params
   return (
     <div className="flex p-4">
-      <RenderGame options={options} css />
+      <RenderGame options={getOptions(pieces)} css />
     </div>
   )
 }
