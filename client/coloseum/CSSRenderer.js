@@ -8,7 +8,6 @@ export default function CSSRenderer({ board, ...options }) {
   const board_id = 'board-' + board.id
   const click = i => () => console.log(i) // eslint-disable-line
   const has_steps = items.filter((i) => i.steps)
-  const layer_class = options.extra_layers.map((l) => `layer-${l}`).join(' ')
   const stepTo = (no) => () => {
     has_steps.forEach((i) => {
       if (i.steps[no]) {
@@ -21,7 +20,7 @@ export default function CSSRenderer({ board, ...options }) {
   }
   setTimeout(stepTo(0), 0)
   return (
-    <div className={boardClass + ' ' + layer_class} id={board_id}>
+    <div className={boardClass} id={board_id}>
       {items.map((i) => (
         <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
           {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}

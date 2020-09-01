@@ -134,7 +134,8 @@ export default class Game {
 
     this.doMoves(pieces)
     if (pieces.length === 0) {
-      this.board.quickAddPieces('|bat,bat,bat')
+      const p = this.board.options.pieces.split('|')
+      this.board.quickAddPieces('|' + [p, p, p].join(','))
     }
 
     this.finishTurn()
@@ -170,8 +171,4 @@ export default class Game {
     this.nextTurn()
     callback()
   }
-}
-
-const getPathDindex = (board, index, team) => {
-  return team === 1 ? 1 : -1
 }

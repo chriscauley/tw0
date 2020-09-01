@@ -4,7 +4,7 @@ import RenderGame from './RenderGame'
 
 const getOptions = (pieces) => {
   const piece_sets = {
-    bones: '|skull',
+    bones: '|skeleton',
     bats: '|bat',
   }
   return {

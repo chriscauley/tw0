@@ -1,18 +1,18 @@
-import { sortBy, range } from 'lodash'
+import { range } from 'lodash'
 
 const addHealth = (piece, out) => {
   const HEART = 'fa fa-heart text-red-400'
-  if (piece.max_health > 1) {
-    if (piece.health > 2) {
-      out.children.push(HEART)
-      out.children.push('fa fa-question text-white')
-    } else {
-      range(piece.health).forEach(() => out.children.push('fa fa-heart text-red-400'))
-    }
+  if (piece.health > 3) {
+    out.children.push(HEART)
+    out.children.push('fa fa-question text-white')
+  } else if (piece.max_health > 1) {
+    range(piece.health).forEach(() => out.children.push('fa fa-heart text-red-400'))
   }
 }
 
 export default (board, options = {}) => {
+  const show_sound = options.extra_layers.includes('sound')
+  const show_sound_cache = options.extra_layers.includes('sound_cache')
   const { geo } = board
   const { xy0 = [0, 0], W = geo.W, H = geo.H, _empty, _highlight = [] } = options
   const items = []
@@ -50,9 +50,9 @@ export default (board, options = {}) => {
     },
     piece: (p) => ({
       // no index because this will be set several times
-      className: `sprite sprite-${p.type} piece ${p.awake ? 'awake' : ''} wait-${p.wait}`,
+      className: `sprite piece ${p.wait !== undefined ? 'wait-' + p.wait : ''} team-${p.team}`,
       id: `piece-${p.id}`,
-      children: [],
+      children: [`sprite sprite-${p.type} ${p.awake ? 'awake' : ''}`],
       steps: [],
     }),
   }
@@ -61,11 +61,12 @@ export default (board, options = {}) => {
     const out = css.piece(piece)
     out._base = out.className
     out.className += css.index(piece._indexes[0])
+    const di_name = geo._dindex2name[piece.dindex]
     piece._indexes.forEach((i, n) => {
       let cls = out._base + css.index(i)
       const attack = animations[i].filter((a) => a.type === 'attack')[0]
       if (attack) {
-        cls += ' attack-' + geo._dindex2name[attack.dindex]
+        cls += ' attack-' + di_name
       }
       if (attack || n > 0) {
         out.steps.push(cls)
@@ -74,6 +75,11 @@ export default (board, options = {}) => {
     const last = out.steps[out.steps.length - 1]
     if (last && last.includes(' attack-')) {
       out.steps.push(last.replace(/ attack-./, ''))
+    }
+    if (out.steps.length) {
+      out.steps[out.steps.length - 1] += ` dindex-${di_name}`
+    } else {
+      out.className += ` dindex-${di_name}`
     }
     out.piece = piece
     pieces[piece.id] = piece
@@ -98,7 +104,6 @@ export default (board, options = {}) => {
       }
     })
   })
-  sortBy(items, 'id') // stops react from re-ording the pieces
 
   indexes.forEach((index) => {
     const wall = board.getOne('wall', index)
@@ -107,13 +112,17 @@ export default (board, options = {}) => {
     } else if (board.getOne('square', index)) {
       items.push(css.square(index))
     }
-    const sound = board.getOne('sound', index)
-    if (sound !== undefined) {
-      items.push(css.sound(index, sound))
+    if (show_sound) {
+      const sound = board.getOne('sound', index)
+      if (sound !== undefined) {
+        items.push(css.sound(index, sound))
+      }
     }
-    const sound_cache = board.cache.sound[index]
-    if (sound_cache !== undefined) {
-      items.push(css.sound_cache(index, sound_cache))
+    if (show_sound_cache) {
+      const sound_cache = board.cache.sound[index]
+      if (sound_cache !== undefined) {
+        items.push(css.sound_cache(index, sound_cache))
+      }
     }
   })
   return {
