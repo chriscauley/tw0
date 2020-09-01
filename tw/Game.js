@@ -28,7 +28,6 @@ export default class Game {
     this.board = board
     board.game = this
     this.id = id
-    // this.spawnPieces()
   }
 
   doAttacks(attack_moves) {
@@ -155,21 +154,6 @@ export default class Game {
     // TODO
     // this.trigger('nextturn')
     this.turn++
-    // this.spawnPieces()
-  }
-
-  // TODO turned off until I figure out logic for game mode
-  spawnPieces() {
-    if (this.turn % 20 !== 0) {
-      return
-    }
-    const teams = [1, 2]
-    teams.forEach((team) => {
-      const index = this.board['start' + team]
-      const dindex = getPathDindex(this.board, index, team)
-      const type = 'skull'
-      this.board.newPiece({ type, index, dindex, team })
-    })
   }
 
   pressSpace = (e, callback) => {
