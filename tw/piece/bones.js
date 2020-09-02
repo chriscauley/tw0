@@ -35,19 +35,19 @@ export default {
         .then(move.chain([move.turn.fromHit, move.morph('legday')])),
       move.wait(1),
       move.attackNearby('circle', 1),
-      move.turn.towardPathOrFoe,
+      move.turn.follow,
       move.forward(1),
     ],
   },
   skull: {
-    tasks: [move.attackNearby('circle', 1), move.turn.towardPathOrFoe, move.forward(1)],
+    tasks: [move.attackNearby('circle', 1), move.turn.follow, move.forward(1)],
   },
   bonetar: {
     opts: { health: 2 },
     tasks: [
       move.wait(1),
       move.ifDidDamage(move.attackNearby('cross', 2), move.forward(1)),
-      move.turn.towardPathOrFoe,
+      move.turn.follow,
       move.forward(2),
     ],
   },

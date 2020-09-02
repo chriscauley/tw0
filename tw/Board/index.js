@@ -38,6 +38,7 @@ export const parsePieces = (pieces) => {
 
 export default class Board {
   constructor({ W, H, turn = 0, ...options }) {
+    window.b = this
     this.entities = {
       piece: {},
       floor: {},
@@ -185,7 +186,7 @@ export default class Board {
   }
 
   getPathDindex(index, team) {
-    return (team === 1 ? 1 : -1) * this.cache.path.dfill[index]
+    return (team === 1 ? 1 : -1) * this.cache.path[index].dindex
   }
 
   recache() {
