@@ -19,7 +19,7 @@ export default function Play({ match }) {
   const { pieces } = match.params
   return (
     <div className="flex p-4">
-      <RenderGame options={getOptions(pieces)} css />
+      <RenderGame options={getOptions(pieces)} />
     </div>
   )
 }

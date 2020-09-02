@@ -1341,10 +1341,10 @@
   resolved "https://registry.yarnpkg.com/@unrest/react-config-hook/-/react-config-hook-0.0.5.tgz#d56e15653baa682e03c8dd42aa960db9bac99c22"
   integrity sha512-kWCCePmy9tQEZ/a8/rxJg+q4P6/Ck47nANel79TizuMUHENZPabUxGOG4CtmOCFHSffeaX4+F1vTP6ua9/gqvQ==
 
-"@unrest/react-jsonschema-form@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@unrest/react-jsonschema-form/-/react-jsonschema-form-0.0.1.tgz#d8cbabb02e06781d23fd9ec0b1a986db865b6d47"
-  integrity sha512-Y8OKRcPW+2/IxMkZkAhUoJl5MyhzTX1twwI1566HmwvUr6Oa+oFr/uyKEnmI0LyQ8LS+eZJ+/sMZYtcs8SRuvw==
+"@unrest/react-jsonschema-form@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@unrest/react-jsonschema-form/-/react-jsonschema-form-0.0.3.tgz#1e523920de04cfb38a9627991ce23ebaa097d69a"
+  integrity sha512-8Uped1ED6PbxtFC5/BvUgWsaAGRT4izdkgpwWT4SDbkAyWnmqV4h4+y36EM38FpACkffX3qPaFhk3NuPC14Frg==
 
 "@unrest/react-rest-hook@^0.0.5":
   version "0.0.5"

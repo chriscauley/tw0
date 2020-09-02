@@ -26,7 +26,7 @@ export default (board, options = {}) => {
     xy = [0, 0],
     W = geo.W,
     H = geo.H,
-    extra_layers = [],
+    _extra_layers = [], // see warning
     layer = 'piece_type',
     empty,
     path = true,
@@ -42,16 +42,17 @@ export default (board, options = {}) => {
     .slice(0, board.geo.W)
     .padEnd(board.geo.W)
   const extras = []
+  console.warn('extra layers is broken, see commented region')
   indexes.forEach((index) => {
     const [_x, y] = geo.index2xy(index)
     const values = []
     extras[y] = extras[y] || ''
-    extra_layers.forEach((layer) => {
-      const value = LAYERS[layer](board, index)
-      if (value !== undefined) {
-        values.push(value)
-      }
-    })
+    // extra_layers.forEach((layer) => {
+    //   const value = LAYERS[layer](board, index)
+    //   if (value !== undefined) {
+    //     values.push(value)
+    //   }
+    // })
     if (values.length) {
       extras[y] += `${index}:${values.join(',')}\t`
     }

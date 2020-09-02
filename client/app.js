@@ -7,6 +7,7 @@ import sprites from './sprites'
 import Coloseum from './coloseum'
 import Look from './coloseum/Look'
 import Play from './coloseum/Play'
+import Editor from './coloseum/Editor'
 
 const keyMap = {
   TOGGLE_HELP: ['/', '?', 'shift+?'],
@@ -23,6 +24,7 @@ const App = () => {
       <Route path="/coloseum/" component={Coloseum} />
       <Route path="/look/" component={Look} />
       <Route path="/play/:pieces/" component={Play} />
+      <Route path="/editor/:slug/" component={Editor} />
     </HashRouter>
   )
 }

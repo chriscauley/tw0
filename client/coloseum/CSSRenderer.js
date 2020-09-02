@@ -2,11 +2,14 @@ import React from 'react'
 
 import renderCSS from '../../tw/render/css'
 
-export default function CSSRenderer({ board, ...options }) {
+const _click = (e, i) => console.log(i) // eslint-disable-line
+
+export default function CSSRenderer({ board, onClick = _click, onMouseEnter, ...options }) {
   const DELAY = 200
   const { items, boardClass } = renderCSS(board, options)
   const board_id = 'board-' + board.id
-  const click = i => () => console.log(i) // eslint-disable-line
+  const click = (square) => (e) => onClick(e, square)
+  const over = (square) => onMouseEnter && ((e) => onMouseEnter(e, square))
   const has_steps = items.filter((i) => i.steps)
   const stepTo = (no) => () => {
     has_steps.forEach((i) => {
@@ -22,7 +25,7 @@ export default function CSSRenderer({ board, ...options }) {
   return (
     <div className={boardClass} id={board_id}>
       {items.map((i) => (
-        <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
+        <div className={i.className} key={i.id} id={i.id} onClick={click(i)} onMouseEnter={over(i)}>
           {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
           {i.text !== undefined && <div className="text">{i.text}</div>}
         </div>

@@ -43,15 +43,13 @@ export default (board, options = {}) => {
     wall: (i, v) => ({
       className: `sprite ${css.index(i)} wall-${v} sprite-wall${((i + 151) % 127) % 5}`,
       id: `wall-${i}`,
+      index: i,
     }),
     sound: (i, v) => ({
       id: `sound-${i}`,
       className: `sound sprite ${css.index(i)}`,
       text: v,
-    }),
-    sound_cache: (i, v) => ({
-      id: `sound_cache-${i}`,
-      className: `sound_cache sprite sound-${v} ${css.index(i)}`,
+      index: i,
     }),
     square: (i) => {
       const xy = geo.index2xy(i)
@@ -59,6 +57,7 @@ export default (board, options = {}) => {
       return {
         className: `sprite square sprite-floor${n} ${css.index(i)}`,
         id: `square-${i}`,
+        index: i,
       }
     },
     piece: (p) => ({
@@ -67,6 +66,7 @@ export default (board, options = {}) => {
       id: `piece-${p.id}`,
       children: [`sprite sprite-${p.type} ${p.awake ? 'awake' : ''}`],
       steps: [],
+      index: p.index,
     }),
   }
 
