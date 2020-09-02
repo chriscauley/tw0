@@ -8,21 +8,28 @@ const schema = {
   properties: {
     css: { type: 'boolean' },
     text: { type: 'boolean' },
-    extra_layers: {
-      title: 'Extra Layers',
-      type: 'array',
-      uniqueItems: true,
-      items: {
-        type: 'string',
-        enum: ['sound', 'sound_cache'],
-      },
+    extra: {
+      type: 'string',
+      enum: [
+        'off',
+        'sound',
+        'sound_cache',
+        'team1_dfill',
+        'team1_id_fill',
+        'team1_fill',
+        'team2_target',
+        // 'team2_dfill',
+        // 'team2_id_fill',
+        // 'team2_fill',
+        // 'team2_target_fill',
+      ],
     },
   },
 }
 
 const uiSchema = {
-  extra_layers: {
-    'ui:widget': 'checkboxes',
+  extra: {
+    'ui:widget': 'radio',
   },
 }
 

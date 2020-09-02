@@ -24,6 +24,7 @@ export default function CSSRenderer({ board, ...options }) {
       {items.map((i) => (
         <div className={i.className} key={i.id} id={i.id} onClick={click(i)}>
           {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
+          {i.text !== undefined && <div className="text">{i.text}</div>}
         </div>
       ))}
     </div>

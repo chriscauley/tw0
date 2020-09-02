@@ -11,8 +11,20 @@ const addHealth = (piece, out) => {
 }
 
 export default (board, options = {}) => {
-  const show_sound = options.extra_layers.includes('sound')
-  const show_sound_cache = options.extra_layers.includes('sound_cache')
+  const { extra } = options
+  const extra_layer =
+    {
+      sound: board.entities.sound,
+      sound_cache: board.cache.sound,
+      team1_fill: board.cache.team[1].fill,
+      team1_dfill: board.cache.team[1].dfill,
+      team1_id_fill: board.cache.team[1].id_fill,
+      team1_target_fill: board.cache.team[1].target_fill,
+      team2_fill: board.cache.team[2].fill,
+      team2_dfill: board.cache.team[2].dfill,
+      team2_id_fill: board.cache.team[2].id_fill,
+      team2_target_fill: board.cache.team[2].target_fill,
+    }[extra] || {}
   const { geo } = board
   const { xy0 = [0, 0], W = geo.W, H = geo.H, _empty, _highlight = [] } = options
   const items = []
@@ -34,7 +46,8 @@ export default (board, options = {}) => {
     }),
     sound: (i, v) => ({
       id: `sound-${i}`,
-      className: `sound sprite sound-${v} ${css.index(i)}`,
+      className: `sound sprite ${css.index(i)}`,
+      text: v,
     }),
     sound_cache: (i, v) => ({
       id: `sound_cache-${i}`,
@@ -112,19 +125,12 @@ export default (board, options = {}) => {
     } else if (board.getOne('square', index)) {
       items.push(css.square(index))
     }
-    if (show_sound) {
-      const sound = board.getOne('sound', index)
-      if (sound !== undefined) {
-        items.push(css.sound(index, sound))
-      }
-    }
-    if (show_sound_cache) {
-      const sound_cache = board.cache.sound[index]
-      if (sound_cache !== undefined) {
-        items.push(css.sound_cache(index, sound_cache))
-      }
+    const extra_value = extra_layer[index]
+    if (extra_value !== undefined) {
+      items.push(css.sound(index, extra_value))
     }
   })
+
   return {
     boardClass: `board W-${W} H-${H}`,
     items,

@@ -17,8 +17,6 @@
   $a: 0.2s;
   font-size: 3em;
   position: relative;
-  &.layer-sound .sprite.sound { display: block; }
-  &.layer-sound_cache .sprite.sound_cache { display: block; }
   .piece {
     position: absolute;
     display: flex;
@@ -36,15 +34,7 @@
   }
   .sprite {
     position: absolute;
-    @for $i from 0 through 16 {
-      &.sound-#{$i}:before {
-        content: "S:#{$i}";
-      }
-    }
-    &.sound, &.sound_cache {
-      display: none;
-    }
-    &.sound:before, &.sound_cache:before {
+    .text {
       /* needs tailwind */
       background: rgba(0,0,0,0.5);
       position: absolute;

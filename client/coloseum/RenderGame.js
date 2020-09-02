@@ -33,7 +33,7 @@ const keyMap = {
 
 export default function RenderGame({ controls = false, options }) {
   const { game, next, reset, update } = useBoard(options)
-  const { css, text, extra_layers } = config.use().formData
+  const { css, text, extra } = config.use().formData
   const handlers = {
     UNSELECT: () => alert('TODO unselect'),
     ARROW: (e) => game.pressArrow(e, update),
@@ -56,8 +56,8 @@ export default function RenderGame({ controls = false, options }) {
           </button>
         </div>
       )}
-      {css && <renderers.css board={game.board} extra_layers={extra_layers} />}
-      {text && <renderers.text board={game.board} extra_layers={extra_layers} />}
+      {css && <renderers.css board={game.board} extra={extra} />}
+      {text && <renderers.text board={game.board} extra_layers={[extra]} />}
       <config.Link />
     </div>
   )
