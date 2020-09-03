@@ -1,29 +1,59 @@
 import React from 'react'
-import objectHash from 'object-hash'
+import Storage from '@unrest/storage'
 
 import Board from '../tw/Board'
 
-const board_cache = {}
-const getGame = (options) => {
-  const hash = objectHash(options).slice(0, 8)
-  if (!board_cache[hash]) {
-    board_cache[hash] = new Board({ id: hash, ...options }).game
+const storage = new Storage('saved_boards')
+const cache = {}
+
+const getBoard = (slug) => {
+  const options = storage.get(slug)
+  if (!options) {
+    return undefined
   }
-  return board_cache[hash]
+  if (!cache[slug]) {
+    cache[slug] = new Board(options)
+  }
+  return cache[slug]
 }
 
-export default (options) => {
-  const [_, setState] = React.useState()
-  const game = getGame(options)
+export default (slug) => {
+  const setState = React.useState()[1]
+  const board = getBoard(slug)
   const update = () => setState(Math.random())
-  const reset = () => {
-    delete board_cache[game.id]
+  const saveOptions = (formData) => {
+    storage.set(slug, formData)
     update()
   }
-  const next = () => {
-    game.nextTurn()
-    update()
+  return {
+    board,
+    saveOptions,
+    saveBoard: (board) => {
+      const pieces = { 1: [], 2: [] }
+      Object.values(board.entities.piece).forEach((piece) => {
+        pieces[piece.team].push([piece.type, piece.index])
+      })
+      const walls = Object.fromEntries(
+        // TODO X is magic string for out-generated exterior walls
+        Object.entries(board.entities.wall).filter(([_, v]) => v !== 'X'),
+      )
+      const options = {
+        W: board.W,
+        H: board.H,
+        pieces,
+        walls,
+      }
+      saveOptions(options)
+      update()
+    },
+    step: () => {
+      board.game.nextTurn()
+      update()
+    },
+    restart: (slug) => {
+      delete cache[slug]
+      update()
+    },
+    update,
   }
-
-  return { game, next, reset, update }
 }

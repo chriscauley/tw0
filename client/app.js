@@ -23,7 +23,7 @@ const App = () => {
       <sprites.routes />
       <Route path="/coloseum/" component={Coloseum} />
       <Route path="/look/" component={Look} />
-      <Route path="/play/:pieces/" component={Play} />
+      <Route path="/play/:slug/" component={Play} />
       <Route path="/editor/:slug/" component={Editor} />
     </HashRouter>
   )

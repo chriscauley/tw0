@@ -3,6 +3,8 @@ import ConfigHook from '@unrest/react-config-hook'
 import css from '@unrest/css'
 import { useSelect } from '@unrest/core'
 
+import { extra_getters } from '../../tw/render/css'
+
 const schema = {
   type: 'object',
   properties: {
@@ -10,19 +12,7 @@ const schema = {
     text: { type: 'boolean' },
     extra: {
       type: 'string',
-      enum: [
-        'off',
-        'sound',
-        'sound_cache',
-        'team1_dfill',
-        'team1_id_fill',
-        'team1_fill',
-        'team2_target',
-        // 'team2_dfill',
-        // 'team2_id_fill',
-        // 'team2_fill',
-        // 'team2_target_fill',
-      ],
+      enum: Object.keys(extra_getters),
     },
   },
 }

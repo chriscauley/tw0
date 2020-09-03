@@ -14,9 +14,7 @@ export const getMove = (piece) => {
   }
   types[piece.type].tasks.find((task) => {
     move = task(piece, move)
-    if (move && move.done) {
-      return true
-    }
+    return move && move.done
   })
 
   return move
@@ -57,7 +55,9 @@ export default class Game {
     // this function happens in waves, first doing colliding enemies, then anyone stepping forward, then everyone else
     // TODO move prioritization here is lacking, but I want to move on to other enemies first
     this.board.recache()
-    const piece_moves = pieces.filter((p) => this.piece_turns[p.id]).map((p) => [p, getMove(p)])
+    const piece_moves = pieces
+      .filter((p) => this.piece_turns[p.id] && p.health > 0)
+      .map((p) => [p, getMove(p)])
     if (!piece_moves.length) {
       return
     }
@@ -87,8 +87,9 @@ export default class Game {
           const collide_index = move0.index
           this.board.animate({ type: 'collide', index: move0.index })
           piece_moves.forEach(([piece, move]) => {
+            this.board.animate({ type: 'attack', index: piece.index, dindex: piece.dindex })
             const { index } = piece
-            applyDamage(this.board, { index, count: 1 })
+            applyDamage(this.board, { index, count: 1, dindex: -piece.dindex })
             move.done = true
             move.end = true
             move.index = piece.index

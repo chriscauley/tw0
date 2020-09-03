@@ -72,6 +72,7 @@ export default class Board {
     options.player && this.addPlayer(options.player)
     this.quickAddPieces(options.pieces)
     this.animations = {}
+    this.recache()
   }
 
   getOne = (type, index) => this.entities[type][index]
@@ -183,6 +184,7 @@ export default class Board {
   quickAddPieces(pieces = {}) {
     pieces = parsePieces(pieces)
     Object.entries(pieces).forEach(([team, piece_set]) => {
+      team = parseInt(team)
       piece_set.forEach(([type, index]) => {
         const options = { type, team, index }
         if (index === undefined) {

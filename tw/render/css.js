@@ -10,21 +10,25 @@ const addHealth = (piece, out) => {
   }
 }
 
+export const extra_getters = {
+  off: () => ({}),
+  sound: (b) => b.entities.sound,
+  sound_cache: (b) => b.cache.sound,
+}
+
+const team_extras = ['id', 'value', 'index', 'dindex']
+;[1, 2].forEach((team) =>
+  team_extras.forEach(
+    (attr) =>
+      (extra_getters[`team${team}_${attr}`] = (b) =>
+        Object.fromEntries(
+          Object.entries(b.cache.team[team]).map(([index, cache]) => [index, cache[attr]]),
+        )),
+  ),
+)
+
 export default (board, options = {}) => {
-  const { extra } = options
-  const extra_layer =
-    {
-      sound: board.entities.sound,
-      sound_cache: board.cache.sound,
-      team1_fill: board.cache.team[1].fill,
-      team1_dfill: board.cache.team[1].dfill,
-      team1_id_fill: board.cache.team[1].id_fill,
-      team1_target_fill: board.cache.team[1].target_fill,
-      team2_fill: board.cache.team[2].fill,
-      team2_dfill: board.cache.team[2].dfill,
-      team2_id_fill: board.cache.team[2].id_fill,
-      team2_target_fill: board.cache.team[2].target_fill,
-    }[extra] || {}
+  const extra_layer = (extra_getters[options.extra] || extra_getters.off)(board)
   const { geo } = board
   const { xy0 = [0, 0], W = geo.W, H = geo.H, _empty, _highlight = [] } = options
   const items = []
@@ -124,10 +128,10 @@ export default (board, options = {}) => {
       items.push(css.wall(index, wall))
     } else if (board.getOne('square', index)) {
       items.push(css.square(index))
-    }
-    const extra_value = extra_layer[index]
-    if (extra_value !== undefined) {
-      items.push(css.sound(index, extra_value))
+      const extra_value = extra_layer[index]
+      if (extra_value !== undefined) {
+        items.push(css.sound(index, extra_value))
+      }
     }
   })
 

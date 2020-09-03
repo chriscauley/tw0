@@ -31,8 +31,12 @@ const keyMap = {
   },
 }
 
-export default function RenderGame({ controls = false, options }) {
-  const { game, next, reset, update } = useBoard(options)
+export default function RenderGame({ controls = false, slug }) {
+  const { board, next, reset, update } = useBoard(slug)
+  if (!board) {
+    throw 404
+  }
+  const { game } = board
   const { css, text, extra } = config.use().formData
   const handlers = {
     UNSELECT: () => alert('TODO unselect'),
@@ -40,8 +44,6 @@ export default function RenderGame({ controls = false, options }) {
     SPACE: (e) => game.pressSpace(e, update),
     SHIFT_UP: game.up,
   }
-
-  window.b = game.board
 
   return (
     <div className="overflow-auto">
@@ -56,8 +58,8 @@ export default function RenderGame({ controls = false, options }) {
           </button>
         </div>
       )}
-      {css && <renderers.css board={game.board} extra={extra} />}
-      {text && <renderers.text board={game.board} extra_layers={[extra]} />}
+      {css && <renderers.css board={board} extra={extra} />}
+      {text && <renderers.text board={board} extra_layers={[extra]} />}
       <config.Link />
     </div>
   )
