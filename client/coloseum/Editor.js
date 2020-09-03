@@ -33,11 +33,29 @@ const schema = {
 const useBoard = (slug) => {
   const setState = React.useState()[1]
   const update = () => setState(Math.random())
+  const saveOptions = (formData) => {
+    storage.set(slug, formData)
+    update()
+  }
   return {
     board: getBoard(slug),
-    save: (formData) => {
-      storage.set(slug, formData)
-      delete cache[slug]
+    saveOptions,
+    saveBoard: (board) => {
+      const pieces = { 1: [], 2: [] }
+      Object.values(board.entities.piece).forEach((piece) => {
+        pieces[piece.team].push([piece.type, piece.index])
+      })
+      const walls = Object.fromEntries(
+        // TODO X is magic string for out-generated exterior walls
+        Object.entries(board.entities.wall).filter(([_, v]) => v !== 'X'),
+      )
+      const options = {
+        W: board.W,
+        H: board.H,
+        pieces,
+        walls,
+      }
+      saveOptions(options)
       update()
     },
     update,
@@ -46,19 +64,19 @@ const useBoard = (slug) => {
 
 export default function Editor({ match }) {
   const { slug } = match.params
-  const { board, save, update } = useBoard(slug)
+  const { board, saveOptions, saveBoard } = useBoard(slug)
   const { toolClick } = tools.use()
   if (!board) {
-    return <Form schema={schema} onSubmit={(formData) => save(formData)} />
+    return <Form schema={schema} onSubmit={saveOptions} />
   }
-  const onClick = (e, s) => toolClick(e, board, s.index, update)
+  const onClick = (e, s) => toolClick(e, board, s.index, saveBoard)
   const onMouseEnter = (e, s) => e.buttons === 1 && onClick(e, s)
 
   return (
     <div className="flex p-4">
       <div className="px-4">
         <tools.Form autosubmit={true} customButton={true} />
-        <Reset reset={() => saveOptions(null)}/>
+        <Reset reset={() => saveOptions(null)} />
       </div>
       <CSSRenderer board={board} onClick={onClick} onMouseEnter={onMouseEnter} />
     </div>

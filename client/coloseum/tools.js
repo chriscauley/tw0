@@ -68,12 +68,12 @@ const remove = {
     delete b.entities.square[i]
     delete b.entities.wall[i]
   },
-  piece: (b, i) => delete b.entities.pieces[i],
+  piece: (b, i) => delete b.entities.piece[i],
 }
 
 const click = (event, board, index, config, save) => {
   const { layer } = config
-  config.wall = 'X'
+  config.wall = 1
   const value = board.entities[layer][index]
   if (event.shiftKey) {
     if (value) {
