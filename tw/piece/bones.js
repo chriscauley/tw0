@@ -5,24 +5,23 @@ export default {
     geometry: 'f',
     tasks: [
       move.combineWith('skeleton', 'bonetar'),
-      move.attackNearby('f', 1),
-      move.forward(1),
+      move.forward.attack(1),
       move.forward.bounce(1),
     ],
   },
   legs4days: {
     geometry: 'f',
     tasks: [
-      move.ifDidDamage(move.attackNearby('f', 2), move.forward(1)),
-      move.forward(3),
-      move.forward.bounce(3),
+      move.combineWith('skeleton', 'bonetar'),
+      move.forward.attack(2),
+      move.forward.bounce(2),
     ],
   },
   sixlegs: {
     geometry: 'f',
     tasks: [
-      move.ifDidDamage(move.attackNearby('f', 3), move.forward(3)),
-      move.forward(3),
+      move.combineWith('skeleton', 'bonetar'),
+      move.forward.attack(3),
       move.forward.bounce(3),
     ],
   },
