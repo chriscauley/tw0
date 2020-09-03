@@ -43,6 +43,9 @@
       color: #aaa;
       font-size: 0.25em;
     }
+    &.node {
+      background: pink;
+    }
   }
   @for $i from -5 through 30 {
     .x-#{$i} {

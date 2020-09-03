@@ -72,6 +72,11 @@ export default (board, options = {}) => {
       steps: [],
       index: p.index,
     }),
+    node: (i, id) => ({
+      className: `sprite node ${css.index(i)}`,
+      text: id,
+      id: `node-${i}`,
+    }),
   }
 
   const spritePiece = (piece) => {
@@ -133,6 +138,10 @@ export default (board, options = {}) => {
         items.push(css.sound(index, extra_value))
       }
     }
+  })
+
+  board.options.nodes.forEach((index, id) => {
+    items.push(css.node(index, id))
   })
 
   return {

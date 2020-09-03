@@ -54,6 +54,7 @@ const useBoard = (slug) => {
         H: board.H,
         pieces,
         walls,
+        nodes: board.options.nodes,
       }
       saveOptions(options)
       update()

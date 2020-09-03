@@ -7,7 +7,7 @@ const schema = {
   properties: {
     layer: {
       type: 'string',
-      enum: ['wall', 'piece'],
+      enum: ['wall', 'piece', 'node'],
     },
     team: {
       type: 'integer',
@@ -58,6 +58,10 @@ const add = {
       })
     }
   },
+  node: (b, i) => {
+    b.options.nodes = b.options.nodes.filter((i2) => i2 !== i)
+    b.options.nodes.push(i)
+  },
 }
 
 const remove = {
@@ -69,6 +73,7 @@ const remove = {
     delete b.entities.wall[i]
   },
   piece: (b, i) => delete b.entities.piece[i],
+  node: (b, i) => (b.options.nodes = b.options.nodes.filter((i2) => i2 !== i)),
 }
 
 const click = (event, board, index, config, save) => {
@@ -76,12 +81,12 @@ const click = (event, board, index, config, save) => {
   config.wall = 1
   const value = board.entities[layer][index]
   if (event.shiftKey) {
-    if (value) {
+    if (value !== undefined) {
       remove[layer](board, index)
       save(board)
     }
   } else {
-    if (!value) {
+    if (value === undefined) {
       add[layer](board, index, config)
       save(board)
     }

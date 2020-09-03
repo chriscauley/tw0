@@ -49,10 +49,12 @@ export default class Board {
       wall: {},
       square: {},
       sound: {},
+      node: {},
     }
     this.options = defaults(options, {
       path: getDefaultPath,
       makeWalls: makeDefaultWalls,
+      nodes: [],
     })
     this.teams = [1, 2]
     this.cache = {}
@@ -200,6 +202,8 @@ export default class Board {
   }
 
   recache() {
+    this.entities.node = {}
+    this.options.nodes.forEach((i) => (this.entities.node[i] = true))
     if (this.dirty.path) {
       this.cache.path = floodFillPath(this)
     }
