@@ -4,6 +4,7 @@ import Storage from '@unrest/storage'
 
 import Board from '../../tw/Board'
 import CSSRenderer from './CSSRenderer'
+import Reset from './Reset'
 import tools from './tools'
 
 const storage = new Storage('saved_boards')
@@ -57,6 +58,7 @@ export default function Editor({ match }) {
     <div className="flex p-4">
       <div className="px-4">
         <tools.Form autosubmit={true} customButton={true} />
+        <Reset reset={() => saveOptions(null)}/>
       </div>
       <CSSRenderer board={board} onClick={onClick} onMouseEnter={onMouseEnter} />
     </div>
