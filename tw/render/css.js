@@ -14,6 +14,7 @@ export const extra_getters = {
   off: () => ({}),
   sound: (b) => b.entities.sound,
   sound_cache: (b) => b.cache.sound,
+  path: (b) => b.entities.path,
 }
 
 const team_extras = ['id', 'value', 'index', 'dindex']

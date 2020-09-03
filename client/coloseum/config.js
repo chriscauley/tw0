@@ -42,7 +42,7 @@ const ConfigLink = () => {
     )
   }
   return (
-    <div className="m-4 fixed bottom-0 right-0 cursor-pointer text-blue-500">
+    <div className="m-4 fixed bottom-0 right-0 cursor-pointer text-blue-500 z-50">
       <i className="fa fa-gear text-xl" onClick={toggle} />
     </div>
   )

@@ -1,12 +1,14 @@
 import React from 'react'
 
 import renderCSS from '../../tw/render/css'
+import config from './config'
 
 const _click = (e, i) => console.log(i) // eslint-disable-line
 
-export default function CSSRenderer({ board, onClick = _click, onMouseEnter, ...options }) {
+export default function CSSRenderer({ board, onClick = _click, onMouseEnter }) {
+  const { extra } = config.use().formData
   const DELAY = 200
-  const { items, boardClass } = renderCSS(board, options)
+  const { items, boardClass } = renderCSS(board, { extra })
   const board_id = 'board-' + board.id
   const click = (square) => (e) => onClick(e, square)
   const over = (square) => onMouseEnter && ((e) => onMouseEnter(e, square))
@@ -30,6 +32,7 @@ export default function CSSRenderer({ board, onClick = _click, onMouseEnter, ...
           {i.text !== undefined && <div className="text">{i.text}</div>}
         </div>
       ))}
+      <config.Link />
     </div>
   )
 }
