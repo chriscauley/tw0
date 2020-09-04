@@ -17,6 +17,7 @@
   $a: 0.2s;
   font-size: 3em;
   position: relative;
+  user-select: none;
   .piece {
     position: absolute;
     display: flex;
@@ -42,9 +43,6 @@
       right: 0;
       color: #aaa;
       font-size: 0.25em;
-    }
-    &.node {
-      background: pink;
     }
   }
   @for $i from -5 through 30 {

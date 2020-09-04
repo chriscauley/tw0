@@ -73,9 +73,8 @@ export default (board, options = {}) => {
       steps: [],
       index: p.index,
     }),
-    node: (i, id) => ({
-      className: `sprite node ${css.index(i)}`,
-      text: id,
+    node: (i, v) => ({
+      className: `sprite sprite-node-${v} node ${css.index(i)}`,
       id: `node-${i}`,
     }),
   }
@@ -141,8 +140,8 @@ export default (board, options = {}) => {
     }
   })
 
-  board.options.nodes.forEach((index, id) => {
-    items.push(css.node(index, id))
+  board.options.nodes.forEach((index) => {
+    items.push(css.node(index, board.entities.node[index]))
   })
 
   return {

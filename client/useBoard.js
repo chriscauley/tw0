@@ -6,20 +6,21 @@ import Board from '../tw/Board'
 const storage = new Storage('saved_boards')
 const cache = {}
 
-const getBoard = (slug) => {
+const getBoard = (slug, player) => {
   const options = storage.get(slug)
   if (!options) {
     return undefined
   }
-  if (!cache[slug]) {
+  if (!cache[slug] || cache[slug].options.player !== player) {
+    options.player = player
     cache[slug] = new Board(options)
   }
   return cache[slug]
 }
 
-export default (slug) => {
+export default (slug, player) => {
   const setState = React.useState()[1]
-  const board = getBoard(slug)
+  const board = getBoard(slug, player)
   const update = () => setState(Math.random())
   const saveOptions = (formData) => {
     storage.set(slug, formData)
@@ -44,6 +45,7 @@ export default (slug) => {
         walls,
       }
       saveOptions(options)
+      board && board.connectPath()
       update()
     },
     step: () => {

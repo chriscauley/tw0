@@ -56,6 +56,7 @@ const useBoard = (slug) => {
         walls,
         nodes: board.options.nodes,
       }
+      board.connectPath()
       saveOptions(options)
       update()
     },

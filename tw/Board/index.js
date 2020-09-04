@@ -116,6 +116,8 @@ export default class Board {
 
   // TODO this could be tw/Board/path.build and tw/Board/wall.build
   connectPath() {
+    this.entities.node = {}
+    this.entities.path = {}
     this.geo.indexes.forEach((i) => (this.entities.square[i] = true))
     let { nodes, makeWalls, walls } = this.options
 
@@ -123,7 +125,6 @@ export default class Board {
     makeWalls(this)
     Object.assign(this.entities.wall, walls)
 
-    Object.entries.path = {}
     if (nodes.length === 0) {
       nodes = getCorners(this, 3)
     } else {
@@ -131,8 +132,16 @@ export default class Board {
     }
     const first_xy = this.geo.index2xy(nodes[0])
     const last_xy = this.geo.index2xy(nodes[nodes.length - 1])
+    this.start1 = nodes[0]
+    this.start2 = nodes[nodes.length - 1]
+    const half = Math.floor(nodes.length / 2)
+    nodes.forEach((index, i) => {
+      this.entities.node[index] = i >= half ? 2 : 1
+    })
     if (nodes.length > 2 && vector.magnitude(vector.subtract(first_xy, last_xy)) < 8) {
+      // nodes wrap around board
       nodes.push(nodes[0])
+      this.start2 = nodes[half]
     }
     let last_node = nodes[0]
     // TODO this will break if not orthogonal
@@ -196,8 +205,6 @@ export default class Board {
   }
 
   recache() {
-    this.entities.node = {}
-    this.options.nodes.forEach((i) => (this.entities.node[i] = true))
     if (this.dirty.path) {
       this.cache.path = floodFillPath(this)
     }
