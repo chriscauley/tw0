@@ -31,8 +31,8 @@ const keyMap = {
   },
 }
 
-export default function RenderGame({ controls = false, slug, player }) {
-  const { board, next, reset, update } = useBoard(slug, player)
+export default function RenderGame({ controls = false, slug, player, mode }) {
+  const { board, next, reset, update } = useBoard(slug, { mode, player })
   if (!board) {
     throw 404
   }

@@ -134,10 +134,6 @@ export default class Game {
     })
 
     this.doMoves(pieces)
-    if (pieces.length === 0) {
-      const p = this.board.options.pieces.split('|')
-      this.board.quickAddPieces('|' + [p, p, p].join(','))
-    }
 
     this.finishTurn()
     this.busy = false
@@ -155,6 +151,7 @@ export default class Game {
     delete this.afterturn
     // TODO
     // this.trigger('nextturn')
+    this.board.mode.tick()
     this.turn++
   }
 

@@ -34,7 +34,7 @@ forward.attack = (dist) => {
   const f = forward(dist)
   return (piece, move) => {
     // like move forward, but does domage if runs into enemy
-    move = f(dist)(move)
+    move = f(piece, move)
     if (move._can_attack) {
       move.damages = [
         {

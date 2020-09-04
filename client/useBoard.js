@@ -6,13 +6,14 @@ import Board from '../tw/Board'
 const storage = new Storage('saved_boards')
 const cache = {}
 
-const getBoard = (slug, player) => {
+const getBoard = (slug, { player, mode } = {}) => {
   const options = storage.get(slug)
   if (!options) {
     return undefined
   }
   if (!cache[slug] || cache[slug].options.player !== player) {
     options.player = player
+    options.mode = mode
     cache[slug] = new Board(options)
   }
   return cache[slug]
