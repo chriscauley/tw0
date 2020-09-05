@@ -2,10 +2,11 @@ import React from 'react'
 
 import renderCSS from '../../tw/render/css'
 import config from './config'
+import GameOver from './GameOver'
 
 const _click = (e, i) => console.log(i) // eslint-disable-line
 
-export default function CSSRenderer({ board, onClick = _click, onMouseEnter }) {
+export default function CSSRenderer({ board, onClick = _click, onMouseEnter, restart }) {
   const { extra } = config.use().formData
   const DELAY = 200
   const { items, boardClass } = renderCSS(board, { extra })
@@ -25,14 +26,23 @@ export default function CSSRenderer({ board, onClick = _click, onMouseEnter }) {
   }
   setTimeout(stepTo(0), 0)
   return (
-    <div className={boardClass} id={board_id}>
-      {items.map((i) => (
-        <div className={i.className} key={i.id} id={i.id} onClick={click(i)} onMouseEnter={over(i)}>
-          {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
-          {i.text !== undefined && <div className="text">{i.text}</div>}
-        </div>
-      ))}
-      <config.Link />
-    </div>
+    <>
+      <div className={boardClass} id={board_id}>
+        {items.map((i) => (
+          <div
+            className={i.className}
+            key={i.id}
+            id={i.id}
+            onClick={click(i)}
+            onMouseEnter={over(i)}
+          >
+            {i.children && i.children.map((c, ci) => <div className={c} key={ci} />)}
+            {i.text !== undefined && <div className="text">{i.text}</div>}
+          </div>
+        ))}
+        <config.Link />
+      </div>
+      <GameOver board={board} restart={restart} />
+    </>
   )
 }

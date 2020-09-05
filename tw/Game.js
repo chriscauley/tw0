@@ -157,12 +157,18 @@ export default class Game {
 
   pressSpace = (e, callback) => {
     e.preventDefault()
+    if (this.board.player && this.board.player.health <= 0) {
+      return
+    }
     this.nextTurn()
     callback()
   }
 
   pressArrow = (e, callback) => {
     e.preventDefault()
+    if (!this.board.player || this.board.player.health <= 0) {
+      return
+    }
     const key = e.key.replace('Arrow', '')[0].toLowerCase()
     const dindex = this.board.geo._name2dindex[key]
     this.player_move = { dindex }

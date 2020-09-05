@@ -11,7 +11,7 @@ const getBoard = (slug, { player, mode } = {}) => {
   if (!options) {
     return undefined
   }
-  if (!cache[slug] || cache[slug].options.player !== player) {
+  if (!cache[slug] || cache[slug].options.player !== player || cache[slug].options.mode !== mode) {
     options.player = player
     options.mode = mode
     cache[slug] = new Board(options)
@@ -53,7 +53,7 @@ export default (slug, player) => {
       board.game.nextTurn()
       update()
     },
-    restart: (slug) => {
+    restart: () => {
       delete cache[slug]
       update()
     },

@@ -12,11 +12,6 @@ function TextRenderer({ board, ...options }) {
   return <pre>{output}</pre>
 }
 
-const renderers = {
-  text: TextRenderer,
-  css: CSSRenderer,
-}
-
 const { button } = css
 const ARROWS = ['up', 'down', 'left', 'right']
 
@@ -31,18 +26,21 @@ const keyMap = {
   },
 }
 
+// GlobalHotKeys.handlers seems to only be set once, so game needs to change outside of function definition
+let game
+
 export default function RenderGame({ controls = false, slug, player, mode }) {
-  const { board, next, reset, update } = useBoard(slug, { mode, player })
+  const { board, next, restart, update } = useBoard(slug, { mode, player })
   if (!board) {
     throw 404
   }
-  const { game } = board
+  game = board.game
   const { css, text, extra } = config.use().formData
   const handlers = {
     UNSELECT: () => alert('TODO unselect'),
     ARROW: (e) => game.pressArrow(e, update),
     SPACE: (e) => game.pressSpace(e, update),
-    SHIFT_UP: game.up,
+    SHIFT_UP: (e) => game.up(e, update),
   }
 
   return (
@@ -53,13 +51,13 @@ export default function RenderGame({ controls = false, slug, player, mode }) {
           <button className={button('mr-2')} onClick={next}>
             next
           </button>
-          <button className={button()} onClick={reset}>
+          <button className={button()} onClick={restart}>
             reset
           </button>
         </div>
       )}
-      {css && <renderers.css board={board} extra={extra} />}
-      {text && <renderers.text board={board} extra_layers={[extra]} />}
+      {css && <CSSRenderer board={board} extra={extra} restart={restart} />}
+      {text && <TextRenderer board={board} extra_layers={[extra]} />}
       <config.Link />
     </div>
   )
