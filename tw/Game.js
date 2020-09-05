@@ -1,6 +1,5 @@
 import { applyMove, applyDamage, canMoveOn } from './piece/lib'
 import { movePlayer } from './piece/lib/player'
-// import respawn from './player/respawn'
 
 // moved these imports down because getMove should probably be in it's own file
 // getMove is originally from piece/lib, but was causing circular import
@@ -145,12 +144,9 @@ export default class Game {
         this.gameover()
         return
       }
-      // respawn(this.board.player)
     }
     this.afterturn.forEach((f) => f())
     delete this.afterturn
-    // TODO
-    // this.trigger('nextturn')
     this.board.mode.tick()
     this.turn++
   }
