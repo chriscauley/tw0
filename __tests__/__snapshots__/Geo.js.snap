@@ -600,6 +600,126 @@ exports[`look.__f 12`] = `
          "
 `;
 
+exports[`look.__lr 1`] = `
+"__lr 1 u
+   
+0 1
+   "
+`;
+
+exports[`look.__lr 2`] = `
+"__lr 2 u
+     
+     
+0   1
+     
+     "
+`;
+
+exports[`look.__lr 3`] = `
+"__lr 3 u
+       
+       
+       
+0     1
+       
+       
+       "
+`;
+
+exports[`look.__lr 4`] = `
+"__lr 4 u
+         
+         
+         
+         
+0       1
+         
+         
+         
+         "
+`;
+
+exports[`look.__lr 5`] = `
+"__lr 1 l
+ 1 
+   
+ 0 "
+`;
+
+exports[`look.__lr 6`] = `
+"__lr 2 l
+  1  
+     
+     
+     
+  0  "
+`;
+
+exports[`look.__lr 7`] = `
+"__lr 3 l
+   1   
+       
+       
+       
+       
+       
+   0   "
+`;
+
+exports[`look.__lr 8`] = `
+"__lr 4 l
+    1    
+         
+         
+         
+         
+         
+         
+         
+    0    "
+`;
+
+exports[`look.__lr 9`] = `
+"__lr 1 r
+ 0 
+   
+ 1 "
+`;
+
+exports[`look.__lr 10`] = `
+"__lr 2 r
+  0  
+     
+     
+     
+  1  "
+`;
+
+exports[`look.__lr 11`] = `
+"__lr 3 r
+   0   
+       
+       
+       
+       
+       
+   1   "
+`;
+
+exports[`look.__lr 12`] = `
+"__lr 4 r
+    0    
+         
+         
+         
+         
+         
+         
+         
+    1    "
+`;
+
 exports[`look.__three 1`] = `
 "__three 1 u
 102
