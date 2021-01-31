@@ -1,5 +1,7 @@
 <template>
-  <div>types: {{ slugs.join(', ') }}</div>
+  <div>
+    <router-view class="app-view" />
+  </div>
 </template>
 
 <script>
