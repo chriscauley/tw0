@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>Coloseum</h1>
-    <pre>{{ board_text }}</pre>
+    <render-board :board="board" />
   </div>
 </template>
 
 <script>
+import RenderBoard from '@/components/RenderBoard'
 import Board from 'tw/Board'
-import renderText from 'tw/render/text'
 
 const parseBoard = (s) => {
   const [W, H] = s.split('x').map(Number)
@@ -15,6 +15,7 @@ const parseBoard = (s) => {
 }
 
 export default {
+  components: { RenderBoard },
   __route: {
     path: '/coloseum/:board/:pieces/',
   },
@@ -23,7 +24,9 @@ export default {
     const options = parseBoard(params.board)
     options.pieces = params.pieces
     const board = new Board(options)
-    return { board_text: renderText(board) }
+    return {
+      board,
+    }
   },
 }
 </script>
