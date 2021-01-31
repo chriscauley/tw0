@@ -1,0 +1,17 @@
+.board {
+  .sprite-floor0, .sprite-floor1 {
+    z-index: 0
+  }
+  .sprite {
+    z-index: 10;
+  }
+  .piece {
+    z-index: 20;
+    .fa {
+      z-index: 30;
+    }
+  }
+  .sound {
+    z-index: 30;
+  }
+}

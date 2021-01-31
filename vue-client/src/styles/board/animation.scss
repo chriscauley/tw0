@@ -1,0 +1,45 @@
+$a: 0.2s;
+
+.board {
+  .piece {
+    transition: left $a, top $a, opacity $a;
+  }
+  .attack-u {
+    animation: $a bounce-up;
+  }
+  .attack-l {
+    animation: $a bounce-left;
+  }
+  .attack-r {
+    animation: $a bounce-right;
+  }
+  .attack-d {
+    animation: $a bounce-down;
+  }
+}
+
+$a_dist: 0.5em;
+
+@keyframes bounce-up {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-$a_dist) }
+  100% { transform: translateY(0) }
+}
+
+@keyframes bounce-down {
+  0% { transform: translateY(0) }
+  50% { transform: translateY($a_dist) }
+  100% { transform: translateY(0) }
+}
+
+@keyframes bounce-right {
+  0% { transform: translateX(0) }
+  50% { transform: translateX($a_dist) }
+  100% { transform: translateX(0) }
+}
+
+@keyframes bounce-left {
+  0% { transform: translateX(0) }
+  50% { transform: translateX(-$a_dist) }
+  100% { transform: translateX(0) }
+}

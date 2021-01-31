@@ -1,0 +1,60 @@
+/* This file concerns positioning pieces on the board */
+
+.board {
+  font-size: 3em;
+  position: relative;
+  user-select: none;
+  .piece {
+    position: absolute;
+    display: flex;
+    .sprite {
+      background-size: 90%;
+      background-position: bottom center;
+    }
+    .fa {
+      font-size: 0.25em;
+      position: relative;
+      left: -0.2em;
+      top: -0.2em;
+    }
+  }
+  .sprite {
+    position: absolute;
+    .text {
+      /* needs tailwind */
+      background: rgba(0,0,0,0.5);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: #aaa;
+      font-size: 0.25em;
+    }
+  }
+  @for $i from -5 through 35 {
+    .x-#{$i} {
+      left: $i * 1em;
+    }
+    .y-#{$i} {
+      top: $i * 1em;
+    }
+    &:hover {
+      .x0-#{$i} {
+        left: $i * 1em;
+      }
+      .y0-#{$i} {
+        top: $i * 1em;
+      }
+    }
+  }
+  @for $i from 1 through 30 {
+    &.W-#{$i} {
+      width: $i * 1em;
+    }
+    &.H-#{$i} {
+      height: $i * 1em;
+    }
+  }
+  .is_dead {
+    opacity: 0;
+  }
+}

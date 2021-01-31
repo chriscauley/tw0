@@ -1,0 +1,33 @@
+@use "sass:color";
+
+@mixin team($number, $color) {
+  &.team-#{$number}.wait-1:before {
+    background: radial-gradient($number, color.adjust($color, $alpha: 0.75), transparent, transparent);
+  }
+  &.team-#{$number} {
+    &.dindex-u:before { border-top-color: $color }
+    &.dindex-l:before { border-left-color: $color }
+    &.dindex-r:before { border-right-color: $color }
+    &.dindex-d:before { border-bottom-color: $color }
+  }
+}
+
+.board .piece {
+  @include team (1, blue);
+  @include team (2, red);
+  &.wait-0:before {
+    background: radial-gradient(gray, transparent, transparent);
+  }
+  &.dindex-u, &.dindex-d, &.dindex-l, &.dindex-r, &.wait-0, &.wait-1 {
+    &:before {
+      border: 0.05em transparent solid;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+}
