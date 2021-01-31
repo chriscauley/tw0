@@ -1,5 +1,5 @@
 .sprite-list {
-  @apply flex justify-between flex-wrap;
+  @apply flex flex-wrap;
   .item {
     @apply p-2 border m-1 text-center;
   }

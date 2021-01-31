@@ -18,8 +18,8 @@ const Sprite = (name) => {
 }
 Sprite.registry = {}
 
-Object.keys(types).forEach((type) => {
-  Sprite(type)
+Object.entries(types).forEach(([name, type]) => {
+  type.tasks && Sprite(name)
 })
 
 export default Sprite

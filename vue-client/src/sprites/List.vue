@@ -22,6 +22,7 @@ Sprite('wall4')
 Sprite('bat.awake')
 Sprite('node-1')
 Sprite('node-2')
+Sprite('warrior')
 
 export default {
   __route: {

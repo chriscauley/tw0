@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import views from '@/views'
 import { SpriteList } from '@/sprites'
+import docs from '@/docs'
 
 const routes = []
 
@@ -17,6 +18,7 @@ const loadViews = (o) =>
   })
 
 loadViews(views)
+loadViews(docs)
 loadViews({ SpriteList })
 
 const router = createRouter({
