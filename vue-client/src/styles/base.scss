@@ -1,9 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+@import './components/SpriteList';
+
 /* everything below this line was copied over and could be deprecated */
-.SpriteList {
-  .sprite {
-    font-size: 6rem;
-  }
-}
 
 .sprite {
   background-size: contain;

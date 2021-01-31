@@ -1,6 +1,6 @@
 <template>
-  <div class="SpriteList flex space-between flex-wrap">
-    <div v-for="(cls, key) in registry" :key="key" class="p-2 border m-1">
+  <div class="sprite-list">
+    <div v-for="(cls, key) in registry" :key="key" class="item">
       <div :class="cls" />
       {{ key }}
     </div>

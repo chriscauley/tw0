@@ -1,0 +1,10 @@
+.sprite-list {
+  @apply flex justify-between flex-wrap;
+  .item {
+    @apply p-2 border m-1 text-center;
+  }
+  .sprite {
+    @apply mb-2;
+    font-size: 6rem;
+  }
+}
