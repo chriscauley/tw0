@@ -3,15 +3,33 @@ import bats from './bats'
 import { assert } from '../utils'
 
 const types = {
-  warrior: {},
   slugs: [],
+  groups: {},
 }
+
+const title = s => (s[0].toUpperCase() + s.slice(1)).replace(/-_/g,' ')
+
+const registerGroups = (groups) => {
+  Object.entries(groups).forEach(([name, pieces]) => {
+    const group = types.groups[name] = {name, pieces}
+    Object.entries(pieces).forEach(([piece_slug, piece]) => {
+      piece.slug = piece_slug
+      piece.name = piece.name || title(piece_slug)
+      types[piece_slug] = piece
+    })
+  })
+}
+
+registerGroups({
+  bats,
+  bones,
+  player: { warrior: {} },
+})
 
 Object.entries({ bats, bones }).forEach(([lib_name, lib]) => {
   Object.entries(lib).forEach(([piece_name, piece]) => {
     piece.tasks.forEach((t) => {
       assert(typeof t === 'function', () => {
-        console.error(piece.tasks)
         throw `piece ${piece_name} has bad task`
       })
     })
