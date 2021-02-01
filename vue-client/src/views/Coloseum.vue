@@ -2,14 +2,15 @@
   <div>
     <h1>Coloseum</h1>
     <div>
-      <button @click="next">Next</button>
-      <button @click="restart">Restart</button>
+      <button @click="next" :class="css.button()">Next</button>
+      <button @click="restart" :class="css.button.danger()">Restart</button>
     </div>
-    <render-board :board="board" :hash="hash" />
+    <render-board v-if="board" :board="board" :hash="hash" />
   </div>
 </template>
 
 <script>
+import css from '@unrest/css'
 import RenderBoard from '@/components/RenderBoard'
 import Board from 'tw/Board'
 
@@ -31,6 +32,7 @@ export default {
     return {
       board,
       hash: null,
+      css,
     }
   },
   methods: {

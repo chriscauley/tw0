@@ -2,7 +2,7 @@
 
 @mixin team($number, $color) {
   &.team-#{$number}.wait-1:before {
-    background: radial-gradient($number, color.adjust($color, $alpha: 0.75), transparent, transparent);
+    background: radial-gradient($color, color.adjust($color, $alpha: 0.75), transparent, transparent);
   }
   &.team-#{$number} {
     &.dindex-u:before { border-top-color: $color }

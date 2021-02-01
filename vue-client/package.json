@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@unrest/css": "^0.0.6",
+    "@unrest/tailwind": "^0.0.8",
     "prettier": "^2.2.1",
     "vue-router": "^4.0.3"
   },
