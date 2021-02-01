@@ -16,6 +16,8 @@
 
 <script>
 import renderCSS from 'tw/render/css'
+const ANIMATION_TIME = 300
+
 export default {
   props: {
     board: Object,
@@ -43,6 +45,19 @@ export default {
       const { H, W } = this.board
       this.items = renderCSS(this.board).items
       this.boardClass = `board W-${W} H-${H} turn-${this.board.game.turn}`
+      setTimeout(this.step, 100)
+    },
+    step() {
+      let needs_step
+      this.items.forEach((item) => {
+        if (item.steps?.length) {
+          needs_step = true
+          item._done = item._done || []
+          item._done.push(item.className)
+          item.className = item.steps.shift()
+        }
+      })
+      needs_step && setTimeout(this.step, ANIMATION_TIME)
     },
   },
 }

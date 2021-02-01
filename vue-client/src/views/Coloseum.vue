@@ -25,15 +25,14 @@ export default {
     path: '/coloseum/:board/:pieces/',
   },
   data() {
-    const { params } = this.$route
-    const options = parseBoard(params.board)
-    options.pieces = params.pieces
-    const board = new Board(options)
     return {
-      board,
+      board: null,
       hash: null,
       css,
     }
+  },
+  mounted() {
+    this.restart()
   },
   methods: {
     next() {
@@ -41,7 +40,11 @@ export default {
       this.hash = this.board.game.turn.toString() // triggers update
     },
     restart() {
-      console.log('todo') // eslint-disable-line
+      const { params } = this.$route
+      const options = parseBoard(params.board)
+      options.pieces = params.pieces
+      this.board = new Board(options)
+      this.hash = this.board.game.turn.toString() // triggers update
     },
   },
 }
