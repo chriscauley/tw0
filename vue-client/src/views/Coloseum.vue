@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>Coloseum</h1>
-    <render-board :board="board" />
+    <div>
+      <button @click="next">Next</button>
+      <button @click="restart">Restart</button>
+    </div>
+    <render-board :board="board" :hash="hash" />
   </div>
 </template>
 
@@ -26,7 +30,17 @@ export default {
     const board = new Board(options)
     return {
       board,
+      hash: null,
     }
+  },
+  methods: {
+    next() {
+      this.board.game.nextTurn()
+      this.hash = this.board.game.turn.toString() // triggers update
+    },
+    restart() {
+      console.log('todo') // eslint-disable-line
+    },
   },
 }
 </script>

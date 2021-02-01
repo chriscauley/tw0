@@ -1,4 +1,5 @@
 <template>
+  <div>{{ board.game.turn }}</div>
   <div :class="boardClass">
     <div
       v-for="item in items"
@@ -18,6 +19,7 @@ import renderCSS from 'tw/render/css'
 export default {
   props: {
     board: Object,
+    hash: String,
     mouseover: {
       type: Function,
       default: () => {},
@@ -27,13 +29,20 @@ export default {
       default: (item) => item.piece && console.log(item) // eslint-disable-line
     },
   },
-  computed: {
-    boardClass() {
+  data() {
+    return { items: [], boardClass: '' }
+  },
+  watch: {
+    hash: 'sync',
+  },
+  mounted() {
+    this.sync()
+  },
+  methods: {
+    sync() {
       const { H, W } = this.board
-      return `board W-${W} H-${H}`
-    },
-    items() {
-      return renderCSS(this.board).items
+      this.items = renderCSS(this.board).items
+      this.boardClass = `board W-${W} H-${H} turn-${this.board.game.turn}`
     },
   },
 }
