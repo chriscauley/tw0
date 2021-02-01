@@ -1,5 +1,6 @@
 import bones from './bones'
 import bats from './bats'
+import pots from './pots'
 import { assert } from '../utils'
 
 const types = {
@@ -23,6 +24,7 @@ const registerGroups = (groups) => {
 registerGroups({
   bats,
   bones,
+  pots,
   player: { warrior: {} },
 })
 
