@@ -76,6 +76,7 @@ export default (board, options = {}) => {
     node: (i, v) => ({
       className: `sprite sprite-node-${v} node ${css.index(i)}`,
       id: `node-${i}`,
+      index: i,
     }),
   }
 

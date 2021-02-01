@@ -42,7 +42,6 @@ export default (board, options = {}) => {
     .slice(0, board.geo.W)
     .padEnd(board.geo.W)
   const extras = []
-  console.warn('extra layers is broken, see commented region')
   indexes.forEach((index) => {
     const [_x, y] = geo.index2xy(index)
     const values = []
