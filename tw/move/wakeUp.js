@@ -2,6 +2,7 @@ import after from './after'
 
 const wake = (piece, move) => {
   move.priority = 0 // since piece doesn't move, do this move first
+  move._woke = !piece.awake
   move.done = true
   after(move, () => {
     piece.awake = true
@@ -21,7 +22,7 @@ const sleep = (piece, move) => {
   return move
 }
 
-export default (piece, move) => {
+const wakeUp = (piece, move) => {
   if (piece.board.cache.sound[piece.index] === undefined) {
     // no sounds, go to sleep
     return sleep(piece, move)
@@ -30,3 +31,10 @@ export default (piece, move) => {
   // if not awake, wake up
   return piece.awake ? move : wake(piece, move)
 }
+
+wakeUp.onWake = action => (piece, move) => {
+  move = wakeUp(piece, move)
+  return move._woke ? action(piece, move) : move
+}
+
+export default wakeUp
