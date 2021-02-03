@@ -14,11 +14,11 @@ export const parsePieces = (pieces) => {
     throw 'Depracated: pieces should be object, not array'
   }
   if (typeof pieces === 'string') {
-    if (!pieces.includes('|')) {
-      pieces += '|' + pieces
+    if (!pieces.includes('+')) {
+      pieces += '+' + pieces
     }
     const out = { 1: [], 2: [] }
-    pieces.split('|').forEach((s, i_team) => {
+    pieces.split('+').forEach((s, i_team) => {
       const team = i_team + 1
       s.split(',').forEach((s2) => {
         if (!s2) {
