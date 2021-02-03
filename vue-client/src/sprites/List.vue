@@ -23,6 +23,7 @@ Sprite('bat.awake')
 Sprite('node-1')
 Sprite('node-2')
 Sprite('warrior')
+Sprite('heart')
 
 export default {
   __route: {
