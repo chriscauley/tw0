@@ -7,6 +7,7 @@
 <script>
 import types from 'tw/piece/types'
 
+document.body.classList.add('theme-dark_mode')
 export default {
   name: 'App',
   data() {

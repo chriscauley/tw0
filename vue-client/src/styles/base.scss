@@ -4,3 +4,7 @@
 @import './components/SpriteList';
 @import './board/base.scss';
 @import './z-index';
+
+body, html {
+  height: 100%;
+}
