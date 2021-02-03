@@ -43,8 +43,12 @@ export default {
       const { params } = this.$route
       const options = parseBoard(params.board)
       options.pieces = params.pieces
-      this.board = new Board(options)
-      this.hash = this.board.game.turn.toString() // triggers update
+      const board = (this.board = new Board(options))
+      this.hash = board.game.turn.toString() // triggers update
+      const all_bats = !options.pieces.replace(/(bat)/g, '').replace(/(\+|,)/g, '')
+      if (all_bats) {
+        board.entities.sound[board.geo.CENTER] = 0
+      }
     },
   },
 }
