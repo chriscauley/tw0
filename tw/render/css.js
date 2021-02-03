@@ -1,12 +1,14 @@
 import { range } from 'lodash'
 
 const addHealth = (piece, out) => {
-  const HEART = 'fa fa-heart text-red-400'
-  if (piece.health > 3) {
+  const HEART = 'sprite sprite-heart mini-sprite'
+  if (piece.health > 100) {
+    // show nothing
+  } else if (piece.health > 3) {
     out.children.push(HEART)
-    out.children.push('fa fa-question text-white')
+    out.children.push('fa fa-question text-white mini-sprite')
   } else if (piece.max_health > 1) {
-    range(piece.health).forEach(() => out.children.push('fa fa-heart text-red-400'))
+    range(piece.health).forEach(() => out.children.push(HEART))
   }
 }
 
