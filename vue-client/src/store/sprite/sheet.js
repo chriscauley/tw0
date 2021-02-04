@@ -1,15 +1,23 @@
+import { reactive } from 'vue'
+
 import Local from '../Local'
 import api from '@/api'
 
 const LS_KEY = 'store/sprite/sheet'
 
-const initial = {
+const { state: byName, update } = Local({ LS_KEY, initial: {} })
+
+// localStorage.clear()
+
+const state = reactive({
+  byName,
   loading: false,
   list: [],
-  byName: {},
-}
+  img_cache: {},
+  cached: 0,
+})
 
-const { state, update, toggle } = Local({ LS_KEY, initial })
+const loading = {}
 
 function init() {
   api.get('/sprite-list.txt').then((r) => {
@@ -18,7 +26,9 @@ function init() {
       .forEach((fname) => {
         const name = fname.replace(/\....$/, '')
         const sheet = state.byName[name] || { name, fname }
-        const defaults = { size: 32, bg_color: null }
+        sheet.url = `/static/sprites/source/${fname}`
+        sheet.cached = false
+        const defaults = { x_scale: 32, y_scale: 32, bg_color: null }
         Object.assign(sheet, defaults)
         if (!state.byName[name]) {
           state.list.push(sheet)
@@ -29,4 +39,23 @@ function init() {
   })
 }
 
-export default { state, update, init, toggle }
+const getImage = (name, callback) => {
+  const sheet = state.byName[name]
+  if (sheet && !state.img_cache[name] && !loading[name]) {
+    loading[name] = true
+    const img = document.createElement('img')
+    sheet.cached = true
+    img.src = sheet.url
+    img.onload = () => {
+      sheet.width = img.width
+      sheet.height = img.height
+      update()
+      state.img_cache[name] = img
+      state.cached++
+      callback()
+    }
+  }
+  return state.img_cache[name]
+}
+
+export default { state, update, init, getImage }
