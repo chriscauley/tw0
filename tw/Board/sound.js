@@ -6,6 +6,7 @@ const age = (board) => {
   // every turn the sound ages one layer value, and sounds "above" MAX_SOUND die
   const entries = Object.entries(board.entities.sound)
   entries.forEach((il) => il[1]++)
+  // TODO lodash.pickBy?
   board.entities.sound = Object.fromEntries(entries.filter((il) => il[1] < MAX_SOUND))
 }
 

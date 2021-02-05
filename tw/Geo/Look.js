@@ -34,6 +34,10 @@ export default (geo) => {
   }
 
   const look = (shape, index, dist, dindex) => {
+    // TODO this should return empty list for directional shapes (f, etc) and dindex=1 for symetrical shapes
+    if (dindex === 0) {
+      return []
+    }
     // TODO are these string interpolations a performance issue?
     assert(look[shape][dindex], `Invalid dindex: ${dindex}`)
     assert(Number.isInteger(dist), `Distance must be an integer not '${typeof dist}`)
