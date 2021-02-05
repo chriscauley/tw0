@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap inset-0 absolute">
+  <div class="flex flex-col inset-0 absolute">
     <div class="relative w-full overflow-auto" v-if="currentSheet" @click="click">
       <canvas ref="canvas" @mousemove="move" />
       <div class="absolute border-2 border-green-300" :style="css.box" />
@@ -67,7 +67,31 @@ export default {
     this.redraw()
   },
   methods: {
-    click() {
+    click(event) {
+      if (event.shiftKey) {
+        const { x_scale, y_scale } = this.currentSheet
+        const canvas = document.createElement('canvas')
+        canvas.width = x_scale
+        canvas.height = y_scale
+        const img = store.sprite.sheet.getImage(this.$route.params.name)
+        canvas.getContext('2d').drawImage(
+          img,
+          this.hovering[0] * x_scale,
+          this.hovering[1] * y_scale,
+          x_scale,
+          y_scale,
+          0,
+          0,
+          x_scale,
+          y_scale,
+        )
+        // window.open(canvas.toDataURL())
+        const a = document.createElement('a')
+        a.href = canvas.toDataURL()
+        a.download = 'sprite.png'
+        a.click()
+        return
+      }
       this.selected.push(this.hovering)
     },
     move(event) {

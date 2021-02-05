@@ -9,7 +9,7 @@
       @mouseover="mouseover(item)"
     >
       <div v-for="c in item.children" :class="c" :key="c" />
-      <div v-if="item.text" class="text">{{ item.text }}</div>
+      <div v-if="item.text !== undefined" class="text">{{ item.text }}</div>
     </div>
   </div>
 </template>
