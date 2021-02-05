@@ -6,7 +6,7 @@ export default (shape, dist) => (piece, move) => {
     .map((index) => piece.board.getOne('piece', index))
     .filter((target) => target && !target.invulnerable && target.team !== piece.team)
   sortBy(targets, 'health')
-  const target = targets[0]
+  const target = targets.find(t => t.player) || targets[0]
   if (target) {
     const dindex = piece.board.geo.floorDindex(target.index - piece.index)
     move.damages = [
