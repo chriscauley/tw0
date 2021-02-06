@@ -4,7 +4,7 @@
       <canvas ref="canvas" @mousemove="mousemove" />
       <div class="absolute border-2 border-green-300 pointer-events-none" :style="css.box" />
       <div
-        v-for="s in selected"
+        v-for="s in selectedIndexes"
         :key="s"
         class="border-red-500 border-2 absolute"
         :style="css.selected(s)"
@@ -34,7 +34,7 @@ export default {
     const { schema } = store.sprite.sheet
     return {
       hovering: null,
-      selected: [],
+      selected: {},
       schema,
       geo: Geo(5, 5),
     }
@@ -59,6 +59,9 @@ export default {
         }
       }
       return { selected, box: selected(this.hovering) }
+    },
+    selectedIndexes() {
+      return Object.values(this.selected)
     },
   },
   watch: {
@@ -85,16 +88,7 @@ export default {
         a.click()
         return
       }
-      this.selected.push(this.hovering)
-    },
-    drawTo(canvas) {
-      const [x, y] = this.geo.index2xy(this.hovering)
-      const img = store.sprite.sheet.getImage(this.$route.params.name)
-      const { scale } = this.currentSheet
-      const ctx = canvas.getContext('2d')
-      ctx.imageSmoothingEnabled = false
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(img, x * scale, y * scale, scale, scale, 0, 0, canvas.width, canvas.height)
+      this.selected[this.hovering] = this.hovering
     },
     mousemove(event) {
       const { scale } = this.currentSheet
@@ -106,6 +100,18 @@ export default {
       if (last_index !== this.hovering) {
         this.drawTo(this.$refs.preview)
       }
+      if (event.buttons === 1) {
+        this.selected[this.hovering] = this.hovering
+      }
+    },
+    drawTo(canvas) {
+      const [x, y] = this.geo.index2xy(this.hovering)
+      const img = store.sprite.sheet.getImage(this.$route.params.name)
+      const { scale } = this.currentSheet
+      const ctx = canvas.getContext('2d')
+      ctx.imageSmoothingEnabled = false
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, x * scale, y * scale, scale, scale, 0, 0, canvas.width, canvas.height)
     },
     redraw() {
       const img = store.sprite.sheet.getImage(this.$route.params.name, this.redraw)
