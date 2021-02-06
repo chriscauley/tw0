@@ -25,6 +25,7 @@ import store from '@/store'
 import Links from './Links'
 import Settings from './Settings'
 import FocusMixin from '@/FocusMixin'
+import Geo from 'tw/Geo'
 
 export default {
   components: { Links, Settings },
@@ -32,10 +33,10 @@ export default {
   data() {
     const { schema } = store.sprite.sheet
     return {
-      mouse: [],
-      hovering: [],
+      hovering: null,
       selected: [],
       schema,
+      geo: Geo(5, 5),
     }
   },
   __route: {
@@ -48,20 +49,16 @@ export default {
     },
     css() {
       const { scale } = this.currentSheet || {}
-      return {
-        box: {
-          left: `${this.hovering[0] * scale}px`,
-          top: `${this.hovering[1] * scale}px`,
-          height: `${scale}px`,
-          width: `${scale}px`,
-        },
-        selected: ([x, y]) => ({
+      const selected = (index) => {
+        const [x, y] = this.geo.index2xy(index)
+        return {
           left: `${x * scale}px`,
           top: `${y * scale}px`,
           height: `${scale}px`,
           width: `${scale}px`,
-        }),
+        }
       }
+      return { selected, box: selected(this.hovering) }
     },
   },
   watch: {
@@ -91,29 +88,22 @@ export default {
       this.selected.push(this.hovering)
     },
     drawTo(canvas) {
+      const [x, y] = this.geo.index2xy(this.hovering)
       const img = store.sprite.sheet.getImage(this.$route.params.name)
       const { scale } = this.currentSheet
       const ctx = canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(
-        img,
-        this.hovering[0] * scale,
-        this.hovering[1] * scale,
-        scale,
-        scale,
-        0,
-        0,
-        canvas.width,
-        canvas.height,
-      )
+      ctx.drawImage(img, x * scale, y * scale, scale, scale, 0, 0, canvas.width, canvas.height)
     },
     mousemove(event) {
       const { scale } = this.currentSheet
-      this.mouse = [event.offsetX, event.offsetY]
-      const [last_x, last_y] = this.hovering
-      this.hovering = [Math.floor(event.offsetX / scale), Math.floor(event.offsetY / scale)]
-      if (last_x !== this.hovering[0] || last_y !== this.hovering[1]) {
+      const last_index = this.hovering
+      this.hovering = this.geo.xy2index([
+        Math.floor(event.offsetX / scale),
+        Math.floor(event.offsetY / scale),
+      ])
+      if (last_index !== this.hovering) {
         this.drawTo(this.$refs.preview)
       }
     },
@@ -122,7 +112,8 @@ export default {
       if (!img) {
         return
       }
-      const { width, height } = this.currentSheet
+      const { width, height, scale } = this.currentSheet
+      this.geo = Geo(Math.floor(width / scale), Math.floor(height / scale))
       const { canvas } = this.$refs
       canvas.width = width
       canvas.height = height

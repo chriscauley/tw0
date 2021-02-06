@@ -1,7 +1,7 @@
 <template>
   <div>
     <i class="fa fa-pencil btn btn-primary" @click="toggleFocus" />
-    <popper v-if="focused">
+    <popper v-if="focused" @click.stop>
       <vacuform :schema="schema" :state="currentSheet" :onChange="saveState"><span /></vacuform>
     </popper>
   </div>

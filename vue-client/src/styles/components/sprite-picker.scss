@@ -4,8 +4,8 @@
 
 .sprite-picker .canvas-wrapper {
   @apply relative overflow-auto;
-  height: 100vh;
-  width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
   canvas {
     margin-bottom: 256px;
   }
