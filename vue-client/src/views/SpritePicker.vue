@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col inset-0 absolute">
-    <div class="relative w-full overflow-auto" v-if="currentSheet" @click="click">
-      <canvas ref="canvas" @mousemove="move" />
-      <div class="absolute border-2 border-green-300" :style="css.box" />
+  <div class="sprite-picker">
+    <div class="canvas-wrapper" v-if="currentSheet" @click="click">
+      <canvas ref="canvas" @mousemove="mousemove" />
+      <div class="absolute border-2 border-green-300 pointer-events-none" :style="css.box" />
       <div
         v-for="s in selected"
         :key="s"
@@ -10,50 +10,65 @@
         :style="css.selected(s)"
       />
     </div>
-    <div>
-      <router-link
-        class="mr-2"
-        v-for="sheet in sheets"
-        :key="sheet.name"
-        :to="`/sprite-picker/${sheet.name}/`"
-      >
-        {{ sheet.name }}
-      </router-link>
+    <div class="flex items-center justify-between">
+      <div>
+        <router-link
+          class="mr-2"
+          v-for="sheet in sheets"
+          :key="sheet.name"
+          :to="`/sprite-picker/${sheet.name}/`"
+        >
+          {{ sheet.name }}
+        </router-link>
+      </div>
+      <div class="actions">
+        <i class="fa fa-pencil btn btn-primary" @click="toggleFocus" />
+        <popper v-if="focused">
+          <vacuform :schema="schema" :state="currentSheet" :onChange="saveState"><span /></vacuform>
+        </popper>
+      </div>
+    </div>
+    <div class="preview">
+      <canvas ref="preview" :width="4 * currentSheet.x_scale" :height="4 * currentSheet.y_scale" />
     </div>
   </div>
 </template>
 
 <script>
 import store from '@/store'
+import FocusMixin from '@/FocusMixin'
 
 export default {
+  mixins: [FocusMixin],
   data() {
+    const { schema } = store.sprite.sheet
     return {
       mouse: [],
       hovering: [],
       selected: [],
+      schema,
     }
   },
   __route: {
     path: '/sprite-picker/:name?',
   },
   computed: {
-    sheets: () => store.sprite.sheet.state.list,
+    sheets: store.sprite.sheet.all,
     currentSheet() {
       return store.sprite.sheet.state.byName[this.$route.params.name]
     },
     css() {
-      const { x_scale, y_scale } = this.currentSheet || {}
+      const { x_scale, y_scale, resolution } = this.currentSheet || {}
       return {
         box: {
-          left: `${this.hovering[0] * x_scale}px`,
-          top: `${this.hovering[1] * y_scale}px`,
+          left: `${this.hovering[0] * resolution}px`,
+          top: `${this.hovering[1] * resolution}px`,
           height: `${y_scale}px`,
           width: `${x_scale}px`,
         },
         selected: ([x, y]) => ({
-          left: `${x * x_scale}px`,
-          top: `${y * y_scale}px`,
+          left: `${x * resolution}px`,
+          top: `${y * resolution}px`,
           height: `${y_scale}px`,
           width: `${x_scale}px`,
         }),
@@ -67,24 +82,16 @@ export default {
     this.redraw()
   },
   methods: {
+    saveState() {
+      store.sprite.sheet.update()
+    },
     click(event) {
       if (event.shiftKey) {
         const { x_scale, y_scale } = this.currentSheet
         const canvas = document.createElement('canvas')
         canvas.width = x_scale
         canvas.height = y_scale
-        const img = store.sprite.sheet.getImage(this.$route.params.name)
-        canvas.getContext('2d').drawImage(
-          img,
-          this.hovering[0] * x_scale,
-          this.hovering[1] * y_scale,
-          x_scale,
-          y_scale,
-          0,
-          0,
-          x_scale,
-          y_scale,
-        )
+        this.drawTo(canvas)
         // window.open(canvas.toDataURL())
         const a = document.createElement('a')
         a.href = canvas.toDataURL()
@@ -94,10 +101,34 @@ export default {
       }
       this.selected.push(this.hovering)
     },
-    move(event) {
-      const { x_scale, y_scale } = this.currentSheet
+    drawTo(canvas) {
+      const img = store.sprite.sheet.getImage(this.$route.params.name)
+      const { x_scale, y_scale, resolution } = this.currentSheet
+      const ctx = canvas.getContext('2d')
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(
+        img,
+        this.hovering[0] * resolution,
+        this.hovering[1] * resolution,
+        x_scale,
+        y_scale,
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      )
+    },
+    mousemove(event) {
+      const { resolution } = this.currentSheet
       this.mouse = [event.offsetX, event.offsetY]
-      this.hovering = [Math.floor(event.offsetX / x_scale), Math.floor(event.offsetY / y_scale)]
+      const [last_x, last_y] = this.hovering
+      this.hovering = [
+        Math.floor(event.offsetX / resolution),
+        Math.floor(event.offsetY / resolution),
+      ]
+      if (last_x !== this.hovering[0] || last_y !== this.hovering[1]) {
+        this.drawTo(this.$refs.preview)
+      }
     },
     redraw() {
       const img = store.sprite.sheet.getImage(this.$route.params.name, this.redraw)

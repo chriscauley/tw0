@@ -2,7 +2,10 @@ import ls from 'local-storage-json'
 import { reactive } from 'vue'
 
 export default ({ LS_KEY, initial, postUpdate = () => {}, init = () => {} }) => {
-  const state = reactive(initial)
+  const state = reactive({
+    ...initial,
+    ...ls.get(LS_KEY),
+  })
   const update = (data) => {
     Object.keys(state).forEach((key) => {
       if (data?.hasOwnProperty(key)) {
@@ -10,10 +13,8 @@ export default ({ LS_KEY, initial, postUpdate = () => {}, init = () => {} }) => 
       }
     })
     ls.set(LS_KEY, state)
-    postUpdate(data)
+    postUpdate(state)
   }
-
-  update(ls.get(LS_KEY))
 
   const toggle = (key) => update({ [key]: !state[key] })
 

@@ -12,10 +12,11 @@ const { state: byName, update } = Local({ LS_KEY, initial: {} })
 const state = reactive({
   byName,
   loading: false,
-  list: [],
   img_cache: {},
   cached: 0,
 })
+
+const all = () => Object.values(state.byName)
 
 const loading = {}
 
@@ -25,13 +26,19 @@ function init() {
       .filter(Boolean)
       .forEach((fname) => {
         const name = fname.replace(/\....$/, '')
-        const sheet = state.byName[name] || { name, fname }
+        const defaults = {
+          name,
+          fname,
+          x_scale: 32,
+          y_scale: 32,
+          resolution: 32,
+          zoom: 1,
+          bg_color: null,
+        }
+        const sheet = state.byName[name] || defaults
         sheet.url = `/static/sprites/source/${fname}`
         sheet.cached = false
-        const defaults = { x_scale: 32, y_scale: 32, bg_color: null }
-        Object.assign(sheet, defaults)
         if (!state.byName[name]) {
-          state.list.push(sheet)
           state.byName[name] = sheet
         }
       })
@@ -58,4 +65,15 @@ const getImage = (name, callback) => {
   return state.img_cache[name]
 }
 
-export default { state, update, init, getImage }
+const schema = {
+  type: 'object',
+  properties: {
+    x_scale: { type: 'number', default: 0 },
+    y_scale: { type: 'number', default: 0 },
+    bg_color: { type: 'string', format: 'color' },
+    zoom: { type: 'number', default: 1 },
+    resolution: { type: 'number', default: 32 },
+  },
+}
+
+export default { state, update, init, getImage, schema, all }

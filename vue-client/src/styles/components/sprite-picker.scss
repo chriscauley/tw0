@@ -1,7 +1,37 @@
+.sprite-picker {
+  @apply flex flex-col inset-0 absolute;
+}
+
+.sprite-picker .canvas-wrapper{
+  @apply relative overflow-auto;
+  height: 100vh;
+  width: 100vw;
+  canvas {
+    margin-bottom: 256px;
+  }
+}
+
 .sprite-picker .vacuform {
   @apply flex flex-wrap justify-between;
   width: 230px;
   .form-group {
     flex-basis: 46%;
   }
+}
+
+.sprite-picker .preview {
+  @apply fixed bottom-0 left-0;
+  $color1: #444;
+  $color2: #333;
+  $size: 50px;
+
+  background-image:
+    linear-gradient(45deg, $color1 25%, transparent 25%, transparent 75%, $color1 75%),
+    linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
+  background-size: $size $size;
+  background-position: 0 0, $size/2 $size/2;
+}
+
+.sprite-picker .actions {
+  @apply bottom-0 fixed right-0;
 }
