@@ -1,14 +1,9 @@
 <template>
   <div class="sprite-picker">
-    <div class="canvas-wrapper" v-if="currentSheet" @click="click">
-      <canvas ref="canvas" @mousemove="mousemove" />
-      <div class="absolute border-2 border-green-300 pointer-events-none" :style="css.box" />
-      <div
-        v-for="s in selectedIndexes"
-        :key="s"
-        class="border-red-500 border-2 absolute"
-        :style="css.selected(s)"
-      />
+    <div class="canvas-wrapper" v-if="currentSheet">
+      <canvas ref="canvas" @mousemove="mousemove" @click="click" />
+      <div class="hovering" :style="css.box" />
+      <div v-for="s in selectedIndexes" :key="s" class="selected" :style="css.selected(s)" />
     </div>
     <div class="actions">
       <links />
@@ -66,6 +61,7 @@ export default {
   },
   watch: {
     currentSheet: 'redraw',
+    'currentSheet.scale': 'redraw',
   },
   mounted() {
     this.redraw()

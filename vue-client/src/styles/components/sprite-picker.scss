@@ -35,3 +35,10 @@
 .sprite-picker .actions {
   @apply bottom-0 absolute  flex right-0;
 }
+
+.sprite-picker .hovering {
+  @apply absolute border-2 border-green-300 pointer-events-none;
+}
+.sprite-picker .selected {
+  @apply border-red-500 border-2 absolute pointer-events-none;
+}
