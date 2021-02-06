@@ -1,0 +1,7 @@
+.sprite-picker .vacuform {
+  @apply flex flex-wrap justify-between;
+  width: 230px;
+  .form-group {
+    flex-basis: 46%;
+  }
+}

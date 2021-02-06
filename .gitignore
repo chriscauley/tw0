@@ -10,3 +10,5 @@ server/settings/.secret_key
 server/settings/local.py
 unrest
 ur
+
+__trash

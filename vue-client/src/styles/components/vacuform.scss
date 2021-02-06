@@ -1,0 +1,5 @@
+/* TODO unrest tailwind not properly loading so we can't use @apply */
+.popper .vacuform {
+  @apply rounded p-4;
+  background: var(--bg);
+}

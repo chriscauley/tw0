@@ -7,7 +7,13 @@
 </template>
 
 <script>
-const links = ['/docs/css/', '/sprite/list/', '/coloseum/9x9/bat/', '/sprite-picker/']
+const links = [
+  '/docs/vacuform/',
+  '/docs/css/',
+  '/sprite/list/',
+  '/coloseum/9x9/bat/',
+  '/sprite-picker/',
+]
 export default {
   __route: {
     path: '/',
