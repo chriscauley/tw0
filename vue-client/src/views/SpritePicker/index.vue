@@ -10,7 +10,7 @@
       <settings />
     </div>
     <div class="preview">
-      <canvas ref="preview" :width="4 * currentSheet.scale" :height="4 * currentSheet.scale" />
+      <canvas ref="preview" :width="4 * outSize" :height="4 * outSize" />
     </div>
   </div>
 </template>
@@ -38,6 +38,9 @@ export default {
     path: '/sprite-picker/:name?',
   },
   computed: {
+    outSize() {
+      return this.currentSheet.scale - this.currentSheet.buffer * 2
+    },
     sheets: store.sprite.sheet.all,
     currentSheet() {
       return store.sprite.sheet.state.byName[this.$route.params.name]
@@ -72,12 +75,9 @@ export default {
     },
     click(event) {
       if (event.shiftKey) {
-        const { scale } = this.currentSheet
         const canvas = document.createElement('canvas')
-        canvas.width = scale
-        canvas.height = scale
+        canvas.width = canvas.height = this.outSize
         this.drawTo(canvas)
-        // window.open(canvas.toDataURL())
         const a = document.createElement('a')
         a.href = canvas.toDataURL()
         a.download = 'sprite.png'
@@ -101,13 +101,16 @@ export default {
       }
     },
     drawTo(canvas) {
+      const sw = this.outSize
       const [x, y] = this.geo.index2xy(this.hovering)
       const img = store.sprite.sheet.getImage(this.$route.params.name)
-      const { scale } = this.currentSheet
+      const { scale, buffer } = this.currentSheet
       const ctx = canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(img, x * scale, y * scale, scale, scale, 0, 0, canvas.width, canvas.height)
+      const sx = x * scale + buffer
+      const sy = y * scale + buffer
+      ctx.drawImage(img, sx, sy, sw, sw, 0, 0, canvas.width, canvas.height)
     },
     redraw() {
       const img = store.sprite.sheet.getImage(this.$route.params.name, this.redraw)
