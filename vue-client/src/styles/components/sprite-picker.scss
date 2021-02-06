@@ -1,8 +1,8 @@
 .sprite-picker {
-  @apply flex flex-col inset-0 absolute;
+  @apply flex flex-col inset-0 absolute overflow-auto;
 }
 
-.sprite-picker .canvas-wrapper{
+.sprite-picker .canvas-wrapper {
   @apply relative overflow-auto;
   height: 100vh;
   width: 100vw;
@@ -20,10 +20,10 @@
 }
 
 .sprite-picker .preview {
-  @apply fixed bottom-0 left-0;
+  @apply absolute bottom-0 left-0;
   $color1: #444;
   $color2: #333;
-  $size: 50px;
+  $size: 32px;
 
   background-image:
     linear-gradient(45deg, $color1 25%, transparent 25%, transparent 75%, $color1 75%),
@@ -33,5 +33,5 @@
 }
 
 .sprite-picker .actions {
-  @apply bottom-0 fixed right-0;
+  @apply bottom-0 absolute  flex right-0;
 }

@@ -10,23 +10,9 @@
         :style="css.selected(s)"
       />
     </div>
-    <div class="flex items-center justify-between">
-      <div>
-        <router-link
-          class="mr-2"
-          v-for="sheet in sheets"
-          :key="sheet.name"
-          :to="`/sprite-picker/${sheet.name}/`"
-        >
-          {{ sheet.name }}
-        </router-link>
-      </div>
-      <div class="actions">
-        <i class="fa fa-pencil btn btn-primary" @click="toggleFocus" />
-        <popper v-if="focused">
-          <vacuform :schema="schema" :state="currentSheet" :onChange="saveState"><span /></vacuform>
-        </popper>
-      </div>
+    <div class="actions">
+      <links />
+      <settings />
     </div>
     <div class="preview">
       <canvas ref="preview" :width="4 * currentSheet.x_scale" :height="4 * currentSheet.y_scale" />
@@ -36,9 +22,12 @@
 
 <script>
 import store from '@/store'
+import Links from './Links'
+import Settings from './Settings'
 import FocusMixin from '@/FocusMixin'
 
 export default {
+  components: { Links, Settings },
   mixins: [FocusMixin],
   data() {
     const { schema } = store.sprite.sheet
@@ -105,6 +94,7 @@ export default {
       const img = store.sprite.sheet.getImage(this.$route.params.name)
       const { x_scale, y_scale, resolution } = this.currentSheet
       const ctx = canvas.getContext('2d')
+      ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.drawImage(
         img,
