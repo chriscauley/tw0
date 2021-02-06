@@ -29,9 +29,7 @@ function init() {
         const defaults = {
           name,
           fname,
-          x_scale: 32,
-          y_scale: 32,
-          resolution: 32,
+          scale: 32,
           zoom: 1,
           bg_color: null,
         }
@@ -68,11 +66,9 @@ const getImage = (name, callback) => {
 const schema = {
   type: 'object',
   properties: {
-    x_scale: { type: 'number', default: 0 },
-    y_scale: { type: 'number', default: 0 },
+    scale: { type: 'number', default: 32 },
     bg_color: { type: 'string', format: 'color' },
     zoom: { type: 'number', default: 1 },
-    resolution: { type: 'number', default: 32 },
   },
 }
 

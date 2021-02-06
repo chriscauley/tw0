@@ -15,7 +15,7 @@
       <settings />
     </div>
     <div class="preview">
-      <canvas ref="preview" :width="4 * currentSheet.x_scale" :height="4 * currentSheet.y_scale" />
+      <canvas ref="preview" :width="4 * currentSheet.scale" :height="4 * currentSheet.scale" />
     </div>
   </div>
 </template>
@@ -47,19 +47,19 @@ export default {
       return store.sprite.sheet.state.byName[this.$route.params.name]
     },
     css() {
-      const { x_scale, y_scale, resolution } = this.currentSheet || {}
+      const { scale } = this.currentSheet || {}
       return {
         box: {
-          left: `${this.hovering[0] * resolution}px`,
-          top: `${this.hovering[1] * resolution}px`,
-          height: `${y_scale}px`,
-          width: `${x_scale}px`,
+          left: `${this.hovering[0] * scale}px`,
+          top: `${this.hovering[1] * scale}px`,
+          height: `${scale}px`,
+          width: `${scale}px`,
         },
         selected: ([x, y]) => ({
-          left: `${x * resolution}px`,
-          top: `${y * resolution}px`,
-          height: `${y_scale}px`,
-          width: `${x_scale}px`,
+          left: `${x * scale}px`,
+          top: `${y * scale}px`,
+          height: `${scale}px`,
+          width: `${scale}px`,
         }),
       }
     },
@@ -76,10 +76,10 @@ export default {
     },
     click(event) {
       if (event.shiftKey) {
-        const { x_scale, y_scale } = this.currentSheet
+        const { scale } = this.currentSheet
         const canvas = document.createElement('canvas')
-        canvas.width = x_scale
-        canvas.height = y_scale
+        canvas.width = scale
+        canvas.height = scale
         this.drawTo(canvas)
         // window.open(canvas.toDataURL())
         const a = document.createElement('a')
@@ -92,16 +92,16 @@ export default {
     },
     drawTo(canvas) {
       const img = store.sprite.sheet.getImage(this.$route.params.name)
-      const { x_scale, y_scale, resolution } = this.currentSheet
+      const { scale } = this.currentSheet
       const ctx = canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.drawImage(
         img,
-        this.hovering[0] * resolution,
-        this.hovering[1] * resolution,
-        x_scale,
-        y_scale,
+        this.hovering[0] * scale,
+        this.hovering[1] * scale,
+        scale,
+        scale,
         0,
         0,
         canvas.width,
@@ -109,13 +109,10 @@ export default {
       )
     },
     mousemove(event) {
-      const { resolution } = this.currentSheet
+      const { scale } = this.currentSheet
       this.mouse = [event.offsetX, event.offsetY]
       const [last_x, last_y] = this.hovering
-      this.hovering = [
-        Math.floor(event.offsetX / resolution),
-        Math.floor(event.offsetY / resolution),
-      ]
+      this.hovering = [Math.floor(event.offsetX / scale), Math.floor(event.offsetY / scale)]
       if (last_x !== this.hovering[0] || last_y !== this.hovering[1]) {
         this.drawTo(this.$refs.preview)
       }
