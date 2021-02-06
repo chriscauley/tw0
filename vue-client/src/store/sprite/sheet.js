@@ -35,6 +35,7 @@ function init() {
           scale: 32,
           buffer: 0,
           sprites: {},
+          tags: {},
         })
         sheet.url = `/static/sprites/source/${fname}`
         sheet.cached = false

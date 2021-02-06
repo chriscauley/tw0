@@ -4,8 +4,10 @@
       <canvas ref="canvas" @mousemove="mousemove" @click="click" />
       <div class="hovering" :style="css.hovering" />
       <div v-if="selected !== undefined" class="selected" :style="css.selected" />
+      <div v-for="i in namedIndexes" :key="i" class="named" :style="css.box(i)" />
     </div>
     <div class="actions">
+      <tags />
       <links />
       <settings />
     </div>
@@ -26,11 +28,12 @@
 import store from '@/store'
 import Links from './Links'
 import Settings from './Settings'
+import Tags from './Tags'
 import FocusMixin from '@/FocusMixin'
 import Geo from 'tw/Geo'
 
 export default {
-  components: { Links, Settings },
+  components: { Links, Settings, Tags },
   mixins: [FocusMixin],
   data() {
     const { schema } = store.sprite.sheet
@@ -45,6 +48,9 @@ export default {
     path: '/sprite-picker/:name?',
   },
   computed: {
+    namedIndexes() {
+      return Object.keys(this.currentSheet.sprites).map(Number)
+    },
     outSize() {
       return this.currentSheet.scale - this.currentSheet.buffer * 2
     },
@@ -63,7 +69,7 @@ export default {
           width: `${scale}px`,
         }
       }
-      return { selected: box(this.selected), hovering: box(this.hovering) }
+      return { box, selected: box(this.selected), hovering: box(this.hovering) }
     },
   },
   watch: {
@@ -90,6 +96,7 @@ export default {
       }
       this.selected = this.selected === this.hovering ? undefined : this.hovering
       this.selected !== undefined && this.drawTo(this.$refs.preview)
+      setTimeout(() => this.$el.querySelector('input').focus())
     },
     mousemove(event) {
       const { scale } = this.currentSheet

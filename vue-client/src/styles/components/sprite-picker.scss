@@ -38,9 +38,33 @@
   @apply bottom-0 absolute  flex right-0;
 }
 
-.sprite-picker .hovering {
-  @apply absolute border-2 border-green-300 pointer-events-none;
+.sprite-picker {
+  .hovering, .selected, .named {
+  @apply absolute border-2 pointer-events-none;
+  }
+  .hovering {
+    @apply border-green-300;
+  }
+  .selected {
+    @apply border-red-500;
+  }
+  .named {
+    @apply border-gray-400;
+  }
 }
-.sprite-picker .selected {
-  @apply border-red-500 border-2 absolute pointer-events-none;
+
+.tags-popper {
+  @apply flex flex-col bg-gray-500 p-2 rounded;
+  .tag {
+    @apply flex items-center;
+    > * {
+      @apply mr-2;
+    }
+    .swatch {
+      @apply h-4 w-4;
+    }
+    .fa {
+      cursor: pointer;
+    }
+  }
 }

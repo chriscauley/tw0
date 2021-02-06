@@ -1,6 +1,7 @@
 import ls from 'local-storage-json'
 import { reactive } from 'vue'
 
+// TODO is init needed here?
 export default ({ LS_KEY, initial, postUpdate = () => {}, init = () => {} }) => {
   const state = reactive({
     ...initial,
