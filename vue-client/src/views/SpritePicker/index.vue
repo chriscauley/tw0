@@ -2,8 +2,8 @@
   <div class="sprite-picker">
     <div class="canvas-wrapper" v-if="currentSheet">
       <canvas ref="canvas" @mousemove="mousemove" @click="click" />
-      <div class="hovering" :style="css.box" />
-      <div v-for="s in selectedIndexes" :key="s" class="selected" :style="css.selected(s)" />
+      <div class="hovering" :style="css.hovering" />
+      <div v-if="selected !== undefined" class="selected" :style="css.selected" />
     </div>
     <div class="actions">
       <links />
@@ -11,6 +11,13 @@
     </div>
     <div class="preview">
       <canvas ref="preview" :width="4 * outSize" :height="4 * outSize" />
+      <input
+        v-if="selected !== undefined"
+        :style="`width: ${4 * outSize}px`"
+        class="form-control text-black"
+        v-model="currentSheet.sprites[selected]"
+        @input="rename"
+      />
     </div>
   </div>
 </template>
@@ -29,7 +36,7 @@ export default {
     const { schema } = store.sprite.sheet
     return {
       hovering: null,
-      selected: {},
+      selected: undefined,
       schema,
       geo: Geo(5, 5),
     }
@@ -47,7 +54,7 @@ export default {
     },
     css() {
       const { scale } = this.currentSheet || {}
-      const selected = (index) => {
+      const box = (index) => {
         const [x, y] = this.geo.index2xy(index)
         return {
           left: `${x * scale}px`,
@@ -56,10 +63,7 @@ export default {
           width: `${scale}px`,
         }
       }
-      return { selected, box: selected(this.hovering) }
-    },
-    selectedIndexes() {
-      return Object.values(this.selected)
+      return { selected: box(this.selected), hovering: box(this.hovering) }
     },
   },
   watch: {
@@ -84,7 +88,8 @@ export default {
         a.click()
         return
       }
-      this.selected[this.hovering] = this.hovering
+      this.selected = this.selected === this.hovering ? undefined : this.hovering
+      this.selected !== undefined && this.drawTo(this.$refs.preview)
     },
     mousemove(event) {
       const { scale } = this.currentSheet
@@ -93,11 +98,11 @@ export default {
         Math.floor(event.offsetX / scale),
         Math.floor(event.offsetY / scale),
       ])
-      if (last_index !== this.hovering) {
+      if (last_index !== this.hovering && this.selected === undefined) {
         this.drawTo(this.$refs.preview)
       }
       if (event.buttons === 1) {
-        this.selected[this.hovering] = this.hovering
+        this.selected = this.hovering
       }
     },
     drawTo(canvas) {
@@ -124,6 +129,12 @@ export default {
       canvas.height = height
       const ctx = canvas.getContext('2d')
       ctx.drawImage(img, 0, 0)
+    },
+    rename() {
+      if (!this.currentSheet.sprites[this.selected]) {
+        delete this.currentSheet.sprites[this.selected]
+      }
+      this.saveState()
     },
   },
 }

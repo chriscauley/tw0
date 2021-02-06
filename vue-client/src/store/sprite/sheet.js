@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import { defaults } from 'lodash'
 
 import Local from '../Local'
 import api from '@/api'
@@ -25,15 +26,16 @@ function init() {
     r.split('\n')
       .filter(Boolean)
       .forEach((fname) => {
+        // TODO remove everything not in defaults and make rest of these derrived properties
         const name = fname.replace(/\....$/, '')
-        const defaults = {
+        const sheet = state.byName[name] || {}
+        defaults(sheet, {
           name,
           fname,
           scale: 32,
-          zoom: 1,
-          bg_color: null,
-        }
-        const sheet = state.byName[name] || defaults
+          buffer: 0,
+          sprites: {},
+        })
         sheet.url = `/static/sprites/source/${fname}`
         sheet.cached = false
         if (!state.byName[name]) {
@@ -67,8 +69,7 @@ const schema = {
   type: 'object',
   properties: {
     scale: { type: 'number', default: 32 },
-    bg_color: { type: 'string', format: 'color' },
-    zoom: { type: 'number', default: 1 },
+    buffer: { type: 'number', default: 0 },
   },
 }
 

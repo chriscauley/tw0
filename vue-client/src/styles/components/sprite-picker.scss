@@ -21,15 +21,17 @@
 
 .sprite-picker .preview {
   @apply absolute bottom-0 left-0;
-  $color1: #444;
-  $color2: #333;
-  $size: 32px;
+  canvas {
+    $color1: #444;
+    $color2: #333;
+    $size: 32px;
 
-  background-image:
-    linear-gradient(45deg, $color1 25%, transparent 25%, transparent 75%, $color1 75%),
-    linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
-  background-size: $size $size;
-  background-position: 0 0, $size/2 $size/2;
+    background-image:
+      linear-gradient(45deg, $color1 25%, transparent 25%, transparent 75%, $color1 75%),
+      linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
+    background-size: $size $size;
+    background-position: 0 0, $size/2 $size/2;
+  }
 }
 
 .sprite-picker .actions {
