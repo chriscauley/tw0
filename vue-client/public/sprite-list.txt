@@ -1,4 +1,8 @@
 16_colors_14.png
+16_colors_16_buffer.png
+16_colors_16.png
+16_colors_32_buffer.png
+16_colors_32.png
 checkers.png
 DungeonCrawl_ProjectUtumnoTileset.png
 Pots.png
