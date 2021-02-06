@@ -2,7 +2,7 @@ const getDefaultTagName = (field) => {
   if (field.enum) {
     return 'vf-select'
   } else if (field.type === 'boolean') {
-    return 'vf-toggle'
+    return 'vf-checkbox'
   } else if (field.format === 'color') {
     return 'vf-color'
   }

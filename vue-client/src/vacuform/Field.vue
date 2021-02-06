@@ -23,10 +23,9 @@ import VfSelect from './widgets/Select'
 import VfCheckbox from './widgets/Checkbox'
 import VfRange from './widgets/Range'
 import VfText from './widgets/Text'
-import VfToggle from './widgets/Toggle'
 
 export default {
-  components: { VfText, VfSelect, VfToggle, VfCheckbox, VfRange },
+  components: { VfText, VfSelect, VfCheckbox, VfRange },
   props: {
     field: Object,
     form: Object,
@@ -51,7 +50,7 @@ export default {
   },
   methods: {
     showLabel(field) {
-      return field.title && !['vf-toggle', 'vf-checkbox'].includes(field.ui.tagName)
+      return field.title && !['vf-checkbox'].includes(field.ui.tagName)
     },
   },
 }
