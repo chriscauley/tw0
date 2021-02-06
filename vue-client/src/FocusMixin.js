@@ -1,11 +1,18 @@
 export default {
   data: () => ({ focused: false }),
   methods: {
+    onFocus() {},
+    onBlur() {},
     toggleFocus(e) {
       if (e.__dropdown_touched !== this) {
         e.__dropdown_touched = e.__dropdown_touched || this
-        const action = `${this.focused ? 'remove' : 'add'}EventListener`
-        document[action]('click', this.toggleFocus)
+        if (this.focused) {
+          document.removeEventListener('click', this.toggleFocus)
+          this.onFocus()
+        } else {
+          document.addEventListener('click', this.toggleFocus)
+          this.onBlur()
+        }
         this.focused = !this.focused
       }
     },
