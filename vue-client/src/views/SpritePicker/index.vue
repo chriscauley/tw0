@@ -170,6 +170,9 @@ export default {
       ctx.drawImage(img, sx, sy, sw, sw, 0, 0, canvas.width, canvas.height)
     },
     redraw() {
+      if (!this.currentSheet) {
+        return
+      }
       const img = store.sprite.sheet.getImage(this.currentSheet.fname, this.redraw)
       if (!img) {
         return

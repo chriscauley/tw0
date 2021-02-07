@@ -7,14 +7,15 @@
 </template>
 
 <script>
+import store from '@/store'
 const links = [
   '/docs/vacuform/',
   '/docs/css/',
   '/sprite/list/',
   '/sprite/list2/',
   '/coloseum/9x9/bat/',
-  '/sprite-picker/',
 ]
+store.sprite.sheet.all().forEach(sheet => links.push(`/sprite-picker/${sheet.name}`))
 export default {
   __route: {
     path: '/',
