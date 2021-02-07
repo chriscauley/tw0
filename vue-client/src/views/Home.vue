@@ -11,6 +11,7 @@ const links = [
   '/docs/vacuform/',
   '/docs/css/',
   '/sprite/list/',
+  '/sprite/list2/',
   '/coloseum/9x9/bat/',
   '/sprite-picker/',
 ]

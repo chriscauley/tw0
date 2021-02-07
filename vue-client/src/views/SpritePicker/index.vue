@@ -13,6 +13,7 @@
       <tags />
       <links />
       <settings />
+      <ImportExport />
     </div>
     <div class="preview">
       <canvas ref="preview" :width="4 * outSize" :height="4 * outSize" />
@@ -30,13 +31,14 @@
 <script>
 import store from '@/store'
 import Links from './Links'
+import ImportExport from './ImportExport'
 import Settings from './Settings'
 import Tags from './Tags'
 import FocusMixin from '@/FocusMixin'
 import Geo from 'tw/Geo'
 
 export default {
-  components: { Links, Settings, Tags },
+  components: { ImportExport, Links, Settings, Tags },
   mixins: [FocusMixin],
   data() {
     const { schema } = store.sprite.sheet
@@ -121,7 +123,7 @@ export default {
         this.selected = this.selected === this.hovering ? undefined : this.hovering
         this.selected !== undefined && this.drawTo(this.$refs.preview)
         setTimeout(() => {
-          const input = this.$el.querySelector('input')
+          const input = this.$el.querySelector('.rename-input')
           input.focus()
           input.style.backgroundImage = `url(${this.$refs.preview.toDataURL()})`
         })
