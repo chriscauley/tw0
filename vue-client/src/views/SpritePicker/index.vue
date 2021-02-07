@@ -158,7 +158,7 @@ export default {
     drawTo(canvas) {
       const sw = this.outSize
       const [x, y] = this.geo.index2xy(this.hovering)
-      const img = store.sprite.sheet.getImage(this.$route.params.name)
+      const img = store.sprite.sheet.getImage(this.currentSheet.fname)
       const { scale, buffer } = this.currentSheet
       const ctx = canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
@@ -168,7 +168,7 @@ export default {
       ctx.drawImage(img, sx, sy, sw, sw, 0, 0, canvas.width, canvas.height)
     },
     redraw() {
-      const img = store.sprite.sheet.getImage(this.$route.params.name, this.redraw)
+      const img = store.sprite.sheet.getImage(this.currentSheet.fname, this.redraw)
       if (!img) {
         return
       }

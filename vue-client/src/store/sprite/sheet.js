@@ -27,6 +27,7 @@ function init() {
       .filter(Boolean)
       .forEach((fname) => {
         // TODO remove everything not in defaults and make rest of these derrived properties
+        // TODO only use fname, not name (requires migration)
         const name = fname.replace(/\....$/, '')
         const sheet = state.byName[name] || {}
         defaults(sheet, {
@@ -47,7 +48,8 @@ function init() {
   })
 }
 
-const getImage = (name, callback) => {
+const getImage = (fname, callback) => {
+  const name = fname.replace(/\....$/, '')
   const sheet = state.byName[name]
   if (sheet && !state.img_cache[name] && !loading[name]) {
     loading[name] = true

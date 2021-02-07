@@ -1,0 +1,14 @@
+.sprite-list2 {
+  .sheet-sprites {
+    @apply flex flex-wrap;
+    .box {
+      @apply border m-2;
+      .sprite {
+        font-size: 8rem;
+      }
+      .text {
+        text-align: center;
+      }
+    }
+  }
+}
