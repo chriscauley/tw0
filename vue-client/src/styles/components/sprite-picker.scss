@@ -63,8 +63,9 @@
   }
 }
 
-.tags-popper {
-  @apply flex flex-col bg-gray-500 p-2 rounded;
+.sprite-picker .tags-popper {
+  @apply bg-gray-500 flex flex-col overflow-auto p-2 rounded;
+  max-height: 80vh;
   .tag {
     @apply flex items-center;
     > * {
@@ -76,6 +77,10 @@
     .swatch {
       @apply h-4 w-4;
     }
+  }
+  input {
+    @apply text-black;
+    width: 8rem;
   }
 }
 

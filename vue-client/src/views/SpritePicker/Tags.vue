@@ -4,11 +4,9 @@
       <i class="fa fa-tag btn btn-primary" />
       <div v-if="currentTag" class="current-tag-color" :style="css.bg" />
     </div>
-    <popper v-if="focused" @click.stop>
+    <popper v-if="focused" @click.stop placement="top">
       <div class="tags-popper">
-        <div class="tag">
-          <i :class="css.radio({ id: null })" @click="select({ id: null })" /> Rename Tool
-        </div>
+        <div class="tag"><i :class="css.radioNull" @click="select({})" /> Rename Tool</div>
         <div v-for="tag in tags" :key="tag.id" class="tag">
           <i :class="css.radio(tag)" @click="select(tag)" />
           <div class="swatch" :style="`background: ${tag.color}`" />
@@ -18,7 +16,7 @@
           <i class="fa fa-edit" @click="editing = tag" />
         </div>
         <form class="flex" @submit.prevent="submit">
-          <input class="text-black" style="width: 6rem" v-model="editing.name" ref="input" />
+          <input style="width: 6rem" v-model="editing.name" ref="input" />
           <input type="color" v-model="editing.color" class="h-8" />
           <button class="btn btn-primary fa fa-check" />
         </form>
@@ -42,9 +40,10 @@ export default {
     tags: store.sprite.tag.all,
     sheets: store.sprite.sheet.all,
     css() {
-      const { id, color } = this.currentTag || {}
+      const { id = null, color } = this.currentTag || {}
       return {
         bg: `background: ${color}`,
+        radioNull: `fa fa-circle${id === null ? '' : '-o'}`,
         radio: (tag) => `fa fa-circle${tag.id === id ? '' : '-o'}`,
         eyecon: (tag) => `fa fa-eye${tag.hidden ? '-slash' : ''}`,
       }
