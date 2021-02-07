@@ -1,5 +1,6 @@
 <template>
   <div class="sprite-list2">
+    <div v-if="duplicates.length" class="alert alert-danger">duplicates: {{ duplicates }}</div>
     <div v-if="editing" class="modal">
       <div class="modal-mask" @click="editing = null" />
       <div class="modal-content">
@@ -49,9 +50,8 @@ export default {
   computed: {
     sheets() {
       const sheets = store.sprite.sheet.all().filter((s) => Object.keys(s.sprites).length)
-      if (
-        sheets.find((sheet) => !store.sprite.sheet.getImage(sheet.fname, () => this.$forceUpdate()))
-      ) {
+      const _getImg = (s) => store.sprite.sheet.getImage(s.fname, () => this.$forceUpdate())
+      if (sheets.find((sheet) => !_getImg(sheet))) {
         // TODO lazy way to force images to be loaded
         return []
       }
@@ -68,6 +68,15 @@ export default {
           summary: getSummary(sheet, sprites),
         }
       })
+    },
+    duplicates() {
+      const counts = {}
+      this.sheets.forEach((sheet) => {
+        sheet.sprites.map((s) => s.name).forEach((n) => (counts[n] = (counts[n] || 0) + 1))
+      })
+      return Object.entries(counts)
+        .filter((e) => e[1] > 1)
+        .map((e) => e.join('x'))
     },
   },
   methods: {
