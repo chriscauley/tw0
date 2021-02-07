@@ -73,9 +73,12 @@
     .fa {
       cursor: pointer;
     }
+    .swatch {
+      @apply h-4 w-4;
+    }
   }
 }
 
-.sprite-picker .swatch {
-  @apply h-4 w-4;
+.sprite-picker .current-tag-color {
+  @apply absolute right-0 top-0 rounded-full w-3 h-3 m-1;
 }

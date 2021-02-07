@@ -1,13 +1,16 @@
 <template>
   <div @click="toggleFocus">
-    <i class="fa fa-tag btn btn-primary" />
+    <div class="relative">
+      <i class="fa fa-tag btn btn-primary" />
+      <div v-if="currentTag" class="current-tag-color" :style="css.bg" />
+    </div>
     <popper v-if="focused" @click.stop>
       <div class="tags-popper">
         <div class="tag">
-          <i :class="css.tag({ id: null })" @click="select({ id: null })" /> Rename Tool
+          <i :class="css.radio({ id: null })" @click="select({ id: null })" /> Rename Tool
         </div>
         <div v-for="tag in tags" :key="tag.id" class="tag">
-          <i :class="css.tag(tag)" @click="select(tag)" />
+          <i :class="css.radio(tag)" @click="select(tag)" />
           <div class="swatch" :style="`background: ${tag.color}`" />
           <span class="name">{{ tag.name }}</span>
           <div class="flex-grow" />
@@ -38,11 +41,13 @@ export default {
     tags: store.sprite.tag.all,
     sheets: store.sprite.sheet.all,
     css() {
-      const { selected } = store.sprite.tag.state
+      const { id, color } = this.currentTag || {}
       return {
-        tag: (tag) => `fa fa-circle${tag.id === selected ? '' : '-o'}`,
+        bg: `background: ${color}`,
+        radio: (tag) => `fa fa-circle${tag.id === id ? '' : '-o'}`,
       }
     },
+    currentTag: () => store.sprite.tag.state.list[store.sprite.tag.state.selected],
     currentSheet() {
       return store.sprite.sheet.state.byName[this.$route.params.name]
     },
