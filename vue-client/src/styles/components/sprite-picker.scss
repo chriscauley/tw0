@@ -32,6 +32,11 @@
     background-size: $size $size;
     background-position: 0 0, $size/2 $size/2;
   }
+  .rename-input {
+    @apply bg-white text-black pl-6;
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+  }
 }
 
 .sprite-picker .actions {
@@ -39,8 +44,8 @@
 }
 
 .sprite-picker {
-  .hovering, .selected, .named {
-  @apply absolute border-2 pointer-events-none;
+  .hovering, .selected, .named, .tagged {
+    @apply absolute border-2 pointer-events-none;
   }
   .hovering {
     @apply border-green-300;
@@ -51,6 +56,11 @@
   .named {
     @apply border-gray-400;
   }
+  .tagged {
+    $c: var(--tag-color);
+    background-image: linear-gradient(45deg, $c 25%, transparent 25%, transparent 50%, $c 50%, $c 75%, transparent 75%, transparent 100%);
+    background-size: 16px 16px;
+  }
 }
 
 .tags-popper {
@@ -60,11 +70,12 @@
     > * {
       @apply mr-2;
     }
-    .swatch {
-      @apply h-4 w-4;
-    }
     .fa {
       cursor: pointer;
     }
   }
+}
+
+.sprite-picker .swatch {
+  @apply h-4 w-4;
 }

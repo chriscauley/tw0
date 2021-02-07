@@ -5,6 +5,9 @@
       <div class="hovering" :style="css.hovering" />
       <div v-if="selected !== undefined" class="selected" :style="css.selected" />
       <div v-for="i in namedIndexes" :key="i" class="named" :style="css.box(i)" />
+      <div v-for="tag in preppedTags" :key="tag.id" :style="`--tag-color: ${tag.color}`">
+        <div v-for="index in tag.indexes" class="tagged" :style="css.box(index)" :key="index" />
+      </div>
     </div>
     <div class="actions">
       <tags />
@@ -16,7 +19,7 @@
       <input
         v-if="selected !== undefined"
         :style="`width: ${4 * outSize}px`"
-        class="form-control text-black"
+        class="rename-input"
         v-model="currentSheet.sprites[selected]"
         @input="rename"
       />
@@ -42,12 +45,20 @@ export default {
       selected: undefined,
       schema,
       geo: Geo(5, 5),
+      tagged: [],
     }
   },
   __route: {
     path: '/sprite-picker/:name?',
   },
   computed: {
+    preppedTags() {
+      delete this.currentSheet.tags.null
+      return store.sprite.tag.state.list.map((tag) => ({
+        ...tag,
+        indexes: this.currentSheet.tags[tag.id],
+      }))
+    },
     namedIndexes() {
       return Object.keys(this.currentSheet.sprites).map(Number)
     },
@@ -71,10 +82,20 @@ export default {
       }
       return { box, selected: box(this.selected), hovering: box(this.hovering) }
     },
+    mode() {
+      const { selected } = store.sprite.tag.state
+      if (null === selected || undefined === selected) {
+        return 'rename'
+      }
+      return 'tag'
+    },
   },
   watch: {
     currentSheet: 'redraw',
     'currentSheet.scale': 'redraw',
+    hovering() {
+      this.drawTo(this.$refs.preview)
+    },
   },
   mounted() {
     this.redraw()
@@ -84,32 +105,52 @@ export default {
       store.sprite.sheet.update()
     },
     click(event) {
-      if (event.shiftKey) {
-        const canvas = document.createElement('canvas')
-        canvas.width = canvas.height = this.outSize
-        this.drawTo(canvas)
-        const a = document.createElement('a')
-        a.href = canvas.toDataURL()
-        a.download = 'sprite.png'
-        a.click()
-        return
+      if (this.mode === 'rename') {
+        if (event.shiftKey) {
+          const canvas = document.createElement('canvas')
+          canvas.width = canvas.height = this.outSize
+          this.drawTo(canvas)
+          const a = document.createElement('a')
+          a.href = canvas.toDataURL()
+          a.download = 'sprite.png'
+          a.click()
+          return
+        }
+        this.selected = this.selected === this.hovering ? undefined : this.hovering
+        this.selected !== undefined && this.drawTo(this.$refs.preview)
+        setTimeout(() => {
+          const input = this.$el.querySelector('input')
+          input.focus()
+          input.style.backgroundImage = `url(${this.$refs.preview.toDataURL()})`
+        })
+      } else if (this.mode === 'tag') {
+        this.doTag(event)
       }
-      this.selected = this.selected === this.hovering ? undefined : this.hovering
-      this.selected !== undefined && this.drawTo(this.$refs.preview)
-      setTimeout(() => this.$el.querySelector('input').focus())
+    },
+    doTag(event) {
+      const { selected } = store.sprite.tag.state
+      const tagIndexes = (this.currentSheet.tags[selected] = this.currentSheet.tags[selected] || [])
+      if (event.shiftKey) {
+        if (tagIndexes.includes(this.hovering)) {
+          this.currentSheet.tags[selected] = tagIndexes.filter((i) => i !== this.hovering)
+        }
+      } else if (!tagIndexes.includes(this.hovering)) {
+        tagIndexes.push(this.hovering)
+      }
+      store.sprite.sheet.update()
     },
     mousemove(event) {
       const { scale } = this.currentSheet
-      const last_index = this.hovering
       this.hovering = this.geo.xy2index([
         Math.floor(event.offsetX / scale),
         Math.floor(event.offsetY / scale),
       ])
-      if (last_index !== this.hovering && this.selected === undefined) {
-        this.drawTo(this.$refs.preview)
-      }
       if (event.buttons === 1) {
-        this.selected = this.hovering
+        if (this.mode === 'rename') {
+          this.selected = this.hovering
+        } else if (this.mode === 'tag') {
+          this.doTag(event)
+        }
       }
     },
     drawTo(canvas) {

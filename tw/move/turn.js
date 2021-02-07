@@ -1,8 +1,9 @@
+import vector from 'tw/Geo/vector'
 import after from './after'
 import { sortBy, min } from 'lodash'
 
 const filterLowest = (piece, move, cache) => {
-  const targets = piece.board.geo.dindexes
+  let targets = piece.board.geo.dindexes
     .map((dindex) => {
       const index = piece.index + dindex
       return {
@@ -18,12 +19,16 @@ const filterLowest = (piece, move, cache) => {
 }
 
 const follow = (piece, move) => {
+  if (move.dindex) {
+    // already turned this move, continue
+    return move
+  }
   // TODO "follow" may be adding complexity here and not actually changing anything
   // Turn piece towards nearest enemy, favoring piece.following (last turns target)
   // Also favor shrinking larger dx, dy or moving foward
   let targets = filterLowest(piece, move, piece.board.cache.team[piece.team])
 
-  if (piece.following) {
+  if (piece.following !== undefined) {
     if (!targets.find((t) => t.id === piece.following)) {
       // can no longer see following piece (enemy moved in way or piece died)
       delete piece.following
@@ -52,6 +57,28 @@ const follow = (piece, move) => {
     move.priority = target.value
   }
 
+  return move
+}
+
+const towardHero = follow.hero = (piece, move) => {
+  const indexes = piece.board.geo.look('box', piece.index, piece.sight, 1)
+  const heros = indexes
+        .map(i => piece.board.getPiece(i))
+        .filter(p => p && p.player && p.team !== piece.team)
+  if (heros.length) {
+    let nearest = { distance: Infinity }
+    heros.forEach(hero => {
+      const { index2xy } = piece.board.geo
+      const dxy = vector.subtract(index2xy(piece.index), index2xy(hero.index))
+      const distance = vector.magnitude(distance)
+      if (distance < nearest.distance) {
+        nearest = { distance, hero, dxy }
+      }
+    })
+    const [ dx, dy ] = nearest.dxy
+    move.dindex = Math.sign(dx) > Math.sign(dy) ? piece.board.W * Math.sign(dy) : Math.sign(dx)
+    throw "TODO verify that toward hero turns toward hero"
+  }
   return move
 }
 
@@ -102,4 +129,5 @@ export default {
   follow,
   towardSound,
   flip,
+  towardHero,
 }

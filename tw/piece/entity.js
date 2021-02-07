@@ -28,8 +28,10 @@ const newPiece = (opts) => {
       'dindex',
       'team',
       'health',
-      '_PRNG',
-      'i_cycle',
+      'blood_armor', // decays every turn
+      'invincible', // can be attacked, but gets no damage
+      'invlunerable', // cannot be attacked
+      'buff', // status effects applied every turn
       'max_health',
       'turns',
       '_turn',

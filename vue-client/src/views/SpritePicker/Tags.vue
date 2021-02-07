@@ -3,6 +3,9 @@
     <i class="fa fa-tag btn btn-primary" />
     <popper v-if="focused" @click.stop>
       <div class="tags-popper">
+        <div class="tag">
+          <i :class="css.tag({ id: null })" @click="select({ id: null })" /> Rename Tool
+        </div>
         <div v-for="tag in tags" :key="tag.id" class="tag">
           <i :class="css.tag(tag)" @click="select(tag)" />
           <div class="swatch" :style="`background: ${tag.color}`" />

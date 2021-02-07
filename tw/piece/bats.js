@@ -11,6 +11,11 @@ export default {
     ],
   },
   bigbat: {
-    tasks: [move.wakeUp, move.attackNearby('circle', 1), move.turn.towardSound, move.forward],
+    tasks: [
+      move.wakeUp,
+      move.attackNearby('circle', 1),
+      move.turn.towardSound,
+      move.forward(1),
+    ],
   },
 }

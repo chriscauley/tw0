@@ -1,8 +1,8 @@
 import { reactive } from 'vue'
 import { defaults } from 'lodash'
 
-import Local from '../Local'
 import api from '@/api'
+import Local from '../Local'
 
 const LS_KEY = 'store/sprite/sheet'
 
