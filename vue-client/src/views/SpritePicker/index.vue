@@ -41,7 +41,7 @@ export default {
   components: { ImportExport, Links, Settings, Tags },
   mixins: [FocusMixin],
   data() {
-    const { schema } = store.sprite.sheet
+    const { schema } = store.sheet
     return {
       hovering: null,
       selected: undefined,
@@ -56,7 +56,7 @@ export default {
   computed: {
     preppedTags() {
       delete this.currentSheet.tags.null
-      return store.sprite.tag.state.list
+      return store.tag.state.list
         .filter((t) => !t.hidden)
         .map((tag) => ({
           ...tag,
@@ -69,9 +69,9 @@ export default {
     outSize() {
       return this.currentSheet.scale - this.currentSheet.buffer * 2
     },
-    sheets: store.sprite.sheet.all,
+    sheets: store.sheet.all,
     currentSheet() {
-      return store.sprite.sheet.state.byName[this.$route.params.name]
+      return store.sheet.state.byName[this.$route.params.name]
     },
     css() {
       const { scale } = this.currentSheet || {}
@@ -87,7 +87,7 @@ export default {
       return { box, selected: box(this.selected), hovering: box(this.hovering) }
     },
     mode() {
-      const { selected } = store.sprite.tag.state
+      const { selected } = store.tag.state
       if (null === selected || undefined === selected) {
         return 'rename'
       }
@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     saveState() {
-      store.sprite.sheet.update()
+      store.sheet.update()
     },
     click(event) {
       if (this.mode === 'rename') {
@@ -132,7 +132,7 @@ export default {
       }
     },
     doTag(event) {
-      const { selected } = store.sprite.tag.state
+      const { selected } = store.tag.state
       const tagIndexes = (this.currentSheet.tags[selected] = this.currentSheet.tags[selected] || [])
       if (event.shiftKey) {
         if (tagIndexes.includes(this.hovering)) {
@@ -141,7 +141,7 @@ export default {
       } else if (!tagIndexes.includes(this.hovering)) {
         tagIndexes.push(this.hovering)
       }
-      store.sprite.sheet.update()
+      store.sheet.update()
     },
     mousemove(event) {
       const { scale } = this.currentSheet
@@ -160,7 +160,7 @@ export default {
     drawTo(canvas) {
       const sw = this.outSize
       const [x, y] = this.geo.index2xy(this.hovering)
-      const img = store.sprite.sheet.getImage(this.currentSheet.fname)
+      const img = store.sheet.getImage(this.currentSheet.fname)
       const { scale, buffer } = this.currentSheet
       const ctx = canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
@@ -173,7 +173,7 @@ export default {
       if (!this.currentSheet) {
         return
       }
-      const img = store.sprite.sheet.getImage(this.currentSheet.fname, this.redraw)
+      const img = store.sheet.getImage(this.currentSheet.fname, this.redraw)
       if (!img) {
         return
       }

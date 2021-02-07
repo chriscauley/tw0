@@ -23,9 +23,9 @@ import FocusMixin from '@/FocusMixin'
 export default {
   mixins: [FocusMixin],
   computed: {
-    sheets: store.sprite.sheet.all,
+    sheets: store.sheet.all,
     currentSheet() {
-      return store.sprite.sheet.state.byName[this.$route.params.name]
+      return store.sheet.state.byName[this.$route.params.name]
     },
   },
 }

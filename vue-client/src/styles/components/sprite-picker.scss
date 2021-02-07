@@ -81,6 +81,9 @@
   input {
     @apply text-black;
     width: 8rem;
+    &[type="color"] {
+      width: 2rem;
+    }
   }
 }
 

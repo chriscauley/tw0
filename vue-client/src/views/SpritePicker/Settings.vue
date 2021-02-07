@@ -17,15 +17,15 @@ import FocusMixin from '@/FocusMixin'
 
 export default {
   mixins: [FocusMixin],
-  data: () => ({ schema: store.sprite.sheet.schema }),
+  data: () => ({ schema: store.sheet.schema }),
   computed: {
     currentSheet() {
-      return store.sprite.sheet.state.byName[this.$route.params.name]
+      return store.sheet.state.byName[this.$route.params.name]
     },
   },
   methods: {
     saveState() {
-      store.sprite.sheet.update()
+      store.sheet.update()
     },
   },
 }

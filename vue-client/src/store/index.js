@@ -1,16 +1,18 @@
-import sprite from './sprite'
+import sheet from './sheet'
+import tag from './tag'
 import { format } from 'date-fns'
 
-const store = { sprite }
+const store = { sheet, tag }
 
-const list = []
+const list = (store.list = [])
+const LS_KEYS = []
 Object.entries(store).forEach(([_name, module]) => {
   list.push(module)
+  LS_KEYS.push(module.LS_KEY)
 })
 
-store.list = list
 store.init = () => {
-  store.list.forEach((m) => m.init(m))
+  store.list.forEach((m) => m.init?.(m))
 }
 
 // TODO should by dynamic from LS_KEY in each module
@@ -18,8 +20,7 @@ const SLUGS = ['sprite/sheet', 'sprite/tag']
 
 export const exportJson = () => {
   const out = {}
-  SLUGS.forEach((slug) => {
-    const LS_KEY = 'store/' + slug
+  LS_KEYS.forEach((LS_KEY) => {
     out[LS_KEY] = window.localStorage.getItem(LS_KEY)
   })
   const a = document.createElement('a')

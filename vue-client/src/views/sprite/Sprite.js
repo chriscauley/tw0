@@ -33,7 +33,7 @@ const sheetSlug = (sheet) => {
 }
 
 const getDataUrl = (sheet, index) => {
-  const img = store.sprite.sheet.getImage(sheet.fname)
+  const img = store.sheet.getImage(sheet.fname)
   const { scale, width, height } = sheet
   const W = Math.floor(width / scale)
   const H = Math.floor(height / scale)

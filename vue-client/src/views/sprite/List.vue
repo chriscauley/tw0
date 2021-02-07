@@ -49,8 +49,8 @@ export default {
   },
   computed: {
     sheets() {
-      const sheets = store.sprite.sheet.all().filter((s) => Object.keys(s.sprites).length)
-      const _getImg = (s) => store.sprite.sheet.getImage(s.fname, () => this.$forceUpdate())
+      const sheets = store.sheet.all().filter((s) => Object.keys(s.sprites).length)
+      const _getImg = (s) => store.sheet.getImage(s.fname, () => this.$forceUpdate())
       if (sheets.find((sheet) => !_getImg(sheet))) {
         // TODO lazy way to force images to be loaded
         return []
@@ -87,7 +87,7 @@ export default {
     save(data) {
       const { sheet, name, index } = data
       sheet.sprites[index] = name
-      store.sprite.sheet.update()
+      store.sheet.update()
       this.editing = null
     },
   },

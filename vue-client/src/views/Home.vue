@@ -15,7 +15,7 @@ const links = [
   '/sprite/list2/',
   '/coloseum/9x9/bat/',
 ]
-store.sprite.sheet.all().forEach(sheet => links.push(`/sprite-picker/${sheet.name}`))
+store.sheet.all().forEach((sheet) => links.push(`/sprite-picker/${sheet.name}`))
 export default {
   __route: {
     path: '/',

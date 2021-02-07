@@ -1,6 +1,6 @@
-import Local from '../Local'
+import Local from './Local'
 
-const LS_KEY = 'store/sprite/tag'
+const LS_KEY = 'store/tag'
 
 const initial = {
   list: [],

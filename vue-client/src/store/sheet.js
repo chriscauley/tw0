@@ -2,9 +2,9 @@ import { reactive } from 'vue'
 import { defaults } from 'lodash'
 
 import api from '@/api'
-import Local from '../Local'
+import Local from './Local'
 
-const LS_KEY = 'store/sprite/sheet'
+const LS_KEY = 'store/sheet'
 
 const { state: byName, update } = Local({ LS_KEY, initial: {} })
 
