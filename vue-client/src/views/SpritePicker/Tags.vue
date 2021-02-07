@@ -14,6 +14,7 @@
           <div class="swatch" :style="`background: ${tag.color}`" />
           <span class="name">{{ tag.name }}</span>
           <div class="flex-grow" />
+          <i :class="css.eyecon(tag)" @click="tag.hidden = !tag.hidden" />
           <i class="fa fa-edit" @click="editing = tag" />
         </div>
         <form class="flex" @submit.prevent="submit">
@@ -45,6 +46,7 @@ export default {
       return {
         bg: `background: ${color}`,
         radio: (tag) => `fa fa-circle${tag.id === id ? '' : '-o'}`,
+        eyecon: (tag) => `fa fa-eye${tag.hidden ? '-slash' : ''}`,
       }
     },
     currentTag: () => store.sprite.tag.state.list[store.sprite.tag.state.selected],
@@ -63,6 +65,7 @@ export default {
       const { editing } = this
       if (editing.id === undefined) {
         store.sprite.tag.add(this.editing)
+        store.sprite.tag.state.selected = this.editing.id
       }
       store.sprite.tag.update()
       this.editing = { color: '#000000' }

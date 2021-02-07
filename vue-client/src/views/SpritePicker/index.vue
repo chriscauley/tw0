@@ -54,10 +54,12 @@ export default {
   computed: {
     preppedTags() {
       delete this.currentSheet.tags.null
-      return store.sprite.tag.state.list.map((tag) => ({
-        ...tag,
-        indexes: this.currentSheet.tags[tag.id],
-      }))
+      return store.sprite.tag.state.list
+        .filter((t) => !t.hidden)
+        .map((tag) => ({
+          ...tag,
+          indexes: this.currentSheet.tags[tag.id],
+        }))
     },
     namedIndexes() {
       return Object.keys(this.currentSheet.sprites).map(Number)
