@@ -55,6 +55,9 @@ export default {
     })
   },
   methods: {
+    handleError(e) {
+      throw e
+    },
     change(name, value) {
       this.state[name] = value // eslint-disable-line
       this.onChange(this.state, { name, value })
