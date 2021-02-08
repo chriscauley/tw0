@@ -4,7 +4,7 @@ export default {
   boo: {
     geometry: 'f',
     opts: { sight: 8 },
-    // sprite: 'wisp',
+    sprite: 'shade-wisp',
     tasks: [
       move.ifLookedAt(move.booOff),
       // move.turn.follow.hero,
@@ -15,25 +15,26 @@ export default {
   },
   boo2: {
     geometry: 'f',
-    // sprite: 'shade',
+    sprite: 'shade',
     opts: { turns: 2, sight: 8 },
     tasks: [move.ifLookedAt(move.booOff), move.turn.follow.hero, move.turn.follow, move.forward(1)],
   },
-  // boohoo: {
-  //   geometry: 'f',
-  //   sprite: 'wraith',
-  //   opts: { turns: 3, health: 3, sight: 5 },
-  //   tasks: [
-  //     move.ifHit(move.teleport(4)),
-  //     move.ifLookedAt(move.booOff),
-  //     move.turn.follow.hero,
-  //     move.turn.follow,
-  //     move.forward(1),
-  //   ],
-  // },
-  blindboo: {
+  boohoo: {
     geometry: 'f',
-    sprite: 'blindboo',
+    sprite: 'shee',
+    opts: { turns: 3, health: 3, sight: 5 },
+    tasks: [
+      // move.ifHit(move.teleport(4)),
+      move.ifLookedAt(move.booOff),
+      move.turn.follow.hero,
+      move.turn.follow,
+      move.forward(1),
+    ],
+  },
+  blindboo: {
+    sprite: 'eye',
+    sprites: ['eye-ethereal'],
+    geometry: 'f',
     opts: { turns: 3, ethereal: true, sight: 8 }, // TODO sight: friendly tower
     tasks: [
       move.turn.follow.hero,

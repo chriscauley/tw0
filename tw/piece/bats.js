@@ -2,6 +2,7 @@ import move from '../move'
 
 export default {
   bat: {
+    sprites: ['bat-asleep'],
     tasks: [
       move.wakeUp,
       move.wait(1),
@@ -11,6 +12,8 @@ export default {
     ],
   },
   bigbat: {
+    sprite: 'bat-boss',
+    sprites: ['bat-boss-asleep'],
     tasks: [
       move.wakeUp,
       move.attackNearby('circle', 1),
