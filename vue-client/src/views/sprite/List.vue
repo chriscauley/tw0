@@ -50,9 +50,7 @@ export default {
   computed: {
     sheets() {
       const sheets = store.sheet.all().filter((s) => Object.keys(s.sprites).length)
-      const _getImg = (s) => store.sheet.getImage(s.fname, () => this.$forceUpdate())
-      if (sheets.find((sheet) => !_getImg(sheet))) {
-        // TODO lazy way to force images to be loaded
+      if (!store.sheet.imagesAreLoaded(this.$forceUpdate)) {
         return []
       }
       return sheets.map((sheet) => {

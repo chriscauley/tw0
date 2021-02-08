@@ -76,4 +76,10 @@ const schema = {
   },
 }
 
-export default { state, update, init, getImage, schema, all }
+const imagesAreLoaded = (callback) => {
+  const sheets = all().filter((s) => Object.keys(s.sprites).length)
+  const _getImg = (s) => getImage(s.fname, callback)
+  return sheets.map((sheet) => _getImg(sheet)).filter(Boolean).length === sheets.length
+}
+
+export default { state, update, init, getImage, schema, all, imagesAreLoaded }

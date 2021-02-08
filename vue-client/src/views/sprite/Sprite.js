@@ -2,7 +2,7 @@
 import store from '@/store'
 import Geo from 'tw/Geo'
 
-const load = () => {
+const { style, canvases, registry } = (() => {
   if (window.SPRITE_CACHE) {
     console.warn('reusing sprite cache')
     return window.SPRITE_CACHE
@@ -14,16 +14,15 @@ const load = () => {
   const canvases = {}
   const registry = {}
   return (window.SPRITE_CACHE = { canvases, registry, style })
-}
+})()
 
-const { style, canvases, registry } = load()
+const css = (slug) => `sprite sprite-${slug.replace(/\./g, ' ')}`
 
 const saveSprite = (slug, url) => {
   if (!registry[slug]) {
     const selector = `.sprite.sprite-${slug}`
     style.innerHTML += `${selector} { background-image: url("${url}");}\n`
-    const cls = slug.replace('.', ' ')
-    registry[slug] = 'sprite sprite-' + cls
+    registry[slug] = css(slug)
   }
   return registry[slug]
 }
@@ -55,6 +54,11 @@ const getSheetSprite = (sheet, index) => {
   return saveSprite(slug, getDataUrl(sheet, index))
 }
 
+const getPieceSprite = (slug, sheet, index) => {
+  return saveSprite(slug, getDataUrl(sheet, index))
+}
+
 export default {
   getSheetSprite,
+  getPieceSprite,
 }
