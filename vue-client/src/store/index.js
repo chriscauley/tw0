@@ -15,9 +15,6 @@ store.init = () => {
   store.list.forEach((m) => m.init?.(m))
 }
 
-// TODO should by dynamic from LS_KEY in each module
-const SLUGS = ['sprite/sheet', 'sprite/tag']
-
 export const exportJson = () => {
   const out = {}
   LS_KEYS.forEach((LS_KEY) => {
