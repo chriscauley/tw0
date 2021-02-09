@@ -33,7 +33,7 @@ export default {
   },
   blindboo: {
     sprite: 'eye',
-    sprites: ['eye-ethereal'],
+    sprites: ['eye.ethereal'],
     geometry: 'f',
     opts: { turns: 3, ethereal: true, sight: 8 }, // TODO sight: friendly tower
     tasks: [

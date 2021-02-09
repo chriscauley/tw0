@@ -2,7 +2,7 @@ import move from '../move'
 
 export default {
   bat: {
-    sprites: ['bat-asleep'],
+    sprites: ['bat.awake'],
     tasks: [
       move.wakeUp,
       move.wait(1),
@@ -12,8 +12,8 @@ export default {
     ],
   },
   bigbat: {
-    sprite: 'bat-boss',
-    sprites: ['bat-boss-asleep'],
+    sprite: 'bat-big',
+    sprites: ['bat-big.awake'],
     tasks: [
       move.wakeUp,
       move.attackNearby('circle', 1),
@@ -21,4 +21,9 @@ export default {
       move.forward(1),
     ],
   },
+  vampire: {
+    sprite: 'vampire',
+    sprites: ['vampire.awake'],
+    tasks: []
+  }
 }
