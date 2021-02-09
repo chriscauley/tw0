@@ -9,7 +9,7 @@
         <div v-for="index in tag.indexes" class="tagged" :style="css.box(index)" :key="index" />
       </div>
     </div>
-    <div class="actions">
+    <div class="page-actions">
       <tags />
       <links />
       <settings />

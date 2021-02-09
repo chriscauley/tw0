@@ -1,12 +1,15 @@
 <template>
   <div class="sprite-list2 sprite-piece-list">
-    <div v-if="errors.length" class="alert alert-danger">missing: {{ errors }}</div>
+    <div v-if="sprites.errors.length" class="alert alert-danger">missing: {{ sprites.errors }}</div>
     <div class="sheet-sprites">
-      <div v-for="sprite in sprites" :key="sprite" class="box">
+      <div v-for="sprite in sprites.exists" :key="sprite" class="box">
         <div :class="sprite" />
         <div class="text">{{ sprite.replace('sprite sprite-', '') }}</div>
       </div>
     </div>
+  </div>
+  <div class="page-actions">
+    <i class="fa fa-download btn btn-primary" @click="downloadSprites" />
   </div>
 </template>
 
@@ -20,22 +23,11 @@ export default {
     path: '/sprite/piece-list',
   },
   computed: {
-    inverted() {
-      const inverted = {}
-      store.sheet.all().forEach((sheet) => {
-        Object.entries(sheet.sprites).forEach(([index, slug]) => {
-          if (inverted[slug]) {
-            this.errors.push('Duplicate sprite: ' + slug)
-          }
-          index = Number(index)
-          inverted[slug] = { slug, sheet, index }
-        })
-      })
-      return inverted
-    },
-    slugs() {
+    sprites() {
+      const exists = []
+      const errors = []
       if (!store.sheet.imagesAreLoaded(this.$forceUpdate)) {
-        return []
+        return { exists, errors }
       }
       const slugs = []
       types.slugs.forEach((slug) => {
@@ -43,19 +35,30 @@ export default {
         slugs.push(type.sprite)
         type.sprites?.forEach((s) => slugs.push(s))
       })
-      slugs.sort()
-      return slugs
-    },
-    errors() {
-      return this.slugs.filter((s) => !this.inverted[s])
-    },
-    sprites() {
-      return this.slugs
-        .filter((s) => this.inverted[s])
-        .map((slug) => {
-          const { sheet, index } = this.inverted[slug]
-          return Sprite.getPieceSprite(slug, sheet, index)
+      const inverted = {}
+      store.sheet.all().forEach((sheet) => {
+        Object.entries(sheet.sprites).forEach(([index, slug]) => {
+          index = Number(index)
+          inverted[slug] = { slug, sheet, index }
         })
+      })
+      slugs.forEach((slug) => {
+        if (inverted[slug]) {
+          const { sheet, index } = inverted[slug]
+          exists.push(Sprite.getPieceSprite(slug, sheet, index))
+        } else if (Sprite.exists(slug)) {
+          exists.push(Sprite.css(slug))
+        } else {
+          errors.push(slug)
+        }
+      })
+      exists.sort()
+      return { exists, errors }
+    },
+  },
+  methods: {
+    downloadSprites() {
+      alert('woo')
     },
   },
 }

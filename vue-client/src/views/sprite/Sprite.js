@@ -58,7 +58,13 @@ const getPieceSprite = (slug, sheet, index) => {
   return saveSprite(slug, getDataUrl(sheet, index))
 }
 
+const solo_sprites = ['bat', 'bat-big', 'vampire', 'legday', 'legs4days', 'sixlegs', 'bonetar']
+const saveSoloSprite = (slug) => saveSprite(slug, `/static/sprites/${slug}.png`)
+solo_sprites.forEach(saveSoloSprite)
+
 export default {
   getSheetSprite,
   getPieceSprite,
+  exists: (s) => !!registry[s],
+  css,
 }
