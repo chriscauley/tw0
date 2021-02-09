@@ -7,9 +7,9 @@
         <div class="text">{{ sprite.replace('sprite sprite-', '') }}</div>
       </div>
     </div>
-  </div>
-  <div class="page-actions">
-    <i class="fa fa-download btn btn-primary" @click="downloadSprites" />
+    <div class="page-actions">
+      <i class="fa fa-download btn btn-primary" @click="downloadSprites" />
+    </div>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     downloadSprites() {
-      alert('woo')
+      Sprite.downloadJson()
     },
   },
 }

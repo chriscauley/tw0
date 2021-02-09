@@ -1,8 +1,10 @@
 // TODO move to models
+import FileSaver from 'file-saver'
 import store from '@/store'
 import Geo from 'tw/Geo'
+import sprites_json from './sprites.json'
 
-const { style, canvases, registry } = (() => {
+const cache = (() => {
   if (window.SPRITE_CACHE) {
     console.warn('reusing sprite cache')
     return window.SPRITE_CACHE
@@ -11,24 +13,34 @@ const { style, canvases, registry } = (() => {
   document.head.appendChild(style)
   style.type = 'text/css'
 
-  const canvases = {}
-  const registry = {}
-  return (window.SPRITE_CACHE = { canvases, registry, style })
+  return (window.SPRITE_CACHE = {
+    style,
+    css: {},
+    json: sprites_json,
+    canvas: {},
+  })
 })()
 
-const css = (slug) => `sprite sprite-${slug.replace(/\./g, ' ')}`
-
-const saveSprite = (slug, url) => {
-  if (!registry[slug]) {
-    const selector = `.sprite.sprite-${slug}`
-    style.innerHTML += `${selector} { background-image: url("${url}");}\n`
-    registry[slug] = css(slug)
+const cssSafe = (slug) => `sprite sprite-${slug.replace(/\./g, ' ')}`
+const css = (slug) => {
+  if (!cache.css[slug]) {
+    console.warn('missing sprite for ', slug)
+    return cssSafe(slug)
   }
-  return registry[slug]
+  return cache.css[slug]
 }
 
-const sheetSlug = (sheet) => {
-  return sheet.fname.replace(/\..*/, '').toLowerCase()
+const saveSprite = (slug, { sheet = {}, index, url }) => {
+  if (!cache.css[slug]) {
+    const selector = `.sprite.sprite-${slug}`
+    cache.style.innerHTML += `${selector} { background-image: url("${url}");}\n`
+    cache.css[slug] = cssSafe(slug)
+  }
+  if (!cache.json[slug]) {
+    cache.json[slug] = { slug, index, url, sheet_fname: sheet.fname }
+    console.warn(`writing ${slug} sprite to cache.json`)
+  }
+  return cache.css[slug]
 }
 
 const getDataUrl = (sheet, index) => {
@@ -36,35 +48,43 @@ const getDataUrl = (sheet, index) => {
   const { scale, width, height } = sheet
   const W = Math.floor(width / scale)
   const H = Math.floor(height / scale)
-  if (!canvases[scale]) {
-    const canvas = (canvases[scale] = document.createElement('canvas'))
+  if (!cache.canvas[scale]) {
+    const canvas = (cache.canvas[scale] = document.createElement('canvas'))
     canvas.width = canvas.height = scale
   }
 
   const geo = Geo(W, H)
-  const ctx = canvases[scale].getContext('2d')
+  const ctx = cache.canvas[scale].getContext('2d')
   ctx.clearRect(0, 0, scale, scale)
   const [x, y] = geo.index2xy(index)
   ctx.drawImage(img, x * scale, y * scale, scale, scale, 0, 0, scale, scale)
-  return canvases[scale].toDataURL()
+  return cache.canvas[scale].toDataURL()
 }
 
 const getSheetSprite = (sheet, index) => {
-  const slug = `sheet-${sheetSlug(sheet)}.-i-${index}`
-  return saveSprite(slug, getDataUrl(sheet, index))
+  return saveSprite(sheet.sprites[index], { sheet, index, url: getDataUrl(sheet, index) })
 }
 
 const getPieceSprite = (slug, sheet, index) => {
-  return saveSprite(slug, getDataUrl(sheet, index))
+  return saveSprite(slug, { sheet, index, url: getDataUrl(sheet, index) })
 }
 
 const solo_sprites = ['bat', 'bat-big', 'vampire', 'legday', 'legs4days', 'sixlegs', 'bonetar']
-const saveSoloSprite = (slug) => saveSprite(slug, `/static/sprites/${slug}.png`)
+const saveSoloSprite = (slug) => {
+  saveSprite(slug, { url: `/static/sprites/${slug}.png` })
+}
 solo_sprites.forEach(saveSoloSprite)
+
+const downloadJson = () => {
+  const blob = new Blob([JSON.stringify(cache.json, null, 2)], { type: 'text/plain;charset=utf-8' })
+  FileSaver.saveAs(blob, 'sprites.json')
+}
 
 export default {
   getSheetSprite,
   getPieceSprite,
-  exists: (s) => !!registry[s],
+  exists: (s) => !!cache.css[s],
+  cssSafe,
+  downloadJson,
   css,
 }
