@@ -69,11 +69,24 @@ const getPieceSprite = (slug, sheet, index) => {
   return saveSprite(slug, { sheet, index, url: getDataUrl(sheet, index) })
 }
 
-const solo_sprites = ['bat', 'bat-big', 'vampire', 'legday', 'legs4days', 'sixlegs', 'bonetar']
+const solo_sprites = [
+  'bat',
+  'bat-big',
+  'vampire',
+  'legday',
+  'legs4days',
+  'sixlegs',
+  'bonetar',
+  'node-1',
+  'node-2',
+]
 const saveSoloSprite = (slug) => {
   saveSprite(slug, { url: `/static/sprites/${slug}.png` })
 }
 solo_sprites.forEach(saveSoloSprite)
+Object.values(cache.json).forEach(({ slug, url }) => {
+  saveSprite(slug, { url })
+})
 
 const downloadJson = () => {
   const blob = new Blob([JSON.stringify(cache.json, null, 2)], { type: 'text/plain;charset=utf-8' })

@@ -29,7 +29,17 @@ export default {
       if (!store.sheet.imagesAreLoaded(this.$forceUpdate)) {
         return { exists, errors }
       }
-      const slugs = []
+      const slugs = [
+        'floor0',
+        'floor1',
+        'wall0',
+        'wall1',
+        'wall2',
+        'wall3',
+        'wall4',
+        'node-1',
+        'node-2',
+      ]
       types.slugs.forEach((slug) => {
         const type = types[slug]
         slugs.push(type.sprite)
