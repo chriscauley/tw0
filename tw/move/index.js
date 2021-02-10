@@ -1,6 +1,7 @@
 import attackNearby from './attackNearby'
 import chain from './chain'
 import energy from './energy'
+import flip from './flip'
 import forward from './forward'
 import ifDidDamage from './ifDidDamage'
 import ifLookedAt from './ifLookedAt'
@@ -14,6 +15,7 @@ export default {
   chain,
   combineWith,
   energy,
+  flip,
   forward,
   ifDidDamage,
   ifLookedAt,
