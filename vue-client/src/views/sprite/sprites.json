@@ -166,5 +166,27 @@
   "heart": {
     "slug": "heart",
     "url": "/static/sprites/heart.png"
+  },
+  "zombie": {
+    "slug": "zombie",
+    "index": 967,
+    "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAACr0lEQVRYR+2Yv0tbURTHjyVDhg4ZUnBwkE4qFqpTzaRSBwuW2i2j0i6CSEon/wAnMUOhg4IZBLOpWNAhRZ2aTupQjFNxcHB4Q4YOGYSW75VvPMbre3k/Yh40Z0ny7ov3k+/5nnPus0tiHl0x55MOYNgM/X8Kpp/2/KVqzp/L0AKE/gM6hYB72d0tK0sfZaP8UwprJbMcBjQyQMB9zwzK59+OLD9Py5MP0/JpcU2Gpl4Y0KCQkQJCPUR1rFoXNnWYMu9Pr64CQTYNSG/ZlGBqAdK/VJP5gWH5cnZswMqlmnm9KNZaBwiA3mxSRiaSUpyt3tsI69n1lFQWk3UFNxcyMvfurK5kyxTk5lACm2ZeHbgCft0ZMGBQUgO3REHCMVXwE/xl24wq8x6+hkkvvuvqQa0ezQ5lEDrV9CdsgIAVGFAxaHo9AXEDN0eFQr1GFbXKTKltvAWF9F3F2BywUBIqsnjgUZ1WKq5bThAfNg3YODEIpv2peyBhWVi4/9EAmXrdenCNHsR7gDFQ+WhDUNkvZCAFubFu3mzW9CnvYdXjM0Yh4vWPX0037VCAD6WdxcKpwt7Jee0HMlJAzmIN3tg33UamrfojBdTjDpvZeqYNwu1apIBuG8XiuNXTNy39kzO3U2S/YD5X9gtyeb7ddGHoHxqpghoQUBq2lH8bH0DApatlcVIjRgyAth2QzTu7tyWV2TlzQNCKth0Q7QNACPoN1yZyu+ZabAB1MZiTzt6WASy+ed8+D1I9+E4fqwjolBLtU1A/MNnOfFx/ll0NBBm6zQAgN5o2aTw8T1hPz/RiEB+GBmT1AnJq6NqAjufvPvlRxbG+a8kfOb68GAkgIfUE4GgD3EHu5uEd8e0k4QsyMsCH5rD+Z5LtB3gdHloO6AXgtd4B9FLIa72joJdCXuv/AMF9vzhbQDOfAAAAAElFTkSuQmCC",
+    "sheet_fname": "16_colors_32_buffer.png"
+  },
+  "blueslime": {
+    "slug": "blueslime",
+    "index": 920,
+    "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABhElEQVRYR+3Wv0oDQRAG8A1YWl6RIlUqBQtra1PYBHwEH0HwMQQfwUcQbCxibW0R0MoqRYorLQXlO/zCMOyxf+YOgs41gexu9nffzO1lEvb8muy5LzjQWiFP0BO0JmBd7z3oCVoTsK7/Pz3YHM6+Y2m1nxtTCKbFABG2uH6MVnN1t+y+r4WagMAR1iy+osB2ddB9D2gNshqYg6PYgqwCAjc7ugzHF1edoS89DXx7ug+b94eiJIuBGkdEqsScV4ocDKihLKtuzFGBfaXtw/ShS5DZCRKHTdl7uv80VJZdjgGIK6cfq4HchClJtCxrbN6oQEJYpuezk85z/rIO8snOHU+djcUJauDpdBpu580OyYMbBzPxNx9teN1uozcwChC9hZ5iSiypft3Jcaar1w4G5HtXblTzV0reWAqH388u8e7I+H3/8gnFhign4LELTyqS1fNzcFVAJolPuXEqTd4I5uXiqoEyzRRMjpfAuK64xCWgIeY60JqiJ+gJWhOwrvce/PMJ/gCYu/gpZYsDIwAAAABJRU5ErkJggg==",
+    "sheet_fname": "16_colors_32_buffer.png"
+  },
+  "fly": {
+    "slug": "fly",
+    "index": 557,
+    "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAADXUlEQVRYR+2WPWgUURSFbxoLSSGYYpVgIWICKqhI1EDEiLFZREQsLBRXiGBhsWIQ1FRJJEExgohgwH+xEhHZRoOCgj8pVLAxFhYSZIvYLRYirJwH53F9zL6fWQJBdprdnX1z3zfnnHtn2mSRH22LnE9agM061FKwpWCzCmRd39HeWcf5+dpcMGLeBSmFYm6E9UqDA2b5rann5tMH2hAQxV7cHJb23X3Ss2pP1N36IFEPYIe3bzM1eVwfuWhAG0FmAqLYzPdntkht+rXsOjaSG1LXQy0C4jsOX20vIIvxM4+S7s1mqexTMUpBXTQF0lUOdbS9+B1yx5tB2uzaEmM34fS1+kZp772379IziEKNNkDhUFF9LaGgnI4Ma+TuYg3p5kZDcgNAoRN192eph4jwaHoOEhKfHDl6PHx8+lkuXxg0XYgRgnGhu58ZY/YAt7FQkE/VqnR275e5L4+DkyE4yQmkbQNQ747N8ubVBwuGdXrOMWOco7zJ87crsrV4QCbPnLPX5hrUWeOATwL+B1VPnZ0yKiJTJ4aHbM6whnZCNRyb9m6Q2dmf8uvrD+kvn4yCjFZQKwkwqIiNl65dKV1dy83GV+6PWygqihhgDQ6AERTnb8zcDT6lkgC1grCTakBBWAfLNRi+A45gyB6ug9LHe47Ym0t+1Ln2Egy5oz0vJ6+asBMUcPwf1+v/mDmc5xrYHaNiUEHA0UrAYWNmiiD41DmDIgChrbimPDFmM0cFAYm1nABZzRJ83ZruXW82erBuhSxbs1OKTx5agU9/m7cWEhyWjh4t2mHOsUII3gitJ2TS24xuCBS8tLpDKvsOGQUIXFlSleLvghCSFqNh2Biw9n3lkYmFtlwri++5xwzsBRAgcPR3/7FQgMZ5fgKADeKOEs5M2kwBmn6SMH+0gbAuHOxiBxOC1vI3H4O+vGXN3qgmgQLsRBdSNwohCIXH2UBf7Z+3lbFrd+qISox6qB0ExCIoSUiMFz3faC035Ks9uhOAOA6Wtpj8cs1QuVT3zT6tZBDQHTPazqwsYb3OGiBdwBQVg2MGm+lOdKH4msXzWh0Nqy11r8nKHs9FKaiDnvWU0Zu76qTA5GoSZtAXakKkZMunWlIGYwst1LqgxQu1cWzdFmCsUo3WtRT87xX8C8leyEcGDCxGAAAAAElFTkSuQmCC",
+    "sheet_fname": "16_colors_32_buffer.png"
+  },
+  "red-zombie": {
+    "slug": "red-zombie",
+    "url": "/static/sprites/red-zombie.png"
   }
 }
