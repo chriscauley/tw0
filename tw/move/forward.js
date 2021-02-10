@@ -1,3 +1,4 @@
+import vector from 'tw/Geo/vector'
 import { canMoveOn, canAttack } from '../piece/lib'
 
 const forward = (dist) => (piece, move) => {
@@ -47,6 +48,23 @@ forward.attack = (dist) => {
       move.done = true
     }
     return move
+  }
+}
+
+forward.turnOrFlip = (piece, move) => {
+  const dindex = move.dindex || piece.dindex
+  const dxy = piece.board.geo.index2xy(dindex)
+
+  // TODO shuffle somehow
+  const target_dxys = [
+    vector.turn(dxy, 1),
+    vector.turn(dxy, -1),
+    vector.times(dxy, -1),
+  ]
+  const moves = target_dxys.map((target_dxy) => forward(piece, move, target_dxy))
+  return {
+    ...move,
+    ...moves.find((move) => move.done),
   }
 }
 
