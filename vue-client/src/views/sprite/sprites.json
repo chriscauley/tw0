@@ -154,5 +154,17 @@
     "index": 905,
     "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFXklEQVRYR6VXW28bRRT+ZtZe27G9jp17miapKgpREVQIISQeuLzwWB6QeIOfwH/kBQlUBAKpEqIlSUNKG2J7vbbXe5lddGZ7NrObdYrEvOzuzLl858w538yK2zvbKUpjOpuh027ns/T9urFM3pyvsiG+/ear9Pj0TK+5noex5+n3k7PncLpdTDxPP28apgy903j36J5+/vL491z1YG8Hq90ueq/sHe7vQTz89KOUHPMwAdAcO7+zt5MZvn8EAsw6ZXl2YsotA6EBfPL+O/kWsDFyNHKnefT9Xgcff/hBwXEZMMkzSNMOyVHUDIIBsn4OoKzE21BWoPmyLDmnQQCq7FQFRKBoLAXAGaC9JKOkcJNxMkaZWjbKGc0z8ODNO9e6gITJGBUiZYDT+DoADIL1TTBVAGhOlAGwMiswgJsiMx2XQZjBcFFzpjSAg+0NnQGaLDun+ZsA8N4zOLZRBZbbk7uKZTUAXqxSJIUyONMhbw/PcbWb3FG2b/KL6LebKZMGGTF7lo2WiejB0T1QD5sEZnYH1c5/GWRXZ4Dbh1L6xeef5Ya/++HRNTukxP1uLpY5hNfYnklcBJCCpmALRUgAKDoSZrokQ6xMCrwlryvKKseswwD+PHt+HUBVdKxIUZotxmRSFT0HYurSOxcud4LOgFn9ZTYrO9na68FfhJBBrZAEBsG2WM+sDbNrCgCqkN2U4rfu30LgJlpkGS2XO4V9UEeYrX0tA4RMNIB6bGkbUU0hDa7gUBQE4MWZqyetloTyMzDshGxUUTcf8SZl50Vo7g2/bw16BRA8f3B3AydPLvTa2lYXTncF44tZvr8M5tb+AHM3zIHRy9IMlFPGzgabHZ2Nfr+PIAig6jGEBH79+enVXeHuJqJY4ezkMj+QRBNoNmycnw7zY73snHzmVGzueZlSW46NZmJhfW8VUgosgkgD4PHe20cYhy5UnCJNs7NNWgLHf2SEVL5ZFbaAz4KqouO9pNvN9z8+gpQS3Y0WgjDC5B9fp3x3f4BYKag4we1BdnIeX/ylsySE0N8Nu47nz0aV17sbzwJiKyYkIiPf91F3ahAQsKJXbdhUmM4XuNXbzglr6LsYtLL6GYcTIBU4eVqkZ6Z3XYRUseYd7tJ3sdbq5RcRbcjzYFsW7F4N02HWFqGIsNPbwE+/PdbUSjKqpmDFlu4CcxCLfv3lw8L5QfIaQCQUUiTY7Ay0zqU/1k82xL3utNtQdozZKAMQIMS2s444jmFZFiaTiZ5PXqW+TGIHu7t5ljioPAMvvRFsXLFbbCmsr6xmafQ8yDRFu92GN5/ngakwxGAw0ADq9Tpc10UqZVU5FeZMjsh5IESMN3b3teDJ+bl+EoiayghJJIkGMPX9zFgj1YWnkgSrdgeLxQKBpbDR7hfYkW1QwW72HUTJFWlpu3wli0SMJEmx5WTbQFGbAGh9tdHBbLHIASAQCNIIPXsFYRjicjIr3IxJXwoJyxIYvswA/D2ewem2URcZkCsAMtY9bKf1PF2UKipIK5agDK022pgHgY4+KwKBJIrQ6XQwiefwhn7hZpzUEt26xB2XLzzNmlYoNIg1p5UB6Dvd9GBnXX9EMkaiUswnWZHRyThcuJBRBoAi9cNQA6iFErGdRUHvL9w56B+SbdWE0DzAxOQnGSesZDuaD3F4eJi6w0vc3d3Qwkop/Qxkgqa0kdZTiEjolnNqKxAtgciLMBqN0N3qaZJRU4Un59nZQHZojaibB4HjQZHLpkCySDWRCf475j9gMsAgCMjpRdaS270VSGcd589Ocyc0z444A+bfsJ0ECGUDMlVLf3I1AEWFkhars5io//81nYwr/7L/BYDjmINgxS3BAAAAAElFTkSuQmCC",
     "sheet_fname": "ProjectUtumno_full.png"
+  },
+  "floorlock": {
+    "slug": "floorlock",
+    "url": "/static/sprites/floorlock.png"
+  },
+  "floorstairs": {
+    "slug": "floorstairs",
+    "url": "/static/sprites/floorstairs.png"
+  },
+  "heart": {
+    "slug": "heart",
+    "url": "/static/sprites/heart.png"
   }
 }

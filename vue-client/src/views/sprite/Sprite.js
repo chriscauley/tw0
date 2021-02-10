@@ -79,13 +79,16 @@ const getPieceSprite = (slug, sheet, index) => {
 const solo_sprites = [
   'bat',
   'bat-big',
-  'vampire',
+  'bonetar',
+  'floorlock',
+  'floorstairs',
+  'heart',
   'legday',
   'legs4days',
   'sixlegs',
-  'bonetar',
   'node-1',
   'node-2',
+  'vampire',
 ]
 const saveSoloSprite = (slug) => {
   saveSprite(slug, { url: `/static/sprites/${slug}.png` })
