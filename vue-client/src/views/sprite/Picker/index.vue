@@ -51,7 +51,7 @@ export default {
     }
   },
   __route: {
-    path: '/sprite-picker/:name?',
+    path: '/sprite/picker/:name?',
   },
   computed: {
     preppedTags() {

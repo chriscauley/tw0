@@ -1,5 +1,5 @@
 <template>
-  <div class="sprite-list2 sprite-piece-list">
+  <div class="sprite-list sprite-piece-list">
     <div v-if="sprites.errors.length" class="alert alert-danger">missing: {{ sprites.errors }}</div>
     <div class="sheet-sprites">
       <div v-for="sprite in sprites.exists" :key="sprite" class="box">
@@ -39,6 +39,9 @@ export default {
         'wall4',
         'node-1',
         'node-2',
+        'heart',
+        'floorlock',
+        'floorstairs',
       ]
       types.slugs.forEach((slug) => {
         const type = types[slug]

@@ -3,11 +3,11 @@
     <i class="fa fa-link btn btn-primary" />
     <popper v-if="focused">
       <div class="flex flex-col bg--bg p-4">
+        <router-link to="/">Home</router-link>
         <router-link
-          class="mr-2"
           v-for="sheet in sheets"
           :key="sheet.name"
-          :to="`/sprite-picker/${sheet.name}/`"
+          :to="`/sprite/picker/${sheet.name}/`"
         >
           {{ sheet.name }}
         </router-link>

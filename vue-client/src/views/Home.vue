@@ -8,14 +8,8 @@
 
 <script>
 import store from '@/store'
-const links = [
-  '/docs/vacuform/',
-  '/docs/css/',
-  '/sprite/list/',
-  '/sprite/list2/',
-  '/coloseum/9x9/bat/',
-]
-store.sheet.all().forEach((sheet) => links.push(`/sprite-picker/${sheet.name}`))
+const links = ['/docs/vacuform/', '/docs/css/', '/sprite/list/', '/coloseum/9x9/bat/']
+store.sheet.all().forEach((sheet) => links.push(`/sprite/picker/${sheet.name}`))
 export default {
   __route: {
     path: '/',

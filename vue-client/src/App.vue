@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/" class="fa fa-home" />
     <router-view class="app-view" />
   </div>
 </template>

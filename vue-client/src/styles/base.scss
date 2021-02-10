@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 
-@import './components/SpriteList';
-@import './components/sprite-list2';
+@import './components/sprite-list';
 @import './components/sprite-picker';
 @import './components/vacuform';
 @import './board/base.scss';

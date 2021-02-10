@@ -1,5 +1,5 @@
 <template>
-  <div class="sprite-list2">
+  <div class="sprite-list">
     <div v-if="duplicates.length" class="alert alert-danger">duplicates: {{ duplicates }}</div>
     <div v-if="editing" class="modal">
       <div class="modal-mask" @click="editing = null" />
@@ -9,7 +9,7 @@
     </div>
     <div v-for="sheet in sheets" :key="sheet.fname">
       <h4>
-        <router-link class="fa fa-edit" :to="`/sprite-picker/${sheet.name}/`" />
+        <router-link class="fa fa-edit" :to="`/sprite/picker/${sheet.name}/`" />
         {{ sheet.summary }}
       </h4>
       <div class="sheet-sprites">
@@ -42,7 +42,7 @@ const schema = {
 
 export default {
   __route: {
-    path: '/sprite/list2',
+    path: '/sprite/list',
   },
   data() {
     return { editing: null, schema }
