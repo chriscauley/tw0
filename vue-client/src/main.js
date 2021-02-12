@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import store from '@/store'
 import App from './App.vue'
 import Vacuform from './vacuform'
+import UrDropdown from '@/components/UrDropdown'
 import Popper from '@/components/Popper'
 import router from './router'
 import Stats from 'stats.js'
@@ -15,6 +16,7 @@ function main() {
   app.use(router)
   app.mount('#app')
   app.component('Popper', Popper)
+  app.component('UrDropdown', UrDropdown)
   app.component('Vacuform', Vacuform)
   store.init()
 }
