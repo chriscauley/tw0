@@ -1,0 +1,24 @@
+.toast-list {
+  @apply bottom-0 fixed flex flex-col items-center left-0 w-full;
+  .toast {
+    @apply p-4 flex justify-between items-center;
+    max-width: 100%;
+    width: 800px;
+    z-index: 1000;
+    &.-info {
+      background: var(--bg-alt);
+    }
+    &.-success {
+      @apply bg-green-500 text-white;
+    }
+    &.-warn, &.-todo {
+      @apply bg-yellow-500 text-white;
+    }
+    &.-error {
+      @apply bg-red-500 text-white;
+    }
+    .fa-close {
+      cursor: pointer;
+    }
+  }
+}

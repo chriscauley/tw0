@@ -25,7 +25,7 @@
         @input="rename"
       />
     </div>
-    <input id="picker-restore" type="file" @change="restore" style="display: none;" />
+    <input id="picker-restore" type="file" @change="restore" style="display: none" />
   </div>
 </template>
 
