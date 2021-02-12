@@ -16,11 +16,11 @@ export default {
     tasks: [move.forward(1), move.flip],
   },
   bouncer: {
+    sprite: 'blueslime',
     tasks: [
-      // move.cycle(move.flip, move.forward(1)),
+      move.cycle(move.flip, move.forward(1)),
     ],
     opts,
-    sprite: 'blueslime',
   },
   // spitter: {
   //   sprite: 'o-eye',

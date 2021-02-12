@@ -32,6 +32,7 @@ const forward = (dist, _passive) => (piece, move) => {
   return move
 }
 
+// blue blob
 forward.bounce = (dist) => {
   const _forward = forward(dist)
   return (piece, move) => {
