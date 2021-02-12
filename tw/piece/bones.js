@@ -5,7 +5,7 @@ export default {
     geometry: 'f',
     tasks: [
       move.combineWith('skeleton', 'bonetar'),
-      move.forward.attack(1),
+      move.forward(1),
       move.forward.bounce(1),
     ],
   },
@@ -13,7 +13,7 @@ export default {
     geometry: 'f',
     tasks: [
       move.combineWith('skeleton', 'bonetar'),
-      move.forward.attack(2),
+      move.forward(2),
       move.forward.bounce(2),
     ],
   },
@@ -21,7 +21,7 @@ export default {
     geometry: 'f',
     tasks: [
       move.combineWith('skeleton', 'bonetar'),
-      move.forward.attack(3),
+      move.forward(3),
       move.forward.bounce(3),
     ],
   },

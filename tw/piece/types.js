@@ -32,6 +32,7 @@ const registerGroups = (groups) => {
 
 registerGroups({
   bats,
+  blind,
   bones,
   boos,
   pots,

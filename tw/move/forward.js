@@ -1,7 +1,8 @@
 import vector from 'tw/Geo/vector'
 import { canMoveOn, canAttack } from '../piece/lib'
+import random from 'tw/random'
 
-const forward = (dist) => (piece, move) => {
+const forward = (dist, _passive) => (piece, move) => {
   const dindex = move.dindex || piece.dindex
   const target_indexes = piece.board.geo.look('f', piece.index, dist, dindex)
   let valid_index
@@ -10,8 +11,16 @@ const forward = (dist) => (piece, move) => {
     if (canMoveOn(piece.board, target_index)) {
       valid_index = target_index
     } else {
-      if (canAttack(piece, target_index)) {
-        move._can_attack = target_index
+      if (!_passive && canAttack(piece, target_index)) {
+        move.damages = [
+          {
+            index: move._can_attack,
+            count: piece.damage,
+            source: piece,
+            dindex: move.dindex,
+          },
+        ]
+        move.done = true
       }
       break
     }
@@ -31,41 +40,25 @@ forward.bounce = (dist) => {
   }
 }
 
-forward.attack = (dist) => {
-  const f = forward(dist)
-  return (piece, move) => {
-    // like move forward, but does domage if runs into enemy
-    move = f(piece, move)
-    if (move._can_attack) {
-      move.damages = [
-        {
-          index: move._can_attack,
-          count: piece.damage,
-          source: piece,
-          dindex: move.dindex,
-        },
-      ]
-      move.done = true
-    }
-    return move
-  }
-}
+// currently unused. This allows pieces that can move forward but not attack
+forward.passive = (dist) => forward(dist, true)
 
+// fly
 forward.turnOrFlip = (piece, move) => {
+  const geo = piece.board.geo
   const dindex = move.dindex || piece.dindex
-  const dxy = piece.board.geo.index2xy(dindex)
 
   // TODO shuffle somehow
-  const target_dxys = [
-    vector.turn(dxy, 1),
-    vector.turn(dxy, -1),
-    vector.times(dxy, -1),
+  const target_dindexes = [
+    geo.turnDindex(dindex, 1),
+    geo.turnDindex(dindex, -1),
+    -dindex
   ]
-  const moves = target_dxys.map((target_dxy) => forward(piece, move, target_dxy))
-  return {
-    ...move,
-    ...moves.find((move) => move.done),
-  }
+
+  const moves = target_dindexes
+        .map((dindex) => forward(1)(piece, {...move, dindex}))
+        .filter((move) => move.done)
+  return random.choice(piece.id + piece.index + piece.board.game.turn, moves) || move
 }
 
 export default forward
