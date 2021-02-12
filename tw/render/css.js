@@ -1,4 +1,8 @@
 import { range } from 'lodash'
+import types from 'tw/piece/types'
+
+const piece_map = {}
+types.slugs.forEach(s => piece_map[s] = types[s].sprite)
 
 const addHealth = (piece, out) => {
   const HEART = 'sprite sprite-heart mini-sprite'
@@ -71,7 +75,7 @@ export default (board, options = {}) => {
       // no index because this will be set several times
       className: `sprite piece ${p.wait !== undefined ? 'wait-' + p.wait : ''} team-${p.team}`,
       id: `piece-${p.id}`,
-      children: [`sprite sprite-${p.type} ${p.awake ? 'awake' : ''}`],
+      children: [`sprite sprite-${piece_map[p.type]} ${p.awake ? 'awake' : ''}`],
       steps: [],
       index: p.index,
     }),
