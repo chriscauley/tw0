@@ -49,6 +49,13 @@ class Geo {
       this._dindex2char[dindex] = this._dindex_chars[i]
     })
 
+    this._dindexRotCW = {
+      1: this.W,
+      [this.W]: -1,
+      '-1': -this.W,
+      [-this.W]: 1,
+    }
+
     this.CENTER = this.xy2index([
       Math.floor((this.x0 + this.W) / 2),
       Math.floor((this.y0 + this.H) / 2),
@@ -106,6 +113,9 @@ class Geo {
     // if dindex is a multiple of W it is in thy y direction
     // otherwise it is in the x direction
     return (dindex % this.W === 0 ? this.W : 1) * Math.sign(dindex)
+  }
+  turnDindex(dindex, dir) {
+    return this._dindexRotCW[dindex] * dir
   }
 }
 
