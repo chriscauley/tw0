@@ -11,7 +11,7 @@
     </div>
     <div class="page-actions">
       <tags />
-      <links />
+      <ur-dropdown :items="links" icon="link" />
       <settings />
       <ImportExport />
     </div>
@@ -30,7 +30,6 @@
 
 <script>
 import store from '@/store'
-import Links from './Links'
 import ImportExport from './ImportExport'
 import Settings from './Settings'
 import Tags from './Tags'
@@ -38,7 +37,7 @@ import FocusMixin from '@/FocusMixin'
 import Geo from 'tw/Geo'
 
 export default {
-  components: { ImportExport, Links, Settings, Tags },
+  components: { ImportExport, Settings, Tags },
   mixins: [FocusMixin],
   data() {
     const { schema } = store.sheet
@@ -54,6 +53,12 @@ export default {
     path: '/sprite/picker/:name?',
   },
   computed: {
+    links() {
+      return [
+        { to: '/', text: 'Home' },
+        ...this.sheets.map((s) => ({ to: s.url, text: s.fname.replace(/\..*/, '') })),
+      ]
+    },
     preppedTags() {
       delete this.currentSheet.tags.null
       return store.tag.state.list
