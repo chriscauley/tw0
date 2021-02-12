@@ -4,7 +4,7 @@
       <i class="fa fa-tag btn btn-primary" />
       <div v-if="currentTag" class="current-tag-color" :style="css.bg" />
     </div>
-    <popper v-if="focused" @click.stop placement="top">
+    <popper v-if="focused" @click.stop placement="top" class="popdown">
       <div class="tags-popper">
         <div class="tag"><i :class="css.radioNull" @click="select({})" /> Rename Tool</div>
         <div v-for="tag in tags" :key="tag.id" class="tag">

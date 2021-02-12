@@ -12,8 +12,8 @@
     <div class="page-actions">
       <tags />
       <ur-dropdown :items="links" icon="link" />
+      <ur-dropdown :items="actions" icon="floppy-o" />
       <settings />
-      <ImportExport />
     </div>
     <div class="preview">
       <canvas ref="preview" :width="4 * outSize" :height="4 * outSize" />
@@ -25,19 +25,19 @@
         @input="rename"
       />
     </div>
+    <input id="picker-restore" type="file" @change="restore" style="display: none;" />
   </div>
 </template>
 
 <script>
-import store from '@/store'
-import ImportExport from './ImportExport'
+import store, { exportJson, importJson } from '@/store'
 import Settings from './Settings'
 import Tags from './Tags'
 import FocusMixin from '@/FocusMixin'
 import Geo from 'tw/Geo'
 
 export default {
-  components: { ImportExport, Settings, Tags },
+  components: { Settings, Tags },
   mixins: [FocusMixin],
   data() {
     const { schema } = store.sheet
@@ -53,10 +53,20 @@ export default {
     path: '/sprite/picker/:name?',
   },
   computed: {
+    actions() {
+      const clickFile = () => this.$el.querySelector('[type=file]').click()
+      return [
+        { icon: 'download', text: 'Save data', click: exportJson },
+        { icon: 'upload', text: 'Restore data', click: clickFile },
+      ]
+    },
     links() {
       return [
         { to: '/', text: 'Home' },
-        ...this.sheets.map((s) => ({ to: s.url, text: s.fname.replace(/\..*/, '') })),
+        ...this.sheets.map((s) => {
+          const text = s.fname.replace(/\..*/, '').split('/').pop()
+          return { to: `/sprite/picker/${text}`, text }
+        }),
       ]
     },
     preppedTags() {
@@ -110,6 +120,13 @@ export default {
     this.redraw()
   },
   methods: {
+    restore(event) {
+      const fr = new FileReader()
+      fr.onload = () => {
+        importJson(fr.result)
+      }
+      fr.readAsText(event.target.files[0])
+    },
     saveState() {
       store.sheet.update()
     },

@@ -2,12 +2,13 @@ import sheet from './sheet'
 import tag from './tag'
 import { format } from 'date-fns'
 
-const store = { sheet, tag }
+const store = {}
 
 const list = (store.list = [])
 const LS_KEYS = []
-Object.entries(store).forEach(([_name, module]) => {
+Object.entries({ sheet, tag }).forEach(([name, module]) => {
   list.push(module)
+  store[name] = module
   LS_KEYS.push(module.LS_KEY)
 })
 

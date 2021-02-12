@@ -4,8 +4,8 @@
       <i v-if="icon" :class="`fa fa-${icon}`" />
       <slot />
     </div>
-    <popper v-if="focused">
-      <div class="flex flex-col bg--bg-alt p-4">
+    <popper v-if="focused" class="popdown">
+      <div class="flex flex-col">
         <div v-for="item in preppedItems" v-bind="item.attrs" v-is="item.tagName" :key="item.key">
           <i v-if="item.icon" :class="`fa fa-${item.icon}`" />
           {{ item.text }}
@@ -17,12 +17,13 @@
 
 <script>
 import FocusMixin from '@/FocusMixin'
+
 const prepItem = (item) => {
   if (typeof item === 'string') {
     item = { text: item, to: item }
   }
   item.attrs = item.attrs || {}
-  item.tagName = 'div'
+  item.tagName = item.tagName || 'div'
   if (item.to) {
     item.attrs.to = item.to
     item.tagName = 'router-link'

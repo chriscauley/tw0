@@ -67,7 +67,7 @@
 }
 
 .sprite-picker .tags-popper {
-  @apply bg-gray-500 flex flex-col overflow-auto p-2 rounded;
+  @apply flex flex-col overflow-auto;
   max-height: 80vh;
   .tag {
     @apply flex items-center;

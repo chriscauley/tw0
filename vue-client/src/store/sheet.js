@@ -82,4 +82,4 @@ const imagesAreLoaded = (callback) => {
   return sheets.map((sheet) => _getImg(sheet)).filter(Boolean).length === sheets.length
 }
 
-export default { state, update, init, getImage, schema, all, imagesAreLoaded }
+export default { state, update, init, getImage, schema, all, imagesAreLoaded, LS_KEY }

@@ -14,4 +14,4 @@ const add = (tag) => {
   state.list.push(tag)
 }
 
-export default { state, update, all: () => state.list, add }
+export default { state, update, all: () => state.list, add, LS_KEY }
