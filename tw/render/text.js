@@ -1,4 +1,4 @@
-import { assert } from '../utils'
+import assert from 'assert'
 
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const ALPHA = alpha.toUpperCase()

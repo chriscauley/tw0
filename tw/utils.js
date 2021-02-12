@@ -2,18 +2,6 @@ import { pick } from 'lodash'
 
 const MAX_LEVEL = 8
 
-export const assert = (bool, e) => {
-  if (!bool) {
-    if (typeof e === 'function') {
-      e = e()
-    }
-    if (typeof e === 'string') {
-      e = Error(e)
-    }
-    throw e
-  }
-}
-
 export const mod = (n, d) => ((n % d) + d) % d
 
 export const floodFill = ({ board, pieces, criteria, use_piece_dindex }) => {

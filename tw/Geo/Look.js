@@ -1,5 +1,5 @@
+import assert from 'assert'
 import { range } from 'lodash'
-import { assert } from '../utils'
 import Shapes from './Shapes'
 
 export default (geo) => {

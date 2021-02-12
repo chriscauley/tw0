@@ -1,10 +1,11 @@
 import { defaults, range } from 'lodash'
+import assert from 'assert'
 
 import { canMoveOn } from '../piece/lib'
 import Game from '../Game'
 import Geo from '../Geo'
 import vector from '../Geo/vector'
-import { assert, floodFillPath, floodFillTeam } from '../utils'
+import { floodFillPath, floodFillTeam } from '../utils'
 import { newPiece } from '../piece/entity'
 import sound from './sound'
 import modes from './modes'

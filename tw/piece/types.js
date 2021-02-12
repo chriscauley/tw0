@@ -1,8 +1,10 @@
+import assert from 'assert'
+
+import bats from './bats'
+import blind from './blind'
 import bones from './bones'
 import boos from './boos'
-import bats from './bats'
 import pots from './pots'
-import { assert } from '../utils'
 
 const types = {
   slugs: [],
