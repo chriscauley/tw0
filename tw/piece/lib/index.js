@@ -1,5 +1,6 @@
 export { default as applyDamage } from './applyDamage'
 export { default as applyMove } from './applyMove'
+export { default as getMove } from './getMove'
 
 export const canAttack = (piece, index) => {
   const target = piece.board.getOne('piece', index)

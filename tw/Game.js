@@ -1,23 +1,7 @@
-import { applyMove, applyDamage, canMoveOn } from './piece/lib'
+import { applyMove, applyDamage, canMoveOn, getMove } from './piece/lib'
 import { movePlayer } from './piece/lib/player'
-
-// moved these imports down because getMove should probably be in it's own file
-// getMove is originally from piece/lib, but was causing circular import
-// import { applyBuff } from './move/buff'
+import Buff from 'tw/models/Buff'
 import types from './piece/types'
-export const getMove = (piece) => {
-  const applyBuff = () => ({})
-  let move = applyBuff(piece, {})
-  if (move.done) {
-    return move
-  }
-  types[piece.type].tasks.find((task) => {
-    move = task(piece, move)
-    return move && move.done
-  })
-
-  return move
-}
 
 export default class Game {
   constructor({ board, id }) {
@@ -115,6 +99,10 @@ export default class Game {
     }
   }
 
+  applyBuffs() {
+    this.board.getPieces().filter(p => p.buff).forEach(p => Buff.apply(p))
+  }
+
   nextTurn = () => {
     this.busy = true
 
@@ -132,6 +120,7 @@ export default class Game {
       this.piece_turns[p.id] = p.turns
     })
 
+    this.applyBuffs()
     this.doMoves(pieces)
 
     this.finishTurn()
