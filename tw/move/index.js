@@ -8,6 +8,7 @@ import ifDidDamage from './ifDidDamage'
 import ifLookedAt from './ifLookedAt'
 import morph, { combineWith } from './morph'
 import turn from './turn'
+import turtleUp from './turtleUp'
 import wait from './wait'
 import wakeUp from './wakeUp'
 
@@ -23,6 +24,7 @@ export default {
   ifLookedAt,
   morph,
   turn,
+  turtleUp,
   wait,
   wakeUp,
 }

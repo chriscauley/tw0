@@ -1,3 +1,18 @@
+import applyMove from './applyMove'
+import getMove from './getMove'
+
+const doDamage = (piece, damage) => {
+  if (piece.blood_armor > 0) {
+    piece.blood_armor --
+  } else if (piece.stone_armor > 0) {
+    piece.stone_armor --
+  } else if (piece.health < damage.count) {
+    piece.health = 0
+  } else {
+    piece.health --
+  }
+}
+
 export default (board, damage) => {
   const { count, index, dindex, _sprite, source } = damage
   const piece = board.getPiece(index)
@@ -5,8 +20,13 @@ export default (board, damage) => {
     // piece died since start of turn
     return false
   }
-  piece.health -= count
-  piece._last_damage = damage
+  if (piece.invincible) {
+    // invincible pieces can be attacked but do not take damage
+    return true
+  }
+
+  const old_health = piece.health
+  doDamage(piece, damage)
   source &&
     board.animate({
       dindex,
@@ -20,6 +40,8 @@ export default (board, damage) => {
     damage.kill = piece
     piece.dead = true
     piece.board.removePiece(piece)
+  } else if (piece.health !== old_health && piece._type.onHit) {
+    applyMove(piece, getMove(piece, 'onHit'))
   }
   return true
 }

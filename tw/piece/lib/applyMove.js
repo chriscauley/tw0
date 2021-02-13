@@ -1,4 +1,4 @@
-export default (piece, move, turn) => {
+export default (piece, move) => {
   if (piece.preMove) {
     piece.preMove()
   }
@@ -11,7 +11,6 @@ export default (piece, move, turn) => {
     piece.dindex = dindex
   }
 
-  piece._turn = turn // indicates this moved this turn
   // TODO old tw code
   after.forEach((f) => piece.board.game.afterturn.push(() => f(piece, move)))
   // piece.last_move = move
@@ -25,7 +24,10 @@ export default (piece, move, turn) => {
   //     target._type.onPush(target, move.push.dxy)
   //   }
   // }
-  if (!piece.player) {
+  if (!piece.player && !move.passive) {
+    // passive moves (piece.onHit) do not cost turns
+    // and player is not managed using these variables
+    piece._turn = piece.board.game.turn // indicates this moved this turn
     piece.board.game.piece_turns[piece.id]--
   }
   if (move.end) {

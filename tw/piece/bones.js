@@ -50,4 +50,14 @@ export default {
       move.forward(2),
     ],
   },
+  bonedragon: {
+    opts: { health: 4 },
+    onHit: [move.turtleUp],
+    tasks: [
+      move.wait(1),
+      move.attackNearby('circle', 1),
+      move.turn.follow,
+      move.forward(1),
+    ]
+  }
 }

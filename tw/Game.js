@@ -76,20 +76,20 @@ export default class Game {
             move.done = true
             move.end = true
             move.index = piece.index
-            applyMove(piece, move, this.turn)
+            applyMove(piece, move)
             if (piece.dead) {
               piece.index = collide_index
             }
           })
         } else {
           // only move the first piece to avoid friendly collision
-          applyMove(piece0, move0, this.turn)
+          applyMove(piece0, move0)
         }
       })
     } else {
       piece_moves
         .filter((pm) => pm[1].priority <= lowest_priority)
-        .forEach((pm) => applyMove(pm[0], pm[1], this.turn))
+        .forEach((pm) => applyMove(pm[0], pm[1]))
     }
 
     // if some pieces did move and some pieces still can move, try do moves again
@@ -134,6 +134,10 @@ export default class Game {
         return
       }
     }
+
+    // after every turn, blood armor decays
+    this.board.pieces.forEach(p => (p.blood_armor > 0) && p.blood_armor --)
+
     this.afterturn.forEach((f) => f())
     delete this.afterturn
     this.board.mode.tick()
