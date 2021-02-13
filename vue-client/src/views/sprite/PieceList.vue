@@ -40,6 +40,8 @@ export default {
         'node-1',
         'node-2',
         'heart',
+        'blood_armor',
+        'invincible',
         'floorlock',
         'floorstairs',
       ]
