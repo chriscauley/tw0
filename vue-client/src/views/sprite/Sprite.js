@@ -22,11 +22,7 @@ const cache = (() => {
 })()
 
 // lazy way to refresh sprites for now
-// Object.keys(cache.json).forEach(k => {
-//   if (k.includes('wall')) {
-//     delete cache.json[k]
-//   }
-// })
+// delete sprites_json.blood_armor
 
 const cssSafe = (slug) => `sprite sprite-${slug.replace(/\./g, ' ')}`
 const css = (slug) => {
@@ -80,6 +76,7 @@ const solo_sprites = [
   'bat',
   'bat-big',
   'bonetar',
+  'blood_armor',
   'floorlock',
   'floorstairs',
   'heart',
