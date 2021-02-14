@@ -7,7 +7,7 @@ export default ({ LS_KEY, initial, postUpdate = () => {}, init = () => {} }) => 
     ...initial,
     ...ls.get(LS_KEY),
   })
-  const update = (data) => {
+  const update = (data = {}) => {
     Object.keys(state).forEach((key) => {
       if (data?.hasOwnProperty(key)) {
         state[key] = data[key]

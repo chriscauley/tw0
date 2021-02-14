@@ -9,7 +9,7 @@
       :change="change"
     />
     <slot name="actions">
-      <button type="submit" class="btn -primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </slot>
     <div v-if="error" class="form-error">
       {{ error }}

@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>Coloseum</h1>
-    <div>
+    <div class="flex">
+      <settings-popper />
       <button @click="next" :class="css.button()">Next</button>
       <button @click="restart" :class="css.button.danger()">Restart</button>
     </div>
@@ -14,6 +15,7 @@ import css from '@unrest/css'
 import RenderBoard from '@/components/RenderBoard'
 import Board from 'tw/Board'
 import EventMixin from '@/EventMixin'
+import SettingsPopper from '@/components/SettingsPopper'
 
 const parseBoard = (s) => {
   const [W, H] = s.split('x').map(Number)
@@ -21,7 +23,7 @@ const parseBoard = (s) => {
 }
 
 export default {
-  components: { RenderBoard },
+  components: { RenderBoard, SettingsPopper },
   mixins: [EventMixin],
   __route: {
     path: '/coloseum/:board/:pieces/',

@@ -2,4 +2,5 @@
 .popper.popdown {
   @apply rounded p-4;
   background: var(--bg-alt);
+  z-index: 100; /* TODO need z-index file */
 }

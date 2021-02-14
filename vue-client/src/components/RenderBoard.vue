@@ -16,6 +16,8 @@
 
 <script>
 import renderCSS from 'tw/render/css'
+import settings from '@/store/settings'
+
 const ANIMATION_TIME = 300
 
 export default {
@@ -43,7 +45,8 @@ export default {
   methods: {
     sync() {
       const { H, W } = this.board
-      this.items = renderCSS(this.board).items
+      const { extra } = settings.state
+      this.items = renderCSS(this.board, { extra }).items
       this.boardClass = `board W-${W} H-${H} turn-${this.board.game.turn}`
       setTimeout(this.step, 100)
     },
