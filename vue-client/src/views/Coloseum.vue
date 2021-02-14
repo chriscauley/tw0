@@ -13,6 +13,7 @@
 import css from '@unrest/css'
 import RenderBoard from '@/components/RenderBoard'
 import Board from 'tw/Board'
+import EventMixin from '@/EventMixin'
 
 const parseBoard = (s) => {
   const [W, H] = s.split('x').map(Number)
@@ -21,6 +22,7 @@ const parseBoard = (s) => {
 
 export default {
   components: { RenderBoard },
+  mixins: [EventMixin],
   __route: {
     path: '/coloseum/:board/:pieces/',
   },
@@ -48,6 +50,13 @@ export default {
       const all_bats = !options.pieces.replace(/(bat)/g, '').replace(/(\+|,)/g, '')
       if (all_bats) {
         board.entities.sound[board.geo.CENTER] = 0
+      }
+    },
+    keyup(event) {
+      if (event.key === 'r') {
+        this.restart()
+      } else if (event.key === ' ') {
+        this.next()
       }
     },
   },
