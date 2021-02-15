@@ -36,8 +36,12 @@ export default {
   data() {
     return { items: [], boardClass: '' }
   },
+  computed: {
+    extra: () => settings.state.extra,
+  },
   watch: {
     hash: 'sync',
+    extra: 'sync',
   },
   mounted() {
     this.sync()
@@ -45,8 +49,7 @@ export default {
   methods: {
     sync() {
       const { H, W } = this.board
-      const { extra } = settings.state
-      this.items = renderCSS(this.board, { extra }).items
+      this.items = renderCSS(this.board, { extra: this.extra }).items
       this.boardClass = `board W-${W} H-${H} turn-${this.board.game.turn}`
       setTimeout(this.step, 100)
     },
