@@ -27,6 +27,7 @@ export default (board, damage) => {
 
   const old_health = piece.health
   doDamage(piece, damage)
+  piece._last_damage = damage
   source &&
     board.animate({
       dindex,

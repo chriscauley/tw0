@@ -72,7 +72,8 @@ export default class Game {
           piece_moves.forEach(([piece, move]) => {
             this.board.animate({ type: 'attack', index: piece.index, dindex: piece.dindex })
             const { index } = piece
-            applyDamage(this.board, { index, count: 1, dindex: -piece.dindex })
+            const dindex = -(move.dindex || piece.dindex)
+            applyDamage(this.board, { index, count: 1, dindex })
             move.done = true
             move.end = true
             move.index = piece.index
