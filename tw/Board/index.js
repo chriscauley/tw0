@@ -246,9 +246,11 @@ export default class Board {
 
   startTurn() {
     sound.age(this)
-    sound.cache(this)
     this.animations = {}
     this.getPieces().forEach((p) => (p._indexes = [p.index]))
+  }
+  cacheSound() {
+    sound.cache(this)
   }
 }
 

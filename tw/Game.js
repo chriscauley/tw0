@@ -115,6 +115,7 @@ export default class Game {
       movePlayer(this.board.player, this.player_move)
       delete this.player_move
     }
+    this.board.cacheSound()
     const pieces = this.board.getPieces().filter((p) => !p.player)
     pieces.forEach((p) => {
       this.piece_turns[p.id] = p.turns
