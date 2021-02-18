@@ -5,13 +5,8 @@ const piece_map = {}
 types.slugs.forEach(s => piece_map[s] = types[s].sprite)
 
 const addHealth = (piece, out) => {
-  const blood = piece.blood_armor
-  const HEART = `sprite sprite-heart ${blood ? 'micro' : 'mini'}-sprite`
-  const BLOOD_ARMOR = 'sprite sprite-blood_armor mini-sprite'
+  const HEART = 'sprite sprite-heart mini-sprite'
   const INVINCIBLE = 'sprite sprite-invincible'
-  if (piece.invincible) {
-    out.children.push(INVINCIBLE)
-  }
   if (piece.health > 100) {
     // show nothing
   } else if (piece.health > 4) {
@@ -20,8 +15,10 @@ const addHealth = (piece, out) => {
   } else if (piece.max_health > 1) {
     range(piece.health).forEach(() => out.children.push(HEART))
   }
-  if (blood) {
-    range(blood).forEach(() => out.children.push(BLOOD_ARMOR))
+  if (piece.invincible) {
+    out.children.push(INVINCIBLE)
+  } else if (piece.blood_armor) {
+    out.children.push('sprite-blood -blood-'+piece.blood_armor)
   }
 }
 

@@ -6,3 +6,26 @@
   image-rendering: pixelated;
   width: 1em;
 }
+
+.sprite-blood {
+  $null: rgba(255,255,255,0.3);
+  @apply absolute rounded-full;
+  border: 0.4em #333 solid;
+  height: 0;
+  inset: 0.1em;
+  transform: rotate(45deg);
+  width: 0;
+  z-index: 100;
+  &.-blood-3 {
+    border-top-color: $null;
+  }
+  &.-blood-2 {
+    border-right-color: $null;
+    border-top-color: $null;
+  }
+  &.-blood-1 {
+    border-bottom-color: $null;
+    border-right-color: $null;
+    border-top-color: $null;
+  }
+};
