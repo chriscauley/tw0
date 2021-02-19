@@ -1,3 +1,8 @@
 .board .sprite.sprite-siren {
   background-position: center;
 }
+
+.board .sprite.hide {
+  filter: grayscale(1);
+  opacity: 0.5
+}

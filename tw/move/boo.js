@@ -2,7 +2,7 @@ import after from './after'
 import ifLookedAt from './ifLookedAt'
 
 const booOff = (piece, move) => after.done(move, () => {
-  piece._sprite = ' hide'
+  piece._sprite = 'hide'
   piece.invulnerable = true
 })
 

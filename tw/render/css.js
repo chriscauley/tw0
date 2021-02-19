@@ -81,7 +81,7 @@ export default (board, options = {}) => {
       // no index because this will be set several times
       className: `sprite piece ${p.wait !== undefined ? 'wait-' + p.wait : ''} team-${p.team}`,
       id: `piece-${p.id}`,
-      children: [`sprite sprite-${piece_map[p.type]} ${p.awake ? 'awake' : ''}`],
+      children: [`sprite sprite-${piece_map[p.type]} ${p.awake ? 'awake' : ''} ${p._sprite || ''}`],
       steps: [],
       index: p.index,
     }),
