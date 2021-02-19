@@ -1,8 +1,5 @@
 export default (piece, move) => {
-  if (piece.preMove) {
-    piece.preMove()
-  }
-  const { index, dindex = piece.dindex, after = [] /*preMove*/ } = move
+  const { index, dindex = piece.dindex, after = [] } = move
   move._from = piece.index
   if (index !== undefined && index !== piece.index) {
     piece.board.setPiece(index, piece)
@@ -13,8 +10,7 @@ export default (piece, move) => {
 
   // TODO old tw code
   after.forEach((f) => piece.board.game.afterturn.push(() => f(piece, move)))
-  // piece.last_move = move
-  // piece.preMove = preMove
+  piece._last_move = move
   if (move.now) {
     move.now(piece)
   }

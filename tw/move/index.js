@@ -1,4 +1,5 @@
 import attackNearby from './attackNearby'
+import boo from './boo'
 import chain from './chain'
 import cycle from './cycle'
 import energy from './energy'
@@ -14,6 +15,7 @@ import wakeUp from './wakeUp'
 
 export default {
   attackNearby,
+  boo,
   chain,
   cycle,
   combineWith,

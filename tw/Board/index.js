@@ -172,7 +172,7 @@ export default class Board {
     this.dirty.team = true
     const piece = newPiece(opts)
     piece.board = this
-    piece.id = this.pieces.length
+    piece.id = this.pieces.length + 1
     this.pieces.push(piece)
     piece._turn = this.game ? this.game.turn : 0
     piece._indexes = [] // used in renderer

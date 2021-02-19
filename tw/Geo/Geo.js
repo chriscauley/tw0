@@ -117,6 +117,14 @@ class Geo {
   turnDindex(dindex, dir) {
     return this._dindexRotCW[dindex] * dir
   }
+  dindex2dxy(dindex) {
+    if (Math.abs(dindex) === 1) {
+      return [dindex, 0]
+    } else if (Math.abs(dindex) === this.W) {
+      return [0, Math.sign(dindex)]
+    }
+    throw `Unknown dindex value ${dindex}`
+  }
 }
 
 export default (x0, x_max, y0, y_max) => {
