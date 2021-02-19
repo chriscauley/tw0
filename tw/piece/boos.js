@@ -1,8 +1,7 @@
 import move from 'tw/move'
 
 const tasks = [
-  move.ifLookedAt(move.boo.off),
-  move.boo.on,
+  move.boo,
   move.attackNearby('circle', 1),
   move.turn.follow,
   move.forward(1)

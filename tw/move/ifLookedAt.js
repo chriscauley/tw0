@@ -1,6 +1,6 @@
 import vector from 'tw/Geo/vector'
 
-export default (action) => (piece, move) => {
+export default (action, alt) => (piece, move) => {
   const targets = piece.board
         .getMany('piece', piece.board.geo.look('box', piece.index, piece.sight, 1))
         .filter(p => p.team !== piece.team && p.player)
@@ -20,5 +20,5 @@ export default (action) => (piece, move) => {
   if (delta_dxy[1] && Math.sign(delta_dxy[1]) === Math.sign(target_dxy[1])) {
     return action(piece, move)
   }
-  return move
+  return alt ? alt(piece, move) : move
 }
