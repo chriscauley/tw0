@@ -25,6 +25,7 @@ export default (piece, move) => {
     // and player is not managed using these variables
     piece._turn = piece.board.game.turn // indicates this moved this turn
     piece.board.game.piece_turns[piece.id]--
+    piece.board.game._moved++
   }
   if (move.end) {
     piece.board.game.piece_turns[piece.id] = 0

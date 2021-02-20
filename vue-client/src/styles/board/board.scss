@@ -57,4 +57,7 @@
   .is_dead {
     opacity: 0;
   }
+  .sprite.sound {
+    pointer-events: none;
+  }
 }

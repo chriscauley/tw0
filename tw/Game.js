@@ -37,6 +37,7 @@ export default class Game {
   doMoves(pieces) {
     // this function happens in waves, first doing colliding enemies, then anyone stepping forward, then everyone else
     // TODO move prioritization here is lacking, but I want to move on to other enemies first
+    this._moved = 0
     this.board.recache()
     const piece_moves = pieces
       .filter((p) => this.piece_turns[p.id] && p.health > 0)
@@ -94,8 +95,7 @@ export default class Game {
     }
 
     // if some pieces did move and some pieces still can move, try do moves again
-    const still_moveable = pieces.filter((p) => this.piece_turns[p.id]).length
-    if (still_moveable !== piece_moves.length) {
+    if (this._moved) {
       this.doMoves(pieces)
     }
   }
