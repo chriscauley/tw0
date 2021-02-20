@@ -48,21 +48,14 @@ const getMove = (player, dindex) => {
   return getAttack(player, dindex) || getStep(player, dindex)
 }
 
-export const movePlayer = (player, { dindex, dindex2 }) => {
+export const movePlayer = (player, { dindex }) => {
   if (dindex === 0) {
     // TODO swapItem, recharge, etc
-    return [{}]
+    return
   }
-  const move1 = getMove(player, dindex)
-  applyMove(player, move1)
-  move1.damages && move1.damages.forEach((d) => applyDamage(player.board, d))
-  if (dindex2) {
-    const move2 = getMove(player, dindex2)
-    applyMove(player, move2)
-    move2.damages && move2.damages.forEach((d) => applyDamage(player.board, d))
-    return [move1, move2]
-  }
-  return [move1]
+  const move = getMove(player, dindex)
+  applyMove(player, move)
+  move.damages && move.damages.forEach((d) => applyDamage(player.board, d))
 }
 
 // const addMoves = moves => {

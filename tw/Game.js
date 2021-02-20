@@ -111,11 +111,9 @@ export default class Game {
     this.piece_turns = {} // how many turns each piece can take
     this.afterturn = []
     this.board.startTurn()
-    if (this.player_move) {
-      this.board.player._indexes = [this.board.player.index]
-      movePlayer(this.board.player, this.player_move)
-      delete this.player_move
-    }
+    this.board.player._indexes = [this.board.player.index]
+    this.player_moves?.forEach(move => movePlayer(this.board.player, move))
+    delete this.player_move
     this.board.cacheSound()
     const pieces = this.board.getPieces().filter((p) => !p.player)
     pieces.forEach((p) => {
@@ -146,23 +144,20 @@ export default class Game {
     this.turn++
   }
 
-  pressSpace = (e, callback) => {
-    e.preventDefault()
-    if (this.board.player && this.board.player.health <= 0) {
+  playerExec = (moves, callback) => {
+    if (this.board.player?.health <= 0) {
       return
     }
-    this.nextTurn()
-    callback()
-  }
-
-  pressArrow = (e, callback) => {
-    e.preventDefault()
-    if (!this.board.player || this.board.player.health <= 0) {
-      return
-    }
-    const key = e.key.replace('Arrow', '')[0].toLowerCase()
-    const dindex = this.board.geo._name2dindex[key]
-    this.player_move = { dindex }
+    this.player_moves = []
+    moves.forEach(key => {
+      if (key === ' ') {
+        // pressing space does nothing
+        this.player_moves.push({dindex: 0})
+      } else if (key.includes('Arrow')) {
+        const dindex = this.board.geo._name2dindex[key.replace('Arrow', '')[0].toLowerCase()]
+        this.player_moves.push({ dindex })
+      }
+    })
     this.nextTurn()
     callback()
   }

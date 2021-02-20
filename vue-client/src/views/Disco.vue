@@ -3,6 +3,7 @@
     <h1>Disco</h1>
     <div class="flex">
       <settings-popper />
+      <!-- <button class="btn btn-primary" @click="replay">Replay</button> -->
     </div>
     <render-board v-if="board" :board="board" :hash="hash" />
   </div>
@@ -49,11 +50,11 @@ export default {
       this.hash = this.board.game.turn.toString()
     },
     keydown(e) {
-      if (e.key.includes('Arrow')) {
-        this.board.game.pressArrow(e, this.sync)
-      } else if (e.key === ' ') {
-        this.board.game.pressSpace(e, this.sync)
+      if (e.key.includes('Arrow') || e.key === ' ') {
+        e.preventDefault()
+        this.board.game.playerExec([e.key], this.sync)
       } else if (e.key === 'r' && !e.ctrlKey) {
+        e.preventDefault()
         this.restart()
       }
     },
