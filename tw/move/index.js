@@ -6,8 +6,10 @@ import energy from './energy'
 import flip from './flip'
 import forward from './forward'
 import ifDidDamage from './ifDidDamage'
+import ifHit from './ifHit'
 import ifLookedAt from './ifLookedAt'
 import morph, { combineWith } from './morph'
+import teleport from './teleport'
 import turn from './turn'
 import turtleUp from './turtleUp'
 import wait from './wait'
@@ -23,8 +25,10 @@ export default {
   flip,
   forward,
   ifDidDamage,
+  ifHit,
   ifLookedAt,
   morph,
+  teleport,
   turn,
   turtleUp,
   wait,

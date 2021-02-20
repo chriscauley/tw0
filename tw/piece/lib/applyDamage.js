@@ -27,7 +27,6 @@ export default (board, damage) => {
 
   const old_health = piece.health
   doDamage(piece, damage)
-  piece._last_damage = damage
   source &&
     board.animate({
       dindex,
@@ -41,8 +40,10 @@ export default (board, damage) => {
     damage.kill = piece
     piece.dead = true
     piece.board.removePiece(piece)
-  } else if (piece.health !== old_health && piece._type.onHit) {
-    applyMove(piece, getMove(piece, 'onHit'))
+  } else if (piece.health !== old_health) {
+    damage.turn = piece.board.game.turn
+    piece._last_damage = damage
+    piece._type.onHit && applyMove(piece, getMove(piece, 'onHit'))
   }
   return true
 }

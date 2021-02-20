@@ -25,7 +25,12 @@ export default {
     sprite: 'shee',
     opts: { turns: 3, health: 3, sight: 4 },
     tasks: [
-      // move.ifHit(move.teleport(4)),
+      move.ifHit(
+        move.chain([
+          move.turn.fromHit,
+          move.teleport(4)
+        ]),
+      ),
       ...tasks
     ],
   },
