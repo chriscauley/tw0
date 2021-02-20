@@ -108,12 +108,12 @@ export default (board, options = {}) => {
     const di_name = geo._dindex2name[piece.dindex]
     piece._indexes.forEach((i, n) => {
       let cls = out._base + css.index(i)
-      const attack = animations[i].filter((a) => a.type === 'attack')[0]
-      if (attack) {
-        cls += ' attack-' + di_name
-      }
-      if (attack || n > 0) {
+      const attack = animations[i].find((a) => a.type === 'attack' && a.source.id === piece.id)
+      if (n > 0) {
         out.steps.push(cls)
+      }
+      if (attack) {
+        out.steps.push(cls + ' attack-' + di_name)
       }
     })
     const last = out.steps[out.steps.length - 1]

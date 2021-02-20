@@ -34,7 +34,7 @@ export default {
     },
   },
   data() {
-    return { items: [], boardClass: '' }
+    return { items: [], boardClass: '', timeout: null }
   },
   computed: {
     extra: () => settings.state.extra,
@@ -63,7 +63,10 @@ export default {
           item.className = item.steps.shift()
         }
       })
-      needs_step && setTimeout(this.step, ANIMATION_TIME)
+      if (needs_step) {
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(this.step, ANIMATION_TIME)
+      }
     },
   },
 }
