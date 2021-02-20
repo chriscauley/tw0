@@ -3,23 +3,21 @@ import after from './after'
 const wake = (piece, move) => {
   move.priority = 0 // since piece doesn't move, do this move first
   move._woke = !piece.awake
-  move.done = true
-  after(move, () => {
+  return after.done(move, () => {
     piece.awake = true
     piece.wait = 1
   })
-  return move
 }
 
 const sleep = (piece, move) => {
   move.done = true
-  if (piece.awake) {
-    after(move, () => {
-      delete piece.awake
-      delete piece.wait
-    })
+  if (!piece.awake) {
+    return move
   }
-  return move
+  return after(move, () => {
+    delete piece.awake
+    delete piece.wait
+  })
 }
 
 const wakeUp = (piece, move) => {

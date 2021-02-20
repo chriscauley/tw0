@@ -7,8 +7,7 @@ const use = (energy_type, amount) =>
     const pass = piece[energy_type] >= amount
     if (pass && move) {
       // paint doesn't pass move in
-      move.done = true
-      after(move, () => {
+      after.done(move, () => {
         piece[energy_type] -= amount
       })
     }
