@@ -55,6 +55,18 @@ class Geo {
       '-1': -this.W,
       [-this.W]: 1,
     }
+    this._dir2index = {
+      right: 1,
+      left: -1,
+      up: -this.W,
+      down: this.W,
+    }
+    this._dindex2dir = {
+      1: 'right',
+      '-1': 'left',
+      [this.W]: 'up',
+      [-this.W]: 'down',
+    }
 
     this.CENTER = this.xy2index([
       Math.floor((this.x0 + this.W) / 2),
@@ -124,6 +136,9 @@ class Geo {
       return [0, Math.sign(dindex)]
     }
     throw `Unknown dindex value ${dindex}`
+  }
+  dindex2dir(dindex) {
+    return this._dindex2dir[dindex]
   }
 }
 

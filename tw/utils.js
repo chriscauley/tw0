@@ -32,9 +32,9 @@ export const floodFill = ({ board, pieces, criteria, use_piece_dindex }) => {
           const dindex = use_piece_dindex ? piece.dindex : -look_dindex
           cache[index] = {
             index,
+            dindex,
             target_index: piece.target_index,
             value: level,
-            dindex: dindex,
             id: piece.id,
           }
           next_targets.push(cache[index])

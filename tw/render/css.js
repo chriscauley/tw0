@@ -30,15 +30,15 @@ export const extra_getters = {
 }
 
 const team_extras = ['id', 'value', 'index', 'dindex']
-;[1, 2].forEach((team) =>
+;[1, 2].forEach((team) => {
   team_extras.forEach(
     (attr) =>
-      (extra_getters[`team${team}_${attr}`] = (b) =>
-        Object.fromEntries(
-          Object.entries(b.cache.team[team]).map(([index, cache]) => [index, cache[attr]]),
-        )),
-  ),
-)
+    (extra_getters[`team${team}_${attr}`] = (b) =>
+      Object.fromEntries(
+        Object.entries(b.cache.team[team]).map(([index, cache]) => [index, cache[attr]]),
+      )),
+  )
+})
 
 export default (board, options = {}) => {
   const extra_layer = (extra_getters[options.extra] || extra_getters.off)(board)
@@ -52,7 +52,16 @@ export default (board, options = {}) => {
     return [xy[0] - xy0[0], xy[1] - xy0[1]]
   }
 
+  const showDindex = (i, v) => ({
+    id: `dindex-${i}`,
+    className: `sprite sprite-arrow-${board.geo.dindex2dir(v)} ${css.index(i)}`,
+    index: i,
+    text: v,
+  })
+
   const css = {
+    team1_dindex: showDindex,
+    team2_dindex: showDindex,
     index: (i) => {
       const xy = index2xy(i)
       return ` x-${xy[0]} y-${xy[1]}`
@@ -148,7 +157,8 @@ export default (board, options = {}) => {
       items.push(css.square(index))
       const extra_value = extra_layer[index]
       if (extra_value !== undefined) {
-        items.push(css.sound(index, extra_value))
+        const f = css[options.extra] || css.sound
+        items.push(f(index, extra_value))
       }
     }
   })

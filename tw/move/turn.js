@@ -60,28 +60,6 @@ const follow = (piece, move) => {
   return move
 }
 
-const towardHero = follow.hero = (piece, move) => {
-  const indexes = piece.board.geo.look('box', piece.index, piece.sight, 1)
-  const heros = indexes
-        .map(i => piece.board.getPiece(i))
-        .filter(p => p && p.player && p.team !== piece.team)
-  if (heros.length) {
-    let nearest = { distance: Infinity }
-    heros.forEach(hero => {
-      const { index2xy } = piece.board.geo
-      const dxy = vector.subtract(index2xy(piece.index), index2xy(hero.index))
-      const distance = vector.magnitude(distance)
-      if (distance < nearest.distance) {
-        nearest = { distance, hero, dxy }
-      }
-    })
-    const [ dx, dy ] = nearest.dxy
-    move.dindex = Math.sign(dx) > Math.sign(dy) ? piece.board.W * Math.sign(dy) : Math.sign(dx)
-    throw "TODO verify that toward hero turns toward hero"
-  }
-  return move
-}
-
 const fromHit = (piece, move) => {
   move.dindex = piece._last_damage.dindex
   return move
@@ -129,5 +107,4 @@ export default {
   follow,
   towardSound,
   flip,
-  towardHero,
 }

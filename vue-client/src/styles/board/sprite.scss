@@ -29,3 +29,8 @@
     border-top-color: $null;
   }
 };
+
+.sprite-arrow-left, .sprite-arrow-right, .sprite-arrow-up, .sprite-arrow-down {
+  background-size: 70%;
+  pointer-events: none;
+}

@@ -2,6 +2,12 @@
   .sprite-floor0, .sprite-floor1 {
     z-index: 0
   }
+  .sprite.square {
+    z-index: 8;
+  }
+  .sprite.node {
+    z-index: 9;
+  }
   .sprite {
     z-index: 10;
   }
