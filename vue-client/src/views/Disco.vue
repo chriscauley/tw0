@@ -53,6 +53,8 @@ export default {
         this.board.game.pressArrow(e, this.sync)
       } else if (e.key === ' ') {
         this.board.game.pressSpace(e, this.sync)
+      } else if (e.key === 'r' && !e.ctrlKey) {
+        this.restart()
       }
     },
   },
