@@ -1,5 +1,8 @@
 <template>
-  <div>{{ board.game.turn }}</div>
+  <div>
+    {{ board.game.turn }}
+    {{ queue }}
+  </div>
   <div :class="boardClass">
     <div
       v-for="item in items"
@@ -11,11 +14,12 @@
       <div v-for="(c, i) in item.children" :class="c" :key="i" />
       <div v-if="item.text !== undefined" class="text">{{ item.text }}</div>
     </div>
+    <div v-for="(item, i) in queueItems" v-bind="item" :key="i" />
   </div>
 </template>
 
 <script>
-import renderCSS from 'tw/render/css'
+import renderCSS, { renderQueue } from 'tw/render/css'
 import settings from '@/store/settings'
 
 const ANIMATION_TIME = 300
@@ -24,6 +28,7 @@ export default {
   props: {
     board: Object,
     hash: String,
+    queue: Array,
     mouseover: {
       type: Function,
       default: () => {},
@@ -38,6 +43,9 @@ export default {
   },
   computed: {
     extra: () => settings.state.extra,
+    queueItems() {
+      return renderQueue(this)
+    },
   },
   watch: {
     hash: 'sync',

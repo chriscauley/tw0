@@ -29,9 +29,11 @@ class Geo {
       indexes: [],
       AREA: W * H,
       _dindex_names: ['u', 'l', 'r', 'd'],
+      _dindex_keys: ['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'],
       _dindex_chars: ['^', '<', '>', 'v'],
       _dindex2char: {},
       _name2dindex: {},
+      _key2dindex: {},
       _dindex2name: {},
       dindexes: [-W, -1, 1, W], // u, l, r, d
       rot_dindexes: {
@@ -47,6 +49,7 @@ class Geo {
       this._dindex2name[dindex] = name
       this._name2dindex[name] = dindex
       this._dindex2char[dindex] = this._dindex_chars[i]
+      this._key2dindex[this._dindex_keys[i]] = dindex
     })
 
     this._dindexRotCW = {
@@ -55,6 +58,8 @@ class Geo {
       '-1': -this.W,
       [-this.W]: 1,
     }
+
+    // TODO replace this dir2index stuff with _dindex2name
     this._dir2index = {
       right: 1,
       left: -1,
@@ -64,8 +69,8 @@ class Geo {
     this._dindex2dir = {
       1: 'right',
       '-1': 'left',
-      [this.W]: 'up',
-      [-this.W]: 'down',
+      [-this.W]: 'up',
+      [this.W]: 'down',
     }
 
     this.CENTER = this.xy2index([

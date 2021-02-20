@@ -20,4 +20,9 @@
   .sound {
     z-index: 30;
   }
+  .sprite-arrow- {
+    &up, &down, &left, &right {
+      z-index: 31
+    }
+  }
 }

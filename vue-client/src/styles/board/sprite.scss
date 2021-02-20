@@ -33,4 +33,11 @@
 .sprite-arrow-left, .sprite-arrow-right, .sprite-arrow-up, .sprite-arrow-down {
   background-size: 70%;
   pointer-events: none;
+  filter: hue-rotate(135deg);
+  &.-step-0 {
+    margin: 0.25em 0 0 -0.25em;
+  }
+  &.-step-1 {
+    margin: 0.25em 0 0 0.25em;
+  }
 }

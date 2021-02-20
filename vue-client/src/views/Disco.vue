@@ -5,7 +5,7 @@
       <settings-popper />
       <!-- <button class="btn btn-primary" @click="replay">Replay</button> -->
     </div>
-    <render-board v-if="board" :board="board" :hash="hash" />
+    <render-board v-if="board" :board="board" :hash="hash" :queue="queue" />
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
       board: null,
       hash: null,
       css,
+      queue: [],
     }
   },
   mounted() {
@@ -49,13 +50,33 @@ export default {
     sync() {
       this.hash = this.board.game.turn.toString()
     },
+    playerExec(keys) {
+      // TODO hate this name
+      this.board.game.playerExec(keys, this.sync)
+      this.queue = []
+    },
     keydown(e) {
       if (e.key.includes('Arrow') || e.key === ' ') {
         e.preventDefault()
-        this.board.game.playerExec([e.key], this.sync)
+        if (e.shiftKey) {
+          this.queue.push(e.key)
+          if (this.queue.length === 1) {
+            this.queue.push(e.key)
+          }
+          while (this.queue.length > 2) {
+            this.queue.shift()
+          }
+        } else {
+          this.playerExec([e.key])
+        }
       } else if (e.key === 'r' && !e.ctrlKey) {
         e.preventDefault()
         this.restart()
+      }
+    },
+    keyup(e) {
+      if (e.key === 'Shift') {
+        this.playerExec(this.queue)
       }
     },
   },

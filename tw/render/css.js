@@ -40,6 +40,15 @@ const team_extras = ['id', 'value', 'index', 'dindex']
   )
 })
 
+export const renderQueue = ({ board, queue }) => {
+  const xy = board.geo.index2xy(board.player.index)
+  const base = `sprite x-${xy[0]} y-${xy[1]}`
+  return queue.map((key, step) => {
+    const dindex = board.geo._key2dindex[key]
+    return { class: `${base} sprite-arrow-${board.geo.dindex2dir(dindex)} -step-${step}` }
+  })
+}
+
 export default (board, options = {}) => {
   const extra_layer = (extra_getters[options.extra] || extra_getters.off)(board)
   const { geo } = board
