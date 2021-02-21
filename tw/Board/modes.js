@@ -20,7 +20,12 @@ class Disco {
     const { board } = this
     if (!Object.values(board.entities.node).find((team) => team === 2)) {
       board.level++
-      board.level++
+      const pieces = [...board.parsed_pieces[2]]
+      let i = 0
+      while (pieces.length < board.level) {
+        pieces.push(pieces[i%pieces.length])
+        i++
+      }
       // blue controls all the nodes, switch all but closest node to red and respawn red pieces
       const player_xy = board.geo.index2xy(board.player.index)
       const nodes = sortBy(
@@ -32,13 +37,11 @@ class Disco {
 
       nodes.forEach((node_index, i) => {
         board.entities.node[node_index] = 2
-        let count = board.level
         let tries = 0
-        while (count > 0) {
+        while (pieces.length) {
           const index = node_index + rand.choice(board.turn * node_index + tries + i, dindexes)
           if (board.canMoveOn(index)) {
-            board.newPiece({ team: 2, type: 'skeleton', index })
-            count--
+            board.newPiece({ team: 2, type: pieces.pop(), index })
           }
           tries++
           if (tries > 100) {

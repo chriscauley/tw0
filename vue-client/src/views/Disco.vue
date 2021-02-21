@@ -44,6 +44,7 @@ export default {
       const options = parseBoard(params.board)
       options.pieces = '+' + params.pieces
       options.player = 1
+      options.mode = 'disco'
       this.board = new Board(options)
       this.sync()
     },

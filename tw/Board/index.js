@@ -197,7 +197,7 @@ export default class Board {
   }
 
   quickAddPieces(pieces = {}) {
-    pieces = parsePieces(pieces)
+    this.parsed_pieces = pieces = parsePieces(pieces)
     Object.entries(pieces).forEach(([team, piece_set]) => {
       team = parseInt(team)
       piece_set.forEach(([type, index]) => {
@@ -207,6 +207,7 @@ export default class Board {
         }
         this.newPiece(options)
       })
+      this.level = Math.max(this.level, this.pieces.filter(p => p.team === team).length)
     })
   }
 
