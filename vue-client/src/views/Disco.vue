@@ -72,10 +72,13 @@ export default {
       } else if (e.key === 'r' && !e.ctrlKey) {
         e.preventDefault()
         this.restart()
+      } else if (e.key === 'Escape') {
+        e.preventDefault()
+        this.queue = []
       }
     },
     keyup(e) {
-      if (e.key === 'Shift') {
+      if (e.key === 'Shift' && this.queue.length) {
         this.playerExec(this.queue)
       }
     },

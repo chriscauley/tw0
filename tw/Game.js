@@ -113,7 +113,9 @@ export default class Game {
     this.board.startTurn()
     this.board.player._indexes = [this.board.player.index]
     this.player_moves?.forEach(move => movePlayer(this.board.player, move))
-    if (this.player_moves?.length === 1) {
+    if (this.player_moves[0]?.fail) {
+      console.warn('TODO: fail indicator')
+    } else if (this.player_moves?.length === 1) {
       this.board.player.energy ++
       this.board.player.energy = Math.min(this.board.player.energy, 12)
     } else if (this.player_moves?.length > 1) {
@@ -165,6 +167,9 @@ export default class Game {
         this.player_moves.push({ dindex })
       }
     })
+    if (this.player_moves.length === 2 && this.board.player.energy < 4) {
+      this.player_moves = [{dindex: 0, fail: true }]
+    }
     this.nextTurn()
     callback()
   }

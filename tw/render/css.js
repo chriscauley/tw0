@@ -24,7 +24,7 @@ const addHealth = (piece, out) => {
     let energy = Math.floor(piece.energy / 4)
     const remainder = piece.energy % 4
     remainder && out.children.push(`sprite sprite-part-energy -energy-${remainder}/4 -energy-${energy}`)
-    while (energy--) {
+    while (energy-- > 0) {
       out.children.push(`sprite sprite-energy -energy-${energy}`)
     }
   }
