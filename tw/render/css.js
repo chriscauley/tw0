@@ -53,7 +53,7 @@ export const renderUI = ({ board, queue=[] }) => {
   const base = `sprite x-${xy[0]} y-${xy[1]}`
   const items = queue.map((key, step) => {
     const dindex = board.geo._key2dindex[key]
-    return { class: `${base} sprite-arrow-${board.geo.dindex2dir(dindex)} -step-${step}` }
+    return { class: `${base} sprite-arrow-${board.geo._dindex2name[dindex]} -step-${step}` }
   })
   return items
 }
@@ -72,7 +72,7 @@ export default (board, options = {}) => {
 
   const showDindex = (i, v) => ({
     id: `dindex-${i}`,
-    className: `sprite sprite-arrow-${board.geo.dindex2dir(v)} ${css.index(i)}`,
+    className: `sprite sprite-arrow-${board.geo.dindex2name[v]} ${css.index(i)}`,
     index: i,
     text: v,
   })

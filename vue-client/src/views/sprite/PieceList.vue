@@ -44,10 +44,10 @@ export default {
         'invincible',
         'floorlock',
         'floorstairs',
-        'arrow-up',
-        'arrow-down',
-        'arrow-left',
-        'arrow-right',
+        'arrow-u',
+        'arrow-d',
+        'arrow-l',
+        'arrow-r',
       ]
       types.slugs.forEach((slug) => {
         const type = types[slug]
