@@ -14,7 +14,7 @@ const forward = (dist, _passive) => (piece, move) => {
       if (!_passive && canAttack(piece, target_index)) {
         move.damages = [
           {
-            index: move._can_attack,
+            index: target_index,
             count: piece.damage,
             source: piece,
             dindex: move.dindex,
