@@ -113,7 +113,14 @@ export default class Game {
     this.board.startTurn()
     this.board.player._indexes = [this.board.player.index]
     this.player_moves?.forEach(move => movePlayer(this.board.player, move))
-    delete this.player_move
+    if (this.player_moves?.length === 1) {
+      this.board.player.energy ++
+      this.board.player.energy = Math.min(this.board.player.energy, 12)
+    } else if (this.player_moves?.length > 1) {
+      this.board.player.energy -= 4
+    }
+
+    delete this.player_moves
     this.board.cacheSound()
     const pieces = this.board.getPieces().filter((p) => !p.player)
     pieces.forEach((p) => {

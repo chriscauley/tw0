@@ -20,6 +20,14 @@ const addHealth = (piece, out) => {
   } else if (piece.blood_armor) {
     out.children.push('sprite-blood -blood-'+piece.blood_armor)
   }
+  if (piece.player) {
+    let energy = Math.floor(piece.energy / 4)
+    const remainder = piece.energy % 4
+    remainder && out.children.push(`sprite sprite-part-energy -energy-${remainder}/4 -energy-${energy}`)
+    while (energy--) {
+      out.children.push(`sprite sprite-energy -energy-${energy}`)
+    }
+  }
 }
 
 export const extra_getters = {
@@ -40,13 +48,14 @@ const team_extras = ['id', 'value', 'index', 'dindex']
   )
 })
 
-export const renderQueue = ({ board, queue }) => {
+export const renderUI = ({ board, queue=[] }) => {
   const xy = board.geo.index2xy(board.player.index)
   const base = `sprite x-${xy[0]} y-${xy[1]}`
-  return queue.map((key, step) => {
+  const items = queue.map((key, step) => {
     const dindex = board.geo._key2dindex[key]
     return { class: `${base} sprite-arrow-${board.geo.dindex2dir(dindex)} -step-${step}` }
   })
+  return items
 }
 
 export default (board, options = {}) => {

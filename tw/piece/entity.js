@@ -35,6 +35,7 @@ const newPiece = (opts) => {
       'max_health',
       'turns',
       '_turn',
+      'energy',
       'equipment',
       'lives',
       'player',
@@ -50,6 +51,7 @@ const newPiece = (opts) => {
     piece.lives = opts.lives || 2
     piece.turns = 0 // player is stationary while others move
     piece.health = piece.max_health = 3
+    piece.energy = 12
   }
   return piece
 }

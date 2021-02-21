@@ -41,3 +41,40 @@
     margin: 0.25em 0 0 0.25em;
   }
 }
+
+.sprite-energy {
+  @apply bg-blue-500 rounded-full;
+  height: 0.25em;
+  width: 0.25em;
+}
+
+.sprite-energy, .sprite-part-energy {
+  margin-top: 0.75em;
+  &.-energy-1 {
+    margin-left: 0.25em;
+  }
+  &.-energy-2 {
+    margin-left: 0.5em;
+  }
+}
+
+.sprite-part-energy {
+  @apply border-blue-200 rounded-full;
+  border-width: 0.125em;
+  margin-top: 0.75em;
+  transform: rotate(-45deg);
+  height: 0;
+  width: 0;
+  &.-energy-1\/4,
+  &.-energy-2\/4,
+  &.-energy-3\/4 {
+    border-top-color: transparent;
+  }
+  &.-energy-1\/4,
+  &.-energy-2\/4 {
+    border-left-color: transparent;
+  }
+  &.-energy-1\/4 {
+    border-bottom-color: transparent;
+  }
+}
