@@ -1,6 +1,7 @@
 import { applyMove, applyDamage, canMoveOn, getMove } from './piece/lib'
 import { movePlayer } from './piece/lib/player'
 import Buff from 'tw/models/Buff'
+import Mode from 'tw/models/Mode'
 import types from './piece/types'
 
 export default class Game {
@@ -149,7 +150,7 @@ export default class Game {
 
     this.afterturn.forEach((f) => f())
     delete this.afterturn
-    this.board.mode.tick()
+    Mode.tick(this.board)
     this.turn++
   }
 

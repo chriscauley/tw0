@@ -1,14 +1,15 @@
 import { defaults, range } from 'lodash'
 import assert from 'assert'
 
-import { canMoveOn } from '../piece/lib'
-import Game from '../Game'
-import Geo from '../Geo'
-import vector from '../Geo/vector'
-import { floodFillPath, floodFillTeam } from '../utils'
-import { newPiece } from '../piece/entity'
+import { canMoveOn } from 'tw/piece/lib'
+import Game from 'tw/Game'
+import Geo from 'tw/Geo'
+import vector from 'tw/Geo/vector'
+import { floodFillPath, floodFillTeam } from 'tw/utils'
+import { newPiece } from 'tw/piece/entity'
+import Mode from 'tw/models/Mode'
+
 import sound from './sound'
-import modes from './modes'
 
 export const parsePieces = (pieces) => {
   if (Array.isArray(pieces)) {
@@ -76,8 +77,8 @@ export default class Board {
     this.recache()
     sound.cache(this)
     this.game = options.game || new Game({ board: this, id: this.options.id })
+    Mode.init(this)
     options.player && this.addPlayer(options.player)
-    this.mode = new modes[this.options.mode](this)
     this.quickAddPieces(options.pieces)
     this.animations = {}
     this.recache()
