@@ -48,6 +48,7 @@ export default {
         'arrow-d',
         'arrow-l',
         'arrow-r',
+        'o-pentagram',
       ]
       types.slugs.forEach((slug) => {
         const type = types[slug]
