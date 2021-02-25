@@ -112,15 +112,17 @@ export default class Game {
     this.piece_turns = {} // how many turns each piece can take
     this.afterturn = []
     this.board.startTurn()
-    this.board.player._indexes = [this.board.player.index]
-    this.player_moves?.forEach(move => movePlayer(this.board.player, move))
-    if (this.player_moves[0]?.fail) {
-      console.warn('TODO: fail indicator')
-    } else if (this.player_moves?.length === 1) {
-      this.board.player.energy ++
-      this.board.player.energy = Math.min(this.board.player.energy, 12)
-    } else if (this.player_moves?.length > 1) {
-      this.board.player.energy -= 4
+    if (this.board.player) {
+      this.board.player._indexes = [this.board.player.index]
+      this.player_moves?.forEach(move => movePlayer(this.board.player, move))
+      if (this.player_moves[0]?.fail) {
+        console.warn('TODO: fail indicator')
+      } else if (this.player_moves?.length === 1) {
+        this.board.player.energy ++
+        this.board.player.energy = Math.min(this.board.player.energy, 12)
+      } else if (this.player_moves?.length > 1) {
+        this.board.player.energy -= 4
+      }
     }
 
     delete this.player_moves

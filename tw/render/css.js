@@ -49,6 +49,9 @@ const team_extras = ['id', 'value', 'index', 'dindex']
 })
 
 export const renderUI = ({ board, queue=[] }) => {
+  if (!board.player) {
+    return
+  }
   const xy = board.geo.index2xy(board.player.index)
   const base = `sprite x-${xy[0]} y-${xy[1]}`
   const items = queue.map((key, step) => {
