@@ -159,6 +159,11 @@ export default class Game {
   }
 
   playerExec = (moves, callback) => {
+    if (!this.board.player) {
+      // zero player mode (coloseum)
+      this.nextTurn()
+      callback()
+    }
     if (this.board.player?.health <= 0) {
       return
     }

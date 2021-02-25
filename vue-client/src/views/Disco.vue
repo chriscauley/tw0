@@ -25,7 +25,7 @@ export default {
   components: { RenderBoard, SettingsPopper },
   mixins: [EventMixin],
   __route: {
-    path: '/disco/:board/:pieces/',
+    path: '/play/:mode/:board/:pieces/',
   },
   data() {
     return {
@@ -42,10 +42,18 @@ export default {
     restart() {
       const { params } = this.$route
       const options = parseBoard(params.board)
-      options.pieces = '+' + params.pieces
-      options.player = 1
-      options.mode = 'disco'
+      options.pieces = params.pieces
+      if (params.mode !== 'coloseum') {
+        options.player = 1
+        options.pieces = '+' + params.pieces
+      }
+      options.mode = params.mode
       this.board = new Board(options)
+      const all_bats = !options.pieces.replace(/(bat)/g, '').replace(/(\+|,)/g, '')
+      if (all_bats) {
+        // all bats won't do anything so they need to be awoken with a sound
+        this.board.entities.sound[this.board.geo.CENTER] = 0
+      }
       this.sync()
     },
     sync() {
