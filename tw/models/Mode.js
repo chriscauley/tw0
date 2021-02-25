@@ -55,9 +55,34 @@ const disco = {
 const soccer = {
   init(board) {
     // add goals
+    const y = Math.floor(board.H/2)
+    const index = board.geo.xy2index([1,y])
+    board.entities.floor[index] = { type: 'goal', index }
   },
   tick(board) {
+    if (board.getPieces().filter(p => p.type === 'ball').length !== 0) {
+      return
+    }
+    board.level++
     // if no balls, spawn balls
+    const { H, W } = board
+    const center_x = Math.floor(W/2)
+    const ys = [1, 2, H-2, H-2]
+    const xs = [center_x-1, center_x, center_x+1]
+    let tries = 0
+    while (board.getPieces().filter(p => p.type === 'ball').length < board.level) {
+      const x = rand.choice(board.turn * board.level + tries, xs)
+      const y = rand.choice(board.turn * board.level - tries, ys)
+      const index = board.geo.xy2index([x, y])
+      if (board.canMoveOn(index)) {
+        const dindex = (y > 2 ? -1 : 1) * W // up or down
+        board.newPiece({ team: 2, type: 'ball', index, dindex })
+      }
+      if (tries > 100) {
+        throw 'failed to place piece after 100 tries'
+      }
+      tries ++
+    }
   },
 }
 
@@ -65,9 +90,9 @@ const modes = { disco, none: {}, soccer }
 
 export default {
   init(board) {
-    modes[board.mode]?.init?.(board)
+    modes[board.options.mode]?.init?.(board)
   },
   tick(board) {
-    modes[board.mode]?.tick?.(board)
+    modes[board.options.mode]?.tick?.(board)
   },
 }

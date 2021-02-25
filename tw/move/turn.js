@@ -60,10 +60,7 @@ const follow = (piece, move) => {
   return move
 }
 
-const fromHit = (piece, move) => {
-  move.dindex = piece._last_damage.dindex
-  return move
-}
+const fromHit = (piece, move) => Object.assign(move, { dindex: piece._last_damage.dindex })
 
 // TODO either merge with filterLowest or move into towardSound (since this is only used there)
 const findLowest = (piece, layer, move = {}) => {

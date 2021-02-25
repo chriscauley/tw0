@@ -1,5 +1,6 @@
 import assert from 'assert'
 
+import balls from './balls'
 import bats from './bats'
 import blind from './blind'
 import bones from './bones'
@@ -31,6 +32,7 @@ const registerGroups = (groups) => {
 }
 
 registerGroups({
+  balls,
   bats,
   blind,
   bones,

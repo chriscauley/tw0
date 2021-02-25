@@ -32,6 +32,36 @@ const forward = (dist, _passive) => (piece, move) => {
   return move
 }
 
+// ball
+forward.collide = (piece, move) => {
+  const dindex = move.dindex || piece.dindex
+  const target_index = piece.index + dindex
+  if (canMoveOn(piece.board, target_index)) {
+    return {
+      ...move,
+      index: target_index,
+      done: true,
+    }
+  }
+  if (canAttack(piece, target_index)) {
+    const damages = [
+      {
+        index: target_index,
+        count: piece.damage,
+        source: piece,
+        dindex,
+      },
+    ]
+    Object.assign(move, {damages})
+  }
+  const target = piece.board.getPiece(target_index)
+  if (target) {
+    move.now = () => target.dindex = dindex
+    move.priority = 1
+  }
+  return Object.assign(move, {dindex: -dindex, done: true})
+}
+
 // blue blob
 forward.bounce = (dist) => {
   const _forward = forward(dist)
