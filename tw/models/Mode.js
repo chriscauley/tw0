@@ -42,10 +42,10 @@ const disco = {
           if (board.canMoveOn(index)) {
             board.newPiece({ team: 2, type: pieces.pop(), index })
           }
-          tries++
           if (tries > 100) {
-            console.error('failed to place peace after 100 tries')
+            throw 'failed to place piece after 100 tries'
           }
+          tries++
         }
       })
     }

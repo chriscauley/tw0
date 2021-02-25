@@ -1,5 +1,6 @@
 import { range } from 'lodash'
 import types from 'tw/piece/types'
+import Floor from 'tw/models/Floor'
 
 const piece_map = {}
 types.slugs.forEach(s => piece_map[s] = types[s].sprite)
@@ -87,6 +88,10 @@ export default (board, options = {}) => {
       const xy = index2xy(i)
       return ` x-${xy[0]} y-${xy[1]}`
     },
+    sprite: (s, i) => ({
+      className: `sprite sprite-${s} ${css.index(i)}`,
+      id: `sprite-${s}-${i}`,
+    }),
     wall: (i, v) => ({
       className: `sprite ${css.index(i)} wall-${v} sprite-wall${((i + 151) % 127) % 5}`,
       id: `wall-${i}`,
@@ -180,6 +185,10 @@ export default (board, options = {}) => {
       if (extra_value !== undefined) {
         const f = css[options.extra] || css.sound
         items.push(f(index, extra_value))
+      }
+      if (board.entities.floor[index]) {
+        const sprite = Floor.sprites[board.entities.floor[index].type]
+        items.push(css.sprite(sprite, index))
       }
     }
   })
