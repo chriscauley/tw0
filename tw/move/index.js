@@ -8,7 +8,7 @@ import forward from './forward'
 import ifDidDamage from './ifDidDamage'
 import ifHit from './ifHit'
 import ifLookedAt from './ifLookedAt'
-import morph, { combineWith } from './morph'
+import morph from './morph'
 import teleport from './teleport'
 import turn from './turn'
 import turtleUp from './turtleUp'
@@ -20,7 +20,6 @@ export default {
   boo,
   chain,
   cycle,
-  combineWith,
   energy,
   flip,
   forward,

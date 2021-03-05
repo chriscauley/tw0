@@ -4,7 +4,7 @@ export default {
   legday: {
     geometry: 'f',
     tasks: [
-      move.combineWith('skeleton', 'bonetar'),
+      move.morph.combineWith('skeleton', 'bonetar'),
       move.forward(1),
       move.forward.bounce(1),
     ],
@@ -12,7 +12,7 @@ export default {
   legs4days: {
     geometry: 'f',
     tasks: [
-      move.combineWith('skeleton', 'bonetar'),
+      move.morph.combineWith('skeleton', 'bonetar'),
       move.forward(2),
       move.forward.bounce(2),
     ],
@@ -20,7 +20,7 @@ export default {
   sixlegs: {
     geometry: 'f',
     tasks: [
-      move.combineWith('skeleton', 'bonetar'),
+      move.morph.combineWith('skeleton', 'bonetar'),
       move.forward(3),
       move.forward.bounce(3),
     ],

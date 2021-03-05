@@ -7,11 +7,11 @@ const doMorph = (type, piece) => {
   board.newPiece({ index, type, dindex, team })
 }
 
-export default (type) => (piece, move) => {
+const morph = (type) => (piece, move) => {
   return after({ ...move, done: true }, () => doMorph(type, piece))
 }
 
-export const combineWith = (target_type, new_type, opts = {}) => {
+morph.combineWith = (target_type, new_type, opts = {}) => {
   const { shape = 'f', dist = 1 } = opts
   return (piece, move) => {
     const target_indexes = piece.board.geo.look(shape, piece.index, dist, piece.dindex)
@@ -32,3 +32,5 @@ export const combineWith = (target_type, new_type, opts = {}) => {
     return move
   }
 }
+
+export default morph
