@@ -11,7 +11,7 @@
       <div v-if="item.text !== undefined" class="text">{{ item.text }}</div>
     </div>
     <div v-for="(item, i) in uiItems" v-bind="item" :key="i" />
-    <player-score :board="board" :hash="hash" />
+    <player-score v-if="board.player" :board="board" :hash="hash" />
   </div>
 </template>
 

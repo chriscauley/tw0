@@ -18,7 +18,7 @@ const doDamage = (piece, damage) => {
 
 export default (board, damage) => {
   const { count, index, dindex, _sprite, source } = damage
-  const piece = board.getPiece(index)
+  const piece = damage.target = board.getPiece(index)
   if (!piece) {
     // piece died since start of turn
     return false

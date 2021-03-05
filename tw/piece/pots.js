@@ -7,5 +7,5 @@ export default {
   bell: {
     opts: { health: Infinity },
     tasks: [],
-  }
+  },
 }

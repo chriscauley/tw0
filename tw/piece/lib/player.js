@@ -50,6 +50,7 @@ const getMove = (player, dindex) => {
 
 export const movePlayer = (player, { dindex }) => {
   if (dindex === 0) {
+    applyMove(player, {dindex, done: true})
     // TODO swapItem, recharge, etc
     return
   }

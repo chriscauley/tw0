@@ -15,9 +15,10 @@ const disco = {
   init(board) {
     board.entities.node[board.options.nodes[0]] = 1
     board.options.nodes.slice(1).forEach((i) => (board.entities.node[i] = 2))
+    board.newPiece({index: board.geo.CENTER, team: 2, type: 'discoball', dindex: 0})
   },
   tick(board) {
-    if (!Object.values(board.entities.node).find((team) => team === 2)) {
+    if (board.player._last_move?.damages?.find(d => d.target?.type === 'discoball')) {
       board.level++
       const pieces = [...board.parsed_pieces[2]]
       let i = 0

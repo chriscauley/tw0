@@ -5,6 +5,10 @@ import Floor from 'tw/models/Floor'
 export const piece_map = {}
 types.slugs.forEach(s => piece_map[s] = types[s].sprite)
 
+const buffs = {
+  active: (piece, out) => out.children[0] += ' active'
+}
+
 const addHealth = (piece, out) => {
   const HEART = 'sprite sprite-heart mini-sprite'
   const INVINCIBLE = 'sprite sprite-invincible'
@@ -29,6 +33,7 @@ const addHealth = (piece, out) => {
       out.children.push(`sprite sprite-energy -energy-${energy}`)
     }
   }
+  buffs[piece.buff?.type]?.(piece, out)
 }
 
 export const extra_getters = {

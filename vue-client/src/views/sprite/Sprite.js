@@ -87,6 +87,7 @@ const solo_sprites = [
   'node-2',
   'vampire',
   'red-zombie',
+  'ball-disco',
 ]
 const saveSoloSprite = (slug) => {
   saveSprite(slug, { url: `/static/sprites/${slug}.png` })
