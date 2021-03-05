@@ -1,8 +1,4 @@
 <template>
-  <div>
-    {{ board.game.turn }}
-    {{ queue }}
-  </div>
   <div :class="boardClass">
     <div
       v-for="item in items"
@@ -15,16 +11,19 @@
       <div v-if="item.text !== undefined" class="text">{{ item.text }}</div>
     </div>
     <div v-for="(item, i) in uiItems" v-bind="item" :key="i" />
+    <player-score :board="board" :hash="hash" />
   </div>
 </template>
 
 <script>
 import renderCSS, { renderUI } from 'tw/render/css'
 import settings from '@/store/settings'
+import PlayerScore from './PlayerScore'
 
 const ANIMATION_TIME = 300
 
 export default {
+  components: { PlayerScore },
   props: {
     board: Object,
     hash: String,

@@ -1,0 +1,17 @@
+.player-score {
+  @apply absolute bottom-0 flex right-0;
+  .score {
+    @apply border-4 border-blue-500 bg-blue-100 flex items-center justify-center rounded;
+    margin-left: 0.125em;
+    height: 1em;
+    .sprite {
+      @apply relative;
+      font-size: 0.8em;
+    }
+    &:after {
+      @apply text-blue-500 flex items-center justify-center rounded-full;
+      content: attr(data-value);
+      font-size: 0.5em;
+    }
+  }
+}

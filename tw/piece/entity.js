@@ -52,6 +52,7 @@ const newPiece = (opts) => {
     piece.turns = 0 // player is stationary while others move
     piece.health = piece.max_health = 3
     piece.energy = 12
+    piece.scores = []
   }
   return piece
 }

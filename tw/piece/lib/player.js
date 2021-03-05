@@ -54,8 +54,25 @@ export const movePlayer = (player, { dindex }) => {
     return
   }
   const move = getMove(player, dindex)
+  const score = {
+    _turn: player.board.game.turn,
+  }
+  if (score._turn === player.scores[player.scores.length - 1]?._turn) {
+    score.sprint = 1
+  }
+  if (move.index !== player.index) {
+    score.step = 1
+  }
   applyMove(player, move)
-  move.damages && move.damages.forEach((d) => applyDamage(player.board, d))
+  move.damages?.forEach((d) => {
+    applyDamage(player.board, d)
+    if (d.kill) {
+      score[d.kill.type] = 1
+      score.kill = 1
+    }
+    score[d.type] = (score[d.type] || 0) + 1
+  })
+  player.scores.push(score)
 }
 
 // const addMoves = moves => {

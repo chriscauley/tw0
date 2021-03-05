@@ -2,7 +2,7 @@ import { range } from 'lodash'
 import types from 'tw/piece/types'
 import Floor from 'tw/models/Floor'
 
-const piece_map = {}
+export const piece_map = {}
 types.slugs.forEach(s => piece_map[s] = types[s].sprite)
 
 const addHealth = (piece, out) => {
