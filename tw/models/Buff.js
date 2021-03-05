@@ -11,7 +11,8 @@ const buffs = {
     sprite: null,
     remove: (piece) => delete piece.invincible,
     add: (piece) => (piece.invincible = true),
-  }
+  },
+  active: {},
 }
 
 const pieceCanBuffTarget = (piece, target) => {
