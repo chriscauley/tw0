@@ -23,9 +23,9 @@
     "slug": "sixlegs",
     "url": "/static/sprites/sixlegs.png"
   },
-  "bonetar": {
-    "slug": "bonetar",
-    "url": "/static/sprites/bonetar.png"
+  "bonetaur": {
+    "slug": "bonetaur",
+    "url": "/static/sprites/bonetaur.png"
   },
   "bat.awake": {
     "slug": "bat.awake",

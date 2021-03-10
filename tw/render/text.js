@@ -12,7 +12,7 @@ const LEGEND = {
   legday: 'l',
   skeleton: 's',
   skull: 'k',
-  bonetar: 'b',
+  bonetaur: 'b',
 }
 
 const ANIMATION_LEGEND = {

@@ -75,7 +75,7 @@ const getPieceSprite = (slug, sheet, index) => {
 const solo_sprites = [
   'bat',
   'bat-big',
-  'bonetar',
+  'bonetaur',
   'blood_armor',
   'floorlock',
   'floorstairs',
