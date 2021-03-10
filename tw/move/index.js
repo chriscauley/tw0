@@ -3,6 +3,7 @@ import boo from './boo'
 import buff from './buff'
 import chain from './chain'
 import cycle from './cycle'
+import done from './done'
 import energy from './energy'
 import flip from './flip'
 import forward from './forward'
@@ -22,6 +23,7 @@ export default {
   buff,
   chain,
   cycle,
+  done,
   energy,
   flip,
   forward,
