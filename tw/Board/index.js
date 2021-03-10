@@ -8,38 +8,9 @@ import vector from 'tw/Geo/vector'
 import { floodFillPath, floodFillTeam } from 'tw/utils'
 import { newPiece } from 'tw/piece/entity'
 import Mode from 'tw/models/Mode'
+import parsePieces from './parsePieces'
 
 import sound from './sound'
-
-export const parsePieces = (pieces) => {
-  if (Array.isArray(pieces)) {
-    throw 'Depracated: pieces should be object, not array'
-  }
-  if (typeof pieces === 'string') {
-    if (!pieces.includes('+')) {
-      pieces += '+' + pieces
-    }
-    const out = { 1: [], 2: [] }
-    pieces.split('+').forEach((s, i_team) => {
-      const team = i_team + 1
-      s.split(',').forEach((s2) => {
-        if (!s2) {
-          return
-        }
-        if (!s2.match(/^\d+x/)) {
-          s2 = '1x' + s2
-        }
-        const [_, count, type] = s2.match(/^(\d+)x(.+)/)
-        let i = parseInt(count)
-        while (i--) {
-          out[team].push([type])
-        }
-      })
-    })
-    pieces = out
-  }
-  return pieces
-}
 
 export default class Board {
   constructor({ W, H, turn = 0, ...options }) {
