@@ -1,5 +1,6 @@
 import { sortBy } from 'lodash'
 import vector from '../Geo/vector'
+import parsePieces from 'tw/Board/parsePieces'
 
 const { subtract, magnitude } = vector
 
@@ -20,7 +21,7 @@ const disco = {
   tick(board) {
     if (board.player._last_move?.damages?.find(d => d.target?.type === 'discoball')) {
       board.level++
-      const pieces = [...board.parsed_pieces[2]]
+      const pieces = [...parsePieces(board.options.pieces)[2]]
       let i = 0
       while (pieces.length < board.level) {
         pieces.push(pieces[i%pieces.length])
@@ -87,7 +88,22 @@ const soccer = {
   },
 }
 
-const modes = { disco, none: {}, soccer }
+const coloseum = {
+  init(board) {
+    const pieces = parsePieces(board.options.pieces)
+    Object.entries(pieces).forEach(([team, piece_set]) => {
+      team = parseInt(team)
+      piece_set.forEach((type) => {
+        const options = { type, team }
+        options.index = board.getTeamSpawn(team)
+        board.newPiece(options)
+      })
+      board.level = Math.max(board.level, board.pieces.filter(p => p.team === team).length)
+    })
+  },
+}
+
+const modes = { disco, none: {}, soccer, coloseum }
 
 export default {
   init(board) {

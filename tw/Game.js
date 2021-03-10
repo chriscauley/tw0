@@ -73,7 +73,7 @@ export default class Game {
           const collide_index = move0.index
           this.board.animate({ type: 'collide', index: move0.index })
           piece_moves.forEach(([piece, move]) => {
-            this.board.animate({ type: 'attack', index: piece.index, dindex: piece.dindex })
+            this.board.animate({ type: 'attack', index: piece.index, dindex: piece.dindex, source: piece })
             const { index } = piece
             const dindex = -(move.dindex || piece.dindex)
             applyDamage(this.board, { index, count: 1, dindex })

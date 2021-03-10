@@ -50,7 +50,6 @@ export default class Board {
     this.game = options.game || new Game({ board: this, id: this.options.id })
     Mode.init(this)
     options.player && this.addPlayer(options.player)
-    this.quickAddPieces(options.pieces)
     this.animations = {}
     this.recache()
   }
@@ -166,21 +165,6 @@ export default class Board {
       throw `cannot place piece for team=${team}`
     }
     return index
-  }
-
-  quickAddPieces(pieces = {}) {
-    this.parsed_pieces = pieces = parsePieces(pieces)
-    Object.entries(pieces).forEach(([team, piece_set]) => {
-      team = parseInt(team)
-      piece_set.forEach(([type, index]) => {
-        const options = { type, team, index }
-        if (index === undefined) {
-          options.index = this.getTeamSpawn(team)
-        }
-        this.newPiece(options)
-      })
-      this.level = Math.max(this.level, this.pieces.filter(p => p.team === team).length)
-    })
   }
 
   getPathDindex(index, team) {
