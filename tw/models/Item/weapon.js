@@ -1,45 +1,48 @@
+import { defaults } from 'lodash'
+
 const BASE = {
   damage: 1,
   dist: 1,
-  shape: '__f',
-  slot: 'weapon',
-  splash: 1, // does damage to all squares in shape
+  step: false,
 }
 
-export default {
-  knife: {...BASE},
+const items = {
+  knife: {},
 
   longsword: {
-    ...BASE,
-    dist: 2,
-    splash: 2,
-    shape: 'f',
-  },
-
-  katana: {
-    ...BASE,
-    shape: 'three',
-    splash: 3,
+    hitbox: { dist: 2, shape: 'f' },
   },
 
   spear: {
-    ...BASE,
-    dist: 2,
+    hitbox: { shape: '__f', dist: 2 },
     step: true,
   },
 
   scythe: {
-    ...BASE,
-    dist: 2,
-    shape: '__three',
-    splash: 3,
+    hitbox: { shape: '__ds', dist: 2 },
+    splash: { shape: '__three', dist: 2 },
+    step: true,
+  },
+
+  katana: {
+    hitbox: { shape: '__f', dist: 2 },
+    splash: { shape: '__three', dist: 2 },
     step: true,
   },
 
   jambiya: {
-    ...BASE,
-    shape: 'lr',
-    splash: 2,
+    hitbox: { shape: '__ds', dist: 1 },
     step: true,
   },
 }
+
+Object.values(items).forEach((item) => {
+  defaults(item, {
+    damage: 1,
+    step: false,
+    hitbox: { shape: '__f', dist: 1 },
+  })
+  item.splash = item.splash || item.hitbox
+})
+
+export default items

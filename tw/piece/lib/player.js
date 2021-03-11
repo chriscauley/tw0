@@ -4,28 +4,27 @@ import Item from 'tw/models/Item'
 
 const getAttack = (player, dindex) => {
   const { weapon } = player.equipment
-  const { dist, shape } = weapon._type
+  const { hitbox, splash, step, sprite } = weapon._type
   const { index } = player
   let move = { index, dindex }
-  if (weapon.step) {
+  if (step) {
     move = getStep(player, dindex)
     if (move.index === undefined) {
       return undefined
     }
   }
+  const can_hit = player.board.geo.look(hitbox.shape, index, hitbox.dist, dindex)
+        .find((target_index) => canAttack(player, target_index))
 
-  const target_indexes = player.board.geo.look(shape, index, dist, dindex)
-  const damages = target_indexes
-    .filter((target_index) => canAttack(player, target_index))
-    .map((target_index) => ({
-      index: target_index,
-      dindex,
-      count: weapon.damage,
-      source: player,
-      sprite: weapon.name,
-    }))
-    .slice(0, weapon.splash)
-  if (damages.length) {
+  if (can_hit !== undefined) {
+    const target_indexes = player.board.geo.look(splash.shape, index, splash.dist, dindex)
+    const damages = target_indexes
+          .map((target_index) => ({
+            index: target_index,
+            dindex,
+            source: player,
+            sprite,
+          }))
     move.damages = damages
     return move
   }

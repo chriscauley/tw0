@@ -42,6 +42,7 @@ export default {
   },
   computed: {
     extra: () => settings.state.extra,
+    show_weapon: () => settings.state.show_weapon,
     uiItems() {
       return renderUI(this)
     },

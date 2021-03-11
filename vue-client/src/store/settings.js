@@ -10,6 +10,10 @@ const schema = {
       type: 'string',
       enum: Object.keys(extra_getters),
     },
+    show_weapon: {
+      title: 'Show Weapon',
+      type: 'boolean',
+    },
   },
 }
 

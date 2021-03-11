@@ -1,6 +1,7 @@
 import { range } from 'lodash'
 import types from 'tw/piece/types'
 import Floor from 'tw/models/Floor'
+import { canMoveOn } from 'tw/piece/lib'
 
 export const piece_map = {}
 types.slugs.forEach(s => piece_map[s] = types[s].sprite)
@@ -54,9 +55,9 @@ const team_extras = ['id', 'value', 'index', 'dindex']
   )
 })
 
-export const renderUI = ({ board, queue=[] }) => {
+export const renderUI = ({ board, queue=[], show_weapon }) => {
   if (!board.player) {
-    return
+    return []
   }
   const xy = board.geo.index2xy(board.player.index)
   const base = `sprite x-${xy[0]} y-${xy[1]}`
@@ -64,6 +65,26 @@ export const renderUI = ({ board, queue=[] }) => {
     const dindex = board.geo._key2dindex[key]
     return { class: `${base} sprite-arrow-${board.geo._dindex2name[dindex]} -step-${step}` }
   })
+  if (show_weapon) {
+    const { step, hitbox, splash } = board.player.equipment.weapon._type
+    const dindex = board.player.dindex
+    const step_index = board.player.index + dindex
+    if (step && !canMoveOn(board, step_index)) {
+      return []
+    } else if (step) {
+      const xy = board.geo.index2xy(step_index)
+      const base = `sprite x-${xy[0]} y-${xy[1]}`
+      items.push({ class: `${base} sprite-arrow-${board.geo._dindex2name[dindex]}` })
+    }
+    board.geo.look(hitbox.shape, board.player.index, hitbox.dist, dindex).forEach(index => {
+      const xy = board.geo.index2xy(index)
+      items.push({ class: `sprite sprite-hitbox x-${xy[0]} y-${xy[1]} fa fa-close` })
+    })
+    board.geo.look(splash.shape, board.player.index, splash.dist, dindex).forEach(index => {
+      const xy = board.geo.index2xy(index)
+      items.push({ class: `sprite x-${xy[0]} y-${xy[1]} sprite-splash` })
+    })
+  }
   return items
 }
 

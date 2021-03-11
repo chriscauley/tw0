@@ -1,7 +1,7 @@
 <template>
   <div @click="opened = true" class="relative">
     <i class="fa fa-gear" @click="toggleFocus" />
-    <popper v-if="focused" class="popdown">
+    <popper v-if="focused" class="popdown" @click.stop>
       <vacuform :state="state" :schema="schema" style="min-width: 150px" :onChange="save">
         <template #actions><span /></template>
       </vacuform>
