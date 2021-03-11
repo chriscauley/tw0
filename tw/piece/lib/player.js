@@ -1,6 +1,6 @@
 import after from 'tw/move/after'
 import { applyMove, applyDamage, canAttack, canMoveOn } from './index'
-import Item from 'tw/item'
+import Item from 'tw/models/Item'
 
 const getAttack = (player, dindex) => {
   const { weapon } = player.equipment

@@ -8,7 +8,7 @@ import vector from 'tw/Geo/vector'
 import { floodFillPath, floodFillTeam } from 'tw/utils'
 import { newPiece } from 'tw/piece/entity'
 import Mode from 'tw/models/Mode'
-import Item from 'tw/item'
+import Item from 'tw/models/Item'
 import parsePieces from './parsePieces'
 
 import sound from './sound'

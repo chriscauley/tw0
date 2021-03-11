@@ -16,7 +16,7 @@
 <script>
 import store from '@/store'
 import types from 'tw/piece/types'
-import Item from 'tw/item'
+import Item from 'tw/models/Item'
 import Sprite from './Sprite'
 
 export default {

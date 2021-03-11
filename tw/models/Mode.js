@@ -1,5 +1,5 @@
 import { sortBy } from 'lodash'
-import Item from 'tw/item'
+import Item from 'tw/models/Item'
 import vector from '../Geo/vector'
 import parsePieces from 'tw/Board/parsePieces'
 

@@ -2,7 +2,7 @@
 import { pick } from 'lodash'
 
 import types from './types'
-import Item from '../item'
+import Item from 'tw/models/Item'
 
 const PIECE_DEFAULTS = {
   i_cycle: 0,

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Item from 'tw/item'
+import Item from 'tw/models/Item'
 import piece_types from 'tw/piece/types'
 
 export default {
