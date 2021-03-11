@@ -75,3 +75,13 @@ export const floodFillTeam = (board, team) => {
     criteria: (index) => !entities.wall[index] && entities.square[index] && !entities.piece[index],
   })
 }
+
+const capitalize = str => str.length ? str[0].toUpperCase() + str.slice(1).toLowerCase() : ''
+
+const escape = str => str.replace(/./g, c => `\\${c}`)
+const titleCase = (sentence, seps = ' _-/') => {
+  let wordPattern = new RegExp(`[^${escape(seps)}]+`, 'g')
+  return sentence.replace(wordPattern, capitalize)
+};
+
+export const unslugify = s => titleCase(s.replace(/[ \-_]+/g, ' '))

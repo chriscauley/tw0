@@ -2,7 +2,7 @@
 import { pick } from 'lodash'
 
 import types from './types'
-import item from '../item'
+import Item from '../item'
 
 const PIECE_DEFAULTS = {
   i_cycle: 0,
@@ -47,7 +47,7 @@ const newPiece = (opts) => {
   }
   piece._type = type
   if (piece.player) {
-    piece.equipment = opts.equipment || { ...item.default_equipment }
+    piece.equipment = opts.equipment || Item.getDefaultEquipment()
     piece.lives = opts.lives || 2
     piece.turns = 0 // player is stationary while others move
     piece.health = piece.max_health = 3

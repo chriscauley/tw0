@@ -6,26 +6,30 @@ const BASE = {
   splash: 1, // does damage to all squares in shape
 }
 
-const types = {
-  knife: {},
+export default {
+  knife: {...BASE},
 
   longsword: {
+    ...BASE,
     dist: 2,
     splash: 2,
     shape: 'f',
   },
 
   katana: {
+    ...BASE,
     shape: 'three',
     splash: 3,
   },
 
   spear: {
+    ...BASE,
     dist: 2,
     step: true,
   },
 
   scythe: {
+    ...BASE,
     dist: 2,
     shape: '__three',
     splash: 3,
@@ -33,22 +37,9 @@ const types = {
   },
 
   jambiya: {
+    ...BASE,
     shape: 'lr',
     splash: 2,
     step: true,
   },
 }
-
-const entries = Object.entries(types)
-entries.sort()
-
-export default new Map(
-  entries.map(([name, type]) => [
-    name,
-    {
-      ...BASE,
-      ...type,
-      name,
-    },
-  ]),
-)

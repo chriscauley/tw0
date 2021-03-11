@@ -1,9 +1,10 @@
-// import after from '../move/after'
+import after from 'tw/move/after'
 import { applyMove, applyDamage, canAttack, canMoveOn } from './index'
+import Item from 'tw/item'
 
 const getAttack = (player, dindex) => {
   const { weapon } = player.equipment
-  const { dist, shape } = weapon
+  const { dist, shape } = weapon._type
   const { index } = player
   let move = { index, dindex }
   if (weapon.step) {
@@ -50,8 +51,7 @@ const getMove = (player, dindex) => {
 
 export const movePlayer = (player, { dindex }) => {
   if (dindex === 0) {
-    applyMove(player, {dindex, done: true})
-    // TODO swapItem, recharge, etc
+    applyMove(player, swapItem(player, { dindex }))
     return
   }
   const move = getMove(player, dindex)
@@ -150,21 +150,16 @@ export const movePlayer = (player, { dindex }) => {
 //   }
 // }
 
-// export const swapItem = player => {
-//   const { board, equipment, xy } = player
-//   const floor_item = board.getOne('item', xy)
-//   const move = {
-//     xy,
-//     dxy: [0, 0],
-//     done: !!floor_item,
-//   }
-//   if (floor_item) {
-//     return after(move, () => {
-//       const { slot } = floor_item
-//       const old_item = equipment[slot]
-//       player.equipment[slot] = floor_item
-//       board.setOne('item', xy, old_item)
-//     })
-//   }
-//   return move
-// }
+const swapItem = (player, move) => {
+  const { board, equipment, index } = player
+  const floor_item = board.getOne('item', index)
+  if (floor_item) {
+    return after(move, () => {
+      const { slot } = Item[floor_item.type]
+      const old_item = equipment[slot]
+      player.equipment[slot] = floor_item
+      board.setOne('item', index, old_item)
+    })
+  }
+  return move
+}

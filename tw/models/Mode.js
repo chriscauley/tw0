@@ -1,4 +1,5 @@
 import { sortBy } from 'lodash'
+import Item from 'tw/item'
 import vector from '../Geo/vector'
 import parsePieces from 'tw/Board/parsePieces'
 
@@ -103,7 +104,22 @@ const coloseum = {
   },
 }
 
-const modes = { disco, none: {}, soccer, coloseum }
+
+const armory = {
+  init(board) {
+    Object.entries(Item.SLOTS).forEach(([slot_name, slot], i_slot) => {
+      slot.ALL.forEach((item, i_item) => {
+        const x = i_item + 1
+        const y = i_slot + 1
+        board.createItem(board.geo.xy2index([x, y]), item.type)
+      })
+    })
+    disco.init(board)
+  },
+  tick: disco.tick,
+}
+
+const modes = { disco, none: {}, soccer, coloseum, armory }
 
 export default {
   init(board) {

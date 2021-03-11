@@ -93,7 +93,7 @@ export default (board, options = {}) => {
       const xy = index2xy(i)
       return ` x-${xy[0]} y-${xy[1]}`
     },
-    sprite: (s, i) => ({
+    sprite: (i, s) => ({
       className: `sprite sprite-${s} ${css.index(i)}`,
       id: `sprite-${s}-${i}`,
     }),
@@ -128,6 +128,11 @@ export default (board, options = {}) => {
     node: (i, v) => ({
       className: `sprite sprite-node-${v} node ${css.index(i)}`,
       id: `node-${i}`,
+      index: i,
+    }),
+    item: (i, v) => ({
+      className: `sprite sprite-${v.type} item ${css.index(i)}`,
+      id: `item-${i}`,
       index: i,
     }),
   }
@@ -193,7 +198,10 @@ export default (board, options = {}) => {
       }
       if (board.entities.floor[index]) {
         const sprite = Floor.sprites[board.entities.floor[index].type]
-        items.push(css.sprite(sprite, index))
+        items.push(css.sprite(index, sprite))
+      }
+      if (board.entities.item[index]) {
+        items.push(css.item(index, board.entities.item[index]))
       }
     }
   })

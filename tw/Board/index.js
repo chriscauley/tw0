@@ -8,6 +8,7 @@ import vector from 'tw/Geo/vector'
 import { floodFillPath, floodFillTeam } from 'tw/utils'
 import { newPiece } from 'tw/piece/entity'
 import Mode from 'tw/models/Mode'
+import Item from 'tw/item'
 import parsePieces from './parsePieces'
 
 import sound from './sound'
@@ -18,6 +19,7 @@ export default class Board {
     this.entities = {
       piece: {},
       floor: {},
+      item: {},
       team: {},
       path: {},
       wall: {},
@@ -61,7 +63,7 @@ export default class Board {
 
   setOne(type, index, value) {
     assert(type !== 'piece', 'Use board.setPiece, not board.setOne("piece", ...)')
-    this.entities[type] = value
+    this.entities[type][index] = value
   }
 
   getPiece = (index) => this.entities.piece[index]
@@ -199,6 +201,11 @@ export default class Board {
       const index = this.getTeamSpawn(team)
       this.player = this.newPiece({ team, type: 'warrior', player: true, index })
     }
+  }
+
+  createItem(index, type) {
+    assert(!this.getOne('item', index), `Cannot add ${type} to index ${index}`)
+    this.setOne('item', index, Item.newItem(type))
   }
 
   startTurn() {
