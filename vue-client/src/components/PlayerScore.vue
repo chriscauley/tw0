@@ -1,4 +1,7 @@
 <template>
+  <div class="player-equipment">
+    <div v-for="(item, index) in equipment" :key="index" :class="item.css" />
+  </div>
   <div v-if="board.player" class="player-score">
     <div v-for="score in scores" :key="score.type" class="score" :data-value="score.value">
       <div :class="score.css" />
@@ -7,6 +10,7 @@
 </template>
 
 <script>
+import Item from 'tw/item'
 import piece_types from 'tw/piece/types'
 
 export default {
@@ -18,7 +22,7 @@ export default {
     // currently only showing pieces killed
     const visible_types = {}
     piece_types.slugs.forEach((t) => (visible_types[t] = true))
-    return { scores: [], visible_types }
+    return { scores: [], visible_types, equipment: [] }
   },
   watch: {
     hash: 'sync',
@@ -40,6 +44,11 @@ export default {
         value,
         type,
         css: `sprite sprite-${type}`,
+      }))
+      this.equipment = Object.values(this.board.player.equipment).map((item) => ({
+        ...Item[item.type],
+        ...item,
+        css: `sprite sprite-${item.type} slot slot-${Item[item.type].slot}`,
       }))
     },
   },

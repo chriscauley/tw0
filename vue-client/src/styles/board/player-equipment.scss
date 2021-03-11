@@ -1,0 +1,10 @@
+.player-equipment {
+  .slot {
+    @apply absolute border-4 border-blue-200 rounded;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .slot-weapon {
+    right: 0;
+    top: 0;
+  }
+}

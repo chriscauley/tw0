@@ -16,6 +16,7 @@
 <script>
 import store from '@/store'
 import types from 'tw/piece/types'
+import Item from 'tw/item'
 import Sprite from './Sprite'
 
 export default {
@@ -49,6 +50,7 @@ export default {
         'arrow-l',
         'arrow-r',
         'o-pentagram',
+        ...Item.TYPES,
       ]
       types.slugs.forEach((slug) => {
         const type = types[slug]
