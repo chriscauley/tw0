@@ -14,16 +14,11 @@ export default {
   bigbat: {
     sprite: 'bat-big',
     sprites: ['bat-big.awake'],
-    tasks: [
-      move.wakeUp,
-      move.attackNearby('circle', 1),
-      move.turn.towardSound,
-      move.forward(1),
-    ],
+    tasks: [move.wakeUp, move.attackNearby('circle', 1), move.turn.towardSound, move.forward(1)],
   },
   vampire: {
     sprite: 'vampire',
     sprites: ['vampire.awake'],
-    tasks: []
-  }
+    tasks: [],
+  },
 }

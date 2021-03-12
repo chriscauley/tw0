@@ -1,4 +1,3 @@
-import vector from 'tw/Geo/vector'
 import { canMoveOn, canAttack } from '../piece/lib'
 import random from 'tw/random'
 
@@ -52,14 +51,14 @@ forward.collide = (piece, move) => {
         dindex,
       },
     ]
-    Object.assign(move, {damages})
+    Object.assign(move, { damages })
   }
   const target = piece.board.getPiece(target_index)
   if (target) {
-    move.now = () => target.dindex = dindex
+    move.now = () => (target.dindex = dindex)
     move.priority = 1
   }
-  return Object.assign(move, {dindex: -dindex, done: true})
+  return Object.assign(move, { dindex: -dindex, done: true })
 }
 
 // blue blob
@@ -80,15 +79,11 @@ forward.turnOrFlip = (piece, move) => {
   const dindex = move.dindex || piece.dindex
 
   // TODO shuffle somehow
-  const target_dindexes = [
-    geo.turnDindex(dindex, 1),
-    geo.turnDindex(dindex, -1),
-    -dindex
-  ]
+  const target_dindexes = [geo.turnDindex(dindex, 1), geo.turnDindex(dindex, -1), -dindex]
 
   const moves = target_dindexes
-        .map((dindex) => forward(1)(piece, {...move, dindex}))
-        .filter((move) => move.done)
+    .map((dindex) => forward(1)(piece, { ...move, dindex }))
+    .filter((move) => move.done)
   return random.choice(piece.id + piece.index + piece.board.game.turn, moves) || move
 }
 

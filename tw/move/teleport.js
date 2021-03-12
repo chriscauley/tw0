@@ -1,14 +1,12 @@
-import vector from 'tw/Geo/vector'
-
 export default (distance) => (piece, move) => {
   let range = distance
   const dindex = move.dindex || piece.dindex
 
   while (range) {
     const target_indexes = piece.board.geo.look('__three', piece.index, range, dindex)
-    const target_index = target_indexes.find(i => piece.board.canMoveOn(i))
+    const target_index = target_indexes.find((i) => piece.board.canMoveOn(i))
     if (target_index === undefined) {
-      range --
+      range--
       continue
     }
     return {

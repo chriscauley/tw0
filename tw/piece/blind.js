@@ -17,9 +17,7 @@ export default {
   },
   bouncer: {
     sprite: 'blueslime',
-    tasks: [
-      move.cycle(move.flip, move.forward(1)),
-    ],
+    tasks: [move.cycle(move.flip, move.forward(1))],
     opts,
   },
   // spitter: {

@@ -9,7 +9,6 @@ import { floodFillPath, floodFillTeam } from 'tw/utils'
 import { newPiece } from 'tw/piece/entity'
 import Mode from 'tw/models/Mode'
 import Item from 'tw/models/Item'
-import parsePieces from './parsePieces'
 
 import sound from './sound'
 

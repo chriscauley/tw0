@@ -1,9 +1,8 @@
-import vector from 'tw/Geo/vector'
 import after from './after'
 import { sortBy, min } from 'lodash'
 
 const filterLowest = (piece, move, cache) => {
-  let targets = piece.board.geo.dindexes
+  const targets = piece.board.geo.dindexes
     .map((dindex) => {
       const index = piece.index + dindex
       return {

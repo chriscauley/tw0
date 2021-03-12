@@ -4,10 +4,10 @@ import Floor from 'tw/models/Floor'
 import { canMoveOn } from 'tw/piece/lib'
 
 export const piece_map = {}
-types.slugs.forEach(s => piece_map[s] = types[s].sprite)
+types.slugs.forEach((s) => (piece_map[s] = types[s].sprite))
 
 const buffs = {
-  active: (piece, out) => out.children[0] += ' active'
+  active: (piece, out) => (out.children[0] += ' active'),
 }
 
 const addHealth = (piece, out) => {
@@ -24,12 +24,13 @@ const addHealth = (piece, out) => {
   if (piece.invincible) {
     out.children.push(INVINCIBLE)
   } else if (piece.blood_armor) {
-    out.children.push('sprite-blood -blood-'+piece.blood_armor)
+    out.children.push('sprite-blood -blood-' + piece.blood_armor)
   }
   if (piece.player) {
     let energy = Math.floor(piece.energy / 4)
     const remainder = piece.energy % 4
-    remainder && out.children.push(`sprite sprite-part-energy -energy-${remainder}/4 -energy-${energy}`)
+    remainder &&
+      out.children.push(`sprite sprite-part-energy -energy-${remainder}/4 -energy-${energy}`)
     while (energy-- > 0) {
       out.children.push(`sprite sprite-energy -energy-${energy}`)
     }
@@ -48,14 +49,14 @@ const team_extras = ['id', 'value', 'index', 'dindex']
 ;[1, 2].forEach((team) => {
   team_extras.forEach(
     (attr) =>
-    (extra_getters[`team${team}_${attr}`] = (b) =>
-      Object.fromEntries(
-        Object.entries(b.cache.team[team]).map(([index, cache]) => [index, cache[attr]]),
-      )),
+      (extra_getters[`team${team}_${attr}`] = (b) =>
+        Object.fromEntries(
+          Object.entries(b.cache.team[team]).map(([index, cache]) => [index, cache[attr]]),
+        )),
   )
 })
 
-export const renderUI = ({ board, queue=[], show_weapon }) => {
+export const renderUI = ({ board, queue = [], show_weapon }) => {
   if (!board.player) {
     return []
   }
@@ -76,11 +77,11 @@ export const renderUI = ({ board, queue=[], show_weapon }) => {
       const base = `sprite x-${xy[0]} y-${xy[1]}`
       items.push({ class: `${base} sprite-arrow-${board.geo._dindex2name[dindex]}` })
     }
-    board.geo.look(hitbox.shape, board.player.index, hitbox.dist, dindex).forEach(index => {
+    board.geo.look(hitbox.shape, board.player.index, hitbox.dist, dindex).forEach((index) => {
       const xy = board.geo.index2xy(index)
       items.push({ class: `sprite sprite-hitbox x-${xy[0]} y-${xy[1]} fa fa-close` })
     })
-    board.geo.look(splash.shape, board.player.index, splash.dist, dindex).forEach(index => {
+    board.geo.look(splash.shape, board.player.index, splash.dist, dindex).forEach((index) => {
       const xy = board.geo.index2xy(index)
       items.push({ class: `sprite x-${xy[0]} y-${xy[1]} sprite-splash` })
     })
@@ -164,7 +165,7 @@ export default (board, options = {}) => {
     out.className += css.index(piece._indexes[0])
     const di_name = geo._dindex2name[piece.dindex]
     piece._indexes.forEach((i, n) => {
-      let cls = out._base + css.index(i)
+      const cls = out._base + css.index(i)
       const attack = animations[i].find((a) => a.type === 'attack' && a.source.id === piece.id)
       if (n > 0) {
         out.steps.push(cls)

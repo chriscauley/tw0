@@ -1,6 +1,6 @@
 const buffs = {
   haste: {
-    apply: (piece) => (piece.board.game.piece_turns[piece.id]++),
+    apply: (piece) => piece.board.game.piece_turns[piece.id]++,
     sprite: 'buff-haste',
   },
   stun: {

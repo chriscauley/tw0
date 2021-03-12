@@ -30,7 +30,7 @@ const wakeUp = (piece, move) => {
   return piece.awake ? move : wake(piece, move)
 }
 
-wakeUp.onWake = action => (piece, move) => {
+wakeUp.onWake = (action) => (piece, move) => {
   move = wakeUp(piece, move)
   return move._woke ? action(piece, move) : move
 }

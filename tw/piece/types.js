@@ -12,11 +12,11 @@ const types = {
   groups: {},
 }
 
-const title = s => (s[0].toUpperCase() + s.slice(1)).replace(/-_/g,' ')
+const title = (s) => (s[0].toUpperCase() + s.slice(1)).replace(/-_/g, ' ')
 
 const registerGroups = (groups) => {
   Object.entries(groups).forEach(([group_name, pieces]) => {
-    const group = types.groups[group_name] = {name: group_name, pieces}
+    const group = (types.groups[group_name] = { name: group_name, pieces })
     Object.entries(pieces).forEach(([piece_slug, piece]) => {
       piece.tasks?.forEach((t) => {
         assert(typeof t === 'function', `piece ${piece_slug} has bad task`)

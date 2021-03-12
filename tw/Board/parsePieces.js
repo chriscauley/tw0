@@ -1,4 +1,3 @@
-
 export default (pieces) => {
   if (typeof pieces === 'string') {
     if (!pieces.includes('+')) {

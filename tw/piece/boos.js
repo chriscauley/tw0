@@ -1,11 +1,6 @@
 import move from 'tw/move'
 
-const tasks = [
-  move.boo,
-  move.attackNearby('circle', 1),
-  move.turn.follow,
-  move.forward(1)
-]
+const tasks = [move.boo, move.attackNearby('circle', 1), move.turn.follow, move.forward(1)]
 
 export default {
   boo: {
@@ -24,25 +19,13 @@ export default {
     geometry: 'f',
     sprite: 'shee',
     opts: { turns: 3, health: 3, sight: 4 },
-    tasks: [
-      move.ifHit(
-        move.chain([
-          move.turn.fromHit,
-          move.teleport(4)
-        ]),
-      ),
-      ...tasks
-    ],
+    tasks: [move.ifHit(move.chain([move.turn.fromHit, move.teleport(4)])), ...tasks],
   },
   blindboo: {
     sprite: 'eye',
     sprites: ['eye.ethereal'],
     geometry: 'f',
     opts: { turns: 3, ethereal: true, sight: 4 }, // TODO sight: friendly tower
-    tasks: [
-      move.turn.follow,
-      move.attackNearby('circle', 1),
-      move.forward(1),
-    ]
-  }
+    tasks: [move.turn.follow, move.attackNearby('circle', 1), move.forward(1)],
+  },
 }
