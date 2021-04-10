@@ -50,6 +50,12 @@ export default {
         ...item,
         css: `sprite sprite-${item.type} slot slot-${Item[item.type].slot}`,
       }))
+      const pickup = this.board.entities.item[this.board.player.index]
+      if (pickup) {
+        this.equipment.push({
+          css: `sprite sprite-${pickup.type} slot slot-pickup`,
+        })
+      }
     },
   },
 }

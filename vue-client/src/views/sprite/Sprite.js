@@ -38,6 +38,7 @@ const saveSprite = (slug, { sheet = {}, index, url }) => {
     const selector = `.sprite.sprite-${slug}`
     const img = document.createElement('img')
     img.onload = () => {
+      // TODO this should be built into the sprite cropper, but that would also require a migraiton
       let [sx, sy, sw, sh] = [0, 0, img.width, img.height]
       if (img.width === 40 && img.height === 40) {
         // buffer 32 image need 4 pixels shaved from each side

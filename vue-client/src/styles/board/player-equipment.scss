@@ -1,10 +1,21 @@
 .player-equipment {
   .slot {
     @apply absolute border-4 border-blue-200 rounded;
+    box-sizing: content-box; /* border screws up pixelated sprites */
     background-color: rgba(0, 0, 0, 0.5);
   }
   .slot-weapon {
     right: 0;
     top: 0;
+  }
+  .slot-pickup {
+    bottom: 0;
+    left: 0;
+    &:after {
+      @apply absolute bg-blue-200 px-2 text-black text-center w-full;
+      bottom: -0.4em;
+      content: 'space';
+      font-size: 0.2em;
+    }
   }
 }
