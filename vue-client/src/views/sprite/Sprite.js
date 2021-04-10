@@ -36,8 +36,25 @@ const css = (slug) => {
 const saveSprite = (slug, { sheet = {}, index, url }) => {
   if (!cache.css[slug]) {
     const selector = `.sprite.sprite-${slug}`
-    cache.style.innerHTML += `${selector} { background-image: url("${url}");}\n`
-    cache.css[slug] = cssSafe(slug)
+    const img = document.createElement('img')
+    img.onload = () => {
+      let [sx, sy, sw, sh] = [0, 0, img.width, img.height]
+      if (img.width === 40 && img.height === 40) {
+        // buffer 32 image need 4 pixels shaved from each side
+        sx = sy = 4
+        sw -= 8
+        sh -= 8
+      }
+      const canvas = document.createElement('canvas')
+      const dw = (canvas.width = sw)
+      const dh = (canvas.height = sh)
+      const context = canvas.getContext('2d')
+      context.imageSmoothingEnabled = false
+      context.drawImage(img, sx, sy, sw, sh, 0, 0, dw, dh)
+      cache.style.innerHTML += `${selector} { background-image: url("${canvas.toDataURL()}");}\n`
+      cache.css[slug] = cssSafe(slug)
+    }
+    img.src = url
   }
   if (!cache.json[slug]) {
     cache.json[slug] = { slug, index, url, sheet_fname: sheet.fname }
